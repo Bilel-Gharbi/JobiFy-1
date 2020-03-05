@@ -4,15 +4,14 @@ const { User } = require("../models");
 // User service file includes functon thant interact with directly with the database
 // After create a service export using the es6 synt
 
-const createUser = async (name, surname) => {
-  // force: true will drop the table if it already exists
-  /*   TODO: function that check if the table created or not */
+const createUser = async data => {
+  const { id, firstName, lastName } = data;
   try {
     await User.sync({ force: false });
-    // Table created
     return User.create({
-      firstName: name,
-      lastName: surname
+      id,
+      firstName,
+      lastName
     });
   } catch (err) {
     console.log("UserService/createUser Error ", err);
@@ -28,7 +27,17 @@ const getAllUser = async () => {
   }
 };
 
+const generateFakeUsers = async fakeData => {
+  try {
+    await User.sync({ force: true });
+    return User.bulkCreate(fakeData);
+  } catch (err) {
+    console.log("UserService/generateDammyUser data Error ", err);
+  }
+};
+
 module.exports = {
   createUser,
-  getAllUser
+  getAllUser,
+  generateFakeUsers
 };

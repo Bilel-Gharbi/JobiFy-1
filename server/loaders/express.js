@@ -17,6 +17,9 @@ module.exports = async app => {
   app.use(express.json());
   app.use(cors("*"));
   app.use(logger("dev"));
-  /* add routes  */
+  // user route API
   app.use("/api/user", API.userRouter);
+
+  // resume route API
+  app.use("/api/resume", API.resumeRouter);
 };

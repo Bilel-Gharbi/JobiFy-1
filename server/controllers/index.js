@@ -1,8 +1,10 @@
 //import all controllers here
-const userController = require("./user");
+const userControllers = require("./user");
+const resumeControllers = require("./resume");
 
 //export one obj contains all controllers
 
 module.exports = {
-  userController
+  userControllers,
+  resumeControllers
 };
