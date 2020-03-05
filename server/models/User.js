@@ -1,22 +1,53 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../loaders/dataBase");
 
-const User = db.define(
-  "User",
-  {
-    // Model attributes are defined here
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastName: {
-      type: DataTypes.STRING
-      // allowNull defaults to true
-    }
+//user has one resume
+const User = db.define("User", {
+  // Model attributes are defined here
+
+  email: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: "email@email.com"
   },
-  {
-    // Other model options go here
+  password: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: "password"
+  },
+  active: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  firstName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "user name"
+  },
+  lastName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "user lastName"
+  },
+  birthDate: {
+    type: DataTypes.DATE,
+    allowNull: true,
+    defaultValue: new Date()
+  },
+  phoneNumber: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: "00000000"
+  },
+  location: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: "anywhere"
+  },
+  photo: {
+    type: DataTypes.STRING,
+    defaultValue: "https://via.placeholder.com/600/92c952"
   }
-);
+});
 
 module.exports = User;

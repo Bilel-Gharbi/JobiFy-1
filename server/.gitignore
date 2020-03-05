@@ -2,3 +2,4 @@
 .env
 /loaders/access.log
 .log
+fakeUserData.js

@@ -3,8 +3,10 @@
     example : userService , productService, companyService 
  */
 
-const userService = require("./user");
+const userServices = require("./user");
+const resumeServices = require("./resume");
 
 module.exports = {
-  userService
+  userServices,
+  resumeServices
 };

@@ -1,10 +1,12 @@
 const userRouter = require("express").Router();
 //import userController as controller
-const { userController: controller } = require("../controllers");
+const { userControllers: controller } = require("../controllers");
 
 userRouter
   .route("/")
   .post(controller.createNewUser)
   .get(controller.getAllUser);
+
+userRouter.route("/generate").post(controller.generateFakeUsers);
 
 module.exports = userRouter;

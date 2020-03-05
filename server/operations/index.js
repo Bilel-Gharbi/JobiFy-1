@@ -1,8 +1,10 @@
 /*
     operation/index.js contain all the operation 
  */
-const userOperation = require("./user");
+const userOperations = require("./user");
+const resumeOperations = require("./resume");
 
 module.exports = {
-  userOperation
+  userOperations,
+  resumeOperations
 };
