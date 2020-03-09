@@ -5,7 +5,7 @@ there is some STRICT rules to follow
 const resumeReducer = (initialState = [], action) => {
   switch (action.type) {
     case "FETCH_CV":
-      return [...action.payoad];
+      return [...action.payload];
 
     default:
       return initialState;

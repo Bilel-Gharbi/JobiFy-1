@@ -1,18 +1,17 @@
 //import User model from models/index.js file
-const { User } = require("../models");
+const { User, Resume } = require("../models");
 
 // User service file includes functon thant interact with directly with the database
 // After create a service export using the es6 synt
 
 const createUser = async data => {
-  const { id, firstName, lastName } = data;
   try {
     await User.sync({ force: false });
-    return User.create({
-      id,
-      firstName,
-      lastName
-    });
+    await Resume.sync({ forse: false });
+    let newUser = await User.create({ ...data });
+    //create new Resume for each user
+    newUser.createResume();
+    return newUser;
   } catch (err) {
     console.log("UserService/createUser Error ", err);
   }

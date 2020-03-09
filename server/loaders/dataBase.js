@@ -1,5 +1,6 @@
 // database laoder
-const Sequelize = require("sequelize");
+const { Sequelize } = require("sequelize");
+
 const {
   datbaseUserName,
   databasePwd,
@@ -16,8 +17,8 @@ let db = new Sequelize(datbaseName, datbaseUserName, databasePwd, {
     min: 0,
     acquire: 30000,
     idle: 10000
-  },
-  operatorsAliases: false
+  }
+  //operatorsAliases: false
 });
 
 module.exports = db;
