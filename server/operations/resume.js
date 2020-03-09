@@ -39,7 +39,7 @@ const addExperience = async (data, id) => {
     console.log("addExperience/ Resume operation error ", err);
   }
 };
-
+//done
 const getExperiences = async id => {
   try {
     result = await resumeServices.getResumeExperience(id);
@@ -48,6 +48,7 @@ const getExperiences = async id => {
     console.log("getExperiences/ Resume operation error ", err);
   }
 };
+//done
 const deleteExperience = async idExperience => {
   try {
     result = await resumeServices.deleteResumeExperience(idExperience);
@@ -56,9 +57,11 @@ const deleteExperience = async idExperience => {
     console.log("deleteExperience / Resume operation error ", err);
   }
 };
-
-const updateExperience = async id => {
+//done
+const updateExperience = async (idExperience, data) => {
   try {
+    result = await resumeServices.updateResumeExperience(idExperience, data);
+    return result;
   } catch (err) {
     console.log("updateExperience / Resume operation error ", err);
   }

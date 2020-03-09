@@ -34,7 +34,21 @@ const getUserResumeDetails = async (req, res) => {
     res.status(400).json(err);
   }
 };
-//done
+//get all experiences for resume
+const getResumeExperiences = async (req, res) => {
+  try {
+    experiences = await resumeOperations.getExperiences(req.params.id);
+    res.status(200).json({
+      status: "sucess",
+      msg: `all experiences for Resume with id ${req.params.id}`,
+      length: experiences.length,
+      data: experiences
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+//add one experience to resume
 const addResumeExperience = async (req, res) => {
   try {
     newExperience = await resumeOperations.addExperience(
@@ -50,22 +64,7 @@ const addResumeExperience = async (req, res) => {
     res.status(400).json(err);
   }
 };
-
-//get all experiences for resume
-const getResumeExperiences = async (req, res) => {
-  try {
-    experiences = await resumeOperations.getExperiences(req.params.id);
-    res.status(200).json({
-      status: "sucess",
-      msg: `all experiences for Resume with id ${req.params.id}`,
-      length: experiences.length,
-      data: experiences
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-};
-
+// delete one experience from resume
 const deleteResumeExperience = async (req, res) => {
   const { id_experience } = req.params;
   try {
@@ -74,7 +73,7 @@ const deleteResumeExperience = async (req, res) => {
     );
     res.status(202).json({
       status: "sucess",
-      msg: `experience ${req.params.id_experience} deleted from with id ${req.params.id}`,
+      msg: `experience ${req.params.id_experience} deleted for the Resume with id ${req.params.id}`,
       deletedExperience
     });
   } catch (err) {
@@ -83,15 +82,17 @@ const deleteResumeExperience = async (req, res) => {
 };
 
 const updateResumeExperience = async (req, res) => {
+  const { id_experience } = req.params;
+  //console.log(req.body);
   try {
-    newExperience = await resumeOperations.addExperience(
-      req.body,
-      req.params.id
+    newExperience = await resumeOperations.updateExperience(
+      id_experience,
+      req.body
     );
-    res.status(201).json({
+    res.status(200).json({
       status: "sucess",
-      msg: `experience ${req.params.id_experience} updated from with id ${req.params.id}`,
-      data: newExperience
+      msg: `experience ${req.params.id_experience} updated for the Resume with id ${req.params.id}`,
+      newExperience
     });
   } catch (err) {
     res.status(400).json(err);

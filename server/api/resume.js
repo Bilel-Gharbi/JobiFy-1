@@ -15,7 +15,7 @@ resumeRouter
   .get(controller.getResumeExperiences); // get all experience by resume
 resumeRouter
   .route("/:id/experience/:id_experience")
-  .patch(controller.addResumeExperience) // update one experience
+  .patch(controller.updateResumeExperience) // update one experience
   .delete(controller.deleteResumeExperience); // delete
 
 //TODO:
