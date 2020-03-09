@@ -1,0 +1,18 @@
+PORT=5000
+DATABASEHOST = "mysql5025.site4now.net"
+DATABASEUSER = "a56018_bilel92"
+DATABASENAME = "db_a56018_bilel92"
+DATABASEPASSWORD = "bilel13925"
+
+
+DATABASEHOST = "jobify-project.000webhostapp.com"
+DATABASEUSER = "id12831847_jobify"
+DATABASENAME = "id12831847_jobify"
+DATABASEPASSWORD = "jobify123"
+
+https://wordpress-310216-1147000.cloudwaysapps.com/
+
+DATABASEHOST = "https://wordpress-310216-1147000.cloudwaysapps.com/"
+DATABASEUSER = "dceeftwddf"
+DATABASENAME = "dceeftwddf"
+DATABASEPASSWORD = "E4Wp5VhBdj"

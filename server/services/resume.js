@@ -1,14 +1,15 @@
 //import Resume model from models/index.js file
-const { Resume } = require("../models");
+const { Resume, Experience } = require("../models");
 
 const createResume = async (data, userId) => {
-  const { summary, expertiseLevel } = data;
+  const { summary, expertiseLevel, UserId } = data;
   try {
     await Resume.sync({ force: false });
     // Table created
     return Resume.create({
       summary,
-      expertiseLevel
+      expertiseLevel,
+      UserId
     });
   } catch (err) {
     console.log("ResumeService/createResume Error ", err);
@@ -24,17 +25,35 @@ const getAllResume = async () => {
   }
 };
 
-const generateFakeResume = async fakeData => {
+//TODO:
+const getUserResumeDetails = async userId => {
+  console.log("service resume", userId);
+  let result = {};
   try {
-    await User.sync({ force: true });
-    return User.bulkCreate(fakeData);
+    let userResume = await Resume.findOne({ where: { UserId: userId } });
+    //console.log(userResume);
+    //let exp = userResume.hasExperience();
+    result.experience = "exp";
+    console.log(result);
+    return userResume;
   } catch (err) {
-    console.log("ResumeService/generateFakeResume data Error ", err);
+    console.log("ResumeService /getUserResumeDetails Eroor ", err);
   }
 };
 
+const addResumeExperience = async (data, id) => {
+  try {
+    await Experience.sync({ force: true });
+    let resume = await Resume.findByPk(id);
+    let newExperience = await resume.createExperience({ ...data });
+    return newExperience;
+  } catch (err) {
+    console.log("ResumeService /addResumeExperience Eroor ", err);
+  }
+};
 module.exports = {
   createResume,
   getAllResume,
-  generateFakeResume
+  getUserResumeDetails,
+  addResumeExperience
 };

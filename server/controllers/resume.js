@@ -24,10 +24,34 @@ const createNewResume = async (req, res) => {
     res.status(400).json(err);
   }
 };
-const generateFakeResumes = async (req, res) => {};
+const getUserResumeDetails = async (req, res) => {
+  console.log(req.params.id);
+  try {
+    userResume = await resumeOperations.getUserResumeDetails(req.params.id);
+    res.json({ status: "sucess", data: userResume });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+const addResumeExperience = async (req, res) => {
+  try {
+    newExperience = await resumeOperations.addExperience(
+      req.body,
+      req.params.id
+    );
+    res.status(201).json({
+      status: "sucess",
+      msg: `new experience added to Resume with id ${req.params.id}`,
+      data: newExperience
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
 
 module.exports = {
   getAllResume,
   createNewResume,
-  generateFakeResumes
+  getUserResumeDetails,
+  addResumeExperience
 };

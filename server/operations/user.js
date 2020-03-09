@@ -30,6 +30,7 @@ const generateFakeUsers = async data => {
     console.log("getAllUser operation error ", err);
   }
 };
+
 module.exports = {
   createNewUser,
   getAllUser,

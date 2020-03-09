@@ -8,8 +8,6 @@ const exempleAPI = axios.create({
   baseURL: "https://swapi.co/api/",
   headers: {
     "X-Requested-With": "XMLHttpRequest"
-    //"X-Requested-With": "XMLHttpRequest",
-    // "Access-Control-Allow-Origin": "*"
   }
 });
 

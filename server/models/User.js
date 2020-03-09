@@ -1,7 +1,8 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { DataTypes, Sequelize } = require("sequelize");
 const db = require("../loaders/dataBase");
-const { Resume } = require("./index");
+
 //user has one resume
+
 const User = db.define("User", {
   // Model attributes are defined here
 
@@ -49,8 +50,5 @@ const User = db.define("User", {
     defaultValue: "https://via.placeholder.com/600/92c952"
   }
 });
-/* User.associate = () => {
-  console.log("hello");
-};
-User.associate(); */
+
 module.exports = User;
