@@ -24,6 +24,7 @@ const createNewResume = async (req, res) => {
     res.status(400).json(err);
   }
 };
+//TODO:
 const getUserResumeDetails = async (req, res) => {
   console.log(req.params.id);
   try {
@@ -33,6 +34,7 @@ const getUserResumeDetails = async (req, res) => {
     res.status(400).json(err);
   }
 };
+//done
 const addResumeExperience = async (req, res) => {
   try {
     newExperience = await resumeOperations.addExperience(
@@ -49,9 +51,64 @@ const addResumeExperience = async (req, res) => {
   }
 };
 
+const getResumeExperiences = async (req, res) => {
+  try {
+    experiences = await resumeOperations.getExperiences(req.params.id);
+    console.log(experiences);
+    res.status(200).json({
+      status: "sucess",
+      msg: `all experiences for Resume with id ${req.params.id}`,
+      length: experiences.length,
+      data: experiences
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
+const deleteResumeExperience = async (req, res) => {
+  //console.log(req.params.id_experience);
+  const { id_experience, id } = req.params;
+  try {
+    let experienceToDelete = await resumeOperations.deleteExperience(
+      id,
+      id_experience
+    );
+    /* newExperience = await resumeOperations.addExperience(
+      req.body,
+      req.params.id
+    ); */
+    res.status(202).json({
+      status: "sucess",
+      msg: `experience ${req.params.id_experience} deleted from with id ${req.params.id}`
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
+const updateResumeExperience = async (req, res) => {
+  try {
+    newExperience = await resumeOperations.addExperience(
+      req.body,
+      req.params.id
+    );
+    res.status(201).json({
+      status: "sucess",
+      msg: `experience ${req.params.id_experience} updated from with id ${req.params.id}`,
+      data: newExperience
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
 module.exports = {
   getAllResume,
   createNewResume,
   getUserResumeDetails,
-  addResumeExperience
+  addResumeExperience,
+  deleteResumeExperience,
+  updateResumeExperience,
+  getResumeExperiences
 };
