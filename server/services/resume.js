@@ -63,11 +63,11 @@ const getResumeExperience = async id => {
 };
 
 //TODO:
-const deleteResumeExperience = async (id, idExperience) => {
-  //console.log(Resume.prototype);
+const deleteResumeExperience = async idExperience => {
   try {
-    let resume = await Resume.findByPk(id);
-    resume.removeExperience(idExperience);
+    let experience = await Experience.findByPk(idExperience);
+    experienceToDelete = await experience.destroy();
+    return experienceToDelete;
   } catch (err) {
     console.log("ResumeService /deleteResumeExperience Eroor ", err);
   }

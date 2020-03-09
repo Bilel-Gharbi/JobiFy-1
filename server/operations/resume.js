@@ -48,9 +48,10 @@ const getExperiences = async id => {
     console.log("getExperiences/ Resume operation error ", err);
   }
 };
-const deleteExperience = async (id, idExperience) => {
+const deleteExperience = async idExperience => {
   try {
-    result = await resumeServices.deleteResumeExperience(id, idExperience);
+    result = await resumeServices.deleteResumeExperience(idExperience);
+    return result;
   } catch (err) {
     console.log("deleteExperience / Resume operation error ", err);
   }

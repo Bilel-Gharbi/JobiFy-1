@@ -51,10 +51,10 @@ const addResumeExperience = async (req, res) => {
   }
 };
 
+//get all experiences for resume
 const getResumeExperiences = async (req, res) => {
   try {
     experiences = await resumeOperations.getExperiences(req.params.id);
-    console.log(experiences);
     res.status(200).json({
       status: "sucess",
       msg: `all experiences for Resume with id ${req.params.id}`,
@@ -67,20 +67,15 @@ const getResumeExperiences = async (req, res) => {
 };
 
 const deleteResumeExperience = async (req, res) => {
-  //console.log(req.params.id_experience);
-  const { id_experience, id } = req.params;
+  const { id_experience } = req.params;
   try {
-    let experienceToDelete = await resumeOperations.deleteExperience(
-      id,
+    let deletedExperience = await resumeOperations.deleteExperience(
       id_experience
     );
-    /* newExperience = await resumeOperations.addExperience(
-      req.body,
-      req.params.id
-    ); */
     res.status(202).json({
       status: "sucess",
-      msg: `experience ${req.params.id_experience} deleted from with id ${req.params.id}`
+      msg: `experience ${req.params.id_experience} deleted from with id ${req.params.id}`,
+      deletedExperience
     });
   } catch (err) {
     res.status(400).json(err);
