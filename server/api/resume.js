@@ -3,6 +3,7 @@ const resumeRouter = require("express").Router();
 const { resumeControllers: controller } = require("../controllers");
 const { experienceControllers: expController } = require("../controllers");
 const { educationControllers: eduController } = require("../controllers");
+const { projectControllers: projController } = require("../controllers");
 
 //get all Resume
 resumeRouter.route("/").get(controller.getAllResume);
@@ -23,7 +24,7 @@ resumeRouter
   .patch(expController.updateResumeExperience) // update one experience
   .delete(expController.deleteResumeExperience); // delete
 
-//TODO:
+//done
 resumeRouter
   .route("/:id/educations")
   .post(eduController.addResumeManyEducations) // add many educations
@@ -38,13 +39,16 @@ resumeRouter
 
 //TODO:
 resumeRouter
-  .route("/:id/project")
-  .post(controller.addResumeExperience) // done
-  .get(controller.addResumeExperience);
+  .route("/:id/projects")
+  .post(projController.addResumeManyProjects) // add many projects
+  .get(projController.getResumeProjects); // get all projects
+
+resumeRouter.route("/:id/project").post(projController.addResumeProject); // add one
+
 resumeRouter
   .route("/:id/project/:id_project")
-  .patch(controller.addResumeExperience)
-  .delete(controller.addResumeExperience);
+  .patch(projController.updateResumeProject) // update on project
+  .delete(projController.deleteResumeProject); // delete one project
 
 //TODO:
 resumeRouter
