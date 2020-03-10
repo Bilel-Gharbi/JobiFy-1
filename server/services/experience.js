@@ -25,7 +25,7 @@ const addResumeManyExperiences = async (data, id) => {
   }
 };
 //done
-const getResumeExperience = async id => {
+const getResumeExperiences = async id => {
   try {
     let resume = await Resume.findByPk(id);
     let allExperieces = await resume.getExperiences();
@@ -58,7 +58,7 @@ const updateResumeExperience = async (idExperience, data) => {
 };
 module.exports = {
   addResumeExperience,
-  getResumeExperience,
+  getResumeExperiences,
   addResumeManyExperiences,
   deleteResumeExperience,
   updateResumeExperience

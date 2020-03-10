@@ -3,7 +3,7 @@ const { experienceServices } = require("../services");
 //done
 const getExperiences = async id => {
   try {
-    result = await experienceServices.getResumeExperience(id);
+    result = await experienceServices.getResumeExperiences(id);
     return result;
   } catch (err) {
     console.log("getExperiences/ ExperienceOperation error ", err);

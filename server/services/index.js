@@ -6,9 +6,11 @@
 const userServices = require("./user");
 const resumeServices = require("./resume");
 const experienceServices = require("./experience");
+const educationServices = require("./education");
 
 module.exports = {
   userServices,
   resumeServices,
-  experienceServices
+  experienceServices,
+  educationServices
 };
