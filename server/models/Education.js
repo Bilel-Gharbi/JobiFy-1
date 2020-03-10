@@ -21,11 +21,11 @@ const Education = db.define("Education", {
   },
   diplomaType: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   description: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   }
 });
 

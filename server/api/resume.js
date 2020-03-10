@@ -2,19 +2,22 @@ const resumeRouter = require("express").Router();
 //import resumeController as controller
 const { resumeControllers: controller } = require("../controllers");
 const { experienceControllers: expController } = require("../controllers");
+const { educationControllers: eduController } = require("../controllers");
 
+//get all Resume
 resumeRouter.route("/").get(controller.getAllResume);
 
+//TODO: get Resume with details
 resumeRouter.route("/:id").get(controller.getUserResumeDetails);
 
 //done
 resumeRouter
   .route("/:id/experiences")
-  .post(expController.addResumeManyExperiences);
-resumeRouter
-  .route("/:id/experience")
-  .post(expController.addResumeExperience) // done
+  .post(expController.addResumeManyExperiences)
   .get(expController.getResumeExperiences); // get all experience by resume
+
+resumeRouter.route("/:id/experience").post(expController.addResumeExperience); // done
+
 resumeRouter
   .route("/:id/experience/:id_experience")
   .patch(expController.updateResumeExperience) // update one experience
@@ -22,13 +25,16 @@ resumeRouter
 
 //TODO:
 resumeRouter
-  .route("/:id/education")
-  .post(controller.addResumeExperience) // done
-  .get(controller.addResumeExperience);
+  .route("/:id/educations")
+  .post(eduController.addResumeManyEducations) // add many educations
+  .get(eduController.getResumeEducations); // get all educations
+
+resumeRouter.route("/:id/education").post(eduController.addResumeEducation); // add one
+
 resumeRouter
   .route("/:id/education/:id_education")
-  .patch(controller.addResumeExperience)
-  .delete(controller.addResumeExperience);
+  .patch(eduController.updateResumeEducation) // update on education
+  .delete(eduController.deleteResumeEducation); // delete one education
 
 //TODO:
 resumeRouter
