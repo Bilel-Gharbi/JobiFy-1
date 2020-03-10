@@ -21,6 +21,23 @@ const addExperience = async (data, id) => {
   }
 };
 
+//add many experiences
+const addManyExperiences = async (data, id) => {
+  //ad the Resume id into the experience
+  //check the current position of the user if there is no endDate that mean the user is on this position
+  data.map(el => {
+    el.ResumeId = id;
+    !el.endDate ? (el.current = true) : (el.current = false);
+  });
+
+  try {
+    result = await experienceServices.addResumeManyExperiences(data, id);
+    return result;
+  } catch (err) {
+    console.log("addManyExperience/ ExperienceOperation error ", err);
+  }
+};
+
 //done
 const deleteExperience = async idExperience => {
   try {
@@ -46,6 +63,7 @@ const updateExperience = async (idExperience, data) => {
 module.exports = {
   getExperiences,
   addExperience,
+  addManyExperiences,
   deleteExperience,
   updateExperience
 };
