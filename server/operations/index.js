@@ -3,8 +3,10 @@
  */
 const userOperations = require("./user");
 const resumeOperations = require("./resume");
+const experienceOperations = require("./experience");
 
 module.exports = {
   userOperations,
-  resumeOperations
+  resumeOperations,
+  experienceOperations
 };

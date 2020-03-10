@@ -5,8 +5,10 @@
 
 const userServices = require("./user");
 const resumeServices = require("./resume");
+const experienceServices = require("./experience");
 
 module.exports = {
   userServices,
-  resumeServices
+  resumeServices,
+  experienceServices
 };

@@ -1,33 +1,11 @@
 /* User controllers */
 
-const { resumeOperations } = require("../operations");
-//const data = require("../fakeUserData");
+const { experienceOperations } = require("../operations");
 
-const getAllResume = async (req, res) => {
-  try {
-    resumes = await resumeOperations.getAllResume();
-    res
-      .status(200)
-      .json({ status: "sucess", length: resumes.length, data: resumes });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-};
-
-//TODO:
-const getUserResumeDetails = async (req, res) => {
-  console.log(req.params.id);
-  try {
-    userResume = await resumeOperations.getUserResumeDetails(req.params.id);
-    res.json({ status: "sucess", data: userResume });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-};
 //get all experiences for resume
 const getResumeExperiences = async (req, res) => {
   try {
-    experiences = await resumeOperations.getExperiences(req.params.id);
+    experiences = await experienceOperations.getExperiences(req.params.id);
     res.status(200).json({
       status: "sucess",
       msg: `all experiences for Resume with id ${req.params.id}`,
@@ -41,7 +19,7 @@ const getResumeExperiences = async (req, res) => {
 //add one experience to resume
 const addResumeExperience = async (req, res) => {
   try {
-    newExperience = await resumeOperations.addExperience(
+    newExperience = await experienceOperations.addExperience(
       req.body,
       req.params.id
     );
@@ -58,7 +36,7 @@ const addResumeExperience = async (req, res) => {
 const deleteResumeExperience = async (req, res) => {
   const { id_experience } = req.params;
   try {
-    let deletedExperience = await resumeOperations.deleteExperience(
+    let deletedExperience = await experienceOperations.deleteExperience(
       id_experience
     );
     res.status(202).json({
@@ -75,7 +53,7 @@ const updateResumeExperience = async (req, res) => {
   const { id_experience } = req.params;
   //console.log(req.body);
   try {
-    newExperience = await resumeOperations.updateExperience(
+    newExperience = await experienceOperations.updateExperience(
       id_experience,
       req.body
     );
@@ -90,8 +68,6 @@ const updateResumeExperience = async (req, res) => {
 };
 
 module.exports = {
-  getAllResume,
-  getUserResumeDetails,
   addResumeExperience,
   deleteResumeExperience,
   updateResumeExperience,

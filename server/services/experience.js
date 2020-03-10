@@ -1,31 +1,6 @@
 //import Resume model from models/index.js file
 const { Resume, Experience } = require("../models");
 
-const getAllResume = async () => {
-  try {
-    let result = await Resume.findAll();
-    return result;
-  } catch (err) {
-    console.log("ResumeService/getAllResume Error ", err);
-  }
-};
-
-//TODO:
-const getUserResumeDetails = async userId => {
-  console.log("service resume", userId);
-  let result = {};
-  try {
-    let userResume = await Resume.findOne({ where: { UserId: userId } });
-    //console.log(userResume);
-    //let exp = userResume.hasExperience();
-    result.experience = "exp";
-    console.log(result);
-    return userResume;
-  } catch (err) {
-    console.log("ResumeService /getUserResumeDetails Eroor ", err);
-  }
-};
-
 //done
 const addResumeExperience = async (data, id) => {
   try {
@@ -34,7 +9,7 @@ const addResumeExperience = async (data, id) => {
     let newExperience = await resume.createExperience({ ...data });
     return newExperience;
   } catch (err) {
-    console.log("ResumeService /addResumeExperience Eroor ", err);
+    console.log("ExperienceService /addResumeExperience Eroor ", err);
   }
 };
 //done
@@ -44,7 +19,7 @@ const getResumeExperience = async id => {
     let allExperieces = await resume.getExperiences();
     return allExperieces;
   } catch (err) {
-    console.log("ResumeService /getResumeExperience Eroor ", err);
+    console.log("ExperienceService /getResumeExperience Eroor ", err);
   }
 };
 
@@ -55,23 +30,21 @@ const deleteResumeExperience = async idExperience => {
     experienceToDelete = await experience.destroy();
     return experienceToDelete;
   } catch (err) {
-    console.log("ResumeService /deleteResumeExperience Eroor ", err);
+    console.log("ExperienceService /deleteResumeExperience Eroor ", err);
   }
 };
 
-//TODO:
+//done
 const updateResumeExperience = async (idExperience, data) => {
   try {
     let experience = await Experience.findByPk(idExperience);
     newExperience = await experience.update({ ...data });
     return newExperience;
   } catch (err) {
-    console.log("ResumeService /updateResumeExperience Eroor ", err);
+    console.log("ExperienceService /updateResumeExperience Eroor ", err);
   }
 };
 module.exports = {
-  getAllResume,
-  getUserResumeDetails,
   addResumeExperience,
   getResumeExperience,
   deleteResumeExperience,
