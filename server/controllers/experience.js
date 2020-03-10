@@ -32,6 +32,23 @@ const addResumeExperience = async (req, res) => {
     res.status(400).json(err);
   }
 };
+
+//add many experiences to resume
+const addResumeManyExperiences = async (req, res) => {
+  try {
+    listExperiences = await experienceOperations.addManyExperiences(
+      req.body,
+      req.params.id
+    );
+    res.status(201).json({
+      status: "sucess",
+      msg: `Many experiences added to Resume with id ${req.params.id}`,
+      data: listExperiences
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
 // delete one experience from resume
 const deleteResumeExperience = async (req, res) => {
   const { id_experience } = req.params;
@@ -69,6 +86,7 @@ const updateResumeExperience = async (req, res) => {
 
 module.exports = {
   addResumeExperience,
+  addResumeManyExperiences,
   deleteResumeExperience,
   updateResumeExperience,
   getResumeExperiences

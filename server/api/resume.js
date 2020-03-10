@@ -9,6 +9,9 @@ resumeRouter.route("/:id").get(controller.getUserResumeDetails);
 
 //done
 resumeRouter
+  .route("/:id/experiences")
+  .post(expController.addResumeManyExperiences);
+resumeRouter
   .route("/:id/experience")
   .post(expController.addResumeExperience) // done
   .get(expController.getResumeExperiences); // get all experience by resume

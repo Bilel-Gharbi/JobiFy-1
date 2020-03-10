@@ -12,6 +12,18 @@ const addResumeExperience = async (data, id) => {
     console.log("ExperienceService /addResumeExperience Eroor ", err);
   }
 };
+const addResumeManyExperiences = async (data, id) => {
+  console.log(...data);
+  try {
+    await Experience.sync({ force: false });
+
+    let newExperiences = await Experience.bulkCreate(data);
+    //let newExperience = await resume.createExperience({ data });
+    return newExperiences;
+  } catch (err) {
+    console.log("ExperienceService /addResumeManyExperiences Eroor ", err);
+  }
+};
 //done
 const getResumeExperience = async id => {
   try {
@@ -47,6 +59,7 @@ const updateResumeExperience = async (idExperience, data) => {
 module.exports = {
   addResumeExperience,
   getResumeExperience,
+  addResumeManyExperiences,
   deleteResumeExperience,
   updateResumeExperience
 };
