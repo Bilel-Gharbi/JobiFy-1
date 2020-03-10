@@ -51,9 +51,10 @@ const addResumeManyEducations = async (req, res) => {
 };
 // delete one education from resume
 const deleteResumeEducation = async (req, res) => {
-  const { id_education } = req.params;
+  const { id_education, id } = req.params;
   try {
     let deletedEducation = await educationOperations.deleteEducation(
+      id,
       id_education
     );
     res.status(202).json({

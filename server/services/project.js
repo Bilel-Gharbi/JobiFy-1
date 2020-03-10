@@ -41,8 +41,8 @@ const deleteResumeProject = async (id, idProject) => {
   //check the resume id before deleted
   try {
     let project = await Project.findByPk(idProject);
-    console.log(project.ResumeId);
-    if (project.ResumeId === id) {
+    //check the resumeid before deleting
+    if (project.ResumeId == id) {
       projectToDelete = await project.destroy();
       return projectToDelete;
     }
@@ -53,11 +53,11 @@ const deleteResumeProject = async (id, idProject) => {
 };
 
 //done
-const updateResumeProject = async (idEducation, data) => {
+const updateResumeProject = async (idProject, data) => {
   try {
-    let education = await Education.findByPk(idEducation);
-    newEducation = await education.update({ ...data });
-    return newEducation;
+    let project = await Project.findByPk(idProject);
+    newProject = await project.update({ ...data });
+    return newProject;
   } catch (err) {
     console.log("ProjectServices /updateResumeProject Eroor ", err);
   }

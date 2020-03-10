@@ -63,16 +63,13 @@ const deleteResumeProject = async (req, res) => {
 
 //update one experience from resume
 const updateResumeProject = async (req, res) => {
-  const { id_education } = req.params;
+  const { id_project } = req.params;
   try {
-    newEducation = await educationOperations.updateEducation(
-      id_education,
-      req.body
-    );
+    newProject = await projectOperations.updateProject(id_project, req.body);
     res.status(200).json({
       status: "sucess",
-      msg: `Education ${req.params.id_education} updated for the Resume with id ${req.params.id}`,
-      newEducation
+      msg: `Project ${req.params.id_project} updated for the Resume with id ${req.params.id}`,
+      newProject
     });
   } catch (err) {
     res.status(400).json(err);

@@ -38,9 +38,9 @@ const addManyEducations = async (data, id) => {
 };
 
 //done
-const deleteEducation = async idEducation => {
+const deleteEducation = async (id, idEducation) => {
   try {
-    result = await educationServices.deleteResumeEducation(idEducation);
+    result = await educationServices.deleteResumeEducation(id, idEducation);
     return result;
   } catch (err) {
     console.log("deleteEducation / EducationOperation error ", err);
