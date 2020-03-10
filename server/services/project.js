@@ -1,66 +1,72 @@
 //import Resume model from models/index.js file
-const { Resume, Education } = require("../models");
+const { Resume, Project } = require("../models");
 
 //done
-const addResumeEducation = async (data, id) => {
-  console.log(data);
+const addResumeProject = async (data, id) => {
+  // console.log(data);
   try {
-    await Education.sync({ force: false });
+    await Project.sync({ force: false });
     let resume = await Resume.findByPk(id);
-    let newEducation = await resume.createEducation({ ...data });
-    return newEducation;
+    let newProject = await resume.createProject({ ...data });
+    return newProject;
   } catch (err) {
-    console.log("EducationService /addResumeEducation Eroor ", err);
+    console.log("ProjectService /addResumeProject Eroor ", err);
   }
 };
 
 //done
-const addResumeManyEducations = async (data, id) => {
+const addResumeManyProjects = async (data, id) => {
   try {
-    await Education.sync({ force: false });
-    let newEducations = await Education.bulkCreate(data);
-    return newEducations;
+    await Project.sync({ force: false });
+    let newProjects = await Project.bulkCreate(data);
+    return newProjects;
   } catch (err) {
-    console.log("EducationService /addResumeManyEducations Eroor ", err);
+    console.log("ProjectServices /addResumeManyProjects Eroor ", err);
   }
 };
 //done
-const getResumeEducations = async id => {
+const getResumeProjects = async id => {
+  //console.log(Project.prototype);
   try {
     let resume = await Resume.findByPk(id);
-    let allEducations = await resume.getEducation();
-    return allEducations;
+    let allProjects = await resume.getProjects();
+    return allProjects;
   } catch (err) {
-    console.log("EducationService /getResumeEducation Eroor ", err);
+    console.log("ProjectServices /getResumeProject Eroor ", err);
   }
 };
 
 //done
-const deleteResumeEducation = async idEducation => {
+const deleteResumeProject = async (id, idProject) => {
+  //check the resume id before deleted
   try {
-    let education = await Education.findByPk(idEducation);
-    educationToDelete = await education.destroy();
-    return educationToDelete;
+    let project = await Project.findByPk(idProject);
+    console.log(project.ResumeId);
+    if (project.ResumeId === id) {
+      projectToDelete = await project.destroy();
+      return projectToDelete;
+    }
+    return `invalid this resume do not containe project with ${idProject} `;
   } catch (err) {
-    console.log("EducationService /deleteResumeEducation Eroor ", err);
+    console.log("ProjectServices /deleteResumeProject Eroor ", err);
   }
 };
 
 //done
-const updateResumeEducation = async (idEducation, data) => {
+const updateResumeProject = async (idEducation, data) => {
   try {
     let education = await Education.findByPk(idEducation);
     newEducation = await education.update({ ...data });
     return newEducation;
   } catch (err) {
-    console.log("EducationService /updateResumeEducation Eroor ", err);
+    console.log("ProjectServices /updateResumeProject Eroor ", err);
   }
 };
 
 module.exports = {
-  addResumeEducation,
-  getResumeEducations,
-  addResumeManyEducations,
-  deleteResumeEducation,
-  updateResumeEducation
+  addResumeProject,
+  getResumeProjects,
+  addResumeManyProjects,
+  deleteResumeProject,
+  updateResumeProject
 };

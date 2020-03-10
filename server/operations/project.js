@@ -1,66 +1,63 @@
-const { educationServices } = require("../services");
+const { projectServices } = require("../services");
 
 //done
-const getEducations = async id => {
-  console.log(id);
+const getProjects = async id => {
   try {
-    result = await educationServices.getResumeEducations(id);
+    result = await projectServices.getResumeProjects(id);
     return result;
   } catch (err) {
-    console.log("getEducations / EducationOperation error ", err);
+    console.log("getProjects / ProjectOperation error ", err);
   }
 };
 //done
-const addEducation = async (data, id) => {
-  //check if user's in position or note
-  //!data.endDate ? (data.current = true) : (data.current = false);
+const addProject = async (data, id) => {
   try {
-    result = await educationServices.addResumeEducation(data, id);
+    result = await projectServices.addResumeProject(data, id);
     return result;
   } catch (err) {
-    console.log("addEducation/ EducationOperation error ", err);
+    console.log("addProject / ProjectOperation error ", err);
   }
 };
 
-//add many experiences
-const addManyEducations = async (data, id) => {
-  //aad the Resume id into the experience
+//done
+const addManyProjects = async (data, id) => {
+  //aad the Resume id into the project
   data.map(el => {
     el.ResumeId = id;
   });
 
   try {
-    result = await educationServices.addResumeManyEducations(data, id);
+    result = await projectServices.addResumeManyProjects(data, id);
     return result;
   } catch (err) {
-    console.log("addManyEducation/ EducationOperation error ", err);
+    console.log("addManyEducation/ ProjectOperation error ", err);
   }
 };
 
 //done
-const deleteEducation = async idEducation => {
+const deleteProject = async (id, idProject) => {
   try {
-    result = await educationServices.deleteResumeEducation(idEducation);
+    result = await projectServices.deleteResumeProject(id, idProject);
     return result;
   } catch (err) {
-    console.log("deleteEducation / EducationOperation error ", err);
+    console.log("deleteProject / ProjectOperation error ", err);
   }
 };
 
 //done
-const updateEducation = async (idEducation, data) => {
+const updateProject = async (idEducation, data) => {
   try {
     result = await educationServices.updateResumeEducation(idEducation, data);
     return result;
   } catch (err) {
-    console.log("updateEducation / EducationOperation error ", err);
+    console.log("updateEducation / ProjectOperation error ", err);
   }
 };
 
 module.exports = {
-  getEducations,
-  addEducation,
-  addManyEducations,
-  deleteEducation,
-  updateEducation
+  getProjects,
+  addProject,
+  addManyProjects,
+  deleteProject,
+  updateProject
 };

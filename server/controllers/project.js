@@ -1,32 +1,29 @@
 /* User controllers */
 
-const { educationOperations } = require("../operations");
+const { projectOperations } = require("../operations");
 
-//get all education for resume
-const getResumeEducations = async (req, res) => {
+//get all project for resume
+const getResumeProjects = async (req, res) => {
   try {
-    educations = await educationOperations.getEducations(req.params.id);
+    projects = await projectOperations.getProjects(req.params.id);
     res.status(200).json({
       status: "sucess",
-      msg: `all educations for Resume with id ${req.params.id}`,
-      length: educations.length,
-      data: educations
+      msg: `all projects for Resume with id ${req.params.id}`,
+      length: projects.length,
+      data: projects
     });
   } catch (err) {
     res.status(400).json(err);
   }
 };
-//add one education to resume
-const addResumeEducation = async (req, res) => {
+//add one project to resume
+const addResumeProject = async (req, res) => {
   try {
-    newEducation = await educationOperations.addEducation(
-      req.body,
-      req.params.id
-    );
+    newProject = await projectOperations.addProject(req.body, req.params.id);
     res.status(201).json({
       status: "sucess",
-      msg: `new education added to Resume with id ${req.params.id}`,
-      newEducation
+      msg: `new project added to Resume with id ${req.params.id}`,
+      newProject
     });
   } catch (err) {
     res.status(400).json(err);
@@ -34,32 +31,30 @@ const addResumeEducation = async (req, res) => {
 };
 
 //add many experiences to resume
-const addResumeManyEducations = async (req, res) => {
+const addResumeManyProjects = async (req, res) => {
   try {
-    listEducations = await educationOperations.addManyEducations(
+    listProjects = await projectOperations.addManyProjects(
       req.body,
       req.params.id
     );
     res.status(201).json({
       status: "sucess",
-      msg: `Many educations added to Resume with id ${req.params.id}`,
-      data: listEducations
+      msg: `Many projects added to Resume with id ${req.params.id}`,
+      data: listProjects
     });
   } catch (err) {
     res.status(400).json(err);
   }
 };
 // delete one education from resume
-const deleteResumeEducation = async (req, res) => {
-  const { id_education } = req.params;
+const deleteResumeProject = async (req, res) => {
+  const { id_project, id } = req.params;
   try {
-    let deletedEducation = await educationOperations.deleteEducation(
-      id_education
-    );
+    let deletedProject = await projectOperations.deleteProject(id, id_project);
     res.status(202).json({
       status: "sucess",
-      msg: `education ${req.params.id_education} deleted for the Resume with id ${req.params.id}`,
-      deletedEducation
+      msg: `project ${req.params.id_education} deleted for the Resume with id ${req.params.id}`,
+      deletedProject
     });
   } catch (err) {
     res.status(400).json(err);
@@ -67,7 +62,7 @@ const deleteResumeEducation = async (req, res) => {
 };
 
 //update one experience from resume
-const updateResumeEducation = async (req, res) => {
+const updateResumeProject = async (req, res) => {
   const { id_education } = req.params;
   try {
     newEducation = await educationOperations.updateEducation(
@@ -85,9 +80,9 @@ const updateResumeEducation = async (req, res) => {
 };
 
 module.exports = {
-  addResumeEducation,
-  addResumeManyEducations,
-  deleteResumeEducation,
-  updateResumeEducation,
-  getResumeEducations
+  addResumeProject,
+  addResumeManyProjects,
+  deleteResumeProject,
+  updateResumeProject,
+  getResumeProjects
 };
