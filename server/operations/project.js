@@ -45,12 +45,12 @@ const deleteProject = async (id, idProject) => {
 };
 
 //done
-const updateProject = async (idEducation, data) => {
+const updateProject = async (idProject, data) => {
   try {
-    result = await educationServices.updateResumeEducation(idEducation, data);
+    result = await projectServices.updateResumeProject(idProject, data);
     return result;
   } catch (err) {
-    console.log("updateEducation / ProjectOperation error ", err);
+    console.log("updateProject / ProjectOperation error ", err);
   }
 };
 
