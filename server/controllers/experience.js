@@ -51,9 +51,10 @@ const addResumeManyExperiences = async (req, res) => {
 };
 // delete one experience from resume
 const deleteResumeExperience = async (req, res) => {
-  const { id_experience } = req.params;
+  const { id_experience, id } = req.params;
   try {
     let deletedExperience = await experienceOperations.deleteExperience(
+      id,
       id_experience
     );
     res.status(202).json({

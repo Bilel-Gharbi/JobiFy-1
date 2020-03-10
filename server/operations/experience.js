@@ -39,9 +39,9 @@ const addManyExperiences = async (data, id) => {
 };
 
 //done
-const deleteExperience = async idExperience => {
+const deleteExperience = async (id, idExperience) => {
   try {
-    result = await experienceServices.deleteResumeExperience(idExperience);
+    result = await experienceServices.deleteResumeExperience(id, idExperience);
     return result;
   } catch (err) {
     console.log("deleteExperience / ExperienceOperation error ", err);

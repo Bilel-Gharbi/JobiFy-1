@@ -36,11 +36,14 @@ const getResumeExperiences = async id => {
 };
 
 //done
-const deleteResumeExperience = async idExperience => {
+const deleteResumeExperience = async (id, idExperience) => {
   try {
     let experience = await Experience.findByPk(idExperience);
-    experienceToDelete = await experience.destroy();
-    return experienceToDelete;
+    if (experience.ResumeId == id) {
+      experienceToDelete = await experience.destroy();
+      return experienceToDelete;
+    }
+    return `invalid id this resume do not containe experience with ${idExperience} `;
   } catch (err) {
     console.log("ExperienceService /deleteResumeExperience Eroor ", err);
   }
