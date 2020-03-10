@@ -7,10 +7,12 @@ const userServices = require("./user");
 const resumeServices = require("./resume");
 const experienceServices = require("./experience");
 const educationServices = require("./education");
+const projectServices = require("./project");
 
 module.exports = {
   userServices,
   resumeServices,
   experienceServices,
-  educationServices
+  educationServices,
+  projectServices
 };
