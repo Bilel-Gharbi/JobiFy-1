@@ -10,6 +10,10 @@ const Certificate = db.define("Certificate", {
   date: {
     type: DataTypes.DATE,
     allowNull: true
+  },
+  organization: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 });
 

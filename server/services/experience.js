@@ -13,12 +13,9 @@ const addResumeExperience = async (data, id) => {
   }
 };
 const addResumeManyExperiences = async (data, id) => {
-  console.log(...data);
   try {
     await Experience.sync({ force: false });
-
     let newExperiences = await Experience.bulkCreate(data);
-    //let newExperience = await resume.createExperience({ data });
     return newExperiences;
   } catch (err) {
     console.log("ExperienceService /addResumeManyExperiences Eroor ", err);
@@ -39,6 +36,9 @@ const getResumeExperiences = async id => {
 const deleteResumeExperience = async (id, idExperience) => {
   try {
     let experience = await Experience.findByPk(idExperience);
+    if (!experience) {
+      return `no experience with id = ${idExperience}`;
+    }
     if (experience.ResumeId == id) {
       experienceToDelete = await experience.destroy();
       return experienceToDelete;

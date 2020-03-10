@@ -39,6 +39,7 @@ Skill.belongsTo(Resume);
 Resume.hasMany(Language);
 Language.belongsTo(Resume);
 
+//console.log(Certificate.prototype);
 //console.log(Project.prototype);
 //console.log(Resume.prototype);
 //console.log(User.prototype);

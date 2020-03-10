@@ -26,54 +26,7 @@ const getUserResumeDetails = async userId => {
   }
 };
 
-//done
-const addResumeExperience = async (data, id) => {
-  try {
-    await Experience.sync({ force: false });
-    let resume = await Resume.findByPk(id);
-    let newExperience = await resume.createExperience({ ...data });
-    return newExperience;
-  } catch (err) {
-    console.log("ResumeService /addResumeExperience Eroor ", err);
-  }
-};
-//done
-const getResumeExperience = async id => {
-  try {
-    let resume = await Resume.findByPk(id);
-    let allExperieces = await resume.getExperiences();
-    return allExperieces;
-  } catch (err) {
-    console.log("ResumeService /getResumeExperience Eroor ", err);
-  }
-};
-
-//done
-const deleteResumeExperience = async idExperience => {
-  try {
-    let experience = await Experience.findByPk(idExperience);
-    experienceToDelete = await experience.destroy();
-    return experienceToDelete;
-  } catch (err) {
-    console.log("ResumeService /deleteResumeExperience Eroor ", err);
-  }
-};
-
-//TODO:
-const updateResumeExperience = async (idExperience, data) => {
-  try {
-    let experience = await Experience.findByPk(idExperience);
-    newExperience = await experience.update({ ...data });
-    return newExperience;
-  } catch (err) {
-    console.log("ResumeService /updateResumeExperience Eroor ", err);
-  }
-};
 module.exports = {
   getAllResume,
-  getUserResumeDetails,
-  addResumeExperience,
-  getResumeExperience,
-  deleteResumeExperience,
-  updateResumeExperience
+  getUserResumeDetails
 };
