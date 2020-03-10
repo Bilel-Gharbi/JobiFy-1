@@ -36,11 +36,15 @@ const getResumeEducations = async id => {
 };
 
 //done
-const deleteResumeEducation = async idEducation => {
+const deleteResumeEducation = async (id, idEducation) => {
   try {
     let education = await Education.findByPk(idEducation);
-    educationToDelete = await education.destroy();
-    return educationToDelete;
+    //check the resume id before destroy row
+    if (education.ResumeId == id) {
+      educationToDelete = await education.destroy();
+      return educationToDelete;
+    }
+    return `invalid id this resume do not containe education with ${idEducation} `;
   } catch (err) {
     console.log("EducationService /deleteResumeEducation Eroor ", err);
   }
