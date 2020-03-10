@@ -1,14 +1,6 @@
 const { resumeServices } = require("../services");
 
-const createNewResume = async (data, userId) => {
-  try {
-    result = await resumeServices.createResume(data);
-    return result;
-  } catch (err) {
-    console.log("createNewResume operation error ", err);
-  }
-};
-
+//done
 const getAllResume = async () => {
   try {
     result = await resumeServices.getAllResume();
@@ -17,7 +9,7 @@ const getAllResume = async () => {
     console.log("getAllResume /Resume operation error ", err);
   }
 };
-
+//TODO:
 const getUserResumeDetails = async userId => {
   try {
     result = await resumeServices.getUserResumeDetails(userId);
@@ -68,7 +60,6 @@ const updateExperience = async (idExperience, data) => {
 };
 
 module.exports = {
-  createNewResume,
   getAllResume,
   getUserResumeDetails,
   addExperience,

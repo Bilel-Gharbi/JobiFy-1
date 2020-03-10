@@ -1,22 +1,21 @@
 const resumeRouter = require("express").Router();
 //import resumeController as controller
 const { resumeControllers: controller } = require("../controllers");
+const { experienceControllers: expController } = require("../controllers");
 
-resumeRouter
-  .route("/")
-  .get(controller.getAllResume)
-  .post(controller.createNewResume);
+resumeRouter.route("/").get(controller.getAllResume);
 
 resumeRouter.route("/:id").get(controller.getUserResumeDetails);
 
+//done
 resumeRouter
   .route("/:id/experience")
-  .post(controller.addResumeExperience) // done
-  .get(controller.getResumeExperiences); // get all experience by resume
+  .post(expController.addResumeExperience) // done
+  .get(expController.getResumeExperiences); // get all experience by resume
 resumeRouter
   .route("/:id/experience/:id_experience")
-  .patch(controller.updateResumeExperience) // update one experience
-  .delete(controller.deleteResumeExperience); // delete
+  .patch(expController.updateResumeExperience) // update one experience
+  .delete(expController.deleteResumeExperience); // delete
 
 //TODO:
 resumeRouter
