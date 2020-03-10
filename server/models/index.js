@@ -15,8 +15,8 @@ User.hasOne(Resume, {
 });
 Resume.belongsTo(User);
 
-console.log(User.prototype);
-console.log(Resume.prototype);
+//console.log(User.prototype);
+//console.log(Resume.prototype);
 /* -----  Resume / Experience association ------- */
 Resume.hasMany(Experience);
 Experience.belongsTo(Resume);

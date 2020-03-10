@@ -28,6 +28,7 @@ const getUserResumeDetails = async userId => {
   }
 };
 
+//done
 const addExperience = async (data, id) => {
   //check if user's in position or note
   !data.endDate ? (data.current = true) : (data.current = false);
@@ -38,10 +39,40 @@ const addExperience = async (data, id) => {
     console.log("addExperience/ Resume operation error ", err);
   }
 };
+//done
+const getExperiences = async id => {
+  try {
+    result = await resumeServices.getResumeExperience(id);
+    return result;
+  } catch (err) {
+    console.log("getExperiences/ Resume operation error ", err);
+  }
+};
+//done
+const deleteExperience = async idExperience => {
+  try {
+    result = await resumeServices.deleteResumeExperience(idExperience);
+    return result;
+  } catch (err) {
+    console.log("deleteExperience / Resume operation error ", err);
+  }
+};
+//done
+const updateExperience = async (idExperience, data) => {
+  try {
+    result = await resumeServices.updateResumeExperience(idExperience, data);
+    return result;
+  } catch (err) {
+    console.log("updateExperience / Resume operation error ", err);
+  }
+};
 
 module.exports = {
   createNewResume,
   getAllResume,
   getUserResumeDetails,
-  addExperience
+  addExperience,
+  getExperiences,
+  deleteExperience,
+  updateExperience
 };

@@ -12,11 +12,11 @@ resumeRouter.route("/:id").get(controller.getUserResumeDetails);
 resumeRouter
   .route("/:id/experience")
   .post(controller.addResumeExperience) // done
-  .get(controller.addResumeExperience); // get all experience by resume
+  .get(controller.getResumeExperiences); // get all experience by resume
 resumeRouter
   .route("/:id/experience/:id_experience")
-  .patch(controller.addResumeExperience) // update one experience
-  .delete(controller.addResumeExperience); // delete
+  .patch(controller.updateResumeExperience) // update one experience
+  .delete(controller.deleteResumeExperience); // delete
 
 //TODO:
 resumeRouter
