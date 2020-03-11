@@ -5,6 +5,7 @@ const { experienceControllers: expController } = require("../controllers");
 const { educationControllers: eduController } = require("../controllers");
 const { projectControllers: projController } = require("../controllers");
 const { certificateControllers: certController } = require("../controllers");
+const { awardControllers: awdController } = require("../controllers");
 
 //get all Resume
 resumeRouter.route("/").get(controller.getAllResume);
@@ -51,7 +52,7 @@ resumeRouter
   .patch(projController.updateResumeProject) // update on project
   .delete(projController.deleteResumeProject); // delete one project
 
-//TODO: // Test ....
+//done
 resumeRouter
   .route("/:id/certificates")
   .post(certController.addResumeManyCertificates) // done
@@ -64,6 +65,19 @@ resumeRouter
   .route("/:id/certificate/:id_certificate")
   .patch(certController.updateResumeCertificate)
   .delete(certController.deleteResumeCertificate);
+
+//TODO: test .....
+resumeRouter
+  .route("/:id/awards")
+  .post(awdController.addResumeManyAwards) // done
+  .get(awdController.getResumeAwards);
+
+resumeRouter.route("/:id/award").post(awdController.addResumeAward);
+
+resumeRouter
+  .route("/:id/award/:id_award")
+  .patch(awdController.updateResumeAward)
+  .delete(awdController.deleteResumeAward);
 
 //TODO:
 resumeRouter
@@ -82,16 +96,6 @@ resumeRouter
   .get(controller.addResumeExperience);
 resumeRouter
   .route("/:id/interst/:id_interst")
-  .patch(controller.addResumeExperience)
-  .delete(controller.addResumeExperience);
-
-//TODO:
-resumeRouter
-  .route("/:id/award")
-  .post(controller.addResumeExperience) // done
-  .get(controller.addResumeExperience);
-resumeRouter
-  .route("/:id/award/:id_award")
   .patch(controller.addResumeExperience)
   .delete(controller.addResumeExperience);
 

@@ -5,6 +5,7 @@ const experienceControllers = require("./experience");
 const educationControllers = require("./education");
 const projectControllers = require("./project");
 const certificateControllers = require("./certificate");
+const awardControllers = require("./award");
 
 //export one obj contains all controllers
 
@@ -14,5 +15,6 @@ module.exports = {
   experienceControllers,
   educationControllers,
   projectControllers,
-  certificateControllers
+  certificateControllers,
+  awardControllers
 };

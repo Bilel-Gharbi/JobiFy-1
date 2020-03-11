@@ -9,6 +9,7 @@ const experienceServices = require("./experience");
 const educationServices = require("./education");
 const projectServices = require("./project");
 const certificateServices = require("./certificate");
+const awardServices = require("./award");
 
 module.exports = {
   userServices,
@@ -16,5 +17,6 @@ module.exports = {
   experienceServices,
   educationServices,
   projectServices,
-  certificateServices
+  certificateServices,
+  awardServices
 };

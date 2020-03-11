@@ -10,6 +10,10 @@ const Award = db.define("Award", {
   },
   description: {
     type: DataTypes.STRING,
+    allowNull: true
+  },
+  date: {
+    type: DataTypes.DATE,
     allowNull: false
   }
 });
