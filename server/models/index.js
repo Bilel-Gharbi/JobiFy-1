@@ -44,6 +44,7 @@ Language.belongsTo(Resume);
 Resume.hasMany(Award);
 Award.belongsTo(Resume);
 
+//console.log(Award.prototype);
 //console.log(Certificate.prototype);
 //console.log(Project.prototype);
 //console.log(Resume.prototype);

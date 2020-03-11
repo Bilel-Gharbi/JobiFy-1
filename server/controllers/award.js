@@ -17,7 +17,7 @@ const getResumeAwards = async (req, res) => {
 //add one award to resume
 const addResumeAward = async (req, res) => {
   try {
-    newAward = await awardOperations.addResumeAward(req.body, req.params.id);
+    newAward = await awardOperations.addAward(req.body, req.params.id);
     res.status(201).json({
       status: "sucess",
       msg: `new award added to Resume with id ${req.params.id}`,
@@ -64,7 +64,7 @@ const updateResumeAward = async (req, res) => {
     res.status(200).json({
       status: "sucess",
       msg: `Award ${req.params.id_award} updated for the Resume with id ${req.params.id}`,
-      newProject
+      newAward
     });
   } catch (err) {
     res.status(400).json(err);

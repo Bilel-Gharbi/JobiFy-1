@@ -3,11 +3,13 @@ const { Resume, Award } = require("../models");
 
 //done
 const addResumeAward = async (data, id) => {
+  console.log("service");
   try {
     await Award.sync({ force: false });
     let resume = await Resume.findByPk(id);
+    //console.log(resume);
     let newAward = await resume.createAward({ ...data });
-    return newCertificate;
+    return newAward;
   } catch (err) {
     console.log("AwardService /addResumeAward Eroor ", err);
   }

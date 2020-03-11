@@ -3,7 +3,6 @@ const { Resume, Education } = require("../models");
 
 //done
 const addResumeEducation = async (data, id) => {
-  console.log(data);
   try {
     await Education.sync({ force: false });
     let resume = await Resume.findByPk(id);
