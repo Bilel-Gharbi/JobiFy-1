@@ -3,7 +3,6 @@ const { Resume, Education } = require("../models");
 
 //done
 const addResumeEducation = async (data, id) => {
-  console.log(data);
   try {
     await Education.sync({ force: false });
     let resume = await Resume.findByPk(id);
@@ -39,6 +38,9 @@ const getResumeEducations = async id => {
 const deleteResumeEducation = async (id, idEducation) => {
   try {
     let education = await Education.findByPk(idEducation);
+    if (!education) {
+      return `no education with id = ${idEducation}`;
+    }
     //check the resume id before destroy row
     if (education.ResumeId == id) {
       educationToDelete = await education.destroy();

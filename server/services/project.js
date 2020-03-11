@@ -41,6 +41,9 @@ const deleteResumeProject = async (id, idProject) => {
   //check the resume id before deleted
   try {
     let project = await Project.findByPk(idProject);
+    if (!project) {
+      return `no project with id = ${idProject}`;
+    }
     //check the resumeid before deleting
     if (project.ResumeId == id) {
       projectToDelete = await project.destroy();
