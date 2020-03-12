@@ -55,8 +55,16 @@ const deleteResumeAward = async (id, idAward) => {
 const updateResumeAward = async (idAward, data) => {
   try {
     let award = await Award.findByPk(idAward);
-    newAward = await award.update({ ...data });
-    return newAward;
+
+    //TODO:
+    if (!award) {
+      return `no Award with id = ${idAward}`;
+    }
+    if (award.ResumeId == id) {
+      newAward = await award.update({ ...data });
+      return newAward;
+    }
+    return `invalid id this resume do not containe award with id = ${idAward} `;
   } catch (err) {
     console.log("AwardService /updateResumeAward Eroor ", err);
   }
