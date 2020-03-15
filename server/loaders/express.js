@@ -19,7 +19,9 @@ module.exports = async app => {
   app.use(logger("dev"));
   // user route API
   app.use("/api/user", API.userRouter);
-
   // resume route API
   app.use("/api/resume", API.resumeRouter);
+
+  // company Route API
+  app.use("/api/company", API.companyRouter);
 };

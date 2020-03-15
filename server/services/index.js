@@ -13,6 +13,9 @@ const awardServices = require("./award");
 const languageServices = require("./language");
 const interestServices = require("./interest");
 
+// company service
+const companyServices = require("./company");
+
 module.exports = {
   userServices,
   resumeServices,
@@ -22,5 +25,6 @@ module.exports = {
   certificateServices,
   awardServices,
   languageServices,
-  interestServices
+  interestServices,
+  companyServices
 };

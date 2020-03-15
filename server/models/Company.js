@@ -3,9 +3,17 @@ const db = require("../loaders/dataBase");
 
 //user has one resume
 
-const User = db.define("User", {
-  // Model attributes are defined here
-
+const Company = db.define("Company", {
+  companyName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "company name"
+  },
+  companyDescription: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "company description"
+  },
   email: {
     type: DataTypes.STRING,
     allowNull: true,
@@ -20,17 +28,11 @@ const User = db.define("User", {
     type: DataTypes.BOOLEAN,
     defaultValue: false
   },
-  firstName: {
+  type: {
     type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: "user name"
+    allowNull: true
   },
-  lastName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: "user lastName"
-  },
-  birthDate: {
+  creationDate: {
     type: DataTypes.DATE,
     allowNull: true,
     defaultValue: new Date()
@@ -45,10 +47,10 @@ const User = db.define("User", {
     allowNull: true,
     defaultValue: "anywhere"
   },
-  photo: {
+  logo: {
     type: DataTypes.STRING,
     defaultValue: "https://via.placeholder.com/600/92c952"
   }
 });
 
-module.exports = User;
+module.exports = Company;
