@@ -59,6 +59,9 @@ const deleteResumeProject = async (id, idProject) => {
 const updateResumeProject = async (idProject, data) => {
   try {
     let project = await Project.findByPk(idProject);
+    if (!project) {
+      return `no project with id = ${idProject}`;
+    }
     newProject = await project.update({ ...data });
     return newProject;
   } catch (err) {
