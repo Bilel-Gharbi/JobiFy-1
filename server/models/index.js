@@ -8,6 +8,7 @@ const Project = require("./Project");
 const Skill = require("./Skill");
 const Language = require("./Language");
 const Award = require("./Award");
+const Interest = require("./Interest");
 
 /* ----- User / Resume association ------- */
 User.hasOne(Resume, {
@@ -35,6 +36,10 @@ Project.belongsTo(Resume);
 /* -----  Resume / Skill association ------- */
 Resume.hasMany(Skill);
 Skill.belongsTo(Resume);
+/* 
+Job.hasMany(Skill);
+Skill.belongsTo(Job);
+ */
 
 /* -----  Resume / Language association ------- */
 Resume.hasMany(Language);
@@ -43,6 +48,10 @@ Language.belongsTo(Resume);
 /* -----  Resume / Award association ------- */
 Resume.hasMany(Award);
 Award.belongsTo(Resume);
+
+/* -----  Resume / Interst association ------- */
+Resume.hasMany(Interest);
+Interest.belongsTo(Resume);
 
 //console.log(Award.prototype);
 //console.log(Certificate.prototype);
@@ -60,5 +69,6 @@ module.exports = {
   Project,
   Language,
   Skill,
-  Award
+  Award,
+  Interest
 };
