@@ -1,14 +1,18 @@
 // models
 const User = require("./User");
 const Resume = require("./Resume");
-const Experience = require("./Experience");
-const Education = require("./Education");
-const Certificate = require("./Certificate");
-const Project = require("./Project");
+const Experience = require("./Experience.js");
+const Education = require("./Education.js");
+const Certificate = require("./Certificate.js");
+const Project = require("./Project.js");
 const Skill = require("./Skill");
-const Language = require("./Language");
-const Award = require("./Award");
-const Interest = require("./Interest");
+const Language = require("./Language.js");
+const Award = require("./Award.js");
+const Interest = require("./Interest.js");
+
+// Compnay Models
+const Company = require("./Company");
+const JobOffer = require("./JobOffer");
 
 /* ----- User / Resume association ------- */
 User.hasOne(Resume, {
@@ -17,8 +21,13 @@ User.hasOne(Resume, {
 });
 Resume.belongsTo(User);
 
-//console.log(User.prototype);
-//console.log(Resume.prototype);
+/* ----- Company / JobOffer association ------- */
+Company.hasMany(JobOffer, {
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
+});
+JobOffer.belongsTo(Company);
+
 /* -----  Resume / Experience association ------- */
 Resume.hasMany(Experience);
 Experience.belongsTo(Resume);
@@ -36,10 +45,9 @@ Project.belongsTo(Resume);
 /* -----  Resume / Skill association ------- */
 Resume.hasMany(Skill);
 Skill.belongsTo(Resume);
-/* 
-Job.hasMany(Skill);
-Skill.belongsTo(Job);
- */
+
+JobOffer.hasMany(Skill);
+Skill.belongsTo(JobOffer);
 
 /* -----  Resume / Language association ------- */
 Resume.hasMany(Language);
@@ -53,13 +61,6 @@ Award.belongsTo(Resume);
 Resume.hasMany(Interest);
 Interest.belongsTo(Resume);
 
-//console.log(Award.prototype);
-//console.log(Certificate.prototype);
-//console.log(Project.prototype);
-//console.log(Resume.prototype);
-//console.log(User.prototype);
-//console.log(Education.prototype);
-//console.log(User.prototype);
 module.exports = {
   User,
   Resume,
@@ -70,5 +71,7 @@ module.exports = {
   Language,
   Skill,
   Award,
-  Interest
+  Interest,
+  Company,
+  JobOffer
 };
