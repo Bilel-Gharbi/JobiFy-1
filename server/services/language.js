@@ -34,29 +34,29 @@ const getResumeLanaguages = async id => {
 };
 
 //done
-const deleteResumeLanguage = async (id, idLangauge) => {
+const deleteResumeLanguage = async (id, idLanguage) => {
   try {
-    let language = await Award.findByPk(idLangauge);
+    let language = await Award.findByPk(idLanguage);
     if (!language) {
-      return `no Award with id = ${idLangauge}`;
+      return `no Award with id = ${idLanguage}`;
     }
     if (language.ResumeId == id) {
       langaugeToDelete = await award.destroy();
       return langaugeToDelete;
     }
-    return `invalid id this resume do not containe Langauge with id = ${idLangauge} `;
+    return `invalid id this resume do not containe Langauge with id = ${idLanguage} `;
   } catch (err) {
     console.log("LangaugeService /deleteResumeLanguage Eroor ", err);
   }
 };
 
 //done
-const updateResumeLangauge = async (idLangauge, data) => {
+const updateResumeLanguage = async (idLanguage, data) => {
   try {
     let language = await Language.findByPk(idAward);
 
     if (!language) {
-      return `no Award with id = ${idLangauge}`;
+      return `no Award with id = ${idLanguage}`;
     }
     newLanguage = await Language.update({ ...data });
     return newLanguage;
@@ -69,5 +69,5 @@ module.exports = {
   getResumeLanaguages,
   addResumeManyLanguages,
   deleteResumeLanguage,
-  updateResumeLangauge
+  updateResumeLanguage
 };

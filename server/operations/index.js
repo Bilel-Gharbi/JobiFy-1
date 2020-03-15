@@ -8,6 +8,8 @@ const educationOperations = require("./education");
 const projectOperations = require("./project");
 const certificateOperations = require("./certificate");
 const awardOperations = require("./award");
+const languageOperations = require("./language");
+const interestOperations = require("./interest");
 
 module.exports = {
   userOperations,
@@ -16,5 +18,7 @@ module.exports = {
   educationOperations,
   projectOperations,
   certificateOperations,
-  awardOperations
+  awardOperations,
+  languageOperations,
+  interestOperations
 };
