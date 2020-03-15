@@ -80,7 +80,7 @@ resumeRouter
   .patch(awdController.updateResumeAward)
   .delete(awdController.deleteResumeAward);
 
-//TODO: // to test .....
+//done
 resumeRouter
   .route("/:id/languages")
   .post(langController.addResumeManyLanguages) // done

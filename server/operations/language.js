@@ -40,17 +40,17 @@ const deleteLanguage = async (id, idLanguage) => {
     result = await languageServices.deleteResumeLanguage(id, idLanguage);
     return result;
   } catch (err) {
-    console.log("deleteInterest / interestOperations error ", err);
+    console.log("deletelanguage/ LanguageOperations error ", err);
   }
 };
 
 //done
 const updateLanguage = async (idLanguage, data) => {
   try {
-    result = await languageServices.updateResumeLangauge(idLanguage, data);
+    result = await languageServices.updateResumeLanguage(idLanguage, data);
     return result;
   } catch (err) {
-    console.log("updateAward / interestOperations error ", err);
+    console.log("updateLanguage / LanguageOperations error ", err);
   }
 };
 
