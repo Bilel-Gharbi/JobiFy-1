@@ -80,7 +80,7 @@ resumeRouter
   .patch(awdController.updateResumeAward)
   .delete(awdController.deleteResumeAward);
 
-//TODO: // to test .....
+//done
 resumeRouter
   .route("/:id/languages")
   .post(langController.addResumeManyLanguages) // done
@@ -100,7 +100,7 @@ resumeRouter
 
 resumeRouter.route("/:id/interest").post(intController.addResumeInterest);
 resumeRouter
-  .route("/:id/interst/:id_interest")
+  .route("/:id/interest/:id_interest")
   .patch(intController.updateResumeInterest)
   .delete(intController.deleteResumeInterest);
 

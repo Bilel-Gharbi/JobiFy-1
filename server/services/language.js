@@ -15,7 +15,7 @@ const addResumeLanguage = async (data, id) => {
 };
 const addResumeManyLanguages = async data => {
   try {
-    await Langauge.sync({ force: false });
+    await Language.sync({ force: false });
     let newLangauges = await Language.bulkCreate(data);
     return newLangauges;
   } catch (err) {
@@ -26,7 +26,7 @@ const addResumeManyLanguages = async data => {
 const getResumeLanaguages = async id => {
   try {
     let resume = await Resume.findByPk(id);
-    let allLanguages = await resume.getLangauges();
+    let allLanguages = await resume.getLanguages();
     return allLanguages;
   } catch (err) {
     console.log("LanguageService /getResumeLangauges Eroor ", err);
@@ -36,13 +36,13 @@ const getResumeLanaguages = async id => {
 //done
 const deleteResumeLanguage = async (id, idLanguage) => {
   try {
-    let language = await Award.findByPk(idLanguage);
+    let language = await Language.findByPk(idLanguage);
     if (!language) {
-      return `no Award with id = ${idLanguage}`;
+      return `no Language with id = ${idLanguage}`;
     }
     if (language.ResumeId == id) {
-      langaugeToDelete = await award.destroy();
-      return langaugeToDelete;
+      languageToDelete = await language.destroy();
+      return languageToDelete;
     }
     return `invalid id this resume do not containe Langauge with id = ${idLanguage} `;
   } catch (err) {
@@ -52,14 +52,17 @@ const deleteResumeLanguage = async (id, idLanguage) => {
 
 //done
 const updateResumeLanguage = async (idLanguage, data) => {
+  console.log(data);
+  console.log(idLanguage);
   try {
-    let language = await Language.findByPk(idAward);
+    let language = await Language.findByPk(idLanguage);
 
     if (!language) {
-      return `no Award with id = ${idLanguage}`;
+      return `no language with id = ${idLanguage}`;
+    } else {
+      newLanguage = await language.update({ ...data });
+      return newLanguage;
     }
-    newLanguage = await Language.update({ ...data });
-    return newLanguage;
   } catch (err) {
     console.log("LanguageService /updateResumeLanguage Eroor ", err);
   }
