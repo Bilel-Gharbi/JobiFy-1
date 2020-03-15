@@ -6,7 +6,6 @@ const addResumeInterest = async (data, id) => {
   try {
     let resume = await Resume.findByPk(id);
     await Interest.sync({ force: false });
-    //console.log(resume);
     let newInterest = await resume.createInterest({ ...data });
     return newInterest;
   } catch (err) {
@@ -36,12 +35,12 @@ const getResumeInterests = async id => {
 //done
 const deleteResumeInterest = async (id, idInterest) => {
   try {
-    let interest = await Interest.findByPk(idLangauge);
+    let interest = await Interest.findByPk(idInterest);
     if (!interest) {
       return `no Award with id = ${idInterest}`;
     }
     if (interest.ResumeId == id) {
-      interestToDelete = await Interest.destroy();
+      interestToDelete = await interest.destroy();
       return interestToDelete;
     }
     return `invalid id this resume do not containe Interest with id = ${idInterest} `;
@@ -58,7 +57,7 @@ const updateResumeInterest = async (idInterest, data) => {
     if (!interest) {
       return `no Interest with id = ${idInterest}`;
     }
-    newInterest = await Interest.update({ ...data });
+    newInterest = await interest.update({ ...data });
     return newInterest;
   } catch (err) {
     console.log("InterestService /updateResumeInterest Eroor ", err);

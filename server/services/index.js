@@ -11,7 +11,7 @@ const projectServices = require("./project");
 const certificateServices = require("./certificate");
 const awardServices = require("./award");
 const languageServices = require("./language");
-const interestServices = require("./interst");
+const interestServices = require("./interest");
 
 module.exports = {
   userServices,

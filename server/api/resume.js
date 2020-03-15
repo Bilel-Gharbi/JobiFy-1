@@ -100,7 +100,7 @@ resumeRouter
 
 resumeRouter.route("/:id/interest").post(intController.addResumeInterest);
 resumeRouter
-  .route("/:id/interst/:id_interest")
+  .route("/:id/interest/:id_interest")
   .patch(intController.updateResumeInterest)
   .delete(intController.deleteResumeInterest);
 
