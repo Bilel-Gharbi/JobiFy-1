@@ -47,7 +47,7 @@ Award.belongsTo(Resume);
 //console.log(Award.prototype);
 //console.log(Certificate.prototype);
 //console.log(Project.prototype);
-//console.log(Resume.prototype);
+console.log(Resume.prototype);
 //console.log(User.prototype);
 //console.log(Education.prototype);
 //console.log(User.prototype);
