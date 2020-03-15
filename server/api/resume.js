@@ -6,6 +6,8 @@ const { educationControllers: eduController } = require("../controllers");
 const { projectControllers: projController } = require("../controllers");
 const { certificateControllers: certController } = require("../controllers");
 const { awardControllers: awdController } = require("../controllers");
+const { languageControllers: langController } = require("../controllers");
+const { interestControllers: intController } = require("../controllers");
 
 //get all Resume
 resumeRouter.route("/").get(controller.getAllResume);
@@ -66,7 +68,6 @@ resumeRouter
   .patch(certController.updateResumeCertificate)
   .delete(certController.deleteResumeCertificate);
 
-//TODO: test .....
 resumeRouter
   .route("/:id/awards")
   .post(awdController.addResumeManyAwards) // done
@@ -79,25 +80,29 @@ resumeRouter
   .patch(awdController.updateResumeAward)
   .delete(awdController.deleteResumeAward);
 
-//TODO:
+//TODO: // to test .....
 resumeRouter
-  .route("/:id/language")
-  .post(controller.addResumeExperience) // done
-  .get(controller.addResumeExperience);
+  .route("/:id/languages")
+  .post(langController.addResumeManyLanguages) // done
+  .get(langController.getResumeLanguages);
+
+resumeRouter.route("/:id/language").post(langController.addResumeLanguage);
 resumeRouter
   .route("/:id/language/:id_language")
-  .patch(controller.addResumeExperience)
-  .delete(controller.addResumeExperience);
+  .patch(langController.updateResumeLanguage)
+  .delete(langController.deleteResumeLanguage);
 
 //TODO:
 resumeRouter
-  .route("/:id/interst")
-  .post(controller.addResumeExperience) // done
-  .get(controller.addResumeExperience);
+  .route("/:id/interests")
+  .post(intController.addResumeManyInterests) // done
+  .get(intController.getResumeInterests);
+
+resumeRouter.route("/:id/interest").post(intController.addResumeInterest);
 resumeRouter
-  .route("/:id/interst/:id_interst")
-  .patch(controller.addResumeExperience)
-  .delete(controller.addResumeExperience);
+  .route("/:id/interst/:id_interest")
+  .patch(intController.updateResumeInterest)
+  .delete(intController.deleteResumeInterest);
 
 //TODO: add id job in skill table
 resumeRouter

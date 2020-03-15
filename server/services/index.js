@@ -10,6 +10,8 @@ const educationServices = require("./education");
 const projectServices = require("./project");
 const certificateServices = require("./certificate");
 const awardServices = require("./award");
+const languageServices = require("./language");
+const interestServices = require("./interst");
 
 module.exports = {
   userServices,
@@ -18,5 +20,7 @@ module.exports = {
   educationServices,
   projectServices,
   certificateServices,
-  awardServices
+  awardServices,
+  languageServices,
+  interestServices
 };
