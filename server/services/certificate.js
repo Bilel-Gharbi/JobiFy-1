@@ -53,6 +53,9 @@ const deleteResumeCertificate = async (id, idCertificate) => {
 const updateResumeCertificate = async (idCertificate, data) => {
   try {
     let certificate = await Certificate.findByPk(idCertificate);
+    if (!certificate) {
+      return `no certificate with id = ${idCertificate}`;
+    }
     newCertificate = await certificate.update({ ...data });
     return newCertificate;
   } catch (err) {

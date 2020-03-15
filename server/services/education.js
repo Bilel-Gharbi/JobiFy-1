@@ -56,6 +56,9 @@ const deleteResumeEducation = async (id, idEducation) => {
 const updateResumeEducation = async (idEducation, data) => {
   try {
     let education = await Education.findByPk(idEducation);
+    if (!education) {
+      return `no education with id = ${idEducation}`;
+    }
     newEducation = await education.update({ ...data });
     return newEducation;
   } catch (err) {

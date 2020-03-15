@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../loaders/dataBase");
 
-//one resume has many awards
-const Interst = db.define("Interst", {
+//one resume has many Interst
+const Interest = db.define("Interst", {
   // Model attributes are defined here
   name: {
     type: DataTypes.STRING,
@@ -10,4 +10,4 @@ const Interst = db.define("Interst", {
   }
 });
 
-module.exports = Interst;
+module.exports = Interest;

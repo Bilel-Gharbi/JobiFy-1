@@ -53,6 +53,9 @@ const deleteResumeExperience = async (id, idExperience) => {
 const updateResumeExperience = async (idExperience, data) => {
   try {
     let experience = await Experience.findByPk(idExperience);
+    if (!experience) {
+      return `no experience with id = ${idExperience}`;
+    }
     newExperience = await experience.update({ ...data });
     return newExperience;
   } catch (err) {
