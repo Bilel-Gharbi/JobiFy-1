@@ -15,7 +15,7 @@ const addSkill = async (data, id) => {
     result = await skillServices.addResumeSkill(data, id);
     return result;
   } catch (err) {
-    console.log("addInterest / interestOperations error ", err);
+    console.log("addInterest / SkillOperations error ", err);
   }
 };
 
@@ -30,25 +30,26 @@ const addManySkills = async (data, id) => {
     result = await skillServices.addResumeManySkills(data, id);
     return result;
   } catch (err) {
-    console.log("addManySkills/ interestOperations error ", err);
+    console.log("addManySkills/ SkillOperations error ", err);
   }
 };
 
-const deleteInterest = async (id, idInterst) => {
+const deleteSkill = async (id, idJobOffer, idSkill) => {
   try {
-    result = await interestServices.deleteResumeInterest(id, idInterst);
+    result = await skillServices.deleteSkill(id, idJobOffer, idSkill);
     return result;
   } catch (err) {
-    console.log("deleteInterest / interestOperations error ", err);
+    console.log("deleteSkill / SkillOperations error ", err);
   }
 };
 
-const updateInterest = async (idInterst, data) => {
+//done
+const updateSkill = async (idSkill, data) => {
   try {
-    result = await interestServices.updateResumeInterest(idInterst, data);
+    result = await skillServices.updateSkill(idSkill, data);
     return result;
   } catch (err) {
-    console.log("updateAward / interestOperations error ", err);
+    console.log("updateSkill / SkillOperations error ", err);
   }
 };
 
@@ -56,6 +57,6 @@ module.exports = {
   getSkills,
   addSkill,
   addManySkills,
-  deleteInterest,
-  updateInterest
+  deleteSkill,
+  updateSkill
 };

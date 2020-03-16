@@ -42,35 +42,33 @@ const addResumeManySkills = async (req, res) => {
   }
 };
 // TODO: delete one skill from resume
-const deleteResumeInterest = async (req, res) => {
-  const { id_interest, id } = req.params;
+const deleteSkill = async (req, res) => {
+  const { id_skill, id_jobOffer, id } = req.params;
   try {
-    let deletedInterest = await interestOperations.deleteInterest(
+    let deletedSkill = await skillOperations.deleteSkill(
       id,
-      id_interest
+      id_jobOffer,
+      id_skill
     );
     res.status(202).json({
       status: "sucess",
-      msg: `Interest ${req.params.id_interest} deleted for the Resume with id ${req.params.id}`,
-      deletedInterest
+      msg: `Skill ${req.params.id_skill} deleted for the Resume or JobOffer with id ${req.params.id}`,
+      deletedSkill
     });
   } catch (err) {
     res.status(401).json(err);
   }
 };
 
-//TODO: update skill
-const updateResumeInterest = async (req, res) => {
-  const { id_interest } = req.params;
+//done
+const updateSkill = async (req, res) => {
+  const { id_skill } = req.params;
   try {
-    newInterest = await interestOperations.updateInterest(
-      id_interest,
-      req.body
-    );
+    newSkill = await skillOperations.updateSkill(id_skill, req.body);
     res.status(200).json({
       status: "sucess",
-      msg: `Interest ${req.params.id_interest} updated for the Resume with id ${req.params.id}`,
-      newInterest
+      msg: `Skill ${req.params.id_skill} updated for the Resume or JobOffer with id ${req.params.id}`,
+      newSkill
     });
   } catch (err) {
     res.status(401).json(err);
@@ -81,6 +79,6 @@ module.exports = {
   addResumeSkill,
   addResumeManySkills,
   getResumeSkills,
-  deleteResumeInterest,
-  updateResumeInterest
+  deleteSkill,
+  updateSkill
 };
