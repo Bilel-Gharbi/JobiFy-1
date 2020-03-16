@@ -41,7 +41,7 @@ const addResumeManySkills = async (req, res) => {
     res.status(401).json(err);
   }
 };
-// TODO: delete one skill from resume
+//done
 const deleteSkill = async (req, res) => {
   const { id_skill, id_jobOffer, id } = req.params;
   try {
