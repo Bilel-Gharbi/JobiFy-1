@@ -76,11 +76,22 @@ const addManySkillsToJobOffer = async data => {
     console.log("JobOfferService /addManySkillsToJobOffer Eroor ", err);
   }
 };
+
+const getJobOfferSkills = async id => {
+  try {
+    let jobOffer = await JobOffer.findByPk(id);
+    let allJobOfferSkills = await jobOffer.getSkills();
+    return allJobOfferSkills;
+  } catch (err) {
+    console.log("JobOfferService /getCompanyJobOffer Eroor ", err);
+  }
+};
 module.exports = {
   addCompanyJobOffer,
   getCompanyJobOffers,
   deleteCompanyJobOffer,
   updateCompanyJobOffer,
   addSkillToJobOffer,
-  addManySkillsToJobOffer
+  addManySkillsToJobOffer,
+  getJobOfferSkills
 };

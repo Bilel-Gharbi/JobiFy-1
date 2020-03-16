@@ -25,6 +25,7 @@ comapnyRouter
 //many skills
 comapnyRouter
   .route("/:id/jobOffer/:id_jobOffer/skills")
-  .post(jobcontroller.addJobOfferSkills);
+  .post(jobcontroller.addJobOfferSkills)
+  .get(jobcontroller.getJobOfferSkills);
 
 module.exports = comapnyRouter;

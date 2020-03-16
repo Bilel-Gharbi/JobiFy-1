@@ -98,11 +98,28 @@ const addJobOfferSkills = async (req, res) => {
   }
 };
 
+const getJobOfferSkills = async (req, res) => {
+  try {
+    jobOfferSkills = await jobOfferOperations.getJobOfferSkills(
+      req.params.id_jobOffer
+    );
+    res.status(200).json({
+      status: "sucess",
+      msg: `all skill for jobOffer with id ${req.id_jobOffer}`,
+      length: jobOfferSkills.length,
+      data: jobOfferSkills
+    });
+  } catch (err) {
+    res.status(401).json(err);
+  }
+};
+
 module.exports = {
   addCompanyJobOffer,
   deleteCompanyJobOffer,
   updateCompanyJobOffer,
   getCompanyJobOffer,
   addJobOfferSkill,
-  addJobOfferSkills
+  addJobOfferSkills,
+  getJobOfferSkills
 };
