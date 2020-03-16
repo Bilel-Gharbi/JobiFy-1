@@ -54,7 +54,8 @@ const updateCompanyJobOffer = async (idJobOffer, data) => {
 };
 
 //add skills to job offer
-const addSkillsToJobOffer = async (idJobOffer, data) => {
+//done
+const addSkillToJobOffer = async (idJobOffer, data) => {
   try {
     let jobOffer = await JobOffer.findByPk(idJobOffer);
     await Skill.sync({ force: false });
@@ -65,10 +66,11 @@ const addSkillsToJobOffer = async (idJobOffer, data) => {
   }
 };
 //Add many skills to job offer
-const addManySkillsToJobOffer = async (idJobOffer, data) => {
+//done
+const addManySkillsToJobOffer = async data => {
   try {
     await Skill.sync({ force: false });
-    let newJobSkills = await Skill.bulkCreate({ ...data });
+    let newJobSkills = await Skill.bulkCreate(data);
     return newJobSkills;
   } catch (err) {
     console.log("JobOfferService /addManySkillsToJobOffer Eroor ", err);
@@ -79,6 +81,6 @@ module.exports = {
   getCompanyJobOffers,
   deleteCompanyJobOffer,
   updateCompanyJobOffer,
-  addSkillsToJobOffer,
+  addSkillToJobOffer,
   addManySkillsToJobOffer
 };

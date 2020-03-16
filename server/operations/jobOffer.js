@@ -39,9 +39,53 @@ const updateJobOffer = async (idJobOffer, data) => {
   }
 };
 
+//add one skills to one joboffer
+//done
+const addJobOfferSkill = async (idJobOffer, data) => {
+  try {
+    result = await jobOfferServices.addSkillToJobOffer(idJobOffer, data);
+    return result;
+  } catch (err) {
+    console.log("addJobOfferSkills / JobOfferOperations error ", err);
+  }
+};
+
+//add one skills to one joboffer
+const addJobOfferSkills = async (idJobOffer, data) => {
+  data.map(el => (el.JobOfferId = idJobOffer));
+  try {
+    result = await jobOfferServices.addManySkillsToJobOffer(data);
+    return result;
+  } catch (err) {
+    console.log("addJobOfferSkill / JobOfferOperations error ", err);
+  }
+};
+
+//TODO:
+const deleteJobOfferSkill = async (idJobOffer, data) => {
+  try {
+    result = await jobOfferServices.updateCompanyJobOffer(idJobOffer, data);
+    return result;
+  } catch (err) {
+    console.log("deleteJobOfferSkill / JobOfferOperations error ", err);
+  }
+};
+
+// TODO:update job offer skills
+const updateJobOfferSkills = async (idJobOffer, data) => {
+  try {
+    result = await jobOfferServices.updateCompanyJobOffer(idJobOffer, data);
+    return result;
+  } catch (err) {
+    console.log("updateJobOfferSkills / JobOfferOperations error ", err);
+  }
+};
+
 module.exports = {
   getJobOffers,
   addJobOffer,
   deleteJobOffer,
-  updateJobOffer
+  updateJobOffer,
+  addJobOfferSkills,
+  addJobOfferSkill
 };

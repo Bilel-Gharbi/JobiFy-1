@@ -16,4 +16,15 @@ comapnyRouter
   .patch(jobcontroller.updateCompanyJobOffer)
   .delete(jobcontroller.deleteCompanyJobOffer);
 
+//job skills
+//one skill
+comapnyRouter
+  .route("/:id/jobOffer/:id_jobOffer/skill")
+  .post(jobcontroller.addJobOfferSkill);
+
+//many skills
+comapnyRouter
+  .route("/:id/jobOffer/:id_jobOffer/skills")
+  .post(jobcontroller.addJobOfferSkills);
+
 module.exports = comapnyRouter;

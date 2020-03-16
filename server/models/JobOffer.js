@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../loaders/dataBase");
 
-//user has one resume
+//jobOffer has many Skills
 
 const JobOffer = db.define("JobOffer", {
   jobPosition: {
