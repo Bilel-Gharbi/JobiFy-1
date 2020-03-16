@@ -1,5 +1,5 @@
 //import Resume model from models/index.js file
-const { Company, JobOffer } = require("../models");
+const { Company, JobOffer, Skill } = require("../models");
 
 const addCompanyJobOffer = async (data, id) => {
   try {
@@ -54,16 +54,33 @@ const updateCompanyJobOffer = async (idJobOffer, data) => {
 };
 
 //add skills to job offer
-const addSkillsToJobOffer = async (idJobOffer, data) => {
+//done
+const addSkillToJobOffer = async (idJobOffer, data) => {
   try {
-    //let jobOffer = await JobOffer.findByPk(idJobOffer);
+    let jobOffer = await JobOffer.findByPk(idJobOffer);
+    await Skill.sync({ force: false });
+    let newJobSkill = await jobOffer.createSkill({ ...data });
+    return newJobSkill;
   } catch (err) {
     console.log("JobOfferService /addSkillsToJobOffer Eroor ", err);
+  }
+};
+//Add many skills to job offer
+//done
+const addManySkillsToJobOffer = async data => {
+  try {
+    await Skill.sync({ force: false });
+    let newJobSkills = await Skill.bulkCreate(data);
+    return newJobSkills;
+  } catch (err) {
+    console.log("JobOfferService /addManySkillsToJobOffer Eroor ", err);
   }
 };
 module.exports = {
   addCompanyJobOffer,
   getCompanyJobOffers,
   deleteCompanyJobOffer,
-  updateCompanyJobOffer
+  updateCompanyJobOffer,
+  addSkillToJobOffer,
+  addManySkillsToJobOffer
 };

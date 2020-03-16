@@ -44,7 +44,7 @@ const deleteCompanyJobOffer = async (req, res) => {
   }
 };
 
-//update award
+//done
 const updateCompanyJobOffer = async (req, res) => {
   const { id_jobOffer } = req.params;
   try {
@@ -61,10 +61,48 @@ const updateCompanyJobOffer = async (req, res) => {
     res.status(401).json(err);
   }
 };
+//add skill to job offer
+const addJobOfferSkill = async (req, res) => {
+  const { id_jobOffer } = req.params;
+  try {
+    newJobOfferSkill = await jobOfferOperations.addJobOfferSkill(
+      id_jobOffer,
+      req.body
+    );
+    console.log(newJobOfferSkill);
+    res.status(200).json({
+      status: "sucess",
+      msg: `new Skill added to job offer ${req.params.id_jobOffer} for the company with id ${req.params.id}`,
+      newJobOfferSkill
+    });
+  } catch (err) {
+    res.status(401).json(err);
+  }
+};
+
+// add many skills to one job offer
+const addJobOfferSkills = async (req, res) => {
+  const { id_jobOffer } = req.params;
+  try {
+    skillsList = await jobOfferOperations.addJobOfferSkills(
+      id_jobOffer,
+      req.body
+    );
+    res.status(200).json({
+      status: "sucess",
+      msg: `many Skill added to job offer ${req.params.id_jobOffer} for the company with id ${req.params.id}`,
+      skillsList
+    });
+  } catch (err) {
+    res.status(401).json(err);
+  }
+};
 
 module.exports = {
   addCompanyJobOffer,
   deleteCompanyJobOffer,
   updateCompanyJobOffer,
-  getCompanyJobOffer
+  getCompanyJobOffer,
+  addJobOfferSkill,
+  addJobOfferSkills
 };

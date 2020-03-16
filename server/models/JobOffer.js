@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../loaders/dataBase");
 
-//user has one resume
+//jobOffer has many Skills
 
 const JobOffer = db.define("JobOffer", {
   jobPosition: {
@@ -13,6 +13,11 @@ const JobOffer = db.define("JobOffer", {
     type: DataTypes.STRING,
     allowNull: false,
     defaultValue: "Job description "
+  },
+  JobContractType: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: "CDI"
   },
   jobMinSalary: {
     type: DataTypes.INTEGER,
@@ -27,6 +32,11 @@ const JobOffer = db.define("JobOffer", {
   jobExpirationDate: {
     type: DataTypes.DATE,
     allowNull: false
+  },
+  sponsored: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false
   }
 });
 
