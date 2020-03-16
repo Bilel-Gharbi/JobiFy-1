@@ -28,7 +28,7 @@ const deleteCompanyJobOffer = async (id, idJobOffer) => {
     if (!jobOffer) {
       return `no JobOffer with id = ${idJobOffer}`;
     }
-    if (jobOffer.CompnayId == id) {
+    if (jobOffer.CompanyId == id) {
       jobOfferToDelete = await jobOffer.destroy();
       return jobOfferToDelete;
     }

@@ -92,7 +92,7 @@ resumeRouter
   .patch(langController.updateResumeLanguage)
   .delete(langController.deleteResumeLanguage);
 
-//TODO:
+//done
 resumeRouter
   .route("/:id/interests")
   .post(intController.addResumeManyInterests) // done
