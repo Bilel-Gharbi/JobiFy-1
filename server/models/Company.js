@@ -16,12 +16,12 @@ const Company = db.define("Company", {
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
     defaultValue: "email@email.com"
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
     defaultValue: "password"
   },
   active: {

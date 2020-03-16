@@ -105,7 +105,7 @@ resumeRouter
   .patch(intController.updateResumeInterest)
   .delete(intController.deleteResumeInterest);
 
-//TEST:
+//done
 resumeRouter
   .route("/:id/skills")
   .post(skillController.addResumeManySkills)
@@ -113,10 +113,10 @@ resumeRouter
 
 resumeRouter.route("/:id/skill").post(skillController.addResumeSkill);
 
-//TODO:
+// test
 resumeRouter
   .route("/:id/skill/:id_skill")
-  .patch(controller.addResumeExperience)
-  .delete(controller.addResumeExperience);
+  .patch(skillController.updateSkill)
+  .delete(skillController.deleteSkill);
 
 module.exports = resumeRouter;

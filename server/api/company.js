@@ -23,6 +23,7 @@ comapnyRouter
   .post(jobcontroller.addJobOfferSkill);
 
 //many skills
+//add many / get all skills
 comapnyRouter
   .route("/:id/jobOffer/:id_jobOffer/skills")
   .post(jobcontroller.addJobOfferSkills)

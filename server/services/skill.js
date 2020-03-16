@@ -32,33 +32,33 @@ const getResumeSkills = async id => {
   }
 };
 
-const deleteResumeInterest = async (id, idInterest) => {
+const deleteSkill = async (id, idSkill) => {
   try {
-    let interest = await Interest.findByPk(idInterest);
-    if (!interest) {
-      return `no Award with id = ${idInterest}`;
+    let skill = await Skill.findByPk(idSkill);
+    if (!skill) {
+      return `no Skill with id = ${idSkill}`;
     }
-    if (interest.ResumeId == id) {
-      interestToDelete = await interest.destroy();
-      return interestToDelete;
+    if (skill.ResumeId == id || skill.JobOfferId == id) {
+      skillToDelete = await skill.destroy();
+      return skillToDelete;
     }
-    return `invalid id this resume do not containe Interest with id = ${idInterest} `;
+    return `invalid id this resume or Job  do not containe skill with id = ${idSkill} `;
   } catch (err) {
-    console.log("InterestService /deleteResumeInterest Eroor ", err);
+    console.log("SkillService /deleteSkill Eroor ", err);
   }
 };
 
-const updateResumeInterest = async (idInterest, data) => {
+const updateSkill = async (idSkill, data) => {
   try {
-    let interest = await Interest.findByPk(idInterest);
+    let skill = await Skill.findByPk(idSkill);
 
-    if (!interest) {
-      return `no Interest with id = ${idInterest}`;
+    if (!skill) {
+      return `no skill with id = ${idSkill}`;
     }
-    newInterest = await interest.update({ ...data });
-    return newInterest;
+    newSkill = await skill.update({ ...data });
+    return newSkill;
   } catch (err) {
-    console.log("InterestService /updateResumeInterest Eroor ", err);
+    console.log("InterestService /updateSkill Eroor ", err);
   }
 };
 
@@ -66,6 +66,6 @@ module.exports = {
   addResumeSkill,
   getResumeSkills,
   addResumeManySkills,
-  deleteResumeInterest,
-  updateResumeInterest
+  deleteSkill,
+  updateSkill
 };
