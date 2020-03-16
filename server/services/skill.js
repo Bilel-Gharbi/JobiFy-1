@@ -61,6 +61,7 @@ const updateResumeInterest = async (idInterest, data) => {
     console.log("InterestService /updateResumeInterest Eroor ", err);
   }
 };
+
 module.exports = {
   addResumeSkill,
   getResumeSkills,
