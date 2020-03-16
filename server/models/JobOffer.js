@@ -14,6 +14,11 @@ const JobOffer = db.define("JobOffer", {
     allowNull: false,
     defaultValue: "Job description "
   },
+  JobContractType: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: "CDI"
+  },
   jobMinSalary: {
     type: DataTypes.INTEGER,
     allowNull: true,
@@ -27,6 +32,11 @@ const JobOffer = db.define("JobOffer", {
   jobExpirationDate: {
     type: DataTypes.DATE,
     allowNull: false
+  },
+  sponsored: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false
   }
 });
 
