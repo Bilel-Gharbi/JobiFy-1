@@ -34,15 +34,16 @@ const addManySkills = async (data, id) => {
   }
 };
 
-const deleteSkill = async (id, idSkill) => {
+const deleteSkill = async (id, idJobOffer, idSkill) => {
   try {
-    result = await skillServices.deleteSkill(id, idSkill);
+    result = await skillServices.deleteSkill(id, idJobOffer, idSkill);
     return result;
   } catch (err) {
     console.log("deleteSkill / SkillOperations error ", err);
   }
 };
 
+//done
 const updateSkill = async (idSkill, data) => {
   try {
     result = await skillServices.updateSkill(idSkill, data);

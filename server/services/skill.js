@@ -31,14 +31,17 @@ const getResumeSkills = async id => {
     console.log("SkillService /getResumeInterests Eroor ", err);
   }
 };
-
-const deleteSkill = async (id, idSkill) => {
+//done
+//this service is used in Resume Api and company Api to delete skill from both table Resume and JobOffer
+const deleteSkill = async (id, idJobOffer, idSkill) => {
   try {
     let skill = await Skill.findByPk(idSkill);
     if (!skill) {
       return `no Skill with id = ${idSkill}`;
     }
-    if (skill.ResumeId == id || skill.JobOfferId == id) {
+    //we check if the service is used to delete Resume skill or JobOffer skills
+    //that's why we add the jobOfferid
+    if (skill.ResumeId == id || skill.JobOfferId == idJobOffer) {
       skillToDelete = await skill.destroy();
       return skillToDelete;
     }
@@ -47,7 +50,7 @@ const deleteSkill = async (id, idSkill) => {
     console.log("SkillService /deleteSkill Eroor ", err);
   }
 };
-
+//done
 const updateSkill = async (idSkill, data) => {
   try {
     let skill = await Skill.findByPk(idSkill);

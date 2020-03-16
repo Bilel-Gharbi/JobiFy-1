@@ -43,9 +43,13 @@ const addResumeManySkills = async (req, res) => {
 };
 // TODO: delete one skill from resume
 const deleteSkill = async (req, res) => {
-  const { id_skill, id } = req.params;
+  const { id_skill, id_jobOffer, id } = req.params;
   try {
-    let deletedSkill = await skillOperations.deleteSkill(id, id_skill);
+    let deletedSkill = await skillOperations.deleteSkill(
+      id,
+      id_jobOffer,
+      id_skill
+    );
     res.status(202).json({
       status: "sucess",
       msg: `Skill ${req.params.id_skill} deleted for the Resume or JobOffer with id ${req.params.id}`,
@@ -56,7 +60,7 @@ const deleteSkill = async (req, res) => {
   }
 };
 
-//TODO: update skill
+//done
 const updateSkill = async (req, res) => {
   const { id_skill } = req.params;
   try {

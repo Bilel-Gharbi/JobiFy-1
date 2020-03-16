@@ -113,7 +113,7 @@ resumeRouter
 
 resumeRouter.route("/:id/skill").post(skillController.addResumeSkill);
 
-// test
+// done
 resumeRouter
   .route("/:id/skill/:id_skill")
   .patch(skillController.updateSkill)
