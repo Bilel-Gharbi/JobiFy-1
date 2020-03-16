@@ -31,9 +31,11 @@ JobOffer.belongsTo(Company);
 /* -----  Resume / Experience association ------- */
 Resume.hasMany(Experience);
 Experience.belongsTo(Resume);
+
 /* -----  Resume / Education association ------- */
 Resume.hasMany(Education);
 Education.belongsTo(Resume);
+
 /* -----  Resume / Certificate association ------- */
 Resume.hasMany(Certificate);
 Certificate.belongsTo(Resume);
@@ -46,6 +48,7 @@ Project.belongsTo(Resume);
 Resume.hasMany(Skill);
 Skill.belongsTo(Resume);
 
+/* --------- Job / Skill ----------------- */
 JobOffer.hasMany(Skill);
 Skill.belongsTo(JobOffer);
 
