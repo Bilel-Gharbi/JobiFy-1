@@ -61,6 +61,15 @@ const addJobOfferSkills = async (idJobOffer, data) => {
   }
 };
 
+const getJobOfferSkills = async id => {
+  try {
+    result = await jobOfferServices.getJobOfferSkills(id);
+    return result;
+  } catch (err) {
+    console.log("getJobOfferSkills / JobOfferOperations error ", err);
+  }
+};
+
 //TODO:
 const deleteJobOfferSkill = async (idJobOffer, data) => {
   try {
@@ -87,5 +96,6 @@ module.exports = {
   deleteJobOffer,
   updateJobOffer,
   addJobOfferSkills,
-  addJobOfferSkill
+  addJobOfferSkill,
+  getJobOfferSkills
 };
