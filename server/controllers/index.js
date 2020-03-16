@@ -8,6 +8,7 @@ const certificateControllers = require("./certificate");
 const awardControllers = require("./award");
 const languageControllers = require("./language");
 const interestControllers = require("./interest");
+const skillControllers = require("./skill");
 
 // company
 const companyControllers = require("./comapny");
@@ -23,6 +24,7 @@ module.exports = {
   awardControllers,
   languageControllers,
   interestControllers,
+  skillControllers,
   companyControllers,
   jobOfferControllers
 };

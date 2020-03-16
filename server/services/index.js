@@ -12,6 +12,7 @@ const certificateServices = require("./certificate");
 const awardServices = require("./award");
 const languageServices = require("./language");
 const interestServices = require("./interest");
+const skillServices = require("./skill");
 
 // company service
 const companyServices = require("./company");
@@ -27,6 +28,7 @@ module.exports = {
   awardServices,
   languageServices,
   interestServices,
+  skillServices,
   companyServices,
   jobOfferServices
 };

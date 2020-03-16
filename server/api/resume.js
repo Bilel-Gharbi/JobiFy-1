@@ -8,6 +8,7 @@ const { certificateControllers: certController } = require("../controllers");
 const { awardControllers: awdController } = require("../controllers");
 const { languageControllers: langController } = require("../controllers");
 const { interestControllers: intController } = require("../controllers");
+const { skillControllers: skillController } = require("../controllers");
 
 //get all Resume
 resumeRouter.route("/").get(controller.getAllResume);
@@ -104,11 +105,15 @@ resumeRouter
   .patch(intController.updateResumeInterest)
   .delete(intController.deleteResumeInterest);
 
-//TODO: add id job in skill table
+//TEST:
 resumeRouter
-  .route("/:id/skill")
-  .post(controller.addResumeExperience)
-  .get(controller.addResumeExperience);
+  .route("/:id/skills")
+  .post(skillController.addResumeManySkills)
+  .get(skillController.getResumeSkills);
+
+resumeRouter.route("/:id/skill").post(skillController.addResumeSkill);
+
+//TODO:
 resumeRouter
   .route("/:id/skill/:id_skill")
   .patch(controller.addResumeExperience)

@@ -52,6 +52,15 @@ const updateCompanyJobOffer = async (idJobOffer, data) => {
     console.log("JobOfferService /updateCompanyJobOffer Eroor ", err);
   }
 };
+
+//add skills to job offer
+const addSkillsToJobOffer = async (idJobOffer, data) => {
+  try {
+    //let jobOffer = await JobOffer.findByPk(idJobOffer);
+  } catch (err) {
+    console.log("JobOfferService /addSkillsToJobOffer Eroor ", err);
+  }
+};
 module.exports = {
   addCompanyJobOffer,
   getCompanyJobOffers,

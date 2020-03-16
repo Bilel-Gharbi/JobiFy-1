@@ -10,6 +10,7 @@ const certificateOperations = require("./certificate");
 const awardOperations = require("./award");
 const languageOperations = require("./language");
 const interestOperations = require("./interest");
+const skillOperations = require("./skill");
 
 //company
 const companyOperations = require("./company");
@@ -25,6 +26,7 @@ module.exports = {
   awardOperations,
   languageOperations,
   interestOperations,
+  skillOperations,
   companyOperations,
   jobOfferOperations
 };
