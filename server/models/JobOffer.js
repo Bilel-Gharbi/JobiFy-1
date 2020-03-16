@@ -17,12 +17,12 @@ const JobOffer = db.define("JobOffer", {
   jobMinSalary: {
     type: DataTypes.INTEGER,
     allowNull: true,
-    defaultValue: "Negociable "
+    defaultValue: 0
   },
   jobMaxSalary: {
     type: DataTypes.INTEGER,
     allowNull: true,
-    defaultValue: "Negociable "
+    defaultValue: 0
   },
   jobExpirationDate: {
     type: DataTypes.DATE,

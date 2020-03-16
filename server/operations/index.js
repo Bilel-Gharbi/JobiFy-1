@@ -11,6 +11,10 @@ const awardOperations = require("./award");
 const languageOperations = require("./language");
 const interestOperations = require("./interest");
 
+//company
+const companyOperations = require("./company");
+const jobOfferOperations = require("./jobOffer");
+
 module.exports = {
   userOperations,
   resumeOperations,
@@ -20,5 +24,7 @@ module.exports = {
   certificateOperations,
   awardOperations,
   languageOperations,
-  interestOperations
+  interestOperations,
+  companyOperations,
+  jobOfferOperations
 };

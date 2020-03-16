@@ -9,8 +9,10 @@ const awardControllers = require("./award");
 const languageControllers = require("./language");
 const interestControllers = require("./interest");
 
+// company
+const companyControllers = require("./comapny");
+const jobOfferControllers = require("./jobOffer");
 //export one obj contains all controllers
-
 module.exports = {
   userControllers,
   resumeControllers,
@@ -20,5 +22,7 @@ module.exports = {
   certificateControllers,
   awardControllers,
   languageControllers,
-  interestControllers
+  interestControllers,
+  companyControllers,
+  jobOfferControllers
 };
