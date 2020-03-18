@@ -24,7 +24,10 @@ const getAllResume = async () => {
 const getUserResumeDetails = async userId => {
   try {
     let userResume = await Resume.findOne({ where: { UserId: userId } });
+    if (!userResume) return `no resume with this id ${userId}`;
 
+    //in case 0 we need to create all the table
+    /* 
     await Project.sync({ force: false });
     await Award.sync({ force: false });
     await Certificate.sync({ force: false });
@@ -32,7 +35,7 @@ const getUserResumeDetails = async userId => {
     await Skill.sync({ force: false });
     await Experience.sync({ force: false });
     await Education.sync({ force: false });
-    await Language.sync({ force: false });
+    await Language.sync({ force: false }); */
 
     let experiences = await userResume.getExperiences();
     let educations = await userResume.getEducation();

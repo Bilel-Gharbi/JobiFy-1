@@ -7,6 +7,6 @@ userRouter
   .post(controller.createNewUser)
   .get(controller.getAllUser);
 
-userRouter.route("/generate").post(controller.generateFakeUsers);
+userRouter.route("/:authId/info").post(controller.createUserInfo);
 
 module.exports = userRouter;

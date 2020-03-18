@@ -9,6 +9,9 @@ comapnyRouter
   .post(compController.createNewCompany)
   .get(compController.getAllCompany);
 
+//to complete compnay profile
+comapnyRouter.route("/:authId/info").post(compController.createCompanyInfo);
+
 comapnyRouter.route("/:id/jobOffers").get(jobcontroller.getCompanyJobOffer);
 comapnyRouter.route("/:id/jobOffer").post(jobcontroller.addCompanyJobOffer);
 

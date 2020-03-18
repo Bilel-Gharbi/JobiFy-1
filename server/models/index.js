@@ -14,6 +14,22 @@ const Interest = require("./Interest.js");
 const Company = require("./Company");
 const JobOffer = require("./JobOffer");
 
+//Auth model
+const Auth = require("./Auth");
+/* ----- Auth / User association ------- */
+Auth.hasOne(User, {
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
+});
+User.belongsTo(Auth);
+
+/* ------- Auth / Company association ------- */
+Auth.hasOne(Company, {
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
+});
+Company.belongsTo(Auth);
+
 /* ----- User / Resume association ------- */
 User.hasOne(Resume, {
   onDelete: "CASCADE",
@@ -64,7 +80,11 @@ Award.belongsTo(Resume);
 Resume.hasMany(Interest);
 Interest.belongsTo(Resume);
 
+Auth.sync({ force: false });
+User.sync({ force: false });
+Company.sync({ force: false });
 module.exports = {
+  Auth,
   User,
   Resume,
   Experience,

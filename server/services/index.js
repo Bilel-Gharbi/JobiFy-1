@@ -18,7 +18,11 @@ const skillServices = require("./skill");
 const companyServices = require("./company");
 const jobOfferServices = require("./jobOffer");
 
+//auth
+const authServices = require("./auth");
+
 module.exports = {
+  authServices,
   userServices,
   resumeServices,
   experienceServices,

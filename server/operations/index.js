@@ -16,7 +16,11 @@ const skillOperations = require("./skill");
 const companyOperations = require("./company");
 const jobOfferOperations = require("./jobOffer");
 
+//auth
+const authOperations = require("./auth");
+
 module.exports = {
+  authOperations,
   userOperations,
   resumeOperations,
   experienceOperations,

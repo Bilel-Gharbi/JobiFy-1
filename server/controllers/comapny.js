@@ -30,7 +30,22 @@ const createNewCompany = async (req, res) => {
   }
 };
 
+const createCompanyInfo = async (req, res) => {
+  const authId = req.params.authId;
+
+  try {
+    companyInfo = await companyOperations.createCompnayInfo(authId, req.body);
+    res.status(201).json({
+      status: "sucess",
+      msg: `init company info with auth id ${authId} .... `,
+      data: companyInfo
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
 module.exports = {
   getAllCompany,
-  createNewCompany
+  createNewCompany,
+  createCompanyInfo
 };

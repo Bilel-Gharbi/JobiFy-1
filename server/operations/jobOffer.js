@@ -1,5 +1,13 @@
 const { jobOfferServices } = require("../services");
 
+const getAllJoboffers = async () => {
+  try {
+    result = await jobOfferServices.getAllJobOffers();
+    return result;
+  } catch (err) {
+    console.log("getAllJoboffers / JobOfferOperations error ", err);
+  }
+};
 //done
 const getJobOffers = async id => {
   try {
@@ -70,27 +78,8 @@ const getJobOfferSkills = async id => {
   }
 };
 
-//TODO:
-const deleteJobOfferSkill = async (idJobOffer, data) => {
-  try {
-    result = await jobOfferServices.updateCompanyJobOffer(idJobOffer, data);
-    return result;
-  } catch (err) {
-    console.log("deleteJobOfferSkill / JobOfferOperations error ", err);
-  }
-};
-
-// TODO:update job offer skills
-const updateJobOfferSkills = async (idJobOffer, data) => {
-  try {
-    result = await jobOfferServices.updateCompanyJobOffer(idJobOffer, data);
-    return result;
-  } catch (err) {
-    console.log("updateJobOfferSkills / JobOfferOperations error ", err);
-  }
-};
-
 module.exports = {
+  getAllJoboffers,
   getJobOffers,
   addJobOffer,
   deleteJobOffer,
