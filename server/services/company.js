@@ -7,13 +7,25 @@ const { Company } = require("../models");
 const createCompany = async data => {
   try {
     await Company.sync({ force: false });
-    let newCompany = await Company.create({ ...data });
+    let newCompany = await Company.create({ AuthId: data });
     return newCompany;
   } catch (err) {
     console.log("CompanyServices/createCompany Error ", err);
   }
 };
 
+const createCompanyInfo = async (authId, data) => {
+  console.log(authId);
+  try {
+    let result = await (
+      await Company.findOne({ where: { AuthId: authId } })
+    ).update({ ...data });
+
+    return result;
+  } catch (err) {
+    console.log("UserService/generateDammyUser data Error ", err);
+  }
+};
 const getAllCompany = async () => {
   try {
     let result = await Company.findAll();
@@ -23,14 +35,8 @@ const getAllCompany = async () => {
   }
 };
 
-const loginCompany = async fakeData => {
-  try {
-  } catch (err) {
-    console.log("UserService/generateDammyUser data Error ", err);
-  }
-};
-
 module.exports = {
   createCompany,
-  getAllCompany
+  getAllCompany,
+  createCompanyInfo
 };

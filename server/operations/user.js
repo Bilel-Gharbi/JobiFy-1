@@ -22,17 +22,17 @@ const getAllUser = async () => {
   }
 };
 
-const generateFakeUsers = async data => {
+const createUserInfo = async (authId, data) => {
   try {
-    result = await userServices.generateFakeUsers(data);
+    result = await userServices.createUserInfo(authId, data);
     return result;
   } catch (err) {
-    console.log("getAllUser operation error ", err);
+    console.log("createUserInfo operation error ", err);
   }
 };
 
 module.exports = {
   createNewUser,
   getAllUser,
-  generateFakeUsers
+  createUserInfo
 };

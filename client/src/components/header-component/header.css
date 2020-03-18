@@ -1,0 +1,21 @@
+.logo {
+  height: 70px;
+  width: 70px;
+}
+
+.navBar-container {
+  display: flex;
+  height: 70px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  background-color: coral;
+  border-radius: 5px;
+}
+.option {
+  margin: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  font-weight: 600;
+}

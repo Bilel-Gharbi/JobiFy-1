@@ -1,6 +1,21 @@
 //import Resume model from models/index.js file
 const { Company, JobOffer, Skill } = require("../models");
 
+const getAllJobOffers = async () => {
+  try {
+    let jobs = await JobOffer.findAll({
+      include: [
+        {
+          model: Company
+        }
+      ]
+    });
+    return jobs;
+  } catch (err) {
+    console.log("JobOfferService /getAllJobOffer Eroor ", err);
+  }
+};
+
 const addCompanyJobOffer = async (data, id) => {
   try {
     let company = await Company.findByPk(id);
@@ -87,6 +102,7 @@ const getJobOfferSkills = async id => {
   }
 };
 module.exports = {
+  getAllJobOffers,
   addCompanyJobOffer,
   getCompanyJobOffers,
   deleteCompanyJobOffer,

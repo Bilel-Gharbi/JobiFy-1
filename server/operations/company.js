@@ -18,7 +18,17 @@ const getAllCompany = async () => {
   }
 };
 
+const createCompnayInfo = async (authId, data) => {
+  try {
+    result = await companyServices.createCompanyInfo(authId, data);
+    return result;
+  } catch (err) {
+    console.log("createCompnayInfo / CompanyOperation error ", err);
+  }
+};
+
 module.exports = {
   createNewCompany,
-  getAllCompany
+  getAllCompany,
+  createCompnayInfo
 };

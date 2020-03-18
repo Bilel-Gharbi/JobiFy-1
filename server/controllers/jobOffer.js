@@ -1,5 +1,19 @@
 const { jobOfferOperations } = require("../operations");
 
+const getAllCompaniesJobOffers = async (req, res) => {
+  try {
+    allJobOffers = await jobOfferOperations.getAllJoboffers();
+    res.status(200).json({
+      status: "sucess",
+      msg: `all jobOffer for all compnaies `,
+      length: allJobOffers.length,
+      data: allJobOffers
+    });
+  } catch (err) {
+    res.status(401).json(err);
+  }
+};
+
 const getCompanyJobOffer = async (req, res) => {
   try {
     jobOffers = await jobOfferOperations.getJobOffers(req.params.id);
@@ -115,6 +129,7 @@ const getJobOfferSkills = async (req, res) => {
 };
 
 module.exports = {
+  getAllCompaniesJobOffers,
   addCompanyJobOffer,
   deleteCompanyJobOffer,
   updateCompanyJobOffer,

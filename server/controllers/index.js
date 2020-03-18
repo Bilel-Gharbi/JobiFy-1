@@ -13,8 +13,12 @@ const skillControllers = require("./skill");
 // company
 const companyControllers = require("./comapny");
 const jobOfferControllers = require("./jobOffer");
-//export one obj contains all controllers
+
+//auth
+const authControllers = require("./auth");
+
 module.exports = {
+  authControllers,
   userControllers,
   resumeControllers,
   experienceControllers,

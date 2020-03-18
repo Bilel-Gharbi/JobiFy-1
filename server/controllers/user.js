@@ -31,14 +31,16 @@ const createNewUser = async (req, res) => {
     res.status(400).json({ status: "fail", msg: err });
   }
 };
-const generateFakeUsers = async (req, res) => {
+
+const createUserInfo = async (req, res) => {
+  const authId = req.params.authId;
+
   try {
-    fakeUsers = await userOperations.generateFakeUsers(data);
+    userInfo = await userOperations.createUserInfo(authId, req.body);
     res.status(201).json({
       status: "sucess",
-      msg: "generating random fake user data .... ",
-      length: fakeUsers.length,
-      data: fakeUsers
+      msg: "init user info with authId .... ",
+      data: userInfo
     });
   } catch (err) {
     res.status(400).json(err);
@@ -48,5 +50,5 @@ const generateFakeUsers = async (req, res) => {
 module.exports = {
   getAllUser,
   createNewUser,
-  generateFakeUsers
+  createUserInfo
 };
