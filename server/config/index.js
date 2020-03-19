@@ -5,5 +5,7 @@ module.exports = {
   datbaseURL: process.env.DATABASEHOST,
   datbaseUserName: process.env.DATABASEUSER,
   datbaseName: process.env.DATABASENAME,
-  databasePwd: process.env.DATABASEPASSWORD
+  databasePwd: process.env.DATABASEPASSWORD,
+  jwtSecretKey: process.env.JWTSECRETKEY,
+  TokenExpDate: process.env.TokenExpDate
 };

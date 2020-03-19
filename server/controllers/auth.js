@@ -11,13 +11,31 @@ const signUp = async (req, res) => {
     res.status(201).json({
       status: "sucess",
       msg: "new signup created .... ",
-      data: userAuth
+      token: userAuth
     });
   } catch (err) {
     res.status(400).json({ status: "fail", err: err.message });
   }
 };
 
+const login = async (req, res) => {
+  try {
+    const token = await authOperations.login(req.body);
+
+    if (!token) {
+      throw new Error("invalid username or password");
+    }
+    res.status(201).json({
+      status: "sucess",
+      msg: "you logged in succesufly .... ",
+      token
+    });
+  } catch (err) {
+    res.status(401).json({ status: "fail", err: err.message });
+  }
+};
+
 module.exports = {
-  signUp
+  signUp,
+  login
 };
