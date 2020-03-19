@@ -23,7 +23,7 @@ const checkUniqueUser = async email => {
     await Auth.sync({ force: false });
     let user = await Auth.findOne({ where: { email } });
     if (user) {
-      return true;
+      return user;
     }
     return false;
   } catch (err) {
