@@ -4,16 +4,6 @@ const db = require("../loaders/dataBase");
 //user has one resume
 
 const Company = db.define("Company", {
-  /* email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: "email@email.com"
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: "password"
-  }, */
   companyName: {
     type: DataTypes.STRING,
     allowNull: true

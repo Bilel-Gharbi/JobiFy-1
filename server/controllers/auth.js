@@ -19,6 +19,7 @@ const signUp = async (req, res) => {
 };
 
 const login = async (req, res) => {
+  //console.log(req.body);
   try {
     const token = await authOperations.login(req.body);
 

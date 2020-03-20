@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const { jwtSecretKey, TokenExpDate } = require("../config");
-console.log(TokenExpDate);
 
 const signUp = async data => {
   const { password, type } = data;
@@ -41,10 +40,13 @@ const login = async data => {
         password,
         userExist.password
       );
-
-      const token = await jwt.sign({ authId: userExist.id }, jwtSecretKey, {
-        expiresIn: TokenExpDate
-      });
+      const token = await jwt.sign(
+        { authId: userExist.id, autType: userExist.type },
+        jwtSecretKey,
+        {
+          expiresIn: TokenExpDate
+        }
+      );
       if (correctPassword) {
         return token;
       }

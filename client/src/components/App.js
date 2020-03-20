@@ -12,8 +12,11 @@ const HomePage = React.lazy(() =>
   import("../pages/HomePage-component/HomePage")
 );
 const JobPage = React.lazy(() => import("../pages/JobPage-component/JobPage"));
+const LoginPage = React.lazy(() =>
+  import("../pages/LoginPage-component/LoginPage")
+);
 
-function App() {
+function App(props) {
   return (
     <Provider store={store}>
       <div>
@@ -22,6 +25,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/jobs" component={JobPage} />
+            <Route exact path="/login" component={LoginPage} />
           </Switch>
         </Suspense>
       </div>

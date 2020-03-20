@@ -31,6 +31,8 @@ const checkUniqueUser = async email => {
   }
 };
 
+//TODO: Forget Password
+//TODO: email verification
 module.exports = {
   signUp,
   login,

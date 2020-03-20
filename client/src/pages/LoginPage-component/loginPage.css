@@ -1,0 +1,34 @@
+.page-container {
+  width: 100%;
+  display: grid;
+  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+
+.login {
+  position: relative;
+  display: grid;
+  margin: auto;
+  width: 100%;
+  border: black solid;
+  overflow: hidden;
+  align-content: center;
+  justify-items: center;
+}
+
+.signup {
+  position: relative;
+  display: grid;
+  margin: auto;
+  width: 100%;
+  border: black solid;
+  align-content: center;
+  justify-items: center;
+}
+
+form {
+  padding: 20px;
+  display: grid;
+  align-content: content;
+}

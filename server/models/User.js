@@ -4,18 +4,6 @@ const db = require("../loaders/dataBase");
 //user has one resume
 
 const User = db.define("User", {
-  // Model attributes are defined here
-
-  /* email: {
-    type: DataTypes.STRING,
-    allowNull: true,
-    defaultValue: "email@email.com"
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: true,
-    defaultValue: "password"
-  }, */
   active: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
