@@ -1,10 +1,12 @@
-const jobsReducer = (initialState = [], action) => {
+const initialState = [];
+
+const jobsReducer = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_JOBS":
-      return [...action.payload];
+      return [...state, ...action.payload];
 
     default:
-      return initialState;
+      return state;
   }
 };
 

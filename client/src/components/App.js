@@ -4,7 +4,7 @@ import "./App.css";
 import { Provider } from "react-redux";
 import store from "../store/index";
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Header from "./header-component/Header";
 //pages
 
@@ -12,19 +12,23 @@ const HomePage = React.lazy(() =>
   import("../pages/HomePage-component/HomePage")
 );
 const JobPage = React.lazy(() => import("../pages/JobPage-component/JobPage"));
+const AuthPage = React.lazy(() =>
+  import("../pages/authPage-component/AuthPage")
+);
 
-function App() {
+function App(props) {
   return (
     <Provider store={store}>
-      <div>
+      <Router>
         <Header />
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/jobs" component={JobPage} />
+            <Route exact path="/login" component={AuthPage} />
           </Switch>
         </Suspense>
-      </div>
+      </Router>
     </Provider>
   );
 }

@@ -4,7 +4,9 @@ const path = require("path");
 const cors = require("cors");
 
 const logger = require("morgan"); //middleware
+
 const API = require("../api");
+const checkToken = require("../middleware/verifyToken");
 
 //tranking request optional
 // we create file and save all request history into access.log
@@ -20,7 +22,7 @@ module.exports = async app => {
   // user route API
   app.use("/api/user", API.userRouter);
   // resume route API
-  app.use("/api/resume", API.resumeRouter);
+  app.use("/api/resume", checkToken, API.resumeRouter);
 
   // company Route API
   app.use("/api/company", API.companyRouter);

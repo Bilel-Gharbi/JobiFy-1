@@ -1,26 +1,16 @@
 import React from "react";
 
+import JobCard from "../jobCard-component/JobCard";
+
 import "./jobList.css";
 
 const JobList = ({ jobs }) => {
-  console.log(jobs);
   return (
-    <div>
+    <div className="jobList">
       {jobs &&
-        jobs.map(({ id, jobPosition, jobDescription, Company }) => {
-          return (
-            <div key={id} className="jobList-container">
-              <span>
-                <strong>{Company.companyName}</strong>
-              </span>
-              <span>
-                <strong>{jobPosition}</strong>
-              </span>
-              <p>{jobDescription}</p>
-            </div>
-          );
+        jobs.map(job => {
+          return <JobCard className="job" job={job} key={job.id} />;
         })}
-      <button className="custom-custom">apply </button>
     </div>
   );
 };
