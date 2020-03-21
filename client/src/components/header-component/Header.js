@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../../actions/auth";
 
 import "./header.css";
 
@@ -9,11 +11,16 @@ class Header extends Component {
   state = {
     userName: "userName "
   };
+  logout = () => {
+    this.props.logout();
+    this.props.history.push("/home");
+  };
   render() {
+    console.log(this.props);
     return (
       <nav className="navbar navbar-expand-lg p-3 mb-5 mb-md-0 navbar-dark bg-primary rounded">
         <div className="container">
-          <Link to="/home" className="navbar-brand d-40 text-center" href="#">
+          <Link to="/home" className="navbar-brand d-40 text-center">
             JobiFY
           </Link>
           <button
@@ -32,7 +39,7 @@ class Header extends Component {
           <div className="collapse navbar-collapse" id="nav-inner-primary">
             <ul className="navbar-nav ml-lg-auto mt-md-0 mt-2">
               <li className="nav-item">
-                <Link className="nav-link" to="/jobs">
+                <Link to="/jobs" className="nav-link" href="#">
                   Local Job
                 </Link>
               </li>
@@ -71,7 +78,7 @@ class Header extends Component {
                     Setting
                   </a>
                   <div className="dropdown-divider" />
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" onClick={this.logout}>
                     Logout
                   </a>
                 </div>
@@ -83,5 +90,7 @@ class Header extends Component {
     );
   }
 }
-
-export default Header;
+const mapStateToProps = state => {
+  return state;
+};
+export default withRouter(connect(mapStateToProps, { logout })(Header));

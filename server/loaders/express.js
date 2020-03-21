@@ -25,7 +25,7 @@ module.exports = async app => {
   app.use("/api/resume", checkToken, API.resumeRouter);
 
   // company Route API
-  app.use("/api/company", checkToken, API.companyRouter);
+  app.use("/api/company", API.companyRouter);
 
   //all jobs Route API
   app.use("/api/jobs", API.jobOfferRouter);

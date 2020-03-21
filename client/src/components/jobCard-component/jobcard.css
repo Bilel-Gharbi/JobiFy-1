@@ -1,0 +1,13 @@
+.card {
+  margin-top: 20px;
+  width: 100%;
+}
+.apply-btn {
+  display: block;
+  width: 200px;
+  background-color: cornflowerblue;
+  border-radius: 3px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 2s;
+}

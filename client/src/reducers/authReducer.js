@@ -1,17 +1,38 @@
 const initialState = {
   isLoged: false,
-  userData: [],
-  token: null,
-  msg: "ënter you address mail and password to login"
+  token: localStorage.getItem("token"),
+  userData: []
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOGIN":
       return { ...state, ...action.payload };
+    case "SIGNUP":
+      return { ...state, ...action.payload };
 
+    case "LOGIN_FAIL":
+    case "SIGNUP_FAIL":
+    case "LOGOUT":
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        isLoged: false,
+        userData: []
+      };
+
+    case "LOGIN_SUCESS":
+    case "SIGNUP_SUCESS":
+      localStorage.setItem("token", action.payload);
+      return {
+        ...state,
+        token: localStorage.getItem("token"),
+        isLoged: true,
+        userData: [1, 1, 1]
+      };
     default:
-      return initialState;
+      return state;
   }
 };
 

@@ -1,48 +1,101 @@
 import authAPI from "../API/authAPI";
 
 //import type
-import { LOGIN, SIGNUP } from "./type";
+import {
+  LOGIN,
+  SIGNUP,
+  LOGIN_SUCESS,
+  LOGIN_FAIL,
+  SIGNUP_SUCESS,
+  SIGNUP_FAIL,
+  LOGOUT
+} from "./type";
+
+//error actions
+import { RETURN_ERRORS, CLEAR_ERRORS } from "./type";
 
 export const login = obj => async dispatch => {
   try {
     const response = await authAPI.post("/login", obj);
-
     //set token
-    localStorage.setItem("token", response.data.token);
+    //localStorage.setItem("token", response.data.token);
 
-    console.log(response.data);
+    //delete error
+    dispatch({
+      type: CLEAR_ERRORS
+    });
+    //dispatch action login_sucess
+    dispatch({
+      type: LOGIN_SUCESS,
+      payload: response.data.token
+    });
 
-    //2 get profil info data
-
+    //dispatch action login
     return dispatch({
       type: LOGIN,
       payload: {
         isLoged: true,
-        token: response.data.token,
-        msg: response.data.msg,
-        userData: [1, 1, 3]
+        token: response.data.token
       }
     });
   } catch (err) {
-    //console.log(err.response.data.err);
     return dispatch({
-      type: LOGIN,
+      type: RETURN_ERRORS,
       payload: {
-        isLoged: false,
-        token: null,
-        msg: err.response.data.err
+        id: "login",
+        status: err.response.data.status,
+        message: err.response.data.err
       }
     });
   }
 };
 
-export const signup = () => async dispatch => {
-  //const response = await authAPI.get("/signup");
-  //console.log(response);
-  //let payload = response.data.data;
+export const signup = data => async dispatch => {
+  try {
+    // try signup
+    const response = await authAPI.post("/signup", data);
+    dispatch({
+      type: CLEAR_ERRORS
+    });
 
-  return dispatch({
-    type: SIGNUP
-    //payload
-  });
+    dispatch({
+      type: SIGNUP_SUCESS,
+      payload: response.data.token
+    });
+    return dispatch({
+      type: SIGNUP,
+      payload: {
+        isLoged: true,
+        token: response.data.token,
+        msg: response.data.msg
+      }
+    });
+  } catch (err) {
+    //case signup fail
+    return dispatch({
+      type: RETURN_ERRORS,
+      payload: {
+        id: "signup",
+        status: err.response.data.status,
+        message: err.response.data.err
+      }
+    });
+  }
+};
+
+export const logout = () => async dispatch => {
+  try {
+    return dispatch({
+      type: LOGOUT
+    });
+  } catch (err) {
+    //case signup fail
+    return dispatch({
+      type: RETURN_ERRORS,
+      payload: {
+        id: "logout",
+        message: "logout problem"
+      }
+    });
+  }
 };
