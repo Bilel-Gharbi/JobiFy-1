@@ -28,7 +28,7 @@ module.exports = async app => {
   app.use("/api/company", API.companyRouter);
 
   //all jobs Route API
-  app.use("/api/jobs", API.jobOfferRouter);
+  app.use("/api/job", API.jobOfferRouter);
 
   //auth
   app.use("/auth", API.authRouter);

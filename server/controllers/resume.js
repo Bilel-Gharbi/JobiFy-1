@@ -73,7 +73,6 @@ const deleteResumeExperience = async (req, res) => {
 //update one experience from resume
 const updateResumeExperience = async (req, res) => {
   const { id_experience } = req.params;
-  //console.log(req.body);
   try {
     newExperience = await resumeOperations.updateExperience(
       id_experience,
@@ -89,11 +88,27 @@ const updateResumeExperience = async (req, res) => {
   }
 };
 
+//Apply to job by resume
+const applyToJobByResume = async (req, res) => {
+  const { jobId, resumeId } = req.params;
+  try {
+    applyToJob = await resumeOperations.applyJob(resumeId, jobId);
+    res.status(200).json({
+      status: "sucess",
+      msg: `Resume with id  ${resumeId} apply offer  with id ${jobId}`,
+      applyToJob
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
 module.exports = {
   getAllResume,
   getUserResumeDetails,
   addResumeExperience,
   deleteResumeExperience,
   updateResumeExperience,
-  getResumeExperiences
+  getResumeExperiences,
+  applyToJobByResume
 };

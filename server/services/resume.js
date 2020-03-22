@@ -1,6 +1,7 @@
 //import Resume model from models/index.js file
 const {
   Resume,
+  Applicant,
   Project,
   Award,
   Certificate,
@@ -64,7 +65,20 @@ const getUserResumeDetails = async userId => {
   }
 };
 
+//apply to job
+const applyToJobOffer = async (ResumeId, JobOfferId) => {
+  try {
+    console.log(Applicant);
+    let newJobApplied = await Applicant.create({ ResumeId, JobOfferId });
+    console.log(newJobApplied);
+    return newJobApplied;
+  } catch (err) {
+    console.log("ResumeService /applyToJobOffer Eroor ", err);
+  }
+};
+
 module.exports = {
   getAllResume,
-  getUserResumeDetails
+  getUserResumeDetails,
+  applyToJobOffer
 };

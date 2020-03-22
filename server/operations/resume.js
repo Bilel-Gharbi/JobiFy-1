@@ -59,11 +59,21 @@ const updateExperience = async (idExperience, data) => {
   }
 };
 
+const applyJob = async (idResume, idJobOffer) => {
+  try {
+    result = await resumeServices.applyToJobOffer(idResume, idJobOffer);
+    return result;
+  } catch (err) {
+    console.log("applyJob / Resume operation error ", err);
+  }
+};
+
 module.exports = {
   getAllResume,
   getUserResumeDetails,
   addExperience,
   getExperiences,
   deleteExperience,
-  updateExperience
+  updateExperience,
+  applyJob
 };
