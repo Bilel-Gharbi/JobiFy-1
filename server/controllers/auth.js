@@ -21,15 +21,14 @@ const signUp = async (req, res) => {
 const login = async (req, res) => {
   //console.log(req.body);
   try {
-    const token = await authOperations.login(req.body);
-
-    if (!token) {
+    const result = await authOperations.login(req.body);
+    if (!result) {
       throw new Error("invalid username or password");
     }
     res.status(201).json({
       status: "sucess",
       msg: "you logged in succesufly .... ",
-      token
+      result
     });
   } catch (err) {
     res.status(401).json({ status: "fail", err: err.message });

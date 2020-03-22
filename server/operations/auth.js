@@ -34,7 +34,6 @@ const login = async data => {
   const { password, email } = data;
   try {
     let userExist = await authServices.checkUniqueUser(email);
-
     if (userExist) {
       const correctPassword = await bcrypt.compare(
         password,
@@ -48,11 +47,10 @@ const login = async data => {
         }
       );
       if (correctPassword) {
-        return token;
+        let user = await authServices.login(userExist.id);
+        return { token, user };
       }
     }
-
-    return token;
   } catch (err) {
     console.log("signup operation error ", err);
   }

@@ -27,7 +27,7 @@ export const login = obj => async dispatch => {
     //dispatch action login_sucess
     dispatch({
       type: LOGIN_SUCESS,
-      payload: response.data.token
+      payload: response.data.result.token
     });
 
     //dispatch action login
@@ -35,7 +35,8 @@ export const login = obj => async dispatch => {
       type: LOGIN,
       payload: {
         isLoged: true,
-        token: response.data.token
+        token: response.data.result.token,
+        userData: response.data.result.user
       }
     });
   } catch (err) {

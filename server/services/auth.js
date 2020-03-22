@@ -1,8 +1,16 @@
 //import User model from models/index.js file
-const { Auth } = require("../models");
+const { Auth, User, Company } = require("../models");
+const resumeServices = require("./resume");
 
-const login = async () => {
+const login = async AuthId => {
   try {
+    let profile =
+      (await User.findOne({ where: { AuthId } })) ||
+      (await Company.findOne({ where: { AuthId } }));
+    //id user
+    //  let profileDetails = await resumeServices.getUserResumeDetails()  || company profile
+    let profileDetails = await resumeServices.getUserResumeDetails(profile.id);
+    return { userInfo: profile, profileDetails };
   } catch (err) {
     console.log("UserService/generateDammyUser data Error ", err);
   }
