@@ -5,7 +5,6 @@ const { User, Resume } = require("../models");
 // After create a service export using the es6 synt
 
 const createUser = async data => {
-  console.log("hello", data);
   try {
     await User.sync({ force: false });
     await Resume.sync({ forse: false });
