@@ -88,12 +88,11 @@ Award.belongsTo(Resume);
 Resume.hasMany(Interest);
 Interest.belongsTo(Resume);
 
-//console.log(Applicant.prototype);
-
 Auth.sync({ force: false });
 User.sync({ force: false });
 Company.sync({ force: false });
 Applicant.sync({ force: false });
+
 module.exports = {
   Auth,
   User,

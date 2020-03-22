@@ -27,6 +27,7 @@ const getUserResumeDetails = async userId => {
     let userResume = await Resume.findOne({ where: { UserId: userId } });
     if (!userResume) return `no resume with this id ${userId}`;
 
+    console.log("hello ", applyedJob);
     //in case 0 we need to create all the table
     /* 
     await Project.sync({ force: false });
@@ -38,6 +39,7 @@ const getUserResumeDetails = async userId => {
     await Education.sync({ force: false });
     await Language.sync({ force: false }); */
 
+    let applyedJob = await userResume.getApplicants();
     let experiences = await userResume.getExperiences();
     let educations = await userResume.getEducation();
     let projects = await userResume.getProjects();
@@ -48,6 +50,7 @@ const getUserResumeDetails = async userId => {
     let languages = await userResume.getLanguages();
 
     let result = {
+      applyedJob,
       userResume,
       experiences,
       educations,
@@ -69,7 +72,9 @@ const getUserResumeDetails = async userId => {
 const applyToJobOffer = async (ResumeId, JobOfferId) => {
   try {
     //check befor applying
-    let applyed = await Applicant.findOne({ ResumeId, JobOfferId });
+    let applyed = await Applicant.findOne({
+      where: { ResumeId, JobOfferId }
+    });
     if (!applyed) {
       //add to table
       let newJobApplied = await Applicant.create({ ResumeId, JobOfferId });
