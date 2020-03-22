@@ -93,13 +93,15 @@ const applyToJobByResume = async (req, res) => {
   const { jobId, resumeId } = req.params;
   try {
     applyToJob = await resumeOperations.applyJob(resumeId, jobId);
+    if (!applyToJob) throw new Error("you are already applyed to this job");
+
     res.status(200).json({
       status: "sucess",
       msg: `Resume with id  ${resumeId} apply offer  with id ${jobId}`,
       applyToJob
     });
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json({ err: err.message });
   }
 };
 

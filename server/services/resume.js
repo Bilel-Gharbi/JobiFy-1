@@ -68,10 +68,14 @@ const getUserResumeDetails = async userId => {
 //apply to job
 const applyToJobOffer = async (ResumeId, JobOfferId) => {
   try {
-    console.log(Applicant);
-    let newJobApplied = await Applicant.create({ ResumeId, JobOfferId });
-    console.log(newJobApplied);
-    return newJobApplied;
+    //check befor applying
+    let applyed = await Applicant.findOne({ ResumeId, JobOfferId });
+    if (!applyed) {
+      //add to table
+      let newJobApplied = await Applicant.create({ ResumeId, JobOfferId });
+      return newJobApplied;
+    }
+    return null;
   } catch (err) {
     console.log("ResumeService /applyToJobOffer Eroor ", err);
   }
