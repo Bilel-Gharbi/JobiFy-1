@@ -10,6 +10,7 @@ const login = async AuthId => {
     //id user
     //  let profileDetails = await resumeServices.getUserResumeDetails()  || company profile
     let profileDetails = await resumeServices.getUserResumeDetails(profile.id);
+    //console.log("hello", profileDetails);
     return { userInfo: profile, profileDetails };
   } catch (err) {
     console.log("UserService/generateDammyUser data Error ", err);
@@ -19,8 +20,9 @@ const login = async AuthId => {
 const signUp = async data => {
   try {
     await Auth.sync({ force: false });
-    let newAuth = Auth.create({ ...data });
-    return newAuth;
+    let newAuth = await Auth.create({ ...data });
+    let profileDetails = await resumeServices.getUserResumeDetails(newAuth.id);
+    return { userInfo: newAuth, profileDetails };
   } catch (err) {
     console.log("AuthService /SignUp Error ", err);
   }

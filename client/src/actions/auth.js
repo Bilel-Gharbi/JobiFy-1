@@ -58,21 +58,22 @@ export const signup = data => async dispatch => {
     dispatch({
       type: CLEAR_ERRORS
     });
-
+    console.log("hello", response);
     dispatch({
       type: SIGNUP_SUCESS,
-      payload: response.data.token
+      payload: response.data.result.token
     });
     return dispatch({
       type: SIGNUP,
       payload: {
         isLoged: true,
-        token: response.data.token,
-        msg: response.data.msg
+        token: response.data.result.token,
+        userData: response.data.result.user
       }
     });
   } catch (err) {
     //case signup fail
+    console.log(err);
     return dispatch({
       type: RETURN_ERRORS,
       payload: {

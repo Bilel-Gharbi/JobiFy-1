@@ -27,7 +27,7 @@ const getUserResumeDetails = async userId => {
     let userResume = await Resume.findOne({ where: { UserId: userId } });
     if (!userResume) return `no resume with this id ${userId}`;
 
-    console.log("hello ", applyedJob);
+    // console.log("hello ", applyedJob);
     //in case 0 we need to create all the table
     /* 
     await Project.sync({ force: false });
@@ -50,7 +50,6 @@ const getUserResumeDetails = async userId => {
     let languages = await userResume.getLanguages();
 
     let result = {
-      applyedJob,
       userResume,
       experiences,
       educations,
@@ -59,7 +58,8 @@ const getUserResumeDetails = async userId => {
       projects,
       languages,
       awards,
-      interests
+      interests,
+      applyedJob
     };
 
     return result;

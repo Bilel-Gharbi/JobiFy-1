@@ -20,10 +20,10 @@ const signUp = async data => {
 
       //create user or compnay table
       type === "USER"
-        ? await userServices.createUser(newAuth.id)
-        : await companyServices.createCompany(newAuth.id);
+        ? (user = await userServices.createUser(newAuth.id))
+        : (user = await companyServices.createCompany(newAuth.id));
 
-      return token;
+      return { token, user };
     }
   } catch (err) {
     console.log("signup operation error ", err);
