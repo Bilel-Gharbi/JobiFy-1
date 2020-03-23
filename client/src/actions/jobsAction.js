@@ -4,7 +4,7 @@ import JobsAPI from "../API/JobsAPI";
 import { FETCH_JOBS } from "./type";
 
 export const fetechJobs = () => async dispatch => {
-  const response = await JobsAPI.get("/");
+  const response = await JobsAPI.get("/all");
   let payload = response.data.data;
   return dispatch({
     type: FETCH_JOBS,

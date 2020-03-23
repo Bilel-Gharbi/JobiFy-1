@@ -17,13 +17,13 @@ const signUp = async data => {
         expiresIn: TokenExpDate
       });
       //
-
       //create user or compnay table
+      console.log(newAuth.userInfo.id);
       type === "USER"
-        ? await userServices.createUser(newAuth.id)
-        : await companyServices.createCompany(newAuth.id);
+        ? (user = await userServices.createUser(newAuth.userInfo.id))
+        : (user = await companyServices.createCompany(newAuth.userInfo.id));
 
-      return token;
+      return { token, user };
     }
   } catch (err) {
     console.log("signup operation error ", err);
@@ -48,6 +48,7 @@ const login = async data => {
       );
       if (correctPassword) {
         let user = await authServices.login(userExist.id);
+        console.log(user);
         return { token, user };
       }
     }

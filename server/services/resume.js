@@ -1,6 +1,7 @@
 //import Resume model from models/index.js file
 const {
   Resume,
+  Applicant,
   Project,
   Award,
   Certificate,
@@ -26,6 +27,7 @@ const getUserResumeDetails = async userId => {
     let userResume = await Resume.findOne({ where: { UserId: userId } });
     if (!userResume) return `no resume with this id ${userId}`;
 
+    // console.log("hello ", applyedJob);
     //in case 0 we need to create all the table
     /* 
     await Project.sync({ force: false });
@@ -37,6 +39,7 @@ const getUserResumeDetails = async userId => {
     await Education.sync({ force: false });
     await Language.sync({ force: false }); */
 
+    let applyedJob = await userResume.getApplicants();
     let experiences = await userResume.getExperiences();
     let educations = await userResume.getEducation();
     let projects = await userResume.getProjects();
@@ -55,16 +58,36 @@ const getUserResumeDetails = async userId => {
       projects,
       languages,
       awards,
-      interests
+      interests,
+      applyedJob
     };
-
+    //console.log(result);
     return result;
   } catch (err) {
     console.log("ResumeService /getUserResumeDetails Eroor ", err);
   }
 };
 
+//apply to job
+const applyToJobOffer = async (ResumeId, JobOfferId) => {
+  try {
+    //check befor applying
+    let applyed = await Applicant.findOne({
+      where: { ResumeId, JobOfferId }
+    });
+    if (!applyed) {
+      //add to table
+      let newJobApplied = await Applicant.create({ ResumeId, JobOfferId });
+      return newJobApplied;
+    }
+    return null;
+  } catch (err) {
+    console.log("ResumeService /applyToJobOffer Eroor ", err);
+  }
+};
+
 module.exports = {
   getAllResume,
-  getUserResumeDetails
+  getUserResumeDetails,
+  applyToJobOffer
 };

@@ -4,14 +4,14 @@ const { authOperations } = require("../operations");
 
 const signUp = async (req, res) => {
   try {
-    const userAuth = await authOperations.signUp(req.body);
-    if (!userAuth) {
+    const result = await authOperations.signUp(req.body);
+    if (!result) {
       throw new Error("email already exisit");
     }
     res.status(201).json({
       status: "sucess",
       msg: "new signup created .... ",
-      token: userAuth
+      result
     });
   } catch (err) {
     res.status(400).json({ status: "fail", err: err.message });
@@ -19,7 +19,6 @@ const signUp = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  //console.log(req.body);
   try {
     const result = await authOperations.login(req.body);
     if (!result) {

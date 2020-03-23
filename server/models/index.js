@@ -9,6 +9,7 @@ const Skill = require("./Skill");
 const Language = require("./Language.js");
 const Award = require("./Award.js");
 const Interest = require("./Interest.js");
+const Applicant = require("./Applicant.js");
 
 // Compnay Models
 const Company = require("./Company");
@@ -68,6 +69,13 @@ Skill.belongsTo(Resume);
 JobOffer.hasMany(Skill);
 Skill.belongsTo(JobOffer);
 
+/* --------- Job / AppliedJOB / Resume  ----------------- */
+JobOffer.hasMany(Applicant);
+Applicant.belongsTo(JobOffer);
+
+Resume.hasMany(Applicant);
+Applicant.belongsTo(Resume);
+
 /* -----  Resume / Language association ------- */
 Resume.hasMany(Language);
 Language.belongsTo(Resume);
@@ -83,6 +91,8 @@ Interest.belongsTo(Resume);
 Auth.sync({ force: false });
 User.sync({ force: false });
 Company.sync({ force: false });
+Applicant.sync({ force: false });
+
 module.exports = {
   Auth,
   User,
@@ -96,5 +106,6 @@ module.exports = {
   Award,
   Interest,
   Company,
-  JobOffer
+  JobOffer,
+  Applicant
 };

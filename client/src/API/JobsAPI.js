@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const JobsAPI = axios.create({
-  baseURL: "http://localhost:5000/api/jobs",
+  baseURL: "http://localhost:5000/api/job",
   headers: {
     "X-Requested-With": "XMLHttpRequest"
   }
