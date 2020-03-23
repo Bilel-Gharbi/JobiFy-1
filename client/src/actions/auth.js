@@ -19,7 +19,6 @@ export const login = obj => async dispatch => {
     const response = await authAPI.post("/login", obj);
     //set token
     //localStorage.setItem("token", response.data.token);
-
     //delete error
     dispatch({
       type: CLEAR_ERRORS

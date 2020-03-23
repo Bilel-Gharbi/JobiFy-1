@@ -61,7 +61,7 @@ const getUserResumeDetails = async userId => {
       interests,
       applyedJob
     };
-
+    //console.log(result);
     return result;
   } catch (err) {
     console.log("ResumeService /getUserResumeDetails Eroor ", err);

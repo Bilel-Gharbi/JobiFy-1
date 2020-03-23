@@ -5,15 +5,14 @@ const resumeServices = require("./resume");
 const login = async AuthId => {
   try {
     let profile =
-      (await User.findOne({ where: { AuthId } })) ||
-      (await Company.findOne({ where: { AuthId } }));
-    //id user
+      (await User.findOne({ where: { AuthId: AuthId } })) ||
+      (await Company.findOne({ where: { AuthId: AuthId } }));
+    //TODO:
     //  let profileDetails = await resumeServices.getUserResumeDetails()  || company profile
     let profileDetails = await resumeServices.getUserResumeDetails(profile.id);
-    //console.log("hello", profileDetails);
     return { userInfo: profile, profileDetails };
   } catch (err) {
-    console.log("UserService/generateDammyUser data Error ", err);
+    console.log("UserService/login  Error ", err);
   }
 };
 
