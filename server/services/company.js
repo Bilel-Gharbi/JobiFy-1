@@ -33,9 +33,9 @@ const getAllCompany = async () => {
     console.log("CompanyServices/getAllCompany Error ", err);
   }
 };
-//TODO:
+
+//DONE
 const getCompanyDetails = async AuthId => {
-  //console.log("company id ", CompanyId);
   try {
     let company = await Company.findOne({ where: { AuthId } });
     //retreive company job offers

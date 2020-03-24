@@ -1,7 +1,7 @@
 //import User model from models/index.js file
 const { Auth, User, Company } = require("../models");
 //const resumeServices = require("./resume");
-const { resumeServices, companyServices } = require("./index");
+//const { resumeServices, companyServices } = require("./index");
 
 const login = async AuthId => {
   try {
@@ -10,11 +10,8 @@ const login = async AuthId => {
       (await Company.findOne({ where: { AuthId: AuthId } }));
     //TODO:
     //return user profile details or user company details
-    let profileDetails =
-      // (await resumeServices.getUserResumeDetails(profile.id)) ||
-      await companyServices.getCompanyDetails(profile.id);
 
-    return { userInfo: profile, profileDetails };
+    return profile;
   } catch (err) {
     console.log("AuthService / login  Error ", err);
   }
