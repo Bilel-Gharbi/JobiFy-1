@@ -1,4 +1,10 @@
-const { authServices, companyServices, userServices } = require("../services");
+const {
+  authServices,
+  companyServices,
+  userServices,
+  resumeServices
+} = require("../services");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -11,19 +17,25 @@ const signUp = async data => {
     if (!userExist) {
       const hasshedPassword = await bcrypt.hash(password, 12);
       data.password = hasshedPassword;
+
+      //auth service
       newAuth = await authServices.signUp(data);
-      //
+      //asign a token
       const token = await jwt.sign({ authId: newAuth.id }, jwtSecretKey, {
         expiresIn: TokenExpDate
       });
-      //
-      //create user or compnay table
-      console.log(newAuth.userInfo.id);
-      type === "USER"
-        ? (user = await userServices.createUser(newAuth.userInfo.id))
-        : (user = await companyServices.createCompany(newAuth.userInfo.id));
 
-      return { token, user };
+      //create user or compnay table
+      type === "USER"
+        ? (user = await userServices.createUser(newAuth.id))
+        : (user = await companyServices.createCompany(newAuth.id));
+
+      //get user or company details
+      profileDetails =
+        (await companyServices.getCompanyDetails(newAuth.id)) ||
+        (await resumeServices.getUserResumeDetails(user.id));
+
+      return { type, token, user, profileDetails };
     }
   } catch (err) {
     console.log("signup operation error ", err);
@@ -48,7 +60,7 @@ const login = async data => {
       );
       if (correctPassword) {
         let user = await authServices.login(userExist.id);
-        console.log(user);
+        //console.log(user);
         return { token, user };
       }
     }

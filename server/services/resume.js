@@ -9,7 +9,8 @@ const {
   Skill,
   Experience,
   Education,
-  Language
+  Language,
+  User
 } = require("../models");
 
 const getAllResume = async () => {
@@ -24,8 +25,9 @@ const getAllResume = async () => {
 //Done
 const getUserResumeDetails = async userId => {
   try {
+    let user = await User.findByPk(userId);
     let userResume = await Resume.findOne({ where: { UserId: userId } });
-    if (!userResume) return `no resume with this id ${userId}`;
+    //if (!userResume) return `no resume with this id ${userId}`;
 
     // console.log("hello ", applyedJob);
     //in case 0 we need to create all the table
@@ -49,7 +51,7 @@ const getUserResumeDetails = async userId => {
     let interests = await userResume.getInterests();
     let languages = await userResume.getLanguages();
 
-    let result = {
+    let resume = {
       userResume,
       experiences,
       educations,
@@ -61,8 +63,7 @@ const getUserResumeDetails = async userId => {
       interests,
       applyedJob
     };
-    //console.log(result);
-    return result;
+    return { user, resume };
   } catch (err) {
     console.log("ResumeService /getUserResumeDetails Eroor ", err);
   }
