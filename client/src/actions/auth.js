@@ -17,28 +17,31 @@ import { RETURN_ERRORS, CLEAR_ERRORS } from "./type";
 export const login = obj => async dispatch => {
   try {
     const response = await authAPI.post("/login", obj);
-    //set token
-    //localStorage.setItem("token", response.data.token);
+
     //delete error
     dispatch({
       type: CLEAR_ERRORS
     });
-    //dispatch action login_sucess
+
+    //dispatch action login_sucess in case no error
     dispatch({
       type: LOGIN_SUCESS,
       payload: response.data.result.token
     });
 
-    //dispatch action login
+    //dispatch and return LOGIN action to set state
     return dispatch({
       type: LOGIN,
       payload: {
         isLoged: true,
         token: response.data.result.token,
-        userData: response.data.result.user
+        userType: response.data.result.type,
+        profile: response.data.result.profile,
+        userData: response.data.result.profileDetails
       }
     });
   } catch (err) {
+    // in case of Erro Dispatch and RETURN_ERROR action
     return dispatch({
       type: RETURN_ERRORS,
       payload: {
@@ -54,25 +57,30 @@ export const signup = data => async dispatch => {
   try {
     // try signup
     const response = await authAPI.post("/signup", data);
+
+    // clear error
     dispatch({
       type: CLEAR_ERRORS
     });
-    console.log("hello", response);
+    // if there is no error  disptach signup sucess
     dispatch({
       type: SIGNUP_SUCESS,
       payload: response.data.result.token
     });
+
+    // return dispatch SIGNUP action
     return dispatch({
       type: SIGNUP,
       payload: {
         isLoged: true,
         token: response.data.result.token,
-        userData: response.data.result.user
+        userType: response.data.result.type,
+        profile: response.data.result.profile,
+        userData: response.data.result.profileDetails
       }
     });
   } catch (err) {
-    //case signup fail
-    console.log(err);
+    //case signup fail dispatch RETURN_ERROR action to update the error state
     return dispatch({
       type: RETURN_ERRORS,
       payload: {
