@@ -1,15 +1,11 @@
 //import User model from models/index.js file
 const { Auth, User, Company } = require("../models");
-//const resumeServices = require("./resume");
-//const { resumeServices, companyServices } = require("./index");
 
 const login = async AuthId => {
   try {
     let profile =
       (await User.findOne({ where: { AuthId: AuthId } })) ||
       (await Company.findOne({ where: { AuthId: AuthId } }));
-    //TODO:
-    //return user profile details or user company details
 
     return profile;
   } catch (err) {

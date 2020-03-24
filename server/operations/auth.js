@@ -60,13 +60,13 @@ const login = async data => {
         }
       );
       if (correctPassword) {
+        const { type } = userExist;
         let profile = await authServices.login(userExist.id);
-
         let profileDetails =
           (await companyServices.getCompanyDetails(userExist.id)) ||
           (await resumeServices.getUserResumeDetails(profile.id));
 
-        return { token, profile, profileDetails };
+        return { type, token, profile, profileDetails };
       }
     }
   } catch (err) {
