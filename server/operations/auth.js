@@ -20,6 +20,7 @@ const signUp = async data => {
 
       //auth service
       newAuth = await authServices.signUp(data);
+
       //asign a token
       const token = await jwt.sign({ authId: newAuth.id }, jwtSecretKey, {
         expiresIn: TokenExpDate
@@ -59,9 +60,13 @@ const login = async data => {
         }
       );
       if (correctPassword) {
-        let user = await authServices.login(userExist.id);
-        //console.log(user);
-        return { token, user };
+        let profile = await authServices.login(userExist.id);
+
+        let profileDetails =
+          (await companyServices.getCompanyDetails(userExist.id)) ||
+          (await resumeServices.getUserResumeDetails(profile.id));
+
+        return { token, profile, profileDetails };
       }
     }
   } catch (err) {
