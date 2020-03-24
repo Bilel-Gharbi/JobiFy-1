@@ -15,7 +15,6 @@ const createCompany = async data => {
 };
 
 const createCompanyInfo = async (authId, data) => {
-  console.log(authId);
   try {
     let result = await (
       await Company.findOne({ where: { AuthId: authId } })
@@ -23,7 +22,7 @@ const createCompanyInfo = async (authId, data) => {
 
     return result;
   } catch (err) {
-    console.log("UserService/generateDammyUser data Error ", err);
+    console.log("UserService/createCompanyInfo  Error ", err);
   }
 };
 const getAllCompany = async () => {
@@ -31,12 +30,25 @@ const getAllCompany = async () => {
     let result = await Company.findAll();
     return result;
   } catch (err) {
-    console.log("CompanyServices/getAllUser Error ", err);
+    console.log("CompanyServices/getAllCompany Error ", err);
+  }
+};
+//TODO:
+const getCompanyDetails = async AuthId => {
+  //console.log("company id ", CompanyId);
+  try {
+    let company = await Company.findOne({ where: { AuthId } });
+    //retreive company job offers
+    let jobOffers = await company.getJobOffers();
+    return { company, jobOffers };
+  } catch (err) {
+    console.log("CompanyServices/getCompanyDetails Error ", err);
   }
 };
 
 module.exports = {
   createCompany,
   getAllCompany,
-  createCompanyInfo
+  createCompanyInfo,
+  getCompanyDetails
 };

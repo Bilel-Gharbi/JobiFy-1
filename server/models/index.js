@@ -93,6 +93,8 @@ User.sync({ force: false });
 Company.sync({ force: false });
 Applicant.sync({ force: false });
 
+//console.log(Company.prototype);
+
 module.exports = {
   Auth,
   User,

@@ -1,6 +1,7 @@
 //import User model from models/index.js file
 const { Auth, User, Company } = require("../models");
-const resumeServices = require("./resume");
+//const resumeServices = require("./resume");
+const { resumeServices, companyServices } = require("./index");
 
 const login = async AuthId => {
   try {
@@ -8,11 +9,14 @@ const login = async AuthId => {
       (await User.findOne({ where: { AuthId: AuthId } })) ||
       (await Company.findOne({ where: { AuthId: AuthId } }));
     //TODO:
-    //  let profileDetails = await resumeServices.getUserResumeDetails()  || company profile
-    let profileDetails = await resumeServices.getUserResumeDetails(profile.id);
+    //return user profile details or user company details
+    let profileDetails =
+      // (await resumeServices.getUserResumeDetails(profile.id)) ||
+      await companyServices.getCompanyDetails(profile.id);
+
     return { userInfo: profile, profileDetails };
   } catch (err) {
-    console.log("UserService/login  Error ", err);
+    console.log("AuthService / login  Error ", err);
   }
 };
 
@@ -20,8 +24,7 @@ const signUp = async data => {
   try {
     await Auth.sync({ force: false });
     let newAuth = await Auth.create({ ...data });
-    let profileDetails = await resumeServices.getUserResumeDetails(newAuth.id);
-    return { userInfo: newAuth, profileDetails };
+    return newAuth;
   } catch (err) {
     console.log("AuthService /SignUp Error ", err);
   }
