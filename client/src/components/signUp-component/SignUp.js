@@ -11,7 +11,7 @@ class SignUp extends Component {
   };
   handelSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
     //action sign up
     this.props.signUp({ ...this.state });
   };
@@ -23,11 +23,8 @@ class SignUp extends Component {
     this.state.password.length > 0
       ? this.setState({ [name]: e.target.value, disabled: true })
       : this.setState({ [name]: e.target.value, disabled: false });
-
-    console.log(this.state);
   };
   render() {
-    console.log(this.props);
     const { email, password, confirmPassword } = this.state;
     return (
       <>

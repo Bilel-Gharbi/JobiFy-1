@@ -1,13 +1,19 @@
 import React, { Component } from "react";
-
 import "./jobcard.css";
+
+import { connect } from "react-redux";
+import { applyToJob } from "../../actions/jobsAction";
 class JobCard extends Component {
+  state = {
+    disable: this.props.isLoged
+  };
   apply = e => {
     e.preventDefault();
+    console.log("apply button work");
   };
   render() {
-    console.log(this.props);
     const { jobPosition, jobDescription, Company } = this.props.job;
+    const { disable } = this.state;
     return (
       <>
         <div className="card">
@@ -21,9 +27,14 @@ class JobCard extends Component {
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
             </p>
-            <a onClick={this.apply} href="" className="card-link">
+            <button
+              disabled={!disable}
+              onClick={this.apply}
+              href=""
+              className="card-link"
+            >
               Apply
-            </a>
+            </button>
           </div>
         </div>
       </>
@@ -31,4 +42,4 @@ class JobCard extends Component {
   }
 }
 
-export default JobCard;
+export default connect(null, { applyToJob })(JobCard);

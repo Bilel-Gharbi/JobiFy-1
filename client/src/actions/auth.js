@@ -14,6 +14,15 @@ import {
 //error actions
 import { RETURN_ERRORS, CLEAR_ERRORS } from "./type";
 
+//Resume action
+import { GET_RESUME } from "./type";
+import {
+  SET_USER_PROFILE,
+  CLEAR_USER_PROFILE,
+  SET_COMPANY_PROFILE,
+  CLEAR_COMPANY_PROFILE
+} from "./type";
+
 export const login = obj => async dispatch => {
   try {
     const response = await authAPI.post("/login", obj);
@@ -28,6 +37,17 @@ export const login = obj => async dispatch => {
       type: LOGIN_SUCESS,
       payload: response.data.result.token
     });
+
+    //disptach resume action or company action
+    response.data.result.type === "USER"
+      ? dispatch({
+          type: SET_USER_PROFILE,
+          payload: response.data.result.profileDetails
+        })
+      : dispatch({
+          type: SET_COMPANY_PROFILE,
+          payload: response.data.result.profileDetails
+        });
 
     //dispatch and return LOGIN action to set state
     return dispatch({
@@ -92,8 +112,18 @@ export const signup = data => async dispatch => {
   }
 };
 
-export const logout = () => async dispatch => {
+export const logout = () => async (dispatch, getState) => {
   try {
+    //diapatch clear User or company
+    getState().auth.userType === "USER"
+      ? dispatch({
+          type: CLEAR_USER_PROFILE
+        })
+      : dispatch({
+          type: CLEAR_COMPANY_PROFILE
+        });
+
+    //dipatch LOGOUT
     return dispatch({
       type: LOGOUT
     });

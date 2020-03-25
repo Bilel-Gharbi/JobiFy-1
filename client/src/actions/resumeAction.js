@@ -1,15 +1,18 @@
 import exempleAPI from "../API/Test";
 //import type
-import { FETCH_RESUME } from "./type";
-
-console.log(FETCH_RESUME);
+import { GET_RESUME } from "./type";
 
 //action to fetech resume
-export const fetechResume = async dispatch => {
-  const data = await exempleAPI.get("/users");
-
+export const getResume = data => dispatch => {
+  //const data = await exempleAPI.get("/users");
   return dispatch({
-    type: FETCH_RESUME,
+    type: GET_RESUME,
     payload: data
+  });
+};
+
+export const clearResume = () => dispatch => {
+  return dispatch({
+    type: CLEAR_ERRORS
   });
 };

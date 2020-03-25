@@ -16,7 +16,7 @@ class Header extends Component {
     this.props.history.push("/home");
   };
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <nav className="navbar navbar-expand-lg p-3 mb-5 mb-md-0 navbar-dark bg-primary rounded">
         <div className="container">
@@ -51,7 +51,7 @@ class Header extends Component {
             </ul>
             <ul className="navbar-nav ml-lg-auto mt-md-0 mt-2">
               <li className="nav-link">
-                <Link to="/login" className="nav-link" href="#">
+                <Link to="/auth" className="nav-link" href="#">
                   signUp
                 </Link>
               </li>
@@ -71,9 +71,9 @@ class Header extends Component {
                   className="dropdown-menu dropdown-menu-right"
                   aria-labelledby="nav-inner-primary_dropdown_1"
                 >
-                  <a className="dropdown-item" href="#">
+                  <Link to="/profile" className="dropdown-item" href="#">
                     Profile
-                  </a>
+                  </Link>
                   <a className="dropdown-item" href="#">
                     Setting
                   </a>
