@@ -11,7 +11,7 @@ import {} from "../../actions";
 class AuthPage extends Component {
   componentDidUpdate() {
     if (this.props.auth.isLoged) {
-      this.props.history.push("/jobs");
+      this.props.history.push("/profile");
     }
   }
 

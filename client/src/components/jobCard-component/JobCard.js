@@ -10,8 +10,10 @@ class JobCard extends Component {
   apply = e => {
     e.preventDefault();
     console.log("apply button work");
+    this.props.applyToJob(this.props.job.id, this.props.resumeId);
   };
   render() {
+    console.log(this.props);
     const { jobPosition, jobDescription, Company } = this.props.job;
     const { disable } = this.state;
     return (
@@ -29,9 +31,9 @@ class JobCard extends Component {
             </p>
             <button
               disabled={!disable}
-              onClick={this.apply}
-              href=""
               className="card-link"
+              type="submit"
+              onClick={this.apply}
             >
               Apply
             </button>
@@ -41,5 +43,12 @@ class JobCard extends Component {
     );
   }
 }
+const mapStateToPropos = state => {
+  if (state.auth.isLoged) {
+    return {
+      resumeId: state.userProfile.resume.userResume.id
+    };
+  }
+};
 
-export default connect(null, { applyToJob })(JobCard);
+export default connect(mapStateToPropos, { applyToJob })(JobCard);
