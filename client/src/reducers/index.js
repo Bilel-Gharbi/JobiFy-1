@@ -4,10 +4,14 @@ import resumeReducer from "./resumeReducer";
 import jobsReducer from "./jobsReducer";
 import authReducer from "./authReducer";
 import errorReducer from "./errorReducer";
+import companyProfileReducer from "./companyProfileReducer";
+import userProfileReducer from "./userProfileReducer";
 
 export default combineReducers({
   auth: authReducer,
-  resume: resumeReducer,
   jobs: jobsReducer,
+  userProfile: userProfileReducer,
+  companyProfile: companyProfileReducer,
+  resume: resumeReducer,
   error: errorReducer
 });

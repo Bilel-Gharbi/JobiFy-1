@@ -1,6 +1,8 @@
 export const FETCH_JOBS = "FETCH_JOBS";
+export const APPLY_JOB = "APPLY_JOB";
+
 export const FETCH_USERS = "FETCH_USER";
-export const FETCH_RESUME = "FETCH_RESUME";
+export const GET_RESUME = "GET_RESUME";
 
 export const LOGIN = "LOGIN";
 export const SIGNUP = "SIGNUP";
@@ -15,3 +17,11 @@ export const LOGIN_SUCESS = "LOGIN_SUCESS";
 //eroor action types
 export const RETURN_ERRORS = "RETURN_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
+//user actions
+export const SET_USER_PROFILE = "SET_USER_PROFILE";
+export const CLEAR_USER_PROFILE = "CLEAR_USER_PROFILE";
+
+// company action
+export const SET_COMPANY_PROFILE = "SET_COMPANY_PROFILE";
+export const CLEAR_COMPANY_PROFILE = "CLEAR_COMPANY_PROFILE";

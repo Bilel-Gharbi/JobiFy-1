@@ -2,13 +2,15 @@
 the first one is initial state and the second one is the action 
 there is some STRICT rules to follow 
  */
-const resumeReducer = (initialState = [], action) => {
+const initialState = {};
+
+const resumeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_CV":
-      return [...action.payload];
+    case "GET_RESUME":
+      return { ...state, ...action.payload };
 
     default:
-      return initialState;
+      return state;
   }
 };
 

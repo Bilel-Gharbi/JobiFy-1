@@ -11,10 +11,11 @@ class JobPage extends Component {
     this.props.fetechJobs();
   }
   render() {
-    const { jobs } = this.props;
+    console.log(this.props);
+    const { jobs, isLoged } = this.props;
     return (
       <div className="jobPage-conatianer">
-        <JobList jobs={jobs} />
+        <JobList jobs={jobs} isLoged={isLoged} />
       </div>
     );
   }
@@ -22,7 +23,10 @@ class JobPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    jobs: state.jobs
+    jobs: state.jobs,
+    isLoged: state.auth.isLoged,
+    jobs: state.jobs,
+    userProfile: state.userProfile
   };
 };
 

@@ -3,6 +3,15 @@ const { jobOfferServices } = require("../services");
 const getAllJoboffers = async () => {
   try {
     result = await jobOfferServices.getAllJobOffers();
+    /* let resultWithSkills = [...result];
+    for (let i = 0; i < result.length; i++) {
+      obj = {};
+      skillArray = await result[i].getSkills();
+      obj.data = 33;
+      result[i].skills = [1, 2, 3];
+      resultWithSkills.push(result[i]);
+    } */
+
     return result;
   } catch (err) {
     console.log("getAllJoboffers / JobOfferOperations error ", err);
