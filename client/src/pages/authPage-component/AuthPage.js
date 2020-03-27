@@ -7,7 +7,6 @@ import "./authPage.css";
 import Login from "../../components/login-component/Login";
 import SignUp from "../../components/signUp-component/SignUp";
 
-import {} from "../../actions";
 class AuthPage extends Component {
   componentDidUpdate() {
     if (this.props.auth.isLoged) {

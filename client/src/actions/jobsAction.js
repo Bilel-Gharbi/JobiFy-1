@@ -1,5 +1,4 @@
 import JobsAPI from "../API/JobsAPI";
-import axios from "axios";
 
 //import type
 import { FETCH_JOBS, APPLY_JOB, CLEAR_ERRORS, RETURN_ERRORS } from "./type";
@@ -17,7 +16,7 @@ export const fetechJobs = () => async dispatch => {
 export const applyToJob = (jobId, resumeId) => async dispatch => {
   console.log(" applyToJob  action fired ", jobId, resumeId);
   try {
-    const response = await JobsAPI.post(`apply/${jobId}/${resumeId}`);
+    await JobsAPI.post(`apply/${jobId}/${resumeId}`);
     //let payload = response.data.data;
     // clear error
     dispatch({
