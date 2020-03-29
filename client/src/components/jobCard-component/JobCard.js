@@ -48,8 +48,9 @@ class JobCard extends Component {
   render() {
     const { jobPosition, Company } = this.props.job;
     return (
-      <>
-        <div className="jobcart">
+      <div className="element">
+        <div className="back"> Click to show details </div>
+        <div className="jobcart" onClick={() => console.log(this.props)}>
           <div className="header">
             <div className="info">
               <div className="companyImg">
@@ -64,7 +65,7 @@ class JobCard extends Component {
           </div>
           <div className="footer">{this.renderSkills()}</div>
         </div>
-      </>
+      </div>
     );
   }
 }

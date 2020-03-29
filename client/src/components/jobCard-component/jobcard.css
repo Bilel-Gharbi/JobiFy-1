@@ -3,11 +3,14 @@
 .jobcart {
   position: relative;
   width: 100%;
+  height: 100%;
   margin: 10px auto;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-gap: 3px;
   padding: 10px;
+
+  border: 1px solid #f1f1f1;
 }
 .header {
   text-transform: capitalize;
@@ -80,4 +83,28 @@
   align-items: center;
   justify-content: center;
   text-transform: capitalize;
+}
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 17% 25%;
+  background-color: transparent;
+  transition: 0.3s all;
+}
+.element {
+  background-color: transparent;
+}
+
+.element:hover .jobcart {
+  cursor: pointer;
+  filter: blur(2px);
+}
+
+.element:hover .back {
+  opacity: 1;
+  background-color: transparent;
+  font-weight: bolder;
+  font-size: larger;
 }
