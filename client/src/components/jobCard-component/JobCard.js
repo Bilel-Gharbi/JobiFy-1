@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
 import "./jobcard.css";
 
 import { connect } from "react-redux";
@@ -21,79 +20,50 @@ class JobCard extends Component {
   }
   apply = e => {
     e.preventDefault();
-    //function to check befor applying
-
     this.props.applyToJob(this.props.job.id, this.props.resumeId);
   };
 
+  renderMatching() {
+    if (this.state.match) {
+      return (
+        <div>
+          <strong>{this.state.match} %</strong>
+        </div>
+      );
+    }
+  }
+  renderSkills() {
+    const { jobSkills } = this.props.job;
+    if (jobSkills) {
+      return jobSkills.map(skill => {
+        return (
+          <span className="skill" key={skill.id}>
+            <strong>{skill.name} </strong>
+          </span>
+        );
+      });
+    }
+  }
+
   render() {
-    const {
-      jobPosition,
-      jobDescription,
-      Company,
-      JobContractType,
-      jobMinSalary,
-      jobMaxSalary,
-      createdAt,
-      jobSkills
-    } = this.props.job;
+    const { jobPosition, Company } = this.props.job;
     return (
       <>
-        <Container>
-          <Row>
-            <Col xs="3">
-              <img src={Company.logo} width="100px" height="100px" />
-            </Col>
-
-            <Col className="jobInfo">
-              <Row>{jobPosition}</Row>
-              <Row>{Company.companyName}</Row>
-            </Col>
-            <Col xs="2">
-              {this.state.match ? (
-                <div>
-                  <strong>{this.state.match} %</strong>
-                </div>
-              ) : null}
-            </Col>
-            <Col xs="2">
-              <Modal>
-                {this.state.autorized ? "Apply" : "alreday applyed"}
-              </Modal>
-            </Col>
-          </Row>
-          <Row className="details">
-            <Col className="info" xs="3">
-              <Row>location</Row>
-              <Row>{JobContractType}</Row>
-              <Row>
-                min : {jobMinSalary} - max: {jobMaxSalary}
-              </Row>
-              <Row>{createdAt.slice(0, 10)}</Row>
-            </Col>
-            <Col className="description">
-              <Row className="jobDecription">
-                {jobDescription}
-                job description Some quick example text to build on the card
-                title and make up the bulk of the card's content. job
-                description Some quick example text to build on the card title
-                and make up the bulk of the card's content.
-              </Row>
-              <Row className="jobSkills">
-                <Col>
-                  {jobSkills.map(skill => {
-                    return (
-                      <Row className="skill">
-                        <strong>{skill.name} </strong>
-                        {skill.level}
-                      </Row>
-                    );
-                  })}
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
+        <div className="jobcart">
+          <div className="header">
+            <div className="info">
+              <div className="companyImg">
+                <img src={Company.logo} />
+              </div>
+              <div className="offerInfo">
+                <span className="jobPostion">{jobPosition}</span>
+                <span className="companyName">{Company.companyName}</span>
+              </div>
+            </div>
+            <div className="match">{this.renderMatching()}</div>
+          </div>
+          <div className="footer">{this.renderSkills()}</div>
+        </div>
       </>
     );
   }

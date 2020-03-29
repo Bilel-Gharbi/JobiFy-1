@@ -16,11 +16,8 @@ export const jobMatch = (resumeSkillsTab, jobOfferSkillsTab) => {
     .toUpperCase()
     .split(",");
 
-  console.log(jobSkills);
-  console.log(resumeSkills);
+  // return ratio by divded the number of skills included by the length of job offer skills
   return (
     (_.intersection(resumeSkills, jobSkills).length / jobSkills.length) * 100
   );
-
-  // return ratio by divded the number of skills included by the length of job offer skills
 };

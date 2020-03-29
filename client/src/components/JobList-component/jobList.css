@@ -1,13 +1,1 @@
-.jobList {
-  width: 100%;
-  display: grid;
-  align-content: center;
-  justify-content: center;
-  grid-gap: 20px;
-}
-.job {
-  display: flex;
-  position: relative;
-  color: red;
-  width: 100%;
-}
+
