@@ -2,16 +2,20 @@ const { jobOfferServices } = require("../services");
 
 const getAllJoboffers = async () => {
   try {
-    result = await jobOfferServices.getAllJobOffers();
-    /* let resultWithSkills = [...result];
+    const result = await jobOfferServices.getAllJobOffers();
+    //loop throughth job table use getJobOfferSkills service to get skills for each job
+    skillsTab = [];
     for (let i = 0; i < result.length; i++) {
-      obj = {};
-      skillArray = await result[i].getSkills();
-      obj.data = 33;
-      result[i].skills = [1, 2, 3];
-      resultWithSkills.push(result[i]);
-    } */
-
+      let jobSkills = await jobOfferServices.getJobOfferSkills(
+        result[i].dataValues.id
+      );
+      skillsTab.push(jobSkills);
+    }
+    //Modify the result table that contain all job offer bu adding new key jobSkills include the skills related to this jobOffer
+    result.map((el, i) => {
+      el.dataValues["jobSkills"] = skillsTab[i];
+    });
+    //return jobOffer array with skills for each job offer
     return result;
   } catch (err) {
     console.log("getAllJoboffers / JobOfferOperations error ", err);

@@ -88,10 +88,20 @@ Award.belongsTo(Resume);
 Resume.hasMany(Interest);
 Interest.belongsTo(Resume);
 
-Auth.sync({ force: false });
+/* Auth.sync({ force: false });
 User.sync({ force: false });
+JobOffer.sync({ force: true });
+Skill.sync({ force: true });
 Company.sync({ force: false });
 Applicant.sync({ force: false });
+Resume.sync({ force: false });
+Experience.sync({ force: false });
+Language.sync({ force: false });
+Education.sync({ force: false });
+Award.sync({ force: false });
+Project.sync({ force: false });
+Interest.sync({ force: false });
+Certificate.sync({ force: false }); */
 
 //console.log(Company.prototype);
 

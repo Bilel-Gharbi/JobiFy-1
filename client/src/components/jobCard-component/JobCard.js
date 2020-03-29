@@ -5,17 +5,19 @@ import "./jobcard.css";
 import { connect } from "react-redux";
 import { applyToJob } from "../../actions/jobsAction";
 
-import { checkBeforApply } from "../../helper";
+import { checkBeforApply, jobMatch } from "../../helper";
 
 import Modal from "../modal-component/Modal";
 class JobCard extends Component {
   state = {
     disable: false,
-    autorized: true
+    autorized: true,
+    match: null
   };
   componentWillReceiveProps() {
     let check = checkBeforApply(this.props.job.id, this.props.applyedJob);
-    this.setState({ autorized: !check, disable: !check });
+    let match = jobMatch(this.props.resumeSkills, this.props.job.jobSkills);
+    this.setState({ autorized: !check, disable: !check, match });
   }
   apply = e => {
     e.preventDefault();
@@ -32,7 +34,8 @@ class JobCard extends Component {
       JobContractType,
       jobMinSalary,
       jobMaxSalary,
-      createdAt
+      createdAt,
+      jobSkills
     } = this.props.job;
     return (
       <>
@@ -47,7 +50,11 @@ class JobCard extends Component {
               <Row>{Company.companyName}</Row>
             </Col>
             <Col xs="2">
-              <div>matching</div>
+              {this.state.match ? (
+                <div>
+                  <strong>{this.state.match} %</strong>
+                </div>
+              ) : null}
             </Col>
             <Col xs="2">
               <Modal>
@@ -60,8 +67,7 @@ class JobCard extends Component {
               <Row>location</Row>
               <Row>{JobContractType}</Row>
               <Row>
-                {" "}
-                min : {jobMinSalary} - max: {jobMaxSalary}{" "}
+                min : {jobMinSalary} - max: {jobMaxSalary}
               </Row>
               <Row>{createdAt.slice(0, 10)}</Row>
             </Col>
@@ -75,10 +81,14 @@ class JobCard extends Component {
               </Row>
               <Row className="jobSkills">
                 <Col>
-                  <div className="skill">skill 1</div>
-                  <div className="skill">skill 2</div>
-                  <div className="skill">skill 3</div>
-                  <div className="skill">skill 3</div>
+                  {jobSkills.map(skill => {
+                    return (
+                      <Row className="skill">
+                        <strong>{skill.name} </strong>
+                        {skill.level}
+                      </Row>
+                    );
+                  })}
                 </Col>
               </Row>
             </Col>
@@ -93,6 +103,7 @@ const mapStateToPropos = (state, ownProps) => {
   if (ownProps.isLoged) {
     return {
       resumeId: state.userProfile.resume.userResume.id,
+      resumeSkills: state.userProfile.resume.skills,
       applyedJob: state.userProfile.resume.applyedJob
     };
   }
