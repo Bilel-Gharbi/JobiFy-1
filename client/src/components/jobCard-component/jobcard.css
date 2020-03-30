@@ -1,60 +1,110 @@
-.card {
-  margin-top: 20px;
+/* ______________________________ */
+
+.jobcart {
+  position: relative;
   width: 100%;
-}
-.apply-btn {
-  display: block;
-  width: 200px;
-  background-color: cornflowerblue;
-  border-radius: 3px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 2s;
-}
-
-.container {
-  border: black solid;
-  border-radius: 5px;
-}
-.col-3 {
+  height: 100%;
+  margin: 10px auto;
   display: grid;
-  justify-content: center;
-  align-items: center;
-}
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 3px;
+  padding: 10px;
 
-.col-2 {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  border: 1px solid #f1f1f1;
 }
-.container:hover {
-  background-color: burlywood;
-}
-.info > .row {
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-}
-
-.jobSkills > .col {
-  display: flex;
-  margin: 5px;
-
-  text-align: center;
-  justify-content: center;
-  font-size: small;
-}
-.skill {
-  border: black solid 1px;
-  font-weight: 500;
-  align-items: center;
-  justify-content: center;
-  margin: 2px 10px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 3px;
-}
-.jobInfo {
-  margin: auto;
+.header {
+  text-transform: capitalize;
   padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  border: 1px black solid;
+}
+
+.info {
+  display: flex;
+  flex: 3;
+}
+.offerInfo {
+  flex: 2;
+  display: grid;
+  align-items: center;
+}
+.companyImg {
+  padding: 2px;
+}
+.companyImg img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.jobPostion {
+  display: block;
+  font-size: 16px;
+  font-weight: 900;
+}
+.companyName {
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 0p;
+}
+
+.match {
+  flex: 1;
+  display: grid;
+  align-items: center;
+  justify-content: right;
+}
+
+.apply {
+  flex: 1;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid;
+  height: auto;
+}
+.footer > span {
+  font-family: "Baloo Thambi 2", cursive;
+  font-size: 15px;
+  position: relative;
+  display: inline-block;
+  border: 1px solid black;
+  margin: 1px 3px;
+  padding: 1px;
+  border-radius: 3px;
+  height: 25px;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+}
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 17% 25%;
+  background-color: transparent;
+  transition: 0.3s all;
+}
+.element {
+  background-color: transparent;
+}
+
+.element:hover .jobcart {
+  cursor: pointer;
+  filter: blur(2px);
+}
+
+.element:hover .back {
+  opacity: 1;
+  background-color: transparent;
+  font-weight: bolder;
+  font-size: larger;
 }

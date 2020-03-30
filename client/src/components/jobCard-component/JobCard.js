@@ -1,90 +1,74 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
 import "./jobcard.css";
 
 import { connect } from "react-redux";
-import { applyToJob } from "../../actions/jobsAction";
+import { applyToJob, fetechJobDetails } from "../../actions/jobsAction";
 
-import { checkBeforApply } from "../../helper";
+import { checkBeforApply, jobMatch } from "../../helper";
 
 import Modal from "../modal-component/Modal";
 class JobCard extends Component {
   state = {
     disable: false,
-    autorized: true
+    autorized: true,
+    match: null
   };
   componentWillReceiveProps() {
     let check = checkBeforApply(this.props.job.id, this.props.applyedJob);
-    this.setState({ autorized: !check, disable: !check });
+    let match = jobMatch(this.props.resumeSkills, this.props.job.jobSkills);
+    this.setState({ autorized: !check, disable: !check, match });
   }
   apply = e => {
     e.preventDefault();
-    //function to check befor applying
-
     this.props.applyToJob(this.props.job.id, this.props.resumeId);
   };
 
-  render() {
-    const {
-      jobPosition,
-      jobDescription,
-      Company,
-      JobContractType,
-      jobMinSalary,
-      jobMaxSalary,
-      createdAt
-    } = this.props.job;
-    return (
-      <>
-        <Container>
-          <Row>
-            <Col xs="3">
-              <img src={Company.logo} width="100px" height="100px" />
-            </Col>
+  renderMatching() {
+    if (this.state.match) {
+      return (
+        <div>
+          <strong>{this.state.match} %</strong>
+        </div>
+      );
+    }
+  }
+  renderSkills() {
+    const { jobSkills } = this.props.job;
+    if (jobSkills) {
+      return jobSkills.map(skill => {
+        return (
+          <span className="skill" key={skill.id}>
+            <strong>{skill.name} </strong>
+          </span>
+        );
+      });
+    }
+  }
 
-            <Col className="jobInfo">
-              <Row>{jobPosition}</Row>
-              <Row>{Company.companyName}</Row>
-            </Col>
-            <Col xs="2">
-              <div>matching</div>
-            </Col>
-            <Col xs="2">
-              <Modal>
-                {this.state.autorized ? "Apply" : "alreday applyed"}
-              </Modal>
-            </Col>
-          </Row>
-          <Row className="details">
-            <Col className="info" xs="3">
-              <Row>location</Row>
-              <Row>{JobContractType}</Row>
-              <Row>
-                {" "}
-                min : {jobMinSalary} - max: {jobMaxSalary}{" "}
-              </Row>
-              <Row>{createdAt.slice(0, 10)}</Row>
-            </Col>
-            <Col className="description">
-              <Row className="jobDecription">
-                {jobDescription}
-                job description Some quick example text to build on the card
-                title and make up the bulk of the card's content. job
-                description Some quick example text to build on the card title
-                and make up the bulk of the card's content.
-              </Row>
-              <Row className="jobSkills">
-                <Col>
-                  <div className="skill">skill 1</div>
-                  <div className="skill">skill 2</div>
-                  <div className="skill">skill 3</div>
-                  <div className="skill">skill 3</div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-      </>
+  render() {
+    const { jobPosition, Company, id } = this.props.job;
+    return (
+      <div className="element">
+        <div className="back"> Click to show details </div>
+        <div
+          className="jobcart"
+          onClick={() => this.props.fetechJobDetails(this.props.job)}
+        >
+          <div className="header">
+            <div className="info">
+              <div className="companyImg">
+                <img src={Company.logo} />
+              </div>
+              <div className="offerInfo">
+                <span className="jobPostion">{jobPosition}</span>
+                <span className="companyName">{Company.companyName}</span>
+              </div>
+            </div>
+            <div className="match">{this.renderMatching()}</div>
+          </div>
+          <div className="footer">{this.renderSkills()}</div>
+        </div>
+      </div>
     );
   }
 }
@@ -93,10 +77,13 @@ const mapStateToPropos = (state, ownProps) => {
   if (ownProps.isLoged) {
     return {
       resumeId: state.userProfile.resume.userResume.id,
+      resumeSkills: state.userProfile.resume.skills,
       applyedJob: state.userProfile.resume.applyedJob
     };
   }
   return {};
 };
 
-export default connect(mapStateToPropos, { applyToJob })(JobCard);
+export default connect(mapStateToPropos, { applyToJob, fetechJobDetails })(
+  JobCard
+);
