@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./jobcard.css";
 
 import { connect } from "react-redux";
-import { applyToJob } from "../../actions/jobsAction";
+import { applyToJob, fetechJobDetails } from "../../actions/jobsAction";
 
 import { checkBeforApply, jobMatch } from "../../helper";
 
@@ -46,11 +46,14 @@ class JobCard extends Component {
   }
 
   render() {
-    const { jobPosition, Company } = this.props.job;
+    const { jobPosition, Company, id } = this.props.job;
     return (
       <div className="element">
         <div className="back"> Click to show details </div>
-        <div className="jobcart" onClick={() => console.log(this.props)}>
+        <div
+          className="jobcart"
+          onClick={() => this.props.fetechJobDetails(this.props.job)}
+        >
           <div className="header">
             <div className="info">
               <div className="companyImg">
@@ -81,4 +84,6 @@ const mapStateToPropos = (state, ownProps) => {
   return {};
 };
 
-export default connect(mapStateToPropos, { applyToJob })(JobCard);
+export default connect(mapStateToPropos, { applyToJob, fetechJobDetails })(
+  JobCard
+);

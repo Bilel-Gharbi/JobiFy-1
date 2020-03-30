@@ -1,15 +1,32 @@
 import JobsAPI from "../API/JobsAPI";
 
 //import type
-import { FETCH_JOBS, APPLY_JOB, CLEAR_ERRORS, RETURN_ERRORS } from "./type";
+import {
+  FETCH_JOBS,
+  APPLY_JOB,
+  CLEAR_ERRORS,
+  RETURN_ERRORS,
+  FETCH_JOB_DETAILS
+} from "./type";
 
 export const fetechJobs = () => async dispatch => {
-  console.log(" fetch jobs action fired ");
   const response = await JobsAPI.get("/all");
-  let payload = response.data.data;
+  //let payload = response.data.data;
   return dispatch({
     type: FETCH_JOBS,
-    payload
+    payload: {
+      jobs: response.data.data
+    }
+  });
+};
+
+export const fetechJobDetails = job => dispatch => {
+  console.log(" fetch job details  action fired ");
+  return dispatch({
+    type: FETCH_JOB_DETAILS,
+    payload: {
+      jobDetails: job
+    }
   });
 };
 

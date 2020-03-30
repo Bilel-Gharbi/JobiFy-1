@@ -25,3 +25,6 @@ export const CLEAR_USER_PROFILE = "CLEAR_USER_PROFILE";
 // company action
 export const SET_COMPANY_PROFILE = "SET_COMPANY_PROFILE";
 export const CLEAR_COMPANY_PROFILE = "CLEAR_COMPANY_PROFILE";
+
+// job_detais
+export const FETCH_JOB_DETAILS = "FETCH_JOB_DETAILS";

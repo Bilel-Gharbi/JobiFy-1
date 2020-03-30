@@ -1,0 +1,31 @@
+.jobDescriptionContainer {
+  background-color: grey;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 2fr 7fr 1fr;
+  grid-gap: 3px;
+}
+
+.header-job-description {
+  background-color: hotpink;
+  margin: 3px 5px;
+  padding: 10px;
+}
+
+.job-title {
+}
+
+.content-job-description {
+  background-color: hotpink;
+  margin: 3px 5px;
+  padding: 10px;
+}
+
+.footer-job-description {
+  background-color: hotpink;
+  margin: 3px 5px;
+  padding: 10px;
+}

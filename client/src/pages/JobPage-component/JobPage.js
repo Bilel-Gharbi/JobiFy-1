@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetechJobs } from "../../actions/jobsAction";
 
 import JobList from "../../components/JobList-component/JobList";
+import JobDescription from "../../components/JobDescription-component/JobDescription";
 
 import "./JobPage.css";
 
@@ -19,8 +20,10 @@ class JobPage extends Component {
           <div className="listContainer">
             <JobList jobs={jobs} isLoged={isLoged} />
           </div>
-          <div className="jobDetails">
-            <div>hellohellohello</div>
+          <div className="jobDetailsContainer">
+            <div className="jobDetails">
+              <JobDescription />
+            </div>
           </div>
         </div>
       </>
@@ -30,7 +33,7 @@ class JobPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    jobs: state.jobs,
+    jobs: state.jobs.jobs,
     isLoged: state.auth.isLoged,
     userProfile: state.userProfile
   };

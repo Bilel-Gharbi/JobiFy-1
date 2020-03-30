@@ -5,14 +5,20 @@
   margin-right: 5px;
 }
 
-.jobDetails {
+.jobDetailsContainer {
   flex: 4;
   display: grid;
   border: 1px black solid;
   margin-left: 5px;
+  background-color: lawngreen;
 }
 
 .jobPagecontainer {
   display: flex;
   margin: 0 20px;
+}
+
+.jobDetails {
+  position: relative;
+  padding: 10px;
 }
