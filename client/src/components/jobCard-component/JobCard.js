@@ -7,6 +7,7 @@ import { applyToJob, fetechJobDetails } from "../../actions/jobsAction";
 import { checkBeforApply, jobMatch } from "../../helper";
 
 import Modal from "../modal-component/Modal";
+import JobSkillsList from "../JobSkillsList - component/JobSkillsList";
 class JobCard extends Component {
   state = {
     disable: false,
@@ -32,21 +33,9 @@ class JobCard extends Component {
       );
     }
   }
-  renderSkills() {
-    const { jobSkills } = this.props.job;
-    if (jobSkills) {
-      return jobSkills.map(skill => {
-        return (
-          <span className="skill" key={skill.id}>
-            <strong>{skill.name} </strong>
-          </span>
-        );
-      });
-    }
-  }
 
   render() {
-    const { jobPosition, Company, id } = this.props.job;
+    const { jobPosition, Company, jobSkills } = this.props.job;
     return (
       <div className="element">
         <div className="back"> Click to show details </div>
@@ -66,7 +55,9 @@ class JobCard extends Component {
             </div>
             <div className="match">{this.renderMatching()}</div>
           </div>
-          <div className="footer">{this.renderSkills()}</div>
+          <div className="footer">
+            <JobSkillsList jobSkills={jobSkills} />
+          </div>
         </div>
       </div>
     );

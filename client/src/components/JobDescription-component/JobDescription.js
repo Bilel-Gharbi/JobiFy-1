@@ -1,5 +1,5 @@
 import React from "react";
-
+import JobSkillsList from "../JobSkillsList - component/JobSkillsList";
 import "./JobDescription.css";
 
 const JobDescription = ({ jobDetails }) => {
@@ -11,7 +11,9 @@ const JobDescription = ({ jobDetails }) => {
         </div>
         <div className="job-save-share">save and share</div>
         <div className="job-contract-date">job contract type and date </div>
-        <div className="job-skills">skills here </div>
+        <div className="job-skills">
+          <JobSkillsList jobSkills={jobDetails.jobSkills} />
+        </div>
       </div>
       <div className="content-job-description">
         Job description and requirement{" "}
