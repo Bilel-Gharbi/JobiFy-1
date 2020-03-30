@@ -6,12 +6,22 @@ import {
   APPLY_JOB,
   CLEAR_ERRORS,
   RETURN_ERRORS,
-  FETCH_JOB_DETAILS
+  FETCH_JOB_DETAILS,
+  SET_DEFAULT_JOB_DETAILS
 } from "./type";
 
 export const fetechJobs = () => async dispatch => {
   const response = await JobsAPI.get("/all");
   //let payload = response.data.data;
+
+  //dispatch set default jobdetails
+  dispatch({
+    type: SET_DEFAULT_JOB_DETAILS,
+    payload: {
+      jobDetails: response.data.data[0]
+    }
+  });
+
   return dispatch({
     type: FETCH_JOBS,
     payload: {

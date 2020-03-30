@@ -8,6 +8,9 @@ const jobsReducer = (state = initialState, action) => {
     case "FETCH_JOBS":
       return { ...state, ...action.payload };
 
+    case "SET_DEFAULT_JOB_DETAILS":
+      return { ...state, ...action.payload };
+
     case "FETCH_JOB_DETAILS":
       return { ...state, ...action.payload };
 
