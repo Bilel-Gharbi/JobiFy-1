@@ -1,0 +1,14 @@
+.skill {
+  font-family: "Baloo Thambi 2", cursive;
+  font-size: 15px;
+  position: relative;
+  display: inline-block;
+  border: 1px solid black;
+  margin: 1px 3px;
+  padding: 1px;
+  border-radius: 3px;
+  height: 25px;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+}

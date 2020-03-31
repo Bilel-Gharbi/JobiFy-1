@@ -4,4 +4,10 @@
 * {
   box-sizing: border-box;
   font-family: "Raleway", sans-serif;
+  padding: 0;
+}
+
+.mainContainer {
+  width: 80%;
+  margin: auto;
 }

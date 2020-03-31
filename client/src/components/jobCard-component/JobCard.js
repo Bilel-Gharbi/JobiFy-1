@@ -37,27 +37,22 @@ class JobCard extends Component {
   render() {
     const { jobPosition, Company, jobSkills } = this.props.job;
     return (
-      <div className="element">
+      <div
+        className="jobcart"
+        onClick={() => this.props.fetechJobDetails(this.props.job)}
+      >
         <div className="back"> Click to show details </div>
-        <div
-          className="jobcart"
-          onClick={() => this.props.fetechJobDetails(this.props.job)}
-        >
-          <div className="header">
-            <div className="info">
-              <div className="companyImg">
-                <img src={Company.logo} />
-              </div>
-              <div className="offerInfo">
-                <span className="jobPostion">{jobPosition}</span>
-                <span className="companyName">{Company.companyName}</span>
-              </div>
+        <div className="header">
+          <div className="info">
+            <div className="companyImg">
+              <img src={Company.logo} />
             </div>
-            <div className="match">{this.renderMatching()}</div>
+            <div className="offerInfo">
+              <span className="jobPostion">{jobPosition}</span>
+              <span className="companyName">{Company.companyName}</span>
+            </div>
           </div>
-          <div className="footer">
-            <JobSkillsList jobSkills={jobSkills} />
-          </div>
+          <div className="match">{this.renderMatching()}</div>
         </div>
       </div>
     );

@@ -3,23 +3,60 @@ import JobSkillsList from "../JobSkillsList - component/JobSkillsList";
 import "./JobDescription.css";
 
 const JobDescription = ({ jobDetails }) => {
+  const {
+    jobPosition,
+    jobDescription,
+    JobContractType,
+    jobMinSalary,
+    createdAt,
+    jobSkills,
+    Company
+  } = jobDetails;
   return (
     <div className="jobDescriptionContainer">
       <div className="header-job-description">
-        <div className="job-title">
-          {jobDetails.jobPosition} job and company
+        <div className="one">
+          <div className="infoDiv">
+            <div className="job-title">{jobPosition}</div>
+            <div className="job-comapny-name">
+              {Company ? Company.companyName : null}
+            </div>
+          </div>
+          <div className="btnDiv">
+            <div>
+              <a href="#" className="saveButton">
+                save me
+              </a>
+            </div>
+            <div>
+              <a href="#" className="saveButton">
+                Apply
+              </a>
+            </div>
+          </div>
         </div>
-        <div className="job-save-share">save and share</div>
-        <div className="job-contract-date">job contract type and date </div>
-        <div className="job-skills">
-          <JobSkillsList jobSkills={jobDetails.jobSkills} />
+        <div className="two">
+          <div>{JobContractType}</div>
+          <div>{jobMinSalary}</div>
+          <div>{createdAt ? createdAt.slice(0, 10) : null}</div>
         </div>
+        <div className="tree">
+          <div className="job-skills">
+            <JobSkillsList jobSkills={jobSkills} />
+          </div>
+        </div>
+      </div>
+      <div className="content-job-comapny- description">
+        <h5>company info</h5>
+        <li>company info1</li>
+        <li>company info1</li>
+        <li>company info1</li>
+        <li>company info1</li>
       </div>
       <div className="content-job-description">
-        Job description and requirement{" "}
+        <h5>job offer description</h5>
+        {jobDescription}
       </div>
-
-      <div className="footer-job-description">footer</div>
     </div>
   );
 };

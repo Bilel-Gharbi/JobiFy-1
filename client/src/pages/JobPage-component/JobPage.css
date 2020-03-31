@@ -1,13 +1,13 @@
 .listContainer {
-  flex: 2;
   position: relative;
+  width: 40%;
   border: 1px black solid;
   margin-right: 5px;
 }
 
 .jobDetailsContainer {
-  flex: 4;
   display: grid;
+  width: 60%;
   border: 1px black solid;
   margin-left: 5px;
   background-color: lawngreen;

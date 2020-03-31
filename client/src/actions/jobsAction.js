@@ -31,7 +31,6 @@ export const fetechJobs = () => async dispatch => {
 };
 
 export const fetechJobDetails = job => dispatch => {
-  console.log(" fetch job details  action fired ");
   return dispatch({
     type: FETCH_JOB_DETAILS,
     payload: {

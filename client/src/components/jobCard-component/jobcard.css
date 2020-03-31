@@ -6,11 +6,9 @@
   height: 100%;
   margin: 10px auto;
   display: grid;
-  grid-template-rows: 1fr 1fr;
   grid-gap: 3px;
-  padding: 10px;
-
-  border: 1px solid #f1f1f1;
+  padding: 3px;
+  border: 1px solid #e77b7b;
 }
 .header {
   text-transform: capitalize;
@@ -29,6 +27,7 @@
   flex: 2;
   display: grid;
   align-items: center;
+  margin-left: 5px;
 }
 .companyImg {
   padding: 2px;
@@ -54,6 +53,7 @@
   display: grid;
   align-items: center;
   justify-content: right;
+  margin: 0 3px;
 }
 
 .apply {
@@ -89,22 +89,27 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  margin: 17% 25%;
+  /* margin: 20% 22%; */
   background-color: transparent;
   transition: 0.3s all;
+  align-items: center;
+  justify-content: center;
+  display: grid;
 }
 .element {
   background-color: transparent;
 }
 
-.element:hover .jobcart {
-  cursor: pointer;
-  filter: blur(2px);
-}
-
-.element:hover .back {
+.jobcart:hover .back {
   opacity: 1;
   background-color: transparent;
   font-weight: bolder;
   font-size: larger;
+  cursor: pointer;
+  z-index: 1;
+}
+.jobcart:hover .header {
+  opacity: 1;
+  filter: blur(4px);
+  z-index: 0;
 }

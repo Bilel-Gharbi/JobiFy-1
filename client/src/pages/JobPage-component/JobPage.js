@@ -11,6 +11,7 @@ class JobPage extends Component {
   componentDidMount() {
     this.props.fetechJobs();
   }
+
   render() {
     const { jobs, isLoged, jobDetails } = this.props;
     return (
@@ -21,9 +22,11 @@ class JobPage extends Component {
             <JobList jobs={jobs} isLoged={isLoged} />
           </div>
           <div className="jobDetailsContainer">
-            <div className="jobDetails">
-              <JobDescription jobDetails={jobDetails} />
-            </div>
+            {jobDetails ? (
+              <div className="jobDetails">
+                <JobDescription jobDetails={jobDetails} />
+              </div>
+            ) : null}
           </div>
         </div>
       </>
