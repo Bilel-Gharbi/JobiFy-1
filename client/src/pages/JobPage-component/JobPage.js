@@ -17,6 +17,7 @@ class JobPage extends Component {
     return (
       <>
         <div> search bar </div>
+        <div> pagination bar </div>
         <div className="jobPagecontainer">
           <div className="listContainer">
             <JobList jobs={jobs} isLoged={isLoged} />
