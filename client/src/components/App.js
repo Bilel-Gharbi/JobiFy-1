@@ -32,12 +32,14 @@ function App() {
         <Header />
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/auth" component={AuthPage} />
-            <Route exact path="/info" component={InfoPage} />
-            <Route exact path="/profile" component={ProfilePage} />
-            <Route exact path="/dashboard" component={DashBoardPage} />
-            <Route exact path="/jobs" component={JobPage} />
+            <div className="mainContainer">
+              <Route exact path="/" component={HomePage} />
+              <Route exact path="/auth" component={AuthPage} />
+              <Route exact path="/info" component={InfoPage} />
+              <Route exact path="/profile" component={ProfilePage} />
+              <Route exact path="/dashboard" component={DashBoardPage} />
+              <Route exact path="/jobs" component={JobPage} />
+            </div>
           </Switch>
         </Suspense>
       </Router>

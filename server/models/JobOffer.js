@@ -10,7 +10,7 @@ const JobOffer = db.define("JobOffer", {
     defaultValue: "Job position"
   },
   jobDescription: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
     defaultValue: "Job description "
   },
