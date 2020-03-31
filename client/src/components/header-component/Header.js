@@ -26,13 +26,13 @@ class Header extends Component {
     const { isLoged } = this.props.auth;
     if (isLoged) {
       return (
-        <a onClick={this.logout}>
+        <Link to="/home" onClick={this.logout}>
           <i className="fa fa-fw fa-sign-out" /> logout
-        </a>
+        </Link>
       );
     }
     return (
-      <Link to="/auth" href="#">
+      <Link to="/auth">
         <i className="fa fa-fw fa-sign-in" /> Login
       </Link>
     );

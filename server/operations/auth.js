@@ -6,9 +6,12 @@ const {
 } = require("../services");
 
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
-const { jwtSecretKey, TokenExpDate } = require("../config");
+//const jwt = require("jsonwebtoken");
+//const { jwtSecretKey, TokenExpDate } = require("../config");
+
+//import helper function
+const { verifyToken, decodeToken, signNewToken } = require("../helper");
 
 const signUp = async data => {
   const { password, type } = data;
@@ -22,9 +25,10 @@ const signUp = async data => {
       newAuth = await authServices.signUp(data);
 
       //asign a token
-      const token = await jwt.sign({ authId: newAuth.id }, jwtSecretKey, {
+      /* const token = await jwt.sign({ authId: newAuth.id }, jwtSecretKey, {
         expiresIn: TokenExpDate
-      });
+      }); */
+      const token = await signNewToken({ authId: newAuth.id });
 
       //create user or compnay table
       type === "USER"
@@ -52,13 +56,18 @@ const login = async data => {
         password,
         userExist.password
       );
-      const token = await jwt.sign(
+      //asign token
+      /* const token = await jwt.sign(
         { authId: userExist.id, autType: userExist.type },
         jwtSecretKey,
         {
           expiresIn: TokenExpDate
         }
-      );
+      ); */
+      const token = await signNewToken({
+        authId: userExist.id,
+        autType: userExist.type
+      });
       if (correctPassword) {
         const { type } = userExist;
         let profile = await authServices.login(userExist.id);
@@ -74,7 +83,31 @@ const login = async data => {
   }
 };
 
+const fetchAuthData = async token => {
+  try {
+    let valid = await verifyToken(token);
+    // if the token is valid without err message or err name
+    if (!valid.name) {
+      token = await signNewToken({
+        authId: valid.authId,
+        autType: valid.autType
+      });
+      //get type from token
+      const type = valid.autType;
+      let profile = await authServices.login(valid.authId);
+      let profileDetails =
+        (await companyServices.getCompanyDetails(valid.authId)) ||
+        (await resumeServices.getUserResumeDetails(profile.id));
+
+      return { type, token, profile, profileDetails };
+    }
+  } catch (err) {
+    console.log("fetchAuthData operation error ", err);
+  }
+};
+
 module.exports = {
   signUp,
-  login
+  login,
+  fetchAuthData
 };

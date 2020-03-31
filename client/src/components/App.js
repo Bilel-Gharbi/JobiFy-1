@@ -3,6 +3,7 @@ import "./App.css";
 
 import { Provider } from "react-redux";
 import store from "../store/index";
+import { fetechJobs } from "../actions/jobsAction";
 
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Header from "./header-component/Header";
@@ -25,26 +26,35 @@ const DashBoardPage = React.lazy(() =>
   import("../pages/DashBoardPage-component/DashBoardPage")
 );
 
-function App() {
-  return (
-    <Provider store={store}>
-      <Router>
-        <Header />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Switch>
-            <div className="mainContainer">
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/auth" component={AuthPage} />
-              <Route exact path="/info" component={InfoPage} />
-              <Route exact path="/profile" component={ProfilePage} />
-              <Route exact path="/dashboard" component={DashBoardPage} />
-              <Route exact path="/jobs" component={JobPage} />
-            </div>
-          </Switch>
-        </Suspense>
-      </Router>
-    </Provider>
-  );
+class App extends React.Component {
+  componentDidMount() {
+    let token = localStorage.getItem("token");
+    store.dispatch(fetechJobs());
+  }
+
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <Header />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <>
+                <div className="mainContainer">
+                  <Route exact path="/" component={HomePage} />
+                  <Route exact path="/auth" component={AuthPage} />
+                  <Route exact path="/info" component={InfoPage} />
+                  <Route exact path="/profile" component={ProfilePage} />
+                  <Route exact path="/dashboard" component={DashBoardPage} />
+                  <Route exact path="/jobs" component={JobPage} />
+                </div>
+              </>
+            </Switch>
+          </Suspense>
+        </Router>
+      </Provider>
+    );
+  }
 }
 
 export default App;

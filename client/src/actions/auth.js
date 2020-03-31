@@ -15,13 +15,19 @@ import {
 import { RETURN_ERRORS, CLEAR_ERRORS } from "./type";
 
 //Resume action
-import { GET_RESUME } from "./type";
 import {
   SET_USER_PROFILE,
   CLEAR_USER_PROFILE,
   SET_COMPANY_PROFILE,
   CLEAR_COMPANY_PROFILE
 } from "./type";
+
+/* export const checkValidToken = token =>  {
+  try {
+  } catch (err) {
+    console.log(err);
+  }
+}; */
 
 export const login = obj => async dispatch => {
   try {

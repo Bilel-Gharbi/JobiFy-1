@@ -24,14 +24,10 @@ const JobDescription = ({ jobDetails }) => {
           </div>
           <div className="btnDiv">
             <div>
-              <a href="#" className="saveButton">
-                save me
-              </a>
+              <a className="saveButton">save me</a>
             </div>
             <div>
-              <a href="#" className="saveButton">
-                Apply
-              </a>
+              <a className="saveButton">Apply</a>
             </div>
           </div>
         </div>
