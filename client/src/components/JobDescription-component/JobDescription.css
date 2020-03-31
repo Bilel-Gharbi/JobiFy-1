@@ -8,7 +8,10 @@
   grid-gap: 3px;
 }
 
-.header-job-description {
+.header-job-description,
+.content-job-comapny-description,
+.content-job-description,
+.footer-job-description {
   background-color: wheat;
   margin: 3px 5px;
   padding: 10px;
@@ -44,18 +47,6 @@
   display: inline-flex;
   padding: 3px;
   align-items: center;
-}
-
-.content-job-description {
-  background-color: hotpink;
-  margin: 3px 5px;
-  padding: 10px;
-}
-
-.footer-job-description {
-  background-color: hotpink;
-  margin: 3px 5px;
-  padding: 10px;
 }
 
 .saveButton {

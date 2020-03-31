@@ -46,7 +46,7 @@ const JobDescription = ({ jobDetails }) => {
           </div>
         </div>
       </div>
-      <div className="content-job-comapny- description">
+      <div className="content-job-comapny-description">
         <h5>company info</h5>
         <li>company info1</li>
         <li>company info1</li>
