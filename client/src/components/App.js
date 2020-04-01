@@ -3,7 +3,7 @@ import "./App.css";
 
 import { Provider } from "react-redux";
 import store from "../store/index";
-import { fetechJobs } from "../actions/jobsAction";
+import { fetechUserData } from "../actions/auth";
 
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Header from "./header-component/Header";
@@ -28,8 +28,10 @@ const DashBoardPage = React.lazy(() =>
 
 class App extends React.Component {
   componentDidMount() {
-    let token = localStorage.getItem("token");
-    store.dispatch(fetechJobs());
+    let token = store.getState().auth.token;
+    if (token) {
+      store.dispatch(fetechUserData(token));
+    }
   }
 
   render() {

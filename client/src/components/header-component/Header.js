@@ -10,17 +10,28 @@ class Header extends Component {
     this.props.logout();
     this.props.history.push("/home");
   };
-  renderProfileTag = () => {
-    const { isLoged, profile } = this.props.auth;
+  renderProfileTag() {
+    const { isLoged, userType } = this.props.auth;
+    const { user } = this.props.userProfile;
+    const { company } = this.props.companyProfile;
+
     if (isLoged) {
+      if (userType === "USER") {
+        return (
+          <Link to="/profile" href="#">
+            <i className="fa fa-fw fa-user" />
+            {user ? user.firstName : null}
+          </Link>
+        );
+      }
       return (
-        <Link to="/profile" href="#">
+        <Link to="/dashboard" href="#">
           <i className="fa fa-fw fa-user" />
-          {profile.firstName}
+          {company ? company.companyName : null}
         </Link>
       );
     }
-  };
+  }
 
   renderLogoutBtn = () => {
     const { isLoged } = this.props.auth;
@@ -39,6 +50,7 @@ class Header extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className="navbar">
         <Link to="/home" className="active" href="#">
@@ -58,7 +70,9 @@ class Header extends Component {
 }
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    userProfile: state.userProfile,
+    companyProfile: state.companyProfile
   };
 };
 export default withRouter(connect(mapStateToProps, { logout })(Header));

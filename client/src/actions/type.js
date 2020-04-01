@@ -7,6 +7,7 @@ export const GET_RESUME = "GET_RESUME";
 export const LOGIN = "LOGIN";
 export const SIGNUP = "SIGNUP";
 export const LOGOUT = "LOGOUT";
+export const FETCH_USER_DATA = "FETCH_USER_DATA";
 
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const LOGIN_FAIL = "LOGIN_FAIL";

@@ -8,7 +8,8 @@ import {
   LOGIN_FAIL,
   SIGNUP_SUCESS,
   SIGNUP_FAIL,
-  LOGOUT
+  LOGOUT,
+  FETCH_USER_DATA
 } from "./type";
 
 //error actions
@@ -21,13 +22,6 @@ import {
   SET_COMPANY_PROFILE,
   CLEAR_COMPANY_PROFILE
 } from "./type";
-
-/* export const checkValidToken = token =>  {
-  try {
-  } catch (err) {
-    console.log(err);
-  }
-}; */
 
 export const login = obj => async dispatch => {
   try {
@@ -61,9 +55,9 @@ export const login = obj => async dispatch => {
       payload: {
         isLoged: true,
         token: response.data.result.token,
-        userType: response.data.result.type,
-        profile: response.data.result.profile,
-        userData: response.data.result.profileDetails
+        userType: response.data.result.type
+        /*  profile: response.data.result.profile,
+        userData: response.data.result.profileDetails */
       }
     });
   } catch (err) {
@@ -140,6 +134,52 @@ export const logout = () => async (dispatch, getState) => {
       payload: {
         id: "logout",
         message: "logout problem"
+      }
+    });
+  }
+};
+
+export const fetechUserData = token => async dispatch => {
+  try {
+    authAPI.defaults.headers.common["x-auth-token"] = token;
+    let response = await authAPI.get("login");
+
+    dispatch({
+      type: CLEAR_ERRORS
+    });
+
+    //dispatch action login_sucess in case no error
+    dispatch({
+      type: LOGIN_SUCESS,
+      payload: response.data.result.token
+    });
+
+    //disptach resume action or company action
+    response.data.result.type === "USER"
+      ? dispatch({
+          type: SET_USER_PROFILE,
+          payload: response.data.result.profileDetails
+        })
+      : dispatch({
+          type: SET_COMPANY_PROFILE,
+          payload: response.data.result.profileDetails
+        });
+
+    return dispatch({
+      type: FETCH_USER_DATA,
+      payload: {
+        isLoged: true,
+        token: response.data.result.token,
+        userType: response.data.result.type
+        /* profile: response.data.result.profile,
+        userData: response.data.result.profileDetails */
+      }
+    });
+  } catch (err) {
+    return dispatch({
+      type: RETURN_ERRORS,
+      payload: {
+        id: "token login err"
       }
     });
   }

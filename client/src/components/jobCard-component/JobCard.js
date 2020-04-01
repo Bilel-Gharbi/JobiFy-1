@@ -14,7 +14,7 @@ class JobCard extends Component {
     autorized: true,
     match: null
   };
-  componentWillReceiveProps() {
+  componentDidMount() {
     let check = checkBeforApply(this.props.job.id, this.props.applyedJob);
     let match = jobMatch(this.props.resumeSkills, this.props.job.jobSkills);
     this.setState({ autorized: !check, disable: !check, match });
