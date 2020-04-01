@@ -1,10 +1,16 @@
 import React, { Suspense } from "react";
 import "./App.css";
 
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
 import store from "../store/index";
+import { fetechUserData } from "../actions/auth";
 
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  BrowserRouter as Router,
+  Redirect
+} from "react-router-dom";
 import Header from "./header-component/Header";
 
 //pages
@@ -25,26 +31,50 @@ const DashBoardPage = React.lazy(() =>
   import("../pages/DashBoardPage-component/DashBoardPage")
 );
 
-function App() {
-  return (
-    <Provider store={store}>
+class App extends React.Component {
+  state = {
+    isLoged: null
+  };
+  componentDidMount() {
+    let token = store.getState().auth.token;
+    if (token) {
+      store.dispatch(fetechUserData(token));
+    }
+  }
+  componentWillReceiveProps() {
+    this.setState({ isLoged: this.props.auth.isLoged });
+  }
+
+  render() {
+    return (
       <Router>
         <Header />
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <div className="mainContainer">
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/auth" component={AuthPage} />
-              <Route exact path="/info" component={InfoPage} />
-              <Route exact path="/profile" component={ProfilePage} />
-              <Route exact path="/dashboard" component={DashBoardPage} />
-              <Route exact path="/jobs" component={JobPage} />
-            </div>
+            <>
+              <div className="mainContainer">
+                <Route exact path="/" component={HomePage} />
+                <Route
+                  exact
+                  path="/auth"
+                  render={() =>
+                    this.state.isLoged ? <Redirect to="/" /> : <AuthPage />
+                  }
+                />
+                <Route exact path="/info" component={InfoPage} />
+                <Route exact path="/profile" component={ProfilePage} />
+                <Route exact path="/dashboard" component={DashBoardPage} />
+                <Route exact path="/jobs" component={JobPage} />
+              </div>
+            </>
           </Switch>
         </Suspense>
       </Router>
-    </Provider>
-  );
+    );
+  }
 }
+const mapStateToProps = state => {
+  return state;
+};
 
-export default App;
+export default connect(mapStateToProps, null)(App);

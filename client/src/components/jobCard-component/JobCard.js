@@ -6,15 +6,15 @@ import { applyToJob, fetechJobDetails } from "../../actions/jobsAction";
 
 import { checkBeforApply, jobMatch } from "../../helper";
 
-import Modal from "../modal-component/Modal";
-import JobSkillsList from "../JobSkillsList - component/JobSkillsList";
+/* import Modal from "../modal-component/Modal";
+import JobSkillsList from "../JobSkillsList - component/JobSkillsList"; */
 class JobCard extends Component {
   state = {
     disable: false,
     autorized: true,
     match: null
   };
-  componentWillReceiveProps() {
+  componentDidMount() {
     let check = checkBeforApply(this.props.job.id, this.props.applyedJob);
     let match = jobMatch(this.props.resumeSkills, this.props.job.jobSkills);
     this.setState({ autorized: !check, disable: !check, match });
@@ -35,7 +35,7 @@ class JobCard extends Component {
   }
 
   render() {
-    const { jobPosition, Company, jobSkills } = this.props.job;
+    const { jobPosition, Company } = this.props.job;
     return (
       <div
         className="jobcart"
@@ -45,7 +45,7 @@ class JobCard extends Component {
         <div className="header">
           <div className="info">
             <div className="companyImg">
-              <img src={Company.logo} />
+              <img src={Company.logo} alt="company logo" />
             </div>
             <div className="offerInfo">
               <span className="jobPostion">{jobPosition}</span>
