@@ -1,0 +1,32 @@
+.default-btn {
+  box-shadow: inset 0px 0px 0px 0px #bbdaf7;
+  background: linear-gradient(to bottom, #79bbff 5%, #0779eb 100%);
+  background-color: #79bbff;
+  border: 1px solid #84bbf3;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #528ecc;
+}
+.default-btn:hover {
+  background: linear-gradient(to bottom, #0779eb 5%, #79bbff 100%);
+  background-color: #0779eb;
+}
+.default-btn:active {
+  position: relative;
+  top: 1px;
+}
+
+.default-btn > div {
+  width: 100%;
+  padding: 3px;
+  display: inline-block;
+}
+
+.default-btn > div i {
+  margin: 0 3px;
+}
