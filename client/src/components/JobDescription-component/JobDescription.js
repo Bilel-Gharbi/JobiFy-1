@@ -1,5 +1,6 @@
 import React from "react";
 import JobSkillsList from "../JobSkillsList - component/JobSkillsList";
+import Button from "../common/Button-component/Button";
 import "./JobDescription.css";
 
 const JobDescription = ({ jobDetails }) => {
@@ -24,10 +25,12 @@ const JobDescription = ({ jobDetails }) => {
           </div>
           <div className="btnDiv">
             <div>
-              <a className="saveButton">save me</a>
+              <Button>Apply </Button>
+              {/*  <a className="saveButton">save me</a> */}
             </div>
             <div>
-              <a className="saveButton">Apply</a>
+              <Button>Save Me </Button>
+              {/*  <a className="saveButton">Apply</a> */}
             </div>
           </div>
         </div>
