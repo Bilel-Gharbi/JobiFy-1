@@ -1,32 +1,51 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import Modal from "../../components/common/modal-component/Modal";
+//import Modal from "../../components/common/modal-component/Modal";
+import ProfileResumeMenu from "../../components/ProfileResumeMenu-component/ProfileResumeMenu";
+import InputText from "../../components/common/InputText-component/inputText";
 
 class ProfilePage extends Component {
   state = {
     count: 0,
-    disable: true
+    resumeSections: []
   };
 
+  componentDidMount() {
+    this.setState({
+      resumeSections: Object.keys(this.props.profile.resume).slice(1)
+    });
+  }
   handelChange = () => {
     this.setState({ count: this.state.count + 1 });
     console.log(this.state.count);
   };
+
   render() {
     return (
       <div>
-        profile Page
+        <div>profile Page</div>
         <div>
+          <ProfileResumeMenu menu={this.state.resumeSections} />
+        </div>
+        {/* <div>
           <Modal
             modalName="Add Experience"
             btnOneText="cancel"
             btnTwoText="Save Experience"
             action={this.handelChange}
           />
-        </div>
+        </div> */}
+        <InputText label="input" />
       </div>
     );
   }
 }
 
-export default ProfilePage;
+const mapStateToProps = state => {
+  return {
+    profile: state.userProfile
+  };
+};
+
+export default connect(mapStateToProps, null)(ProfilePage);

@@ -25,12 +25,10 @@ const JobDescription = ({ jobDetails }) => {
           </div>
           <div className="btnDiv">
             <div>
-              <Button>Apply </Button>
-              {/*  <a className="saveButton">save me</a> */}
+              <Button>Apply</Button>
             </div>
             <div>
-              <Button>Save Me </Button>
-              {/*  <a className="saveButton">Apply</a> */}
+              <Button>Save Me</Button>
             </div>
           </div>
         </div>
