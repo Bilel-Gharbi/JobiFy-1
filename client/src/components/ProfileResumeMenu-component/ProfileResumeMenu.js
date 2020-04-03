@@ -8,7 +8,13 @@ const ProfileResumeMenu = ({ menu }) => {
       profile Menu
       {menu &&
         menu.map(element => {
-          return <Modal key={element} modalName={`Add new ${element}`} />;
+          return (
+            <Modal
+              key={element}
+              modalName={`Add new ${element}`}
+              body={<div>hello</div>}
+            />
+          );
         })}
     </div>
   );
