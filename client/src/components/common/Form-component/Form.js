@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Button from "../Button-component/Button";
 import InputText from "../InputText-component/inputText";
 
+import "./Form.css";
 class Form extends Component {
   state = {};
 
@@ -34,18 +35,17 @@ class Form extends Component {
       this.state &&
       Object.keys(this.state).map((el, i) => {
         return (
-          <div key={el}>
-            <InputText
-              ref={this.FormRef}
-              id={el}
-              name={el}
-              label={el}
-              placeholder={`${el} placeholder`}
-              onChange={this.handelInputChange}
-              value={this.state[el]}
-              type={this.props.types[i]}
-            />
-          </div>
+          <InputText
+            key={el}
+            ref={this.FormRef}
+            id={el}
+            name={el}
+            label={el}
+            placeholder={`${el} placeholder`}
+            onChange={this.handelInputChange}
+            value={this.state[el]}
+            type={this.props.types[i]}
+          />
         );
       })
     );
@@ -63,9 +63,9 @@ class Form extends Component {
     const { withSubmitButton } = this.props;
 
     return (
-      <form onSubmit={this.onHandelSubmit}>
-        {<div>{this.initInputForm()}</div>}
-        <div> {this.props.children} </div>
+      <form className="customform" onSubmit={this.onHandelSubmit}>
+        {<>{this.initInputForm()}</>}
+        <> {this.props.children} </>
         {withSubmitButton ? <Button type="submit">Form Button</Button> : null}
       </form>
     );
