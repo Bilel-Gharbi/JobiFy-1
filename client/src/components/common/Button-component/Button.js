@@ -8,7 +8,7 @@ const Button = props => {
   return (
     <button className={`${className} default-btn`} {...otherProps}>
       <div>
-        <i className={icon} />
+        {icon ? <i className={icon} /> : null}
         <a>{props.children}</a>
       </div>
     </button>

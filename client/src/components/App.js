@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import "./App.css";
 
-import { Provider, connect } from "react-redux";
+import { connect } from "react-redux";
 import store from "../store/index";
 import { fetechUserData } from "../actions/auth";
 
@@ -11,6 +11,7 @@ import {
   BrowserRouter as Router,
   Redirect
 } from "react-router-dom";
+
 import Header from "./header-component/Header";
 
 //pages
@@ -33,17 +34,19 @@ const DashBoardPage = React.lazy(() =>
 
 class App extends React.Component {
   state = {
-    isLoged: null
+    isLoged: this.props.auth.isLoged
   };
   componentDidMount() {
     let token = store.getState().auth.token;
     if (token) {
       store.dispatch(fetechUserData(token));
     }
+
+    console.log(this.props);
   }
-  componentWillReceiveProps() {
+  /* componentWillReceiveProps() {
     this.setState({ isLoged: this.props.auth.isLoged });
-  }
+  } */
 
   render() {
     return (

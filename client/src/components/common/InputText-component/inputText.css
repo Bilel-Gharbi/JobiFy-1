@@ -1,0 +1,30 @@
+.Input {
+  padding: 2px;
+  font-size: 15px;
+  border-width: 1px;
+  border-color: #cccccc;
+  background-color: #ffffff;
+  color: #000000;
+  border-style: solid;
+  border-radius: 0px;
+  /*  box-shadow: 0px 0px 5px rgba(82, 144, 255, 0.75); */
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.75);
+  margin: 3px 3px;
+  letter-spacing: 1px;
+  margin-inline-start: auto;
+  width: 300px;
+}
+.Input:focus {
+  outline: none;
+}
+
+.InputText {
+  display: flex;
+  align-items: center;
+}
+
+.InputText > label {
+  margin: 0 5px;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+}
