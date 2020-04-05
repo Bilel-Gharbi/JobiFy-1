@@ -3,6 +3,8 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 import Button from "../Button-component/Button";
 
+import Form from "../Form-component/Form";
+
 const ModalComponent = props => {
   const {
     className,
@@ -21,7 +23,14 @@ const ModalComponent = props => {
     setModal(!modal);
   };
   const executeActionAndToggle = () => {
-    action();
+    //get the form state from props or children using ref
+    let stateFormValue;
+    props.body
+      ? (stateFormValue = props.body.ref.current.state)
+      : (stateFormValue = props.children.ref.current.state);
+
+    /*  action(); */
+    console.log(stateFormValue);
     toggle();
   };
 
@@ -36,8 +45,8 @@ const ModalComponent = props => {
         {modalName}
       </Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}> {title}</ModalHeader>
-        <ModalBody>{body}</ModalBody>
+        <ModalHeader toggle={toggle}> {modalName}</ModalHeader>
+        <ModalBody>{body || props.children}</ModalBody>
         <ModalFooter>
           <Button className={className} onClick={toggle}>
             {btnOneText || "cancel"}
