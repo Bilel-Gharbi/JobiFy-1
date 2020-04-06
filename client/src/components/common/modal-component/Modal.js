@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 import Button from "../Button-component/Button";
+import { addExperience } from "../../../actions/resumeAction";
 
-import Form from "../Form-component/Form";
-
+import store from "../../../store";
 const ModalComponent = props => {
   const {
     className,
@@ -31,6 +32,8 @@ const ModalComponent = props => {
 
     /*  action(); */
     console.log(stateFormValue);
+    //dispatch action
+    store.dispatch(props.action({ ...stateFormValue }));
     toggle();
   };
 
@@ -60,4 +63,4 @@ const ModalComponent = props => {
   );
 };
 
-export default ModalComponent;
+export default connect(null, { addExperience })(ModalComponent);

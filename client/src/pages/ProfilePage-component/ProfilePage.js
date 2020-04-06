@@ -7,7 +7,8 @@ class ProfilePage extends Component {
   renderProfileMenu = () => {
     //TODO: check profile type before for User or company
     if (this.props.profile.resume) {
-      const resumeSections = Object.keys(this.props.profile.resume).slice(1);
+      const arrMenuElement = Object.keys(this.props.profile.resume);
+      const resumeSections = arrMenuElement.slice(1, arrMenuElement.length - 1);
       return <ProfileResumeMenu menu={resumeSections} />;
     }
     return <h3> loading ... </h3>;
