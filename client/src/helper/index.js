@@ -1,6 +1,8 @@
 import * as _ from "underscore";
 
 export const checkBeforApply = (jobId, applyedJobTab) => {
+  /*  console.log(jobId);
+  console.log(applyedJobTab); */
   return _.any(applyedJobTab, { JobOfferId: jobId });
 };
 

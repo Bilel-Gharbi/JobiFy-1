@@ -3,6 +3,16 @@ import React, { useRef } from "react";
 import Modal from "../common/modal-component/Modal";
 
 import Form from "../../components/common/Form-component/Form";
+import {
+  addExperience,
+  addEducation,
+  addSkill,
+  addCertificate,
+  addProject,
+  addLanguage,
+  addAward,
+  newInterest
+} from "../../actions/resumeAction";
 
 const ProfileResumeMenu = ({ menu }) => {
   const formRef = useRef();
@@ -19,19 +29,21 @@ const ProfileResumeMenu = ({ menu }) => {
         position: "",
         task: ""
       },
-      types: ["date", "date", "checkbox", "text", "text", "text"]
+      types: ["date", "date", "checkbox", "text", "text", "text"],
+      action: addExperience
     },
     //education
     {
       formState: {
         diplomaMajor: "",
         diplomaType: "",
-        StartDate: "",
-        EndDate: "",
+        startDate: "",
+        endDate: "",
         establishment: "",
         description: ""
       },
-      types: ["text", "text", "date", "date", "text", "text"]
+      types: ["text", "text", "date", "date", "text", "text"],
+      action: addEducation
     },
     //new skills
     {
@@ -39,7 +51,8 @@ const ProfileResumeMenu = ({ menu }) => {
         name: "",
         level: ""
       },
-      types: ["text", "text"]
+      types: ["text", "text"],
+      action: addSkill
     },
     //new certif
     {
@@ -48,7 +61,8 @@ const ProfileResumeMenu = ({ menu }) => {
         Date: "",
         organization: ""
       },
-      types: ["text", "date", "text"]
+      types: ["text", "date", "text"],
+      action: addCertificate
     },
     // project
     {
@@ -58,7 +72,8 @@ const ProfileResumeMenu = ({ menu }) => {
         technologies: "",
         link: ""
       },
-      types: ["text", "text", "text", "text"]
+      types: ["text", "text", "text", "text"],
+      action: addProject
     },
     // language
     {
@@ -66,7 +81,8 @@ const ProfileResumeMenu = ({ menu }) => {
         name: "",
         level: ""
       },
-      types: ["text", "text"]
+      types: ["text", "text"],
+      action: addLanguage
     },
     // award
     {
@@ -75,14 +91,16 @@ const ProfileResumeMenu = ({ menu }) => {
         description: "",
         date: ""
       },
-      types: ["text", "text", "date"]
+      types: ["text", "text", "date"],
+      action: addAward
     },
     // interest
     {
       formState: {
         name: ""
       },
-      types: ["text"]
+      types: ["text"],
+      action: newInterest
     }
   ];
 
@@ -95,6 +113,7 @@ const ProfileResumeMenu = ({ menu }) => {
               key={element}
               modalName={`Add new ${element}`}
               body={<Form ref={formRef} {...formProps[i]} />}
+              action={formProps[i].action}
             >
               {/* <Form
                 ref={formRef}

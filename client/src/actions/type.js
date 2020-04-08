@@ -30,3 +30,13 @@ export const CLEAR_COMPANY_PROFILE = "CLEAR_COMPANY_PROFILE";
 // job_detais
 export const FETCH_JOB_DETAILS = "FETCH_JOB_DETAILS";
 export const SET_DEFAULT_JOB_DETAILS = "SET_DEFAULT_JOB_DETAILS";
+
+// Resume_Actions
+export const ADD_EXPERIENCE = "ADD_EXPERIENCE";
+export const ADD_EDUCATION = "ADD_EDUCATION";
+export const ADD_PROJECT = "ADD_PROJECT";
+export const ADD_LANGUAGE = "ADD_LANGUAGE";
+export const ADD_SKILL = "ADD_SKILL";
+export const ADD_INTEREST = "ADD_INTEREST";
+export const ADD_CERTIFICATE = "ADD_CERTIFICATE";
+export const ADD_AWARD = "ADD_AWARD";

@@ -41,7 +41,6 @@ class App extends React.Component {
     if (token) {
       store.dispatch(fetechUserData(token));
     }
-
     console.log(this.props);
   }
   /* componentWillReceiveProps() {
