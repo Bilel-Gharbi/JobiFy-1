@@ -42,7 +42,7 @@ export const fetechJobDetails = job => dispatch => {
 export const applyToJob = (jobId, resumeId) => async dispatch => {
   console.log(" applyToJob  action fired ", jobId, resumeId);
   try {
-    await JobsAPI.post(`apply/${jobId}/${resumeId}`);
+    let response = await JobsAPI.post(`apply/${jobId}/${resumeId}`);
     //let payload = response.data.data;
     // clear error
     dispatch({
@@ -50,7 +50,8 @@ export const applyToJob = (jobId, resumeId) => async dispatch => {
     });
     //dispatch apply to job
     return dispatch({
-      type: APPLY_JOB
+      type: APPLY_JOB,
+      payload: response.data.applyToJob
     });
   } catch (err) {
     //error
