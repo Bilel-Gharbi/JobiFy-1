@@ -14,11 +14,16 @@ class ProfilePage extends Component {
     return <h3> loading ... </h3>;
   };
 
+  renderResume = () => {
+    return <div>User Resume</div>;
+  };
+
   render() {
     return (
       <div>
         <div>profile Page</div>
         {this.renderProfileMenu()}
+        {this.renderResume()}
       </div>
     );
   }

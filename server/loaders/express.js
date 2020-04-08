@@ -22,7 +22,7 @@ module.exports = async app => {
   // user route API
   app.use("/api/user", API.userRouter);
   // resume route API
-  app.use("/api/resume", API.resumeRouter);
+  app.use("/api/resume", checkToken, API.resumeRouter);
 
   // company Route API
   app.use("/api/company", API.companyRouter);

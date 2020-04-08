@@ -82,6 +82,15 @@ const userProfileReducer = (state = initialState, action) => {
           interests: [...state.resume.interests, action.payload]
         }
       };
+
+    case "APPLY_JOB":
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          applyedJob: [...state.resume.applyedJob, action.payload]
+        }
+      };
     default:
       return state;
   }
