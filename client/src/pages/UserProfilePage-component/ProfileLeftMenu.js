@@ -6,7 +6,7 @@ import MenuProfileList from "./MenuProfileList";
 class ProfileLeftMenu extends Component {
   state = { list: [] };
 
-  componentDidMount() {
+  componentWillMount() {
     this.setState({
       list: [
         {

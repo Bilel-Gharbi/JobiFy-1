@@ -15,6 +15,8 @@ import {
 /* import Header from "./header-component/Header";
 import NewHeader from "./test-component/NewHeader"; */
 
+import SpinnerLoader from "../components/common/Spinner-component";
+
 //pages
 const HomePage = React.lazy(() =>
   import("../pages/HomePage-component/HomePage")
@@ -43,7 +45,8 @@ class App extends React.Component {
   state = {
     isLoged: this.props.auth.isLoged,
   };
-  componentDidMount() {
+  //changed from didmount to willMount
+  componentWillMount() {
     let token = store.getState().auth.token;
     if (token) {
       store.dispatch(fetechUserData(token));
@@ -57,7 +60,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<SpinnerLoader />}>
           <Header />
           <NewHeader />
           <Switch>

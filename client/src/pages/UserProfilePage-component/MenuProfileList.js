@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import MenuSectionElement from "./MenuSectionElement";
-
 import { connect } from "react-redux";
 import { setProfileSectionToRender } from "../../actions/ui";
+
+const MenuSectionElement = React.lazy(() => import("./MenuSectionElement"));
+//import MenuSectionElement from "./MenuSectionElement";
 
 class MenuProfileList extends Component {
   constructor(props) {

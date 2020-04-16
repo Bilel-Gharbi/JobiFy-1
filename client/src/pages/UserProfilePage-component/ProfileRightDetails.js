@@ -1,15 +1,48 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import PersonalInformationCart from "./PersonalInformationCart";
-import EducationCartList from "../../components/EducationsCartList-component/EducationCartList";
-import LanguagesCartList from "../../components/LanguagesCartList-compoenent/LanguagesCartList";
-import ExperienceCartList from "../../components/ExperiencesCartLIst-component/ExperienceCartList";
-import ProjectCartList from "../../components/ProjectCardList-component/ProjectCartList";
-import AwardCartList from "../../components/AwardCartLIst-component/AwardCartList";
-import SkillsCartList from "../../components/SkillsCartList-component/SkillsCartList";
-import InterestCartList from "../../components/InterestsCartLIst-component/InterestCartList";
-import CertificationCartList from "../../components/CertificationsCartLIst-component/CertificationsCartList";
+const PersonalInformationCart = React.lazy(() =>
+  import("./PersonalInformationCart")
+);
+const EducationCartList = React.lazy(() =>
+  import("../../components/EducationsCartList-component/EducationCartList")
+);
+const LanguagesCartList = React.lazy(() =>
+  import("../../components/LanguagesCartList-compoenent/LanguagesCartList")
+);
+const ExperienceCartList = React.lazy(() =>
+  import("../../components/ExperiencesCartLIst-component/ExperienceCartList")
+);
+const ProjectCartList = React.lazy(() =>
+  import("../../components/ProjectCardList-component/ProjectCartList")
+);
+const AwardCartList = React.lazy(() =>
+  import("../../components/AwardCartLIst-component/AwardCartList")
+);
+
+const SkillsCartList = React.lazy(() =>
+  import("../../components/SkillsCartList-component/SkillsCartList")
+);
+
+const InterestCartList = React.lazy(() =>
+  import("../../components/InterestsCartLIst-component/InterestCartList")
+);
+
+const CertificationCartList = React.lazy(() =>
+  import(
+    "../../components/CertificationsCartLIst-component/CertificationsCartList"
+  )
+);
+
+//import PersonalInformationCart from "./PersonalInformationCart";
+//import EducationCartList from "../../components/EducationsCartList-component/EducationCartList";
+//import LanguagesCartList from "../../components/LanguagesCartList-compoenent/LanguagesCartList";
+//import ExperienceCartList from "../../components/ExperiencesCartLIst-component/ExperienceCartList";
+//import ProjectCartList from "../../components/ProjectCardList-component/ProjectCartList";
+//import AwardCartList from "../../components/AwardCartLIst-component/AwardCartList";
+//import SkillsCartList from "../../components/SkillsCartList-component/SkillsCartList";
+//import InterestCartList from "../../components/InterestsCartLIst-component/InterestCartList";
+//import CertificationCartList from "../../components/CertificationsCartLIst-component/CertificationsCartList";
 
 class ProfileRightDetails extends Component {
   renderContent = () => {
@@ -36,8 +69,6 @@ class ProfileRightDetails extends Component {
     }
   };
   render() {
-    console.log(this.props);
-
     return (
       <div className="kt-grid__item kt-grid__item--fluid kt-app__content">
         <div className="row">
@@ -48,9 +79,11 @@ class ProfileRightDetails extends Component {
                   <h3 className="kt-portlet__head-title">
                     {this.props.selectedMenuSection || "Personal Information"}
                     <small>
-                      update your
-                      {this.props.selectedMenuSection ||
-                        " personal information"}
+                      {"update your " +
+                        (this.props.selectedMenuSection ||
+                          "personal information")}
+                      {/*  {this.props.selectedMenuSection ||
+                        " personal information"} */}
                     </small>
                   </h3>
                 </div>
