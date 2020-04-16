@@ -35,12 +35,12 @@ class JobPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     jobs: state.jobs.jobs,
     isLoged: state.auth.isLoged,
     userProfile: state.userProfile,
-    jobDetails: state.jobs.jobDetails
+    jobDetails: state.jobs.jobDetails,
   };
 };
 
