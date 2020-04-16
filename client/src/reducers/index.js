@@ -6,6 +6,7 @@ import authReducer from "./authReducer";
 import errorReducer from "./errorReducer";
 import companyProfileReducer from "./companyProfileReducer";
 import userProfileReducer from "./userProfileReducer";
+import uiReducer from "./uiReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
   userProfile: userProfileReducer,
   companyProfile: companyProfileReducer,
   resume: resumeReducer,
-  error: errorReducer
+  error: errorReducer,
+  UI: uiReducer,
 });

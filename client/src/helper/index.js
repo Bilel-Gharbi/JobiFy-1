@@ -23,3 +23,11 @@ export const jobMatch = (resumeSkillsTab, jobOfferSkillsTab) => {
     (_.intersection(resumeSkills, jobSkills).length / jobSkills.length) * 100
   );
 };
+
+export const technlogiesTabGenerator = (technologiesString) => {
+  let technologiesTab = technologiesString
+    .replace(/[^A-Z0-9+]+/gi, "_")
+    .split("_");
+
+  return technologiesTab;
+};

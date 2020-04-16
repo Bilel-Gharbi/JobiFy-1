@@ -28,7 +28,7 @@ class AuthPage extends Component {
     );
   }
 }
-const mapStateToPropos = state => {
+const mapStateToPropos = (state) => {
   return { auth: state.auth, error: state.error };
 };
 export default withRouter(

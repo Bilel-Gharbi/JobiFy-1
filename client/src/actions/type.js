@@ -40,3 +40,6 @@ export const ADD_SKILL = "ADD_SKILL";
 export const ADD_INTEREST = "ADD_INTEREST";
 export const ADD_CERTIFICATE = "ADD_CERTIFICATE";
 export const ADD_AWARD = "ADD_AWARD";
+
+//UI_Actions
+export const SET_PROFILE_SECTION = "SET_PROFILE_SECTION";

@@ -9,10 +9,11 @@ import {
   Route,
   Switch,
   BrowserRouter as Router,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
-import Header from "./header-component/Header";
+/* import Header from "./header-component/Header";
+import NewHeader from "./test-component/NewHeader"; */
 
 //pages
 const HomePage = React.lazy(() =>
@@ -25,16 +26,22 @@ const AuthPage = React.lazy(() =>
 const InfoPage = React.lazy(() =>
   import("../pages/InfoPage-component/InfoPage")
 );
-const ProfilePage = React.lazy(() =>
-  import("../pages/ProfilePage-component/ProfilePage")
+const UserProfilePage = React.lazy(() =>
+  import("../pages/UserProfilePage-component")
 );
 const DashBoardPage = React.lazy(() =>
   import("../pages/DashBoardPage-component/DashBoardPage")
 );
 
+const Header = React.lazy(() => import("./header-component/Header"));
+
+const NewHeader = React.lazy(() =>
+  import("../components/test-component/NewHeader")
+);
+
 class App extends React.Component {
   state = {
-    isLoged: this.props.auth.isLoged
+    isLoged: this.props.auth.isLoged,
   };
   componentDidMount() {
     let token = store.getState().auth.token;
@@ -50,8 +57,9 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Header />
         <Suspense fallback={<div>Loading...</div>}>
+          <Header />
+          <NewHeader />
           <Switch>
             <>
               <div className="mainContainer">
@@ -64,7 +72,7 @@ class App extends React.Component {
                   }
                 />
                 <Route exact path="/info" component={InfoPage} />
-                <Route exact path="/profile" component={ProfilePage} />
+                <Route exact path="/profile" component={UserProfilePage} />
                 <Route exact path="/dashboard" component={DashBoardPage} />
                 <Route exact path="/jobs" component={JobPage} />
               </div>
@@ -75,7 +83,7 @@ class App extends React.Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return state;
 };
 
