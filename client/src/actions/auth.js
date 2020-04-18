@@ -9,7 +9,7 @@ import {
   SIGNUP_SUCESS,
   SIGNUP_FAIL,
   LOGOUT,
-  FETCH_USER_DATA
+  FETCH_USER_DATA,
 } from "./type";
 
 //error actions
@@ -20,45 +20,43 @@ import {
   SET_USER_PROFILE,
   CLEAR_USER_PROFILE,
   SET_COMPANY_PROFILE,
-  CLEAR_COMPANY_PROFILE
+  CLEAR_COMPANY_PROFILE,
 } from "./type";
 
-export const login = obj => async dispatch => {
+export const login = (obj) => async (dispatch) => {
   try {
     const response = await authAPI.post("/login", obj);
 
     //delete error
     dispatch({
-      type: CLEAR_ERRORS
-    });
-
-    //dispatch action login_sucess in case no error
-    dispatch({
-      type: LOGIN_SUCESS,
-      payload: response.data.result.token
+      type: CLEAR_ERRORS,
     });
 
     //disptach resume action or company action
     response.data.result.type === "USER"
       ? dispatch({
           type: SET_USER_PROFILE,
-          payload: response.data.result.profileDetails
+          payload: response.data.result.profileDetails,
         })
       : dispatch({
           type: SET_COMPANY_PROFILE,
-          payload: response.data.result.profileDetails
+          payload: response.data.result.profileDetails,
         });
-
+    //dispatch action login_sucess in case no error
+    dispatch({
+      type: LOGIN_SUCESS,
+      payload: response.data.result.token,
+    });
     //dispatch and return LOGIN action to set state
     return dispatch({
       type: LOGIN,
       payload: {
         isLoged: true,
         token: response.data.result.token,
-        userType: response.data.result.type
+        userType: response.data.result.type,
         /*  profile: response.data.result.profile,
         userData: response.data.result.profileDetails */
-      }
+      },
     });
   } catch (err) {
     // in case of Erro Dispatch and RETURN_ERROR action
@@ -67,26 +65,26 @@ export const login = obj => async dispatch => {
       payload: {
         id: "login",
         status: err.response.data.status,
-        message: err.response.data.err
-      }
+        message: err.response.data.err,
+      },
     });
   }
 };
 
 //FIXME:
-export const signup = data => async dispatch => {
+export const signup = (data) => async (dispatch) => {
   try {
     // try signup
     const response = await authAPI.post("/signup", data);
 
     // clear error
     dispatch({
-      type: CLEAR_ERRORS
+      type: CLEAR_ERRORS,
     });
     // if there is no error  disptach signup sucess
     dispatch({
       type: SIGNUP_SUCESS,
-      payload: response.data.result.token
+      payload: response.data.result.token,
     });
 
     // return dispatch SIGNUP action
@@ -97,8 +95,8 @@ export const signup = data => async dispatch => {
         token: response.data.result.token,
         userType: response.data.result.type,
         profile: response.data.result.profile,
-        userData: response.data.result.profileDetails
-      }
+        userData: response.data.result.profileDetails,
+      },
     });
   } catch (err) {
     //case signup fail dispatch RETURN_ERROR action to update the error state
@@ -107,8 +105,8 @@ export const signup = data => async dispatch => {
       payload: {
         id: "signup",
         status: err.response.data.status,
-        message: err.response.data.err
-      }
+        message: err.response.data.err,
+      },
     });
   }
 };
@@ -118,15 +116,15 @@ export const logout = () => async (dispatch, getState) => {
     //diapatch clear User or company
     getState().auth.userType === "USER"
       ? dispatch({
-          type: CLEAR_USER_PROFILE
+          type: CLEAR_USER_PROFILE,
         })
       : dispatch({
-          type: CLEAR_COMPANY_PROFILE
+          type: CLEAR_COMPANY_PROFILE,
         });
 
     //dipatch LOGOUT
     return dispatch({
-      type: LOGOUT
+      type: LOGOUT,
     });
   } catch (err) {
     //case signup fail
@@ -134,36 +132,36 @@ export const logout = () => async (dispatch, getState) => {
       type: RETURN_ERRORS,
       payload: {
         id: "logout",
-        message: "logout problem"
-      }
+        message: "logout problem",
+      },
     });
   }
 };
 
-export const fetechUserData = token => async dispatch => {
+export const fetechUserData = (token) => async (dispatch) => {
   try {
     authAPI.defaults.headers.common["x-auth-token"] = token;
     let response = await authAPI.get("login");
 
     dispatch({
-      type: CLEAR_ERRORS
+      type: CLEAR_ERRORS,
     });
 
     //dispatch action login_sucess in case no error
     dispatch({
       type: LOGIN_SUCESS,
-      payload: response.data.result.token
+      payload: response.data.result.token,
     });
 
     //disptach resume action or company action
     response.data.result.type === "USER"
       ? dispatch({
           type: SET_USER_PROFILE,
-          payload: response.data.result.profileDetails
+          payload: response.data.result.profileDetails,
         })
       : dispatch({
           type: SET_COMPANY_PROFILE,
-          payload: response.data.result.profileDetails
+          payload: response.data.result.profileDetails,
         });
 
     return dispatch({
@@ -171,17 +169,17 @@ export const fetechUserData = token => async dispatch => {
       payload: {
         isLoged: true,
         token: response.data.result.token,
-        userType: response.data.result.type
+        userType: response.data.result.type,
         /* profile: response.data.result.profile,
         userData: response.data.result.profileDetails */
-      }
+      },
     });
   } catch (err) {
     return dispatch({
       type: RETURN_ERRORS,
       payload: {
-        id: "token login err"
-      }
+        id: "token login err",
+      },
     });
   }
 };

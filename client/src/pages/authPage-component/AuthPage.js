@@ -9,16 +9,6 @@ import Login from "../../components/login-component/Login";
 import SignUp from "../../components/signUp-component/SignUp";
 
 class AuthPage extends Component {
-  componentDidMount() {
-    console.log(this.props);
-  }
-  componentDidUpdate() {
-    console.log(this.props);
-    if (this.props.auth.isLoged) {
-      this.props.history.push("/profile");
-    }
-  }
-
   render() {
     return (
       <div className="page-container">

@@ -1,6 +1,6 @@
 import React from "react";
 
-const PersonalInformationCart = (props) => {
+const PersonalInformationCart = ({ data }) => {
   return (
     <form className="kt-form kt-form--label-right">
       <div className="kt-portlet__body">
@@ -49,7 +49,7 @@ const PersonalInformationCart = (props) => {
                 <input
                   className="form-control"
                   type="text"
-                  defaultValue="Nick"
+                  defaultValue={data.firstName}
                 />
               </div>
             </div>
@@ -61,7 +61,7 @@ const PersonalInformationCart = (props) => {
                 <input
                   className="form-control"
                   type="text"
-                  defaultValue="Bold"
+                  defaultValue={data.lastName}
                 />
               </div>
             </div>
@@ -73,12 +73,8 @@ const PersonalInformationCart = (props) => {
                 <input
                   className="form-control"
                   type="text"
-                  defaultValue="your location "
+                  defaultValue={data.location}
                 />
-                {/* <span className="form-text text-muted">
-                  If you want your invoices addressed to a company. Leave blank
-                  to use your full name.
-                </span> */}
               </div>
             </div>
             <div className="form-group row">
@@ -96,28 +92,7 @@ const PersonalInformationCart = (props) => {
                     type="text"
                     className="form-control"
                     placeholder="Phone"
-                    defaultValue={35278953712}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="form-group row">
-              <label className="col-xl-3 col-lg-3 col-form-label">
-                Email Address
-              </label>
-              <div className="col-lg-9 col-xl-6">
-                <div className="input-group">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="la la-at" />
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Email"
-                    aria-describedby="basic-addon1"
-                    defaultValue="nick.bold@loop.com"
+                    defaultValue={data.phoneNumber}
                   />
                 </div>
               </div>
@@ -133,7 +108,7 @@ const PersonalInformationCart = (props) => {
           }}
         >
           <button type="submit" className="btn btn-success">
-            Submit
+            Update
           </button>
           &nbsp;
           <button type="reset" className="btn btn-secondary">

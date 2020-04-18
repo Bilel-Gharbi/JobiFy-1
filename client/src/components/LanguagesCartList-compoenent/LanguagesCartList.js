@@ -1,8 +1,11 @@
-import React from "react";
-
+import React, { useRef } from "react";
 import Tag from "../common/Tag-component";
+import ButtonModalProfilAdd from "../../pages/UserProfilePage-component/ButtonModalProfilAdd";
 
-const LanguagesCartList = ({ data }) => {
+const LanguagesCartList = ({ data, selectedMenuSection }) => {
+  const formRef = useRef();
+  console.log(selectedMenuSection);
+
   return (
     <div className="row">
       <div className="col-xl-12">
@@ -14,9 +17,10 @@ const LanguagesCartList = ({ data }) => {
                 <h3 className="kt-portlet__head-title"></h3>
               </div>
               <div className="kt-portlet__head-toolbar">
-                <button className="btn btn-label-brand btn-sm btn-icon btn-icon-md">
-                  <i className="flaticon2-add" />
-                </button>
+                <ButtonModalProfilAdd
+                  formRef={formRef}
+                  selectedMenuSection={selectedMenuSection}
+                />
               </div>
             </div>
             {/* header */}

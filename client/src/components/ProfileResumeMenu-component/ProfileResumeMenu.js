@@ -11,7 +11,7 @@ import {
   addProject,
   addLanguage,
   addAward,
-  newInterest
+  newInterest,
 } from "../../actions/resumeAction";
 
 const ProfileResumeMenu = ({ menu }) => {
@@ -27,10 +27,10 @@ const ProfileResumeMenu = ({ menu }) => {
         current: "",
         comapanyName: "",
         position: "",
-        task: ""
+        task: "",
       },
       types: ["date", "date", "checkbox", "text", "text", "text"],
-      action: addExperience
+      action: addExperience,
     },
     //education
     {
@@ -40,29 +40,29 @@ const ProfileResumeMenu = ({ menu }) => {
         startDate: "",
         endDate: "",
         establishment: "",
-        description: ""
+        description: "",
       },
       types: ["text", "text", "date", "date", "text", "text"],
-      action: addEducation
+      action: addEducation,
     },
     //new skills
     {
       formState: {
         name: "",
-        level: ""
+        level: "",
       },
       types: ["text", "text"],
-      action: addSkill
+      action: addSkill,
     },
     //new certif
     {
       formState: {
         name: "",
         Date: "",
-        organization: ""
+        organization: "",
       },
       types: ["text", "date", "text"],
-      action: addCertificate
+      action: addCertificate,
     },
     // project
     {
@@ -70,38 +70,38 @@ const ProfileResumeMenu = ({ menu }) => {
         name: "",
         description: "",
         technologies: "",
-        link: ""
+        link: "",
       },
       types: ["text", "text", "text", "text"],
-      action: addProject
+      action: addProject,
     },
     // language
     {
       formState: {
         name: "",
-        level: ""
+        level: "",
       },
       types: ["text", "text"],
-      action: addLanguage
+      action: addLanguage,
     },
     // award
     {
       formState: {
         name: "",
         description: "",
-        date: ""
+        date: "",
       },
       types: ["text", "text", "date"],
-      action: addAward
+      action: addAward,
     },
     // interest
     {
       formState: {
-        name: ""
+        name: "",
       },
       types: ["text"],
-      action: newInterest
-    }
+      action: newInterest,
+    },
   ];
 
   return (
