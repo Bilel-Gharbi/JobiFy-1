@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { useRef } from "react";
 import { connect } from "react-redux";
+
+import formProps from "./formCrudResume";
 
 const PersonalInformationCart = React.lazy(() =>
   import("./PersonalInformationCart")
@@ -25,7 +27,7 @@ const SkillsCartList = React.lazy(() =>
 );
 
 const InterestCartList = React.lazy(() =>
-  import("../../components/InterestsCartLIst-component/InterestCartList")
+  import("../../components/InterestsCartList-component/InterestCartList")
 );
 
 const CertificationCartList = React.lazy(() =>
@@ -34,78 +36,120 @@ const CertificationCartList = React.lazy(() =>
   )
 );
 
-//import PersonalInformationCart from "./PersonalInformationCart";
-//import EducationCartList from "../../components/EducationsCartList-component/EducationCartList";
-//import LanguagesCartList from "../../components/LanguagesCartList-compoenent/LanguagesCartList";
-//import ExperienceCartList from "../../components/ExperiencesCartLIst-component/ExperienceCartList";
-//import ProjectCartList from "../../components/ProjectCardList-component/ProjectCartList";
-//import AwardCartList from "../../components/AwardCartLIst-component/AwardCartList";
-//import SkillsCartList from "../../components/SkillsCartList-component/SkillsCartList";
-//import InterestCartList from "../../components/InterestsCartLIst-component/InterestCartList";
-//import CertificationCartList from "../../components/CertificationsCartLIst-component/CertificationsCartList";
+const ButtonModalProfil = React.lazy(() => import("./ButtonModalProfil"));
+const Modal = React.lazy(() =>
+  import("../../components/common/modal-component/Modal")
+);
+const Form = React.lazy(() =>
+  import("../../components/common/Form-component/Form")
+);
 
-class ProfileRightDetails extends Component {
-  renderContent = () => {
-    switch (this.props.selectedMenuSection) {
+const ProfileRightDetails = ({ selectedMenuSection, resume, userInfo }) => {
+  const formRef = useRef();
+
+  const renderContent = () => {
+    switch (selectedMenuSection) {
       case "Experiences":
-        return <ExperienceCartList data={this.props.resume.experiences} />;
+        return <ExperienceCartList data={resume.experiences} />;
       case "Educations":
-        return <EducationCartList data={this.props.resume.educations} />;
+        return <EducationCartList data={resume.educations} />;
       case "Certifications":
-        return <CertificationCartList data={this.props.resume.certificates} />;
+        return <CertificationCartList data={resume.certificates} />;
       case "Projects":
-        return <ProjectCartList data={this.props.resume.projects} />;
+        return <ProjectCartList data={resume.projects} />;
       case "Awards":
-        return <AwardCartList data={this.props.resume.awards} />;
+        return <AwardCartList data={resume.awards} />;
       case "Interests":
-        return <InterestCartList data={this.props.resume.interests} />;
+        return (
+          <InterestCartList
+            data={resume.interests}
+            selectedMenuSection={selectedMenuSection}
+          />
+        );
       case "Languages":
-        return <LanguagesCartList data={this.props.resume.languages} />;
+        return (
+          <LanguagesCartList
+            data={resume.languages}
+            selectedMenuSection={selectedMenuSection}
+          />
+        );
       case "Skills":
-        return <SkillsCartList data={this.props.resume.skills} />;
+        return (
+          <SkillsCartList
+            data={resume.skills}
+            selectedMenuSection={selectedMenuSection}
+          />
+        );
 
       default:
-        return <PersonalInformationCart data={this.props.userInfo} />;
+        return <PersonalInformationCart data={userInfo} />;
     }
   };
-  render() {
-    return (
-      <div className="kt-grid__item kt-grid__item--fluid kt-app__content">
-        <div className="row">
-          <div className="col-xl-12">
-            <div className="kt-portlet">
-              <div className="kt-portlet__head">
-                <div className="kt-portlet__head-label">
-                  <h3 className="kt-portlet__head-title">
-                    {this.props.selectedMenuSection || "Personal Information"}
-                    <small>
-                      {"update your " +
-                        (this.props.selectedMenuSection ||
-                          "personal information")}
-                      {/*  {this.props.selectedMenuSection ||
-                        " personal information"} */}
-                    </small>
-                  </h3>
-                </div>
-                <div className="kt-portlet__head-toolbar">
-                  <div className="kt-portlet__head-wrapper">
+  const renderModalButton = () => {
+    //const { selectedMenuSection } = this.props;
+    switch (selectedMenuSection) {
+      case "Experiences":
+      case "Educations":
+      case "Certifications":
+      case "Projects":
+      case "Awards":
+        return (
+          <Modal
+            customButton={<ButtonModalProfil />}
+            modalName={selectedMenuSection}
+            btnOne="add experience"
+            body={<Form ref={formRef} {...formProps[selectedMenuSection]} />}
+          />
+        );
+      case "Interests":
+      case "Languages":
+      case "Skills":
+        return null;
+
+      default:
+        return null;
+    }
+  };
+  return (
+    <div className="kt-grid__item kt-grid__item--fluid kt-app__content">
+      <div className="row">
+        <div className="col-xl-12">
+          <div className="kt-portlet">
+            <div className="kt-portlet__head">
+              <div className="kt-portlet__head-label">
+                <h3 className="kt-portlet__head-title">
+                  {selectedMenuSection || "Personal Information"}
+                  <small>
+                    {"update your " +
+                      (selectedMenuSection || "personal information")}
+                  </small>
+                </h3>
+              </div>
+
+              {/* <div className="kt-portlet__head-toolbar">
+                  <div
+                    className="kt-portlet__head-wrapper"
+                    onClick={() => console.log("hello")}
+                  >
                     <button className="btn btn-label-brand btn-sm btn-icon btn-icon-md">
                       <i className="flaticon2-add" />
                     </button>
                   </div>
-                </div>
+                </div> */}
+              <div style={{ alignItems: "center", display: "flex" }}>
+                {renderModalButton()}
               </div>
+            </div>
 
-              <div className="kt-portlet__body" style={{ padding: "0px" }}>
-                {this.renderContent()}
-              </div>
+            <div className="kt-portlet__body" style={{ padding: "0px" }}>
+              {renderContent()}
             </div>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 const mapStateToProps = (state) => {
   return {
     selectedMenuSection: state.UI.profileSection,

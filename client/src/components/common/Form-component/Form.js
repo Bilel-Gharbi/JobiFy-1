@@ -7,12 +7,12 @@ import "./Form.css";
 class Form extends Component {
   state = {};
 
-  componentDidMount() {
+  componentWillMount() {
     //init from state depend from the formState props
     this.setState({ ...this.props.formState }, () => console.log(this.state));
   }
 
-  handelInputChange = e => {
+  handelInputChange = (e) => {
     let name = e.target.name;
     let type = e.target.type;
 
@@ -32,26 +32,32 @@ class Form extends Component {
     //iterate over the state keys
     // this.props.type array to check the type
     return (
-      this.state &&
-      Object.keys(this.state).map((el, i) => {
-        return (
-          <InputText
-            key={el}
-            ref={this.FormRef}
-            id={el}
-            name={el}
-            label={el}
-            placeholder={`${el} placeholder`}
-            onChange={this.handelInputChange}
-            value={this.state[el]}
-            type={this.props.types[i]}
-          />
-        );
-      })
+      <div className="kt-form">
+        <div className="kt-portlet__body">
+          {this.state &&
+            Object.keys(this.state).map((el, i) => {
+              return (
+                <div key={el} className="form-group">
+                  <InputText
+                    key={el}
+                    ref={this.FormRef}
+                    id={el}
+                    name={el}
+                    label={el}
+                    placeholder={`${el} placeholder`}
+                    onChange={this.handelInputChange}
+                    value={this.state[el]}
+                    type={this.props.types[i]}
+                  />
+                </div>
+              );
+            })}
+        </div>
+      </div>
     );
   }
 
-  onHandelSubmit = e => {
+  onHandelSubmit = (e) => {
     e.preventDefault();
 
     //action passed to the form
@@ -63,7 +69,7 @@ class Form extends Component {
     const { withSubmitButton } = this.props;
 
     return (
-      <form className="customform" onSubmit={this.onHandelSubmit}>
+      <form onSubmit={this.onHandelSubmit}>
         {<>{this.initInputForm()}</>}
         <> {this.props.children} </>
         {withSubmitButton ? <Button type="submit">Form Button</Button> : null}

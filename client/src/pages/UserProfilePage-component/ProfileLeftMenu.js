@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import UserProfileDescription from "./UserProfileDescription";
-import MenuProfileList from "./MenuProfileList";
+//import UserProfileDescription from "./UserProfileDescription";
+//import MenuProfileList from "./MenuProfileList";
+
+const UserProfileDescription = React.lazy(() =>
+  import("./UserProfileDescription")
+);
+const MenuProfileList = React.lazy(() => import("./MenuProfileList"));
 
 class ProfileLeftMenu extends Component {
   state = { list: [] };
 
+  //setup left menu
   componentWillMount() {
     this.setState({
       list: [

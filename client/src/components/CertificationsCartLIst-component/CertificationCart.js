@@ -1,5 +1,5 @@
 import React from "react";
-import Tag from "../../components/common/Tag-component/index";
+import Tag from "../common/Tag-component/index";
 
 const CertificationCart = ({ certification }) => {
   return (
@@ -69,7 +69,7 @@ const CertificationCart = ({ certification }) => {
                         style={{ marginRight: "10px" }}
                       />
                       <strong>
-                        {new Date(certification.date).toDateString()}
+                        {new Date(certification.date).toLocaleDateString()}
                       </strong>
                     </a>
                   </div>

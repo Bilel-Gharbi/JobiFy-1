@@ -4,13 +4,15 @@ import "./login.css";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
   };
-  handelSubmit = e => {
+  handelSubmit = (e) => {
     e.preventDefault();
-    this.props.login({ ...this.state });
+    this.props.login({ ...this.state }, () => {
+      this.props.history.push("/profile");
+    });
   };
-  handelChange = e => {
+  handelChange = (e) => {
     const name = e.target.name;
     this.setState({ [name]: e.target.value });
   };

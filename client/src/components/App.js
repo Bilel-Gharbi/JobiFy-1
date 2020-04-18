@@ -21,6 +21,9 @@ import SpinnerLoader from "../components/common/Spinner-component";
 const HomePage = React.lazy(() =>
   import("../pages/HomePage-component/HomePage")
 );
+const ProfilePage = React.lazy(() =>
+  import("../pages/ProfilePage-component/ProfilePage")
+);
 const JobPage = React.lazy(() => import("../pages/JobPage-component/JobPage"));
 const AuthPage = React.lazy(() =>
   import("../pages/authPage-component/AuthPage")
@@ -42,38 +45,38 @@ const NewHeader = React.lazy(() =>
 );
 
 class App extends React.Component {
-  state = {
-    isLoged: this.props.auth.isLoged,
-  };
   //changed from didmount to willMount
   componentWillMount() {
     let token = store.getState().auth.token;
     if (token) {
       store.dispatch(fetechUserData(token));
     }
-    console.log(this.props);
   }
-  /* componentWillReceiveProps() {
-    this.setState({ isLoged: this.props.auth.isLoged });
-  } */
-
+  renderRouteOrRedirect = (condition, routeDirection, otherRoute) => {
+    return condition ? (
+      <Redirect to={`${routeDirection}`} />
+    ) : (
+      <Redirect to={`${otherRoute}`} />
+    );
+  };
   render() {
+    const { isLoged } = this.props;
     return (
       <Router>
         <Suspense fallback={<SpinnerLoader />}>
           <Header />
-          <NewHeader />
+          {/* <NewHeader /> */}
           <Switch>
             <>
               <div className="mainContainer">
-                <Route exact path="/" component={HomePage} />
+                <Route exact path="/" component={InfoPage} />
                 <Route
-                  exact
                   path="/auth"
                   render={() =>
-                    this.state.isLoged ? <Redirect to="/" /> : <AuthPage />
+                    this.renderRouteOrRedirect(isLoged, "profile", "auth")
                   }
                 />
+                <Route exact path="/auth" component={AuthPage} />
                 <Route exact path="/info" component={InfoPage} />
                 <Route exact path="/profile" component={UserProfilePage} />
                 <Route exact path="/dashboard" component={DashBoardPage} />
@@ -87,7 +90,9 @@ class App extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  return state;
+  return {
+    isLoged: state.auth.isLoged,
+  };
 };
 
 export default connect(mapStateToProps, null)(App);

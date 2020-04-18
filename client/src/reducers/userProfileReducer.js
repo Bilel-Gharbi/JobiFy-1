@@ -1,6 +1,6 @@
 const initialState = {
   user: null,
-  resume: null
+  resume: null,
 };
 
 const userProfileReducer = (state = initialState, action) => {
@@ -16,8 +16,8 @@ const userProfileReducer = (state = initialState, action) => {
         ...state,
         resume: {
           ...state.resume,
-          experiences: [...state.resume.experiences, action.payload]
-        }
+          experiences: [...state.resume.experiences, action.payload],
+        },
       };
 
     case "ADD_EDUCATION":
@@ -25,8 +25,8 @@ const userProfileReducer = (state = initialState, action) => {
         ...state,
         resume: {
           ...state.resume,
-          educations: [...state.resume.educations, action.payload]
-        }
+          educations: [...state.resume.educations, action.payload],
+        },
       };
 
     case "ADD_SKILL":
@@ -34,8 +34,8 @@ const userProfileReducer = (state = initialState, action) => {
         ...state,
         resume: {
           ...state.resume,
-          skills: [...state.resume.skills, action.payload]
-        }
+          skills: [...state.resume.skills, action.payload],
+        },
       };
 
     case "ADD_CERTIFICATE":
@@ -43,8 +43,8 @@ const userProfileReducer = (state = initialState, action) => {
         ...state,
         resume: {
           ...state.resume,
-          certificates: [...state.resume.certificates, action.payload]
-        }
+          certificates: [...state.resume.certificates, action.payload],
+        },
       };
 
     case "ADD_PROJECT":
@@ -52,8 +52,8 @@ const userProfileReducer = (state = initialState, action) => {
         ...state,
         resume: {
           ...state.resume,
-          projects: [...state.resume.projects, action.payload]
-        }
+          projects: [...state.resume.projects, action.payload],
+        },
       };
 
     case "ADD_LANGUAGE":
@@ -61,8 +61,8 @@ const userProfileReducer = (state = initialState, action) => {
         ...state,
         resume: {
           ...state.resume,
-          languages: [...state.resume.languages, action.payload]
-        }
+          languages: [...state.resume.languages, action.payload],
+        },
       };
 
     case "ADD_AWARD":
@@ -70,8 +70,8 @@ const userProfileReducer = (state = initialState, action) => {
         ...state,
         resume: {
           ...state.resume,
-          awards: [...state.resume.awards, action.payload]
-        }
+          awards: [...state.resume.awards, action.payload],
+        },
       };
 
     case "ADD_INTEREST":
@@ -79,8 +79,8 @@ const userProfileReducer = (state = initialState, action) => {
         ...state,
         resume: {
           ...state.resume,
-          interests: [...state.resume.interests, action.payload]
-        }
+          interests: [...state.resume.interests, action.payload],
+        },
       };
 
     case "APPLY_JOB":
@@ -88,8 +88,8 @@ const userProfileReducer = (state = initialState, action) => {
         ...state,
         resume: {
           ...state.resume,
-          applyedJob: [...state.resume.applyedJob, action.payload]
-        }
+          applyedJob: [...state.resume.applyedJob, action.payload],
+        },
       };
     default:
       return state;

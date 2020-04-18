@@ -3,10 +3,9 @@ import { connect } from "react-redux";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 import Button from "../Button-component/Button";
-import { addExperience } from "../../../actions/resumeAction";
 
 import store from "../../../store";
-const ModalComponent = props => {
+const ModalComponent = (props) => {
   const {
     className,
     title,
@@ -15,7 +14,8 @@ const ModalComponent = props => {
     modalName,
     btnOneText,
     btnTwoText,
-    action
+    action,
+    customButton,
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -24,26 +24,47 @@ const ModalComponent = props => {
     setModal(!modal);
   };
   const executeActionAndToggle = () => {
+    const { action } = props.body.props;
+    const data = props.body.ref.current.state;
     //get the form state from props or children using ref
-    let stateFormValue;
+
+    /*   let stateFormValue;
     props.body
       ? (stateFormValue = props.body.ref.current.state)
       : (stateFormValue = props.children.ref.current.state);
 
-    /*  action(); */
-    console.log(stateFormValue);
+  */
     //dispatch action
-    store.dispatch(props.action({ ...stateFormValue }));
+    //TODO: validation before dispatch actions
+    console.log(data);
+    //console.log(props.body.props.action);
+    //console.log(props.body.ref.current.state);
+    store.dispatch(action({ ...data }));
     toggle();
   };
+  /* const renderModalMainButton = () => {
+    if (customButton) {
+      return (
+        <div onClick={toggle} disabled={disabled}>
+          {customButton}
+        </div>
+      );
+    }
+    return (
+      <Button className={className} onClick={toggle} disabled={disabled}>
+        {modalName}
+      </Button>
+    );
+  }; */
 
   return (
     <>
+      {/* {renderModalMainButton()} */}
       <Button
         className={className}
-        icon="fa fa-fw fa-suitcase"
         onClick={toggle}
         disabled={disabled}
+        customButton={customButton}
       >
         {modalName}
       </Button>
@@ -51,10 +72,14 @@ const ModalComponent = props => {
         <ModalHeader toggle={toggle}> {modalName}</ModalHeader>
         <ModalBody>{body || props.children}</ModalBody>
         <ModalFooter>
-          <Button className={className} onClick={toggle}>
+          <Button className="btn btn-secondary" onClick={toggle} type="reset">
             {btnOneText || "cancel"}
           </Button>
-          <Button className={className} onClick={executeActionAndToggle}>
+          <Button
+            className="btn btn-success"
+            type="submit"
+            onClick={executeActionAndToggle}
+          >
             {btnTwoText || "Do Something"}
           </Button>
         </ModalFooter>
@@ -63,4 +88,4 @@ const ModalComponent = props => {
   );
 };
 
-export default connect(null, { addExperience })(ModalComponent);
+export default connect(null /* { addExperience } */)(ModalComponent);
