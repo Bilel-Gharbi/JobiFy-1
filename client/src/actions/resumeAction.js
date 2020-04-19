@@ -1,200 +1,202 @@
-import store from "../store";
 import resumeAPI from "../API/resumeAPI";
+import * as TYPE from "./type";
 
-//import type
-import {
-  ADD_EDUCATION,
-  ADD_EXPERIENCE,
-  ADD_PROJECT,
-  ADD_LANGUAGE,
-  ADD_SKILL,
-  ADD_CERTIFICATE,
-  ADD_INTEREST,
-  ADD_AWARD,
-  DEL_SKILL,
-  DEL_LANGUAGE,
-  DEL_INTEREST,
-} from "./type";
-
-// get resume id from the store
-//FIXME: problem resumeId undefined
-const state = store.getState();
-const resumeId = state.userProfile.resume.userResume.id;
-
-export const addExperience = (data) => async (dispatch) => {
+export const addExperience = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const experience = await resumeAPI.post(`${resumeId}/experience`, data);
 
   return dispatch({
-    type: ADD_EXPERIENCE,
+    type: TYPE.ADD_EXPERIENCE,
     payload: experience.data.data,
   });
 };
 
-export const deleteExperience = (data) => async (dispatch) => {
+export const deleteExperience = (id) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
+  const deletedExperience = await resumeAPI.delete(
+    `${resumeId}/experience/${id}`
+  );
+
+  return dispatch({
+    type: TYPE.DEL_EXPERIENCE,
+    payload: deletedExperience.data.deletedExperience,
+  });
+};
+
+export const updateExperience = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const experience = await resumeAPI.post(`${resumeId}/experience`, data);
 
   return dispatch({
-    type: ADD_EXPERIENCE,
+    type: TYPE.ADD_EXPERIENCE,
     payload: experience.data.data,
   });
 };
 
-export const updateExperience = (data) => async (dispatch) => {
-  const experience = await resumeAPI.post(`${resumeId}/experience`, data);
-
-  return dispatch({
-    type: ADD_EXPERIENCE,
-    payload: experience.data.data,
-  });
-};
-
-export const addEducation = (data) => async (dispatch) => {
+export const addEducation = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const eduction = await resumeAPI.post(`${resumeId}/education`, data);
-  // const result = await resumeAPI.post(`${resumeId}/experience`,data)
 
   return dispatch({
-    type: ADD_EDUCATION,
+    type: TYPE.ADD_EDUCATION,
     payload: eduction.data.newEducation,
   });
 };
 
-export const deleteEducation = (data) => async (dispatch) => {
-  const eduction = await resumeAPI.post(`${resumeId}/education`, data);
-  // const result = await resumeAPI.post(`${resumeId}/experience`,data)
+export const deleteEducation = (id) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
+  const deletedEducation = await resumeAPI.delete(
+    `${resumeId}/education/${id}`
+  );
 
   return dispatch({
-    type: ADD_EDUCATION,
-    payload: eduction.data.newEducation,
-  });
-};
-export const updateEducation = (data) => async (dispatch) => {
-  const eduction = await resumeAPI.post(`${resumeId}/education`, data);
-  // const result = await resumeAPI.post(`${resumeId}/experience`,data)
-
-  return dispatch({
-    type: ADD_EDUCATION,
-    payload: eduction.data.newEducation,
+    type: TYPE.DEL_EDUCATION,
+    payload: deletedEducation.data.deletedEducation,
   });
 };
 
-export const addSkill = (data) => async (dispatch) => {
+export const updateEducation = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
+  const eduction = await resumeAPI.post(`${resumeId}/education`, data);
+
+  return dispatch({
+    type: TYPE.ADD_EDUCATION,
+    payload: eduction.data.newEducation,
+  });
+};
+
+export const addSkill = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const newSkill = await resumeAPI.post(`${resumeId}/skill`, data);
   console.log(newSkill.data.newSkill);
   return dispatch({
-    type: ADD_SKILL,
+    type: TYPE.ADD_SKILL,
     payload: newSkill.data.newSkill,
   });
 };
 
-export const deleteSkill = (id) => async (dispatch) => {
+export const deleteSkill = (id) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const delSkill = await resumeAPI.delete(`${resumeId}/skill/${id}`);
-  console.log(delSkill.data.deletedSkill);
-  //console.log("hello it's work", id);
+
   return dispatch({
-    type: DEL_SKILL,
+    type: TYPE.DEL_SKILL,
     payload: delSkill.data.deletedSkill,
   });
 };
 
-export const addCertificate = (data) => async (dispatch) => {
+export const addCertificate = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const newCertificate = await resumeAPI.post(`${resumeId}/certificate`, data);
   return dispatch({
-    type: ADD_CERTIFICATE,
+    type: TYPE.ADD_CERTIFICATE,
     payload: newCertificate.data.newCertificate,
   });
 };
-export const deleteCertificate = (data) => async (dispatch) => {
-  const newCertificate = await resumeAPI.post(`${resumeId}/certificate`, data);
+export const deleteCertificate = (id) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
+  const deletedCertificate = await resumeAPI.delete(
+    `${resumeId}/certificate/${id}`
+  );
   return dispatch({
-    type: ADD_CERTIFICATE,
-    payload: newCertificate.data.newCertificate,
+    type: TYPE.DEL_CERTIFICATE,
+    payload: deletedCertificate.data.deletedCertificate,
   });
 };
-export const updateCertificate = (data) => async (dispatch) => {
+export const updateCertificate = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const newCertificate = await resumeAPI.post(`${resumeId}/certificate`, data);
   return dispatch({
-    type: ADD_CERTIFICATE,
+    type: TYPE.ADD_CERTIFICATE,
     payload: newCertificate.data.newCertificate,
   });
 };
 
-export const addProject = (data) => async (dispatch) => {
+export const addProject = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const newProject = await resumeAPI.post(`${resumeId}/project`, data);
   return dispatch({
-    type: ADD_PROJECT,
+    type: TYPE.ADD_PROJECT,
+    payload: newProject.data.newProject,
+  });
+};
+export const deleteProject = (id) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
+  const deletedProject = await resumeAPI.delete(`${resumeId}/project/${id}`);
+  return dispatch({
+    type: TYPE.DEL_PROJECT,
+    payload: deletedProject.data.deletedProject,
+  });
+};
+export const updateProject = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
+  const newProject = await resumeAPI.post(`${resumeId}/project`, data);
+  return dispatch({
+    type: TYPE.ADD_PROJECT,
     payload: newProject.data.newProject,
   });
 };
 
-export const deleteProject = (data) => async (dispatch) => {
-  const newProject = await resumeAPI.post(`${resumeId}/project`, data);
-  return dispatch({
-    type: ADD_PROJECT,
-    payload: newProject.data.newProject,
-  });
-};
-
-export const updateProject = (data) => async (dispatch) => {
-  const newProject = await resumeAPI.post(`${resumeId}/project`, data);
-  return dispatch({
-    type: ADD_PROJECT,
-    payload: newProject.data.newProject,
-  });
-};
-
-export const addLanguage = (data) => async (dispatch) => {
+export const addLanguage = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const newLanguage = await resumeAPI.post(`${resumeId}/language`, data);
   return dispatch({
-    type: ADD_LANGUAGE,
+    type: TYPE.ADD_LANGUAGE,
     payload: newLanguage.data.newLanguage,
   });
 };
-export const deleteLanguage = (id) => async (dispatch) => {
+export const deleteLanguage = (id) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const deletedLanguage = await resumeAPI.delete(`${resumeId}/language/${id}`);
 
   return dispatch({
-    type: DEL_LANGUAGE,
+    type: TYPE.DEL_LANGUAGE,
     payload: deletedLanguage.data.deletedLanguage,
   });
 };
 
-export const addAward = (data) => async (dispatch) => {
+export const addAward = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const newAward = await resumeAPI.post(`${resumeId}/award`, data);
   return dispatch({
-    type: ADD_AWARD,
+    type: TYPE.ADD_AWARD,
     payload: newAward.data.newAward,
   });
 };
 
-export const deleteAward = (data) => async (dispatch) => {
+export const deleteAward = (id) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
+  const deletedAward = await resumeAPI.delete(`${resumeId}/award/${id}`);
+  return dispatch({
+    type: TYPE.DEL_AWARD,
+    payload: deletedAward.data.deletedAward,
+  });
+};
+
+export const updateAward = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const newAward = await resumeAPI.post(`${resumeId}/award`, data);
   return dispatch({
-    type: ADD_AWARD,
+    type: TYPE.ADD_AWARD,
     payload: newAward.data.newAward,
   });
 };
 
-export const updateAward = (data) => async (dispatch) => {
-  const newAward = await resumeAPI.post(`${resumeId}/award`, data);
-  return dispatch({
-    type: ADD_AWARD,
-    payload: newAward.data.newAward,
-  });
-};
-
-export const addInterest = (data) => async (dispatch) => {
+export const addInterest = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   const newInterest = await resumeAPI.post(`${resumeId}/interest`, data);
   return dispatch({
-    type: ADD_INTEREST,
+    type: TYPE.ADD_INTEREST,
     payload: newInterest.data.newInterest,
   });
 };
-export const deleteInterest = (id) => async (dispatch) => {
+export const deleteInterest = (id) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   //console.log("del interets", id);
   const deletedInterest = await resumeAPI.delete(`${resumeId}/interest/${id}`);
 
   return dispatch({
-    type: DEL_INTEREST,
+    type: TYPE.DEL_INTEREST,
     payload: deletedInterest.data.deletedInterest,
   });
 };

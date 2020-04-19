@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
+import ButtonModalProfilAddUpdate from "../../pages/UserProfilePage-component/ButtonsModalProfileAddUpdate";
 
-const ExperienceCart = ({ experience }) => {
+const ExperienceCart = ({ experience, deleteAction, selectedMenuSection }) => {
+  const formRef = useRef();
   return (
     <div className="kt-portlet kt-portlet--height-fluid">
       {/* header */}
@@ -9,13 +11,12 @@ const ExperienceCart = ({ experience }) => {
           <h3 className="kt-portlet__head-title"></h3>
         </div>
         <div className="kt-portlet__head-toolbar">
-          <button className="btn btn-label-brand btn-sm btn-icon btn-icon-md">
-            <i className="flaticon2-delete" />
-          </button>
-          &nbsp;
-          <button className="btn btn-label-brand btn-sm btn-icon btn-icon-md">
-            <i className="flaticon2-refresh" />
-          </button>
+          <ButtonModalProfilAddUpdate
+            formRef={formRef}
+            selectedMenuSection={selectedMenuSection}
+            id={experience.id}
+            deleteAction={deleteAction}
+          />
         </div>
       </div>
       {/* header */}
