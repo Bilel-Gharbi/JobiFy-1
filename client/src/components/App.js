@@ -47,8 +47,8 @@ const NewHeader = React.lazy(() =>
 class App extends React.Component {
   //changed from didmount to willMount
   componentWillMount() {
-    //let token = store.getState().auth.token;
-    let token = localStorage.getItem("token");
+    let token = store.getState().auth.token;
+    // let token = localStorage.getItem("token");
     if (token) {
       store.dispatch(fetechUserData(token));
     }

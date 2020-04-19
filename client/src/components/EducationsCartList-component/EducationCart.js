@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
+import ButtonModalProfilAddUpdate from "../../pages/UserProfilePage-component/ButtonsModalProfileAddUpdate";
 
-const EducationCart = ({ education }) => {
+const EducationCart = ({ education, selectedMenuSection, deleteAction }) => {
+  const formRef = useRef();
   return (
     <div className="kt-portlet kt-portlet--height-fluid">
       {/* header */}
@@ -9,13 +11,19 @@ const EducationCart = ({ education }) => {
           <h3 className="kt-portlet__head-title"></h3>
         </div>
         <div className="kt-portlet__head-toolbar">
-          <button className="btn btn-label-brand btn-sm btn-icon btn-icon-md">
+          {/*  <button className="btn btn-label-brand btn-sm btn-icon btn-icon-md">
             <i className="flaticon2-delete" />
           </button>
           &nbsp;
           <button className="btn btn-label-brand btn-sm btn-icon btn-icon-md">
             <i className="flaticon2-refresh" />
-          </button>
+          </button> */}
+          <ButtonModalProfilAddUpdate
+            formRef={formRef}
+            selectedMenuSection={selectedMenuSection}
+            id={education.id}
+            deleteAction={deleteAction}
+          />
         </div>
       </div>
       {/* header */}

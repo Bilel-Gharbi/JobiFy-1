@@ -18,7 +18,7 @@ export const deleteExperience = (id) => async (dispatch, getState) => {
   );
 
   return dispatch({
-    type: TYPE.ADD_EXPERIENCE,
+    type: TYPE.DEL_EXPERIENCE,
     payload: deletedExperience.data.deletedExperience,
   });
 };
@@ -36,7 +36,6 @@ export const updateExperience = (data) => async (dispatch, getState) => {
 export const addEducation = (data) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
   const eduction = await resumeAPI.post(`${resumeId}/education`, data);
-  // const result = await resumeAPI.post(`${resumeId}/experience`,data)
 
   return dispatch({
     type: TYPE.ADD_EDUCATION,
@@ -44,20 +43,21 @@ export const addEducation = (data) => async (dispatch, getState) => {
   });
 };
 
-export const deleteEducation = (data) => async (dispatch, getState) => {
+export const deleteEducation = (id) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
-  const eduction = await resumeAPI.post(`${resumeId}/education`, data);
-  // const result = await resumeAPI.post(`${resumeId}/experience`,data)
+  const deletedEducation = await resumeAPI.delete(
+    `${resumeId}/education/${id}`
+  );
 
   return dispatch({
-    type: TYPE.ADD_EDUCATION,
-    payload: eduction.data.newEducation,
+    type: TYPE.DEL_EDUCATION,
+    payload: deletedEducation.data.deletedEducation,
   });
 };
+
 export const updateEducation = (data) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
   const eduction = await resumeAPI.post(`${resumeId}/education`, data);
-  // const result = await resumeAPI.post(`${resumeId}/experience`,data)
 
   return dispatch({
     type: TYPE.ADD_EDUCATION,
@@ -93,12 +93,14 @@ export const addCertificate = (data) => async (dispatch, getState) => {
     payload: newCertificate.data.newCertificate,
   });
 };
-export const deleteCertificate = (data) => async (dispatch, getState) => {
+export const deleteCertificate = (id) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
-  const newCertificate = await resumeAPI.post(`${resumeId}/certificate`, data);
+  const deletedCertificate = await resumeAPI.delete(
+    `${resumeId}/certificate/${id}`
+  );
   return dispatch({
-    type: TYPE.ADD_CERTIFICATE,
-    payload: newCertificate.data.newCertificate,
+    type: TYPE.DEL_CERTIFICATE,
+    payload: deletedCertificate.data.deletedCertificate,
   });
 };
 export const updateCertificate = (data) => async (dispatch, getState) => {
@@ -118,16 +120,14 @@ export const addProject = (data) => async (dispatch, getState) => {
     payload: newProject.data.newProject,
   });
 };
-
-export const deleteProject = (data) => async (dispatch, getState) => {
+export const deleteProject = (id) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
-  const newProject = await resumeAPI.post(`${resumeId}/project`, data);
+  const deletedProject = await resumeAPI.delete(`${resumeId}/project/${id}`);
   return dispatch({
-    type: TYPE.ADD_PROJECT,
-    payload: newProject.data.newProject,
+    type: TYPE.DEL_PROJECT,
+    payload: deletedProject.data.deletedProject,
   });
 };
-
 export const updateProject = (data) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
   const newProject = await resumeAPI.post(`${resumeId}/project`, data);
@@ -164,12 +164,12 @@ export const addAward = (data) => async (dispatch, getState) => {
   });
 };
 
-export const deleteAward = (data) => async (dispatch, getState) => {
+export const deleteAward = (id) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
-  const newAward = await resumeAPI.post(`${resumeId}/award`, data);
+  const deletedAward = await resumeAPI.delete(`${resumeId}/award/${id}`);
   return dispatch({
-    type: TYPE.ADD_AWARD,
-    payload: newAward.data.newAward,
+    type: TYPE.DEL_AWARD,
+    payload: deletedAward.data.deletedAward,
   });
 };
 

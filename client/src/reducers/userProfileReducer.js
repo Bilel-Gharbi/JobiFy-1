@@ -22,12 +22,38 @@ const userProfileReducer = (state = initialState, action) => {
         },
       };
 
+    case "DEL_EXPERIENCE":
+      const newExperiences = filterElementFromState(
+        state.resume.experiences,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          experiences: [...newExperiences],
+        },
+      };
+
     case "ADD_EDUCATION":
       return {
         ...state,
         resume: {
           ...state.resume,
           educations: [...state.resume.educations, action.payload],
+        },
+      };
+
+    case "DEL_EDUCATION":
+      const newEducations = filterElementFromState(
+        state.resume.educations,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          educations: [...newEducations],
         },
       };
 
@@ -61,6 +87,18 @@ const userProfileReducer = (state = initialState, action) => {
           certificates: [...state.resume.certificates, action.payload],
         },
       };
+    case "DEL_CERTIFICATE":
+      const newCertificates = filterElementFromState(
+        state.resume.certificates,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          certificates: [...newCertificates],
+        },
+      };
 
     case "ADD_PROJECT":
       return {
@@ -68,6 +106,19 @@ const userProfileReducer = (state = initialState, action) => {
         resume: {
           ...state.resume,
           projects: [...state.resume.projects, action.payload],
+        },
+      };
+
+    case "DEL_PROJECT":
+      const newProjects = filterElementFromState(
+        state.resume.projects,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          projects: [...newProjects],
         },
       };
 
@@ -99,6 +150,19 @@ const userProfileReducer = (state = initialState, action) => {
         resume: {
           ...state.resume,
           awards: [...state.resume.awards, action.payload],
+        },
+      };
+
+    case "DEL_AWARD":
+      const newAwards = filterElementFromState(
+        state.resume.awards,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          awards: [...newAwards],
         },
       };
 

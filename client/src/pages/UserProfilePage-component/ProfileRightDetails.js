@@ -56,6 +56,7 @@ const ProfileRightDetails = ({
         return (
           <ExperienceCartList
             data={resume.experiences}
+            selectedMenuSection={selectedMenuSection}
             deleteExperience={props.deleteExperience}
           />
         );
@@ -63,6 +64,7 @@ const ProfileRightDetails = ({
         return (
           <EducationCartList
             data={resume.educations}
+            selectedMenuSection={selectedMenuSection}
             deleteEducation={props.deleteEducation}
           />
         );
@@ -70,6 +72,7 @@ const ProfileRightDetails = ({
         return (
           <CertificationCartList
             data={resume.certificates}
+            selectedMenuSection={selectedMenuSection}
             deleteCertificate={props.deleteCertificate}
           />
         );
@@ -77,6 +80,7 @@ const ProfileRightDetails = ({
         return (
           <ProjectCartList
             data={resume.projects}
+            selectedMenuSection={selectedMenuSection}
             deleteProject={props.deleteProject}
           />
         );
@@ -84,7 +88,8 @@ const ProfileRightDetails = ({
         return (
           <AwardCartList
             data={resume.awards}
-            deleteAwarad={props.deleteAwarad}
+            selectedMenuSection={selectedMenuSection}
+            deleteAward={props.deleteAward}
           />
         );
       case "Interests":

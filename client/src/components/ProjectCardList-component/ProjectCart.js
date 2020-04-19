@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import Tag from "../common/Tag-component";
+import ButtonModalProfilAddUpdate from "../../pages/UserProfilePage-component/ButtonsModalProfileAddUpdate";
+
 import { technlogiesTabGenerator } from "../../helper";
 
-const ProjectCart = ({ project }) => {
+const ProjectCart = ({ project, deleteAction, selectedMenuSection }) => {
+  const formRef = useRef();
   const technologiesTab = technlogiesTabGenerator(project.technologies);
   return (
     <div className="kt-portlet kt-portlet--height-fluid">
@@ -12,13 +15,12 @@ const ProjectCart = ({ project }) => {
           <h3 className="kt-portlet__head-title"></h3>
         </div>
         <div className="kt-portlet__head-toolbar">
-          <button className="btn btn-label-brand btn-sm btn-icon btn-icon-md">
-            <i className="flaticon2-delete" />
-          </button>
-          &nbsp;
-          <button className="btn btn-label-brand btn-sm btn-icon btn-icon-md">
-            <i className="flaticon2-refresh" />
-          </button>
+          <ButtonModalProfilAddUpdate
+            formRef={formRef}
+            selectedMenuSection={selectedMenuSection}
+            id={project.id}
+            deleteAction={deleteAction}
+          />
         </div>
       </div>
       {/* header */}
