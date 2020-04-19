@@ -1,3 +1,5 @@
+import { filterElementFromState } from "../helper";
+
 const initialState = {
   user: null,
   resume: null,
@@ -38,6 +40,19 @@ const userProfileReducer = (state = initialState, action) => {
         },
       };
 
+    case "DEL_SKILL":
+      const newSkills = filterElementFromState(
+        state.resume.skills,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          skills: [...newSkills],
+        },
+      };
+
     case "ADD_CERTIFICATE":
       return {
         ...state,
@@ -65,6 +80,19 @@ const userProfileReducer = (state = initialState, action) => {
         },
       };
 
+    case "DEL_LANGUAGE":
+      const newLanguages = filterElementFromState(
+        state.resume.languages,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          languages: [...newLanguages],
+        },
+      };
+
     case "ADD_AWARD":
       return {
         ...state,
@@ -80,6 +108,18 @@ const userProfileReducer = (state = initialState, action) => {
         resume: {
           ...state.resume,
           interests: [...state.resume.interests, action.payload],
+        },
+      };
+    case "DEL_INTEREST":
+      const newInterests = filterElementFromState(
+        state.resume.interests,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          interests: [...newInterests],
         },
       };
 

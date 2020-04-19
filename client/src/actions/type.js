@@ -32,6 +32,8 @@ export const FETCH_JOB_DETAILS = "FETCH_JOB_DETAILS";
 export const SET_DEFAULT_JOB_DETAILS = "SET_DEFAULT_JOB_DETAILS";
 
 // Resume_Actions
+
+//Add
 export const ADD_EXPERIENCE = "ADD_EXPERIENCE";
 export const ADD_EDUCATION = "ADD_EDUCATION";
 export const ADD_PROJECT = "ADD_PROJECT";
@@ -40,6 +42,26 @@ export const ADD_SKILL = "ADD_SKILL";
 export const ADD_INTEREST = "ADD_INTEREST";
 export const ADD_CERTIFICATE = "ADD_CERTIFICATE";
 export const ADD_AWARD = "ADD_AWARD";
+
+//Delete
+export const DEL_EXPERIENCE = "DEL_EXPERIENCE";
+export const DEL_EDUCATION = "DEL_EDUCATION";
+export const DEL_PROJECT = "DEL_PROJECT";
+export const DEL_LANGUAGE = "DEL_LANGUAGE";
+export const DEL_SKILL = "DEL_SKILL";
+export const DEL_INTEREST = "DEL_INTEREST";
+export const DEL_CERTIFICATE = "DEL_CERTIFICATE";
+export const DEL_AWARD = "DEL_AWARD";
+
+//Update
+export const UPDATE_EXPERIENCE = "UPDATE_EXPERIENCE";
+export const UPDATE_EDUCATION = "UPDATE_EDUCATION";
+export const UPDATE_PROJECT = "UPDATE_PROJECT";
+export const UPDATE_LANGUAGE = "UPDATE_LANGUAGE";
+export const UPDATE_SKILL = "UPDATE_SKILL";
+export const UPDATE_INTEREST = "UPDATE_INTEREST";
+export const UPDATE_CERTIFICATE = "UPDATE_CERTIFICATE";
+export const UPDATE_AWARD = "UPDATE_AWARD";
 
 //UI_Actions
 export const SET_PROFILE_SECTION = "SET_PROFILE_SECTION";

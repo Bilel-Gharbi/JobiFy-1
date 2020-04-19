@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Tag from "../common/Tag-component";
 import ButtonModalProfilAdd from "../../pages/UserProfilePage-component/ButtonModalProfilAdd";
 
-const LanguagesCartList = ({ data, selectedMenuSection }) => {
+const LanguagesCartList = ({ data, selectedMenuSection, deleteLanguage }) => {
   const formRef = useRef();
   console.log(selectedMenuSection);
 
@@ -43,8 +43,10 @@ const LanguagesCartList = ({ data, selectedMenuSection }) => {
                       gridGap: "10px",
                     }}
                   >
-                    {data.map((element) => (
-                      <Tag key={element.id}>{element.name}</Tag>
+                    {data.map(({ id, name }) => (
+                      <Tag key={id} id={id} action={deleteLanguage}>
+                        {name}
+                      </Tag>
                     ))}
                   </div>
                 </div>

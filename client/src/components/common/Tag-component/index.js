@@ -1,6 +1,9 @@
 import React from "react";
 
 const Tag = (props) => {
+  const handelClick = () => {
+    props.action(props.id);
+  };
   return (
     <div
       style={{
@@ -20,6 +23,7 @@ const Tag = (props) => {
           }}
         >
           <a
+            onClick={handelClick}
             className="fa flaticon-cancel"
             style={{
               position: "absolute",

@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import Tag from "../common/Tag-component";
 import ButtonModalProfilAdd from "../../pages/UserProfilePage-component/ButtonModalProfilAdd";
+import { deleteSkill } from "../../actions/resumeAction";
 
-const InterestCartList = ({ data, selectedMenuSection }) => {
+const InterestCartList = ({ data, selectedMenuSection, deleteInterest }) => {
   const formRef = useRef();
   return (
     <div className="row">
@@ -41,8 +42,10 @@ const InterestCartList = ({ data, selectedMenuSection }) => {
                       gridGap: "10px",
                     }}
                   >
-                    {data.map((element) => (
-                      <Tag key={element.id}>{element.name}</Tag>
+                    {data.map(({ id, name }) => (
+                      <Tag key={id} id={id} action={deleteInterest}>
+                        {name}
+                      </Tag>
                     ))}
                   </div>
                 </div>

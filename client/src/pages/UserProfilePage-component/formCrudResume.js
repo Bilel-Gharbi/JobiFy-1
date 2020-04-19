@@ -6,7 +6,7 @@ import {
   addProject,
   addLanguage,
   addAward,
-  newInterest,
+  addInterest,
 } from "../../actions/resumeAction";
 
 const formProps = {
@@ -91,7 +91,7 @@ const formProps = {
       name: "",
     },
     types: ["text"],
-    action: newInterest,
+    action: addInterest,
   },
 };
 
