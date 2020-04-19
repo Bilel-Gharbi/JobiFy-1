@@ -3,7 +3,7 @@ import Tag from "../common/Tag-component/index";
 
 import ButtonModalProfilAdd from "../../pages/UserProfilePage-component/ButtonModalProfilAdd";
 
-const SkillsCartList = ({ data, selectedMenuSection }) => {
+const SkillsCartList = ({ data, selectedMenuSection, deleteSkill }) => {
   const formRef = useRef();
   return (
     <div className="row">
@@ -42,8 +42,10 @@ const SkillsCartList = ({ data, selectedMenuSection }) => {
                       gridGap: "10px",
                     }}
                   >
-                    {data.map((element) => (
-                      <Tag key={element.id}>{element.name}</Tag>
+                    {data.map(({ id, name }) => (
+                      <Tag key={id} id={id} action={deleteSkill}>
+                        {name}
+                      </Tag>
                     ))}
                   </div>
                 </div>

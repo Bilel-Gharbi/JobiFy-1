@@ -31,3 +31,11 @@ export const technlogiesTabGenerator = (technologiesString) => {
 
   return technologiesTab;
 };
+
+/* const newSkills = state.resume.skills.filter(
+  (element) => element.id !== action.payload.id
+);
+ */
+export const filterElementFromState = (arr, element) => {
+  return arr.filter((el) => el.id !== element.id);
+};

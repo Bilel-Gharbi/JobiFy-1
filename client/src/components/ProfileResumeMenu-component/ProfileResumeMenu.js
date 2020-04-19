@@ -11,7 +11,7 @@ import {
   addProject,
   addLanguage,
   addAward,
-  newInterest,
+  addInterest,
 } from "../../actions/resumeAction";
 
 const ProfileResumeMenu = ({ menu }) => {
@@ -100,7 +100,7 @@ const ProfileResumeMenu = ({ menu }) => {
         name: "",
       },
       types: ["text"],
-      action: newInterest,
+      action: addInterest,
     },
   ];
 

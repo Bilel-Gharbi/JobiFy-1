@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
+import * as resumeActions from "../../actions/resumeAction";
 
 import formProps from "./formCrudResume";
 
@@ -19,20 +20,17 @@ const ProjectCartList = React.lazy(() =>
   import("../../components/ProjectCardList-component/ProjectCartList")
 );
 const AwardCartList = React.lazy(() =>
-  import("../../components/AwardCartLIst-component/AwardCartList")
+  import("../../components/AwardCartList-component/AwardCartList")
 );
-
 const SkillsCartList = React.lazy(() =>
   import("../../components/SkillsCartList-component/SkillsCartList")
 );
-
 const InterestCartList = React.lazy(() =>
   import("../../components/InterestsCartList-component/InterestCartList")
 );
-
 const CertificationCartList = React.lazy(() =>
   import(
-    "../../components/CertificationsCartLIst-component/CertificationsCartList"
+    "../../components/CertificationsCartList-component/CertificationsCartList"
   )
 );
 
@@ -44,26 +42,57 @@ const Form = React.lazy(() =>
   import("../../components/common/Form-component/Form")
 );
 
-const ProfileRightDetails = ({ selectedMenuSection, resume, userInfo }) => {
+const ProfileRightDetails = ({
+  selectedMenuSection,
+  resume,
+  userInfo,
+  ...props
+}) => {
   const formRef = useRef();
 
   const renderContent = () => {
     switch (selectedMenuSection) {
       case "Experiences":
-        return <ExperienceCartList data={resume.experiences} />;
+        return (
+          <ExperienceCartList
+            data={resume.experiences}
+            deleteExperience={props.deleteExperience}
+          />
+        );
       case "Educations":
-        return <EducationCartList data={resume.educations} />;
+        return (
+          <EducationCartList
+            data={resume.educations}
+            deleteEducation={props.deleteEducation}
+          />
+        );
       case "Certifications":
-        return <CertificationCartList data={resume.certificates} />;
+        return (
+          <CertificationCartList
+            data={resume.certificates}
+            deleteCertificate={props.deleteCertificate}
+          />
+        );
       case "Projects":
-        return <ProjectCartList data={resume.projects} />;
+        return (
+          <ProjectCartList
+            data={resume.projects}
+            deleteProject={props.deleteProject}
+          />
+        );
       case "Awards":
-        return <AwardCartList data={resume.awards} />;
+        return (
+          <AwardCartList
+            data={resume.awards}
+            deleteAwarad={props.deleteAwarad}
+          />
+        );
       case "Interests":
         return (
           <InterestCartList
             data={resume.interests}
             selectedMenuSection={selectedMenuSection}
+            deleteInterest={props.deleteInterest}
           />
         );
       case "Languages":
@@ -71,6 +100,7 @@ const ProfileRightDetails = ({ selectedMenuSection, resume, userInfo }) => {
           <LanguagesCartList
             data={resume.languages}
             selectedMenuSection={selectedMenuSection}
+            deleteLanguage={props.deleteLanguage}
           />
         );
       case "Skills":
@@ -78,6 +108,7 @@ const ProfileRightDetails = ({ selectedMenuSection, resume, userInfo }) => {
           <SkillsCartList
             data={resume.skills}
             selectedMenuSection={selectedMenuSection}
+            deleteSkill={props.deleteSkill}
           />
         );
 
@@ -126,16 +157,6 @@ const ProfileRightDetails = ({ selectedMenuSection, resume, userInfo }) => {
                 </h3>
               </div>
 
-              {/* <div className="kt-portlet__head-toolbar">
-                  <div
-                    className="kt-portlet__head-wrapper"
-                    onClick={() => console.log("hello")}
-                  >
-                    <button className="btn btn-label-brand btn-sm btn-icon btn-icon-md">
-                      <i className="flaticon2-add" />
-                    </button>
-                  </div>
-                </div> */}
               <div style={{ alignItems: "center", display: "flex" }}>
                 {renderModalButton()}
               </div>
@@ -150,6 +171,7 @@ const ProfileRightDetails = ({ selectedMenuSection, resume, userInfo }) => {
     </div>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     selectedMenuSection: state.UI.profileSection,
@@ -157,4 +179,6 @@ const mapStateToProps = (state) => {
     userInfo: state.userProfile.user,
   };
 };
-export default connect(mapStateToProps)(ProfileRightDetails);
+export default connect(mapStateToProps, { ...resumeActions })(
+  ProfileRightDetails
+);

@@ -4,7 +4,7 @@ import ButtonModalProfil from "../UserProfilePage-component/ButtonModalProfil";
 import Modal from "../../components/common/modal-component/Modal";
 import Form from "../../components/common/Form-component/Form";
 
-import {
+/* import {
   addExperience,
   addEducation,
   addSkill,
@@ -12,12 +12,12 @@ import {
   addProject,
   addLanguage,
   addAward,
-  newInterest,
-} from "../../actions/resumeAction";
+  addInterest,
+} from "../../actions/resumeAction"; */
 const InfoPage = () => {
   const formRef = useRef();
 
-  const formProps = {
+  /* const formProps = {
     //experience
     experience: {
       formState: {
@@ -99,9 +99,9 @@ const InfoPage = () => {
         name: "",
       },
       types: ["text"],
-      action: newInterest,
+      action: addInterest,
     },
-  };
+  }; */
 
   return (
     <div>
@@ -111,7 +111,7 @@ const InfoPage = () => {
       <Modal
         customButton={<ButtonModalProfil />}
         modalName="hello basic modal"
-        body={<Form ref={formRef} {...formProps.experience} />}
+        //body={<Form ref={formRef} {...formProps.experience} />}
       ></Modal>
     </div>
   );

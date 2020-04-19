@@ -29,6 +29,6 @@ yarn-error.log*
 /public/crud
 /public/custom
 /public/pages
-/public/dashbords
+/public/dashboards
 /public/layout
-/public/index2
+/public/index 2
