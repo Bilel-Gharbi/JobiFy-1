@@ -22,6 +22,7 @@ const EducationCart = ({ education, selectedMenuSection, deleteAction }) => {
             formRef={formRef}
             selectedMenuSection={selectedMenuSection}
             id={education.id}
+            formValue={education}
             deleteAction={deleteAction}
           />
         </div>

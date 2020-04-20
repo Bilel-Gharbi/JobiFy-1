@@ -6,6 +6,7 @@ const ExperienceCartList = ({
   deleteExperience,
   selectedMenuSection,
 }) => {
+  console.log(data);
   return (
     <div className="row">
       <div className="col-xl-12">

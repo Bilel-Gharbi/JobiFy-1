@@ -1,13 +1,4 @@
-import {
-  addExperience,
-  addEducation,
-  addSkill,
-  addCertificate,
-  addProject,
-  addLanguage,
-  addAward,
-  addInterest,
-} from "../../actions/resumeAction";
+import * as actions from "../../actions/resumeAction";
 
 const formProps = {
   //experience
@@ -15,26 +6,26 @@ const formProps = {
     formState: {
       startDate: "",
       endDate: "",
+      current: "",
       comapanyName: "",
       position: "",
       task: "",
-      current: "",
     },
-    types: ["date", "date", "text", "text", "text", "checkbox"],
-    action: addExperience,
+    types: ["date", "date", "checkbox", "text", "text", "text"],
+    action: { add: actions.addExperience, update: actions.updateExperience },
   },
   //education
   Educations: {
     formState: {
-      diplomaMajor: "",
-      diplomaType: "",
       startDate: "",
       endDate: "",
       establishment: "",
+      diplomaMajor: "",
+      diplomaType: "",
       description: "",
     },
-    types: ["text", "text", "date", "date", "text", "text"],
-    action: addEducation,
+    types: ["date", "date", "text", "text", "text", "text"],
+    action: { add: actions.addEducation, update: actions.updateEducation },
   },
   //new skills
   Skills: {
@@ -43,7 +34,7 @@ const formProps = {
       level: "",
     },
     types: ["text", "text"],
-    action: addSkill,
+    action: { add: actions.addSkill },
   },
   //new certif
   Certifications: {
@@ -53,7 +44,7 @@ const formProps = {
       organization: "",
     },
     types: ["text", "date", "text"],
-    action: addCertificate,
+    action: { add: actions.addCertificate, update: actions.updateCertificate },
   },
   // project
   Projects: {
@@ -64,7 +55,7 @@ const formProps = {
       link: "",
     },
     types: ["text", "text", "text", "text"],
-    action: addProject,
+    action: { add: actions.addProject, update: actions.updateProject },
   },
   // language
   Languages: {
@@ -73,7 +64,7 @@ const formProps = {
       level: "",
     },
     types: ["text", "text"],
-    action: addLanguage,
+    action: { add: actions.addLanguage },
   },
   // award
   Awards: {
@@ -83,7 +74,7 @@ const formProps = {
       date: "",
     },
     types: ["text", "text", "date"],
-    action: addAward,
+    action: { add: actions.addAward, update: actions.updateAward },
   },
   // interest
   Interests: {
@@ -91,7 +82,7 @@ const formProps = {
       name: "",
     },
     types: ["text"],
-    action: addInterest,
+    action: { add: actions.addInterest },
   },
 };
 

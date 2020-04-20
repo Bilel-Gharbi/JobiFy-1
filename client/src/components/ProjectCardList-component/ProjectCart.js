@@ -20,6 +20,7 @@ const ProjectCart = ({ project, deleteAction, selectedMenuSection }) => {
             selectedMenuSection={selectedMenuSection}
             id={project.id}
             deleteAction={deleteAction}
+            formValue={project}
           />
         </div>
       </div>
@@ -54,7 +55,9 @@ const ProjectCart = ({ project, deleteAction, selectedMenuSection }) => {
               }}
             >
               {technologiesTab.map((element, i) => (
-                <Tag key={i}>{element}</Tag>
+                <Tag key={i} deleteButton={false}>
+                  {element}
+                </Tag>
               ))}
             </div>
           </div>

@@ -39,7 +39,11 @@ const ModalComponent = (props) => {
     console.log(data);
     //console.log(props.body.props.action);
     //console.log(props.body.ref.current.state);
-    store.dispatch(action({ ...data }));
+    if (data.formId) {
+      store.dispatch(action.update(data.formId, data.formState));
+    } else {
+      store.dispatch(action.add({ ...data.formState }));
+    }
     toggle();
   };
   /* const renderModalMainButton = () => {

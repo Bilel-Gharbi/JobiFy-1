@@ -19,6 +19,7 @@ const CertificationCart = ({
             formRef={formRef}
             selectedMenuSection={selectedMenuSection}
             id={certification.id}
+            formValue={certification}
             deleteAction={deleteAction}
           />
         </div>
