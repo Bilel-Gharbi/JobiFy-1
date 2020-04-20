@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import ButtonModalProfilAddUpdate from "../../pages/UserProfilePage-component/ButtonsModalProfileAddUpdate";
+import ButtonModalProfilAddUpdate from "../common/ButtonsModalProfileAddUpdate-component";
 
 const CertificationCart = ({
   certification,

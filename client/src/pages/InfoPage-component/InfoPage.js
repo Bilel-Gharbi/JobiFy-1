@@ -1,8 +1,8 @@
 import React, { Component, useRef } from "react";
 
-import ButtonModalProfil from "../UserProfilePage-component/ButtonModalProfil";
+/* import ButtonModalProfil from "../UserProfilePage-component/ButtonModalProfil";
 import Modal from "../../components/common/modal-component/Modal";
-import Form from "../../components/common/Form-component/Form";
+import Form from "../../components/common/Form-component/Form"; */
 
 /* import {
   addExperience,
@@ -106,13 +106,13 @@ const InfoPage = () => {
   return (
     <div>
       Complete Your Info
-      <ButtonModalProfil></ButtonModalProfil>
+      {/* <ButtonModalProfil></ButtonModalProfil>
       <Modal customButton={<ButtonModalProfil />} />
       <Modal
         customButton={<ButtonModalProfil />}
         modalName="hello basic modal"
         //body={<Form ref={formRef} {...formProps.experience} />}
-      ></Modal>
+      ></Modal> */}
     </div>
   );
 };

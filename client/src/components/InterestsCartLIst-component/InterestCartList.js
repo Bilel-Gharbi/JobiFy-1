@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import Tag from "../common/Tag-component";
-import ButtonModalProfilAdd from "../../pages/UserProfilePage-component/ButtonModalProfilAdd";
-import { deleteSkill } from "../../actions/resumeAction";
+import ButtonModalProfilAdd from "../common/ButtonModalProfilAdd-component";
 
 const InterestCartList = ({ data, selectedMenuSection, deleteInterest }) => {
   const formRef = useRef();
