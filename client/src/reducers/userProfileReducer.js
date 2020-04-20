@@ -1,4 +1,4 @@
-import { filterElementFromState } from "../helper";
+import { filterElementFromState, updateElementFromState } from "../helper";
 
 const initialState = {
   user: null,
@@ -35,6 +35,19 @@ const userProfileReducer = (state = initialState, action) => {
         },
       };
 
+    case "UPDATE_EXPERIENCE":
+      const newUpdatedExperiences = updateElementFromState(
+        state.resume.experiences,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          experiences: [...newUpdatedExperiences],
+        },
+      };
+
     case "ADD_EDUCATION":
       return {
         ...state,
@@ -54,6 +67,19 @@ const userProfileReducer = (state = initialState, action) => {
         resume: {
           ...state.resume,
           educations: [...newEducations],
+        },
+      };
+
+    case "UPDATE_EDUCATION":
+      const newUpdatedEducations = updateElementFromState(
+        state.resume.educations,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          educations: [...newUpdatedEducations],
         },
       };
 
@@ -100,6 +126,19 @@ const userProfileReducer = (state = initialState, action) => {
         },
       };
 
+    case "UPDATE_CERTIFICATE":
+      const newUpdatedCertificates = updateElementFromState(
+        state.resume.certificates,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          certificates: [...newUpdatedCertificates],
+        },
+      };
+
     case "ADD_PROJECT":
       return {
         ...state,
@@ -119,6 +158,19 @@ const userProfileReducer = (state = initialState, action) => {
         resume: {
           ...state.resume,
           projects: [...newProjects],
+        },
+      };
+
+    case "UPDATE_PROJECT":
+      const newUpdatedProjects = updateElementFromState(
+        state.resume.projects,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          projects: [...newUpdatedProjects],
         },
       };
 
@@ -163,6 +215,18 @@ const userProfileReducer = (state = initialState, action) => {
         resume: {
           ...state.resume,
           awards: [...newAwards],
+        },
+      };
+    case "UPDATE_AWARD":
+      const newUpdatedAwards = updateElementFromState(
+        state.resume.awards,
+        action.payload
+      );
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          awards: [...newUpdatedAwards],
         },
       };
 

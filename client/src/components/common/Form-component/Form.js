@@ -5,11 +5,30 @@ import InputText from "../InputText-component/inputText";
 
 import "./Form.css";
 class Form extends Component {
-  state = {};
+  state = {
+    formState: {},
+    formId: null,
+  };
 
   componentWillMount() {
     //init from state depend from the formState props
-    this.setState({ ...this.props.formState }, () => console.log(this.state));
+    this.setState({ formState: { ...this.props.formState } }, () =>
+      console.log(this.state)
+    );
+
+    //set form default value for update
+    if (this.props.formValue) {
+      const {
+        id,
+        createdAt,
+        updatedAt,
+        ResumeId,
+        ...defaultValue
+      } = this.props.formValue;
+      this.setState({ formState: { ...defaultValue }, formId: id }, () =>
+        console.log(this.state)
+      );
+    }
   }
 
   handelInputChange = (e) => {
@@ -18,24 +37,36 @@ class Form extends Component {
 
     //check the type of input text to render and then we decide to set state depend on type
     type === "checkbox" || type === "radio"
-      ? this.setState({ [name]: !this.props.formState[name] }, () => {
-          //change the value of input checkbox or radio from true to false
-          this.props.formState[name] = !this.props.formState[name];
-          //console.log(this.state);
-        })
-      : this.setState({ [name]: e.target.value }, () =>
-          console.log(this.state)
+      ? this.setState(
+          {
+            formState: {
+              ...this.state.formState,
+              [name]: !this.props.formState[name],
+            },
+          },
+          () => {
+            //change the value of input checkbox or radio from true to false
+            this.props.formState[name] = !this.props.formState[name];
+            //console.log(this.state);
+          }
+        )
+      : this.setState(
+          { formState: { ...this.state.formState, [name]: e.target.value } },
+          () => console.log(this.state)
         );
   };
 
   initInputForm() {
     //iterate over the state keys
-    // this.props.type array to check the type
+    const { formState } = this.state;
+    const x = null;
     return (
       <div className="kt-form">
         <div className="kt-portlet__body">
-          {this.state &&
-            Object.keys(this.state).map((el, i) => {
+          {formState &&
+            Object.keys(formState).map((el, i) => {
+              const { types } = this.props;
+
               return (
                 <div key={el} className="form-group">
                   <InputText
@@ -46,8 +77,8 @@ class Form extends Component {
                     label={el}
                     placeholder={`${el} placeholder`}
                     onChange={this.handelInputChange}
-                    value={this.state[el]}
-                    type={this.props.types[i]}
+                    value={formState[el]}
+                    type={types[i]}
                   />
                 </div>
               );

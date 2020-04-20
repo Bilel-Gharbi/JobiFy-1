@@ -58,6 +58,7 @@ const ProfileRightDetails = ({
             data={resume.experiences}
             selectedMenuSection={selectedMenuSection}
             deleteExperience={props.deleteExperience}
+            updateExperience={props.updateExperience}
           />
         );
       case "Educations":
@@ -66,6 +67,7 @@ const ProfileRightDetails = ({
             data={resume.educations}
             selectedMenuSection={selectedMenuSection}
             deleteEducation={props.deleteEducation}
+            updateEducation={props.updateEducation}
           />
         );
       case "Certifications":
@@ -74,6 +76,7 @@ const ProfileRightDetails = ({
             data={resume.certificates}
             selectedMenuSection={selectedMenuSection}
             deleteCertificate={props.deleteCertificate}
+            updateCertificate={props.updateCertificate}
           />
         );
       case "Projects":
@@ -90,6 +93,7 @@ const ProfileRightDetails = ({
             data={resume.awards}
             selectedMenuSection={selectedMenuSection}
             deleteAward={props.deleteAward}
+            updateAward={props.updateAward}
           />
         );
       case "Interests":

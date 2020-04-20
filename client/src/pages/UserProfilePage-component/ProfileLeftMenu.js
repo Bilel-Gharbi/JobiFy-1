@@ -10,57 +10,11 @@ const MenuProfileList = React.lazy(() => import("./MenuProfileList"));
 
 class ProfileLeftMenu extends Component {
   state = {
-    list: [
-      {
-        section: "Experiences",
-        nb: this.props.resume.experiences.length,
-        icon: "flaticon2-shopping-cart",
-      },
-      {
-        section: "Educations",
-        nb: this.props.resume.educations.length,
-        icon: "flaticon2-file",
-      },
-      {
-        section: "Certifications",
-        nb: this.props.resume.certificates.length,
-        icon: "flaticon2-rocket",
-      },
-      {
-        section: "Projects",
-        nb: this.props.resume.projects.length,
-        icon: "flaticon2-rocket",
-      },
-      {
-        section: "Awards",
-        nb: this.props.resume.awards.length,
-        icon: "flaticon2-rocket",
-      },
-      {
-        section: "Skills",
-        nb: this.props.resume.skills.length,
-        icon: "flaticon2-layers",
-      },
-      {
-        section: "Languages",
-        nb: this.props.resume.languages.length,
-        icon: "flaticon2-rocket",
-      },
-      {
-        section: "Interests",
-        nb: this.props.resume.interests.length,
-        icon: "flaticon2-rocket",
-      },
-      {
-        section: "Applied Jobs",
-        nb: this.props.resume.applyedJob.length,
-        icon: "flaticon2-rocket",
-      },
-    ],
+    list: [],
   };
 
   //setup left menu
-  /* componentWillMount() {
+  componentWillMount() {
     this.setState({
       list: [
         {
@@ -109,8 +63,8 @@ class ProfileLeftMenu extends Component {
           icon: "flaticon2-rocket",
         },
       ],
-    }); 
-  }*/
+    });
+  }
   render() {
     return (
       <div className="kt-grid__item kt-app__toggle kt-app__aside">

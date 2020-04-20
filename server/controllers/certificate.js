@@ -10,7 +10,7 @@ const getResumeCertificates = async (req, res) => {
       status: "sucess",
       msg: `all certificates for Resume with id ${req.params.id}`,
       length: certificates.length,
-      data: certificates
+      data: certificates,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -26,7 +26,7 @@ const addResumeCertificate = async (req, res) => {
     res.status(201).json({
       status: "sucess",
       msg: `new certificate added to Resume with id ${req.params.id}`,
-      newCertificate
+      newCertificate,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -43,7 +43,7 @@ const addResumeManyCertificates = async (req, res) => {
     res.status(201).json({
       status: "sucess",
       msg: `Many certificates added to Resume with id ${req.params.id}`,
-      data: listCertificates
+      data: listCertificates,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -60,7 +60,7 @@ const deleteResumeCertificate = async (req, res) => {
     res.status(202).json({
       status: "sucess",
       msg: `Certificate ${req.params.id_certificate} deleted for the Resume with id ${req.params.id}`,
-      deletedCertificate
+      deletedCertificate,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -71,14 +71,14 @@ const deleteResumeCertificate = async (req, res) => {
 const updateResumeCertificate = async (req, res) => {
   const { id_certificate } = req.params;
   try {
-    newProject = await certificateOperations.updateCertificate(
+    newCertificate = await certificateOperations.updateCertificate(
       id_certificate,
       req.body
     );
     res.status(200).json({
       status: "sucess",
       msg: `Certificate ${req.params.id_certificate} updated for the Resume with id ${req.params.id}`,
-      newProject
+      newCertificate,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -90,5 +90,5 @@ module.exports = {
   addResumeManyCertificates,
   deleteResumeCertificate,
   updateResumeCertificate,
-  getResumeCertificates
+  getResumeCertificates,
 };

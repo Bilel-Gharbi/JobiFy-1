@@ -15,6 +15,7 @@ const AwardCart = ({ award, selectedMenuSection, deleteAction }) => {
             formRef={formRef}
             selectedMenuSection={selectedMenuSection}
             id={award.id}
+            formValue={award}
             deleteAction={deleteAction}
           />
         </div>

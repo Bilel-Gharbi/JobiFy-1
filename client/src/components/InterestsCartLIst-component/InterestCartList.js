@@ -43,7 +43,12 @@ const InterestCartList = ({ data, selectedMenuSection, deleteInterest }) => {
                     }}
                   >
                     {data.map(({ id, name }) => (
-                      <Tag key={id} id={id} action={deleteInterest}>
+                      <Tag
+                        key={id}
+                        id={id}
+                        deleteButton={true}
+                        action={deleteInterest}
+                      >
                         {name}
                       </Tag>
                     ))}

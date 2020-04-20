@@ -44,7 +44,12 @@ const LanguagesCartList = ({ data, selectedMenuSection, deleteLanguage }) => {
                     }}
                   >
                     {data.map(({ id, name }) => (
-                      <Tag key={id} id={id} action={deleteLanguage}>
+                      <Tag
+                        key={id}
+                        id={id}
+                        deleteButton={true}
+                        action={deleteLanguage}
+                      >
                         {name}
                       </Tag>
                     ))}

@@ -1,8 +1,8 @@
 import React from "react";
 
-const Tag = (props) => {
+const Tag = ({ deleteButton, action, id, children }) => {
   const handelClick = () => {
-    props.action(props.id);
+    action(id);
   };
   return (
     <div
@@ -22,17 +22,20 @@ const Tag = (props) => {
             margin: "0px 3px 0px 0px",
           }}
         >
-          <a
-            onClick={handelClick}
-            className="fa flaticon-cancel"
-            style={{
-              position: "absolute",
-              right: "0%",
-              top: "-4%",
-              cursor: "pointer",
-            }}
-          />
-          {props.children}
+          {deleteButton ? (
+            <a
+              onClick={handelClick}
+              className="fa flaticon-cancel"
+              style={{
+                position: "absolute",
+                right: "0%",
+                top: "-4%",
+                cursor: "pointer",
+              }}
+            />
+          ) : null}
+
+          {children}
         </span>
       </div>
     </div>

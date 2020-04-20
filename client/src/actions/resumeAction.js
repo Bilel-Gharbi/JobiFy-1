@@ -23,13 +23,16 @@ export const deleteExperience = (id) => async (dispatch, getState) => {
   });
 };
 
-export const updateExperience = (data) => async (dispatch, getState) => {
+export const updateExperience = (id, data) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
-  const experience = await resumeAPI.post(`${resumeId}/experience`, data);
+  const experience = await resumeAPI.patch(
+    `${resumeId}/experience/${id}`,
+    data
+  );
 
   return dispatch({
-    type: TYPE.ADD_EXPERIENCE,
-    payload: experience.data.data,
+    type: TYPE.UPDATE_EXPERIENCE,
+    payload: experience.data.newExperience,
   });
 };
 
@@ -55,12 +58,12 @@ export const deleteEducation = (id) => async (dispatch, getState) => {
   });
 };
 
-export const updateEducation = (data) => async (dispatch, getState) => {
+export const updateEducation = (id, data) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
-  const eduction = await resumeAPI.post(`${resumeId}/education`, data);
+  const eduction = await resumeAPI.patch(`${resumeId}/education/${id}`, data);
 
   return dispatch({
-    type: TYPE.ADD_EDUCATION,
+    type: TYPE.UPDATE_EDUCATION,
     payload: eduction.data.newEducation,
   });
 };
@@ -103,11 +106,14 @@ export const deleteCertificate = (id) => async (dispatch, getState) => {
     payload: deletedCertificate.data.deletedCertificate,
   });
 };
-export const updateCertificate = (data) => async (dispatch, getState) => {
+export const updateCertificate = (id, data) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
-  const newCertificate = await resumeAPI.post(`${resumeId}/certificate`, data);
+  const newCertificate = await resumeAPI.patch(
+    `${resumeId}/certificate/${id}`,
+    data
+  );
   return dispatch({
-    type: TYPE.ADD_CERTIFICATE,
+    type: TYPE.UPDATE_CERTIFICATE,
     payload: newCertificate.data.newCertificate,
   });
 };
@@ -128,11 +134,11 @@ export const deleteProject = (id) => async (dispatch, getState) => {
     payload: deletedProject.data.deletedProject,
   });
 };
-export const updateProject = (data) => async (dispatch, getState) => {
+export const updateProject = (id, data) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
-  const newProject = await resumeAPI.post(`${resumeId}/project`, data);
+  const newProject = await resumeAPI.patch(`${resumeId}/project/${id}`, data);
   return dispatch({
-    type: TYPE.ADD_PROJECT,
+    type: TYPE.UPDATE_PROJECT,
     payload: newProject.data.newProject,
   });
 };
@@ -173,11 +179,11 @@ export const deleteAward = (id) => async (dispatch, getState) => {
   });
 };
 
-export const updateAward = (data) => async (dispatch, getState) => {
+export const updateAward = (id, data) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
-  const newAward = await resumeAPI.post(`${resumeId}/award`, data);
+  const newAward = await resumeAPI.patch(`${resumeId}/award/${id}`, data);
   return dispatch({
-    type: TYPE.ADD_AWARD,
+    type: TYPE.UPDATE_AWARD,
     payload: newAward.data.newAward,
   });
 };

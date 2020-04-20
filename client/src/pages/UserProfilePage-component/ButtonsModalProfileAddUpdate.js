@@ -23,7 +23,13 @@ const ButtonModalProfilAddUpdate = ({
       <Modal
         customButton={<ButtonModalProfil icon={"flaticon2-refresh"} />}
         modalName={selectedMenuSection}
-        body={<Form ref={formRef} {...formProps[selectedMenuSection]} />}
+        body={
+          <Form
+            ref={formRef}
+            {...formProps[selectedMenuSection]}
+            formValue={props.formValue}
+          />
+        }
       />
     </>
   );

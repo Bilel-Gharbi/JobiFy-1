@@ -43,7 +43,12 @@ const SkillsCartList = ({ data, selectedMenuSection, deleteSkill }) => {
                     }}
                   >
                     {data.map(({ id, name }) => (
-                      <Tag key={id} id={id} action={deleteSkill}>
+                      <Tag
+                        key={id}
+                        id={id}
+                        deleteButton={true}
+                        action={deleteSkill}
+                      >
                         {name}
                       </Tag>
                     ))}

@@ -15,6 +15,7 @@ const ExperienceCart = ({ experience, deleteAction, selectedMenuSection }) => {
             formRef={formRef}
             selectedMenuSection={selectedMenuSection}
             id={experience.id}
+            formValue={experience}
             deleteAction={deleteAction}
           />
         </div>
