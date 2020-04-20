@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Tag from "../common/Tag-component";
-import ButtonModalProfilAddUpdate from "../../pages/UserProfilePage-component/ButtonsModalProfileAddUpdate";
+import ButtonModalProfilAddUpdate from "../common/ButtonsModalProfileAddUpdate-component";
 
 import { technlogiesTabGenerator } from "../../helper";
 

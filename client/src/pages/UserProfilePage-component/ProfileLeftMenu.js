@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//import UserProfileDescription from "./UserProfileDescription";
-//import MenuProfileList from "./MenuProfileList";
 
 const UserProfileDescription = React.lazy(() =>
   import("./UserProfileDescription")

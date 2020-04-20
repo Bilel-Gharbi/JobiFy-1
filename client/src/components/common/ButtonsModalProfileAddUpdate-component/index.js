@@ -1,8 +1,8 @@
 import React from "react";
-import Modal from "../../components/common/modal-component/Modal";
-import Form from "../../components/common/Form-component/Form";
-import ButtonModalProfil from "./ButtonModalProfil";
-import formProps from "./formCrudResume";
+import Modal from "../modal-component/Modal";
+import Form from "../Form-component/Form";
+import ButtonModalProfil from "../ButtonModalProfil-component";
+import formProps from "../../../pages/UserProfilePage-component/formCrudResume";
 
 const ButtonModalProfilAddUpdate = ({
   selectedMenuSection,

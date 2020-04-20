@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Tag from "../common/Tag-component/index";
 
-import ButtonModalProfilAdd from "../../pages/UserProfilePage-component/ButtonModalProfilAdd";
+import ButtonModalProfilAdd from "../common/ButtonModalProfilAdd-component";
 
 const SkillsCartList = ({ data, selectedMenuSection, deleteSkill }) => {
   const formRef = useRef();

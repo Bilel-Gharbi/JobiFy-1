@@ -34,7 +34,9 @@ const CertificationCartList = React.lazy(() =>
   )
 );
 
-const ButtonModalProfil = React.lazy(() => import("./ButtonModalProfil"));
+const ButtonModalProfil = React.lazy(() =>
+  import("../../components/common/ButtonModalProfil-component")
+);
 const Modal = React.lazy(() =>
   import("../../components/common/modal-component/Modal")
 );
