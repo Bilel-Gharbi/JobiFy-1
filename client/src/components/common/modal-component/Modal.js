@@ -16,6 +16,7 @@ const ModalComponent = (props) => {
     btnTwoText,
     action,
     customButton,
+    open,
   } = props;
 
   const [modal, setModal] = useState(false);
