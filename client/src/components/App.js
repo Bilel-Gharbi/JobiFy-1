@@ -44,6 +44,8 @@ const NewHeader = React.lazy(() =>
   import("../components/test-component/NewHeader")
 );
 
+const JobsPage = React.lazy(() => import("../pages/JobsPage-component"));
+
 class App extends React.Component {
   //changed from didmount to willMount
   componentWillMount() {
@@ -82,6 +84,7 @@ class App extends React.Component {
                 <Route exact path="/profile" component={UserProfilePage} />
                 <Route exact path="/dashboard" component={DashBoardPage} />
                 <Route exact path="/jobs" component={JobPage} />
+                <Route exact path="/jobsPage" component={JobsPage} />
               </div>
             </>
           </Switch>
