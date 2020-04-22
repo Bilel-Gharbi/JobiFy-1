@@ -6,6 +6,10 @@ export const checkBeforApply = (jobId, applyedJobTab) => {
   return _.any(applyedJobTab, { JobOfferId: jobId });
 };
 
+export const checkBeforeSave = (jobId, savedJobsTab) => {
+  return _.any(savedJobsTab, { id: jobId });
+};
+
 export const jobMatch = (resumeSkillsTab, jobOfferSkillsTab) => {
   //check how many Resume skills included in JobOffer skills
 
@@ -13,11 +17,11 @@ export const jobMatch = (resumeSkillsTab, jobOfferSkillsTab) => {
     .join(",")
     .toUpperCase()
     .split(",");
+
   let resumeSkills = _.pluck(resumeSkillsTab, "name")
     .join(",")
     .toUpperCase()
     .split(",");
-
   // return ratio by divded the number of skills included by the length of job offer skills
   return (
     (_.intersection(resumeSkills, jobSkills).length / jobSkills.length) * 100

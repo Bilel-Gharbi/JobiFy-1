@@ -1,7 +1,14 @@
-import React from "react";
-import Modal from "../../components/common/modal-component/Modal";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { applyToJob, fetechJobDetails } from "../../actions/jobsAction";
+import { withRouter } from "react-router-dom";
+import ApplyButton from "./ApplyButton";
+import DetailsButton from "./DetailsButton";
+import SaveButton from "./SaveButton";
 
-const JobCartHeader = ({ data }) => {
+import { checkBeforeSave } from "../../helper";
+
+const JobCartHeader = ({ data, isLoged, job, ...props }) => {
   const {
     companyName,
     jobPosition,
@@ -12,9 +19,41 @@ const JobCartHeader = ({ data }) => {
     type,
   } = data;
 
+  //save component
+  const [disabled, setDisabled] = useState(
+    checkBeforeSave(job.id, JSON.parse(localStorage.getItem("savedJobs")))
+  );
+  const [saveButtonProps, setSaveButtonProps] = useState({
+    text: "Save",
+    icon: null,
+  });
+
+  useEffect(() => {
+    if (disabled)
+      setSaveButtonProps({ text: "Saved", icon: "flaticon2-check-mark" });
+  }, []);
+
   const apply = () => {
-    console.log("hello");
-    return <Modal open={true} />;
+    //console.log("hello", props, isLoged);
+    if (!isLoged) {
+      props.history.push("/auth");
+    }
+  };
+
+  const showDetails = () => {
+    props.fetechJobDetails(job);
+    console.log("details");
+  };
+
+  const save = () => {
+    const savedJobs = localStorage.getItem("savedJobs");
+    if (savedJobs) {
+      const newSavedJobsTab = JSON.parse(savedJobs);
+      newSavedJobsTab.push(job);
+      localStorage.setItem("savedJobs", JSON.stringify(newSavedJobsTab));
+      setSaveButtonProps({ text: "Saved", icon: "flaticon2-check-mark" });
+      setDisabled(true);
+    }
   };
 
   return (
@@ -28,40 +67,16 @@ const JobCartHeader = ({ data }) => {
           </a>
         </div>
 
-        <div className="kt-widget__action">
-          <button
-            type="button"
-            className="btn btn-sm btn-upper"
-            style={{ background: "#edeff6" }}
-          >
-            Details
-          </button>
+        <div className="kt-widget__action" style={{ display: "flex" }}>
+          <DetailsButton showDetails={showDetails} />
           &nbsp;
-          {/* <button>
-            <Modal
-              customButton={
-                <button
-                  type="button"
-                  onClick={apply}
-                  className="btn btn-success btn-sm btn-upper"
-                >
-                  applu
-                </button>
-              }
-              modalName={"apply"}
-            />
-          </button> */}
-          <button
-            type="button"
-            onClick={apply}
-            className="btn btn-success btn-sm btn-upper"
-          >
-            Apply
-          </button>
+          <ApplyButton apply={apply} />
           &nbsp;
-          <button type="button" className="btn btn-brand btn-sm btn-upper">
-            Save
-          </button>
+          <SaveButton
+            save={save}
+            disabled={disabled}
+            saveButtonProps={saveButtonProps}
+          />
         </div>
       </div>
       {/* tags header */}
@@ -88,4 +103,6 @@ const JobCartHeader = ({ data }) => {
   );
 };
 
-export default JobCartHeader;
+export default withRouter(
+  connect(null, { applyToJob, fetechJobDetails })(JobCartHeader)
+);

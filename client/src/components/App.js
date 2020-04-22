@@ -54,7 +54,14 @@ class App extends React.Component {
     if (token) {
       store.dispatch(fetechUserData(token));
     }
+
+    //set savedJobs Array ;
+    let savedJobs = localStorage.getItem("savedJobs");
+    if (!savedJobs) {
+      localStorage.setItem("savedJobs", "[]");
+    }
   }
+
   renderRouteOrRedirect = (condition, routeDirection, otherRoute) => {
     return condition ? (
       <Redirect to={`${routeDirection}`} />

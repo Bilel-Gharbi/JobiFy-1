@@ -14,9 +14,8 @@ const ModalComponent = (props) => {
     modalName,
     btnOneText,
     btnTwoText,
-    action,
+    modalAction,
     customButton,
-    open,
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -25,8 +24,8 @@ const ModalComponent = (props) => {
     setModal(!modal);
   };
   const executeActionAndToggle = () => {
-    const { action } = props.body.props;
-    const data = props.body.ref.current.state;
+    //const { action } = props.body.props;
+    //const data = props.body.ref.current.state;
     //get the form state from props or children using ref
 
     /*   let stateFormValue;
@@ -37,15 +36,26 @@ const ModalComponent = (props) => {
   */
     //dispatch action
     //TODO: validation before dispatch actions
-    console.log(data);
+    //console.log(data);
     //console.log(props.body.props.action);
     //console.log(props.body.ref.current.state);
-    if (data.formId) {
-      store.dispatch(action.update(data.formId, data.formState));
-    } else {
-      store.dispatch(action.add({ ...data.formState }));
+    console.log(modalAction);
+    if (modalAction) {
+      modalAction();
+      toggle();
+      return;
     }
-    toggle();
+    if (body.props.action) {
+      const { action } = body.props;
+      if (body.ref.current.state.formId) {
+        const data = body.ref.current.state;
+        store.dispatch(action.update(data.formId, data.formState));
+      } else {
+        const data = body.ref.current.state;
+        store.dispatch(action.add({ ...data.formState }));
+      }
+      toggle();
+    } else toggle();
   };
   /* const renderModalMainButton = () => {
     if (customButton) {
