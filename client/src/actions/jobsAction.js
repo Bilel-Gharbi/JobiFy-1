@@ -7,10 +7,10 @@ import {
   CLEAR_ERRORS,
   RETURN_ERRORS,
   FETCH_JOB_DETAILS,
-  SET_DEFAULT_JOB_DETAILS
+  SET_DEFAULT_JOB_DETAILS,
 } from "./type";
 
-export const fetechJobs = () => async dispatch => {
+export const fetechJobs = () => async (dispatch) => {
   const response = await JobsAPI.get("/all");
   //let payload = response.data.data;
 
@@ -18,40 +18,41 @@ export const fetechJobs = () => async dispatch => {
   dispatch({
     type: SET_DEFAULT_JOB_DETAILS,
     payload: {
-      jobDetails: response.data.data[0]
-    }
+      jobDetails: response.data.data[0],
+    },
   });
 
   return dispatch({
     type: FETCH_JOBS,
     payload: {
-      jobs: response.data.data
-    }
+      jobs: response.data.data,
+    },
   });
 };
 
-export const fetechJobDetails = job => dispatch => {
+export const fetechJobDetails = (job) => (dispatch) => {
   return dispatch({
     type: FETCH_JOB_DETAILS,
     payload: {
-      jobDetails: job
-    }
+      jobDetails: job,
+    },
   });
 };
 
-export const applyToJob = (jobId, resumeId) => async dispatch => {
+export const applyToJob = (jobId) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
   console.log(" applyToJob  action fired ", jobId, resumeId);
   try {
     let response = await JobsAPI.post(`apply/${jobId}/${resumeId}`);
     //let payload = response.data.data;
     // clear error
     dispatch({
-      type: CLEAR_ERRORS
+      type: CLEAR_ERRORS,
     });
     //dispatch apply to job
     return dispatch({
       type: APPLY_JOB,
-      payload: response.data.applyToJob
+      payload: response.data.applyToJob,
     });
   } catch (err) {
     //error
@@ -60,8 +61,8 @@ export const applyToJob = (jobId, resumeId) => async dispatch => {
       payload: {
         id: "apply to job",
         message: err.response.data.err,
-        status: err.response.data.status
-      }
+        status: err.response.data.status,
+      },
     });
   }
 };

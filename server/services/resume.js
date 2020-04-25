@@ -10,7 +10,7 @@ const {
   Experience,
   Education,
   Language,
-  User
+  User,
 } = require("../models");
 
 const getAllResume = async () => {
@@ -23,7 +23,7 @@ const getAllResume = async () => {
 };
 
 //Done
-const getUserResumeDetails = async userId => {
+const getUserResumeDetails = async (userId) => {
   try {
     let user = await User.findByPk(userId);
     let userResume = await Resume.findOne({ where: { UserId: userId } });
@@ -61,7 +61,7 @@ const getUserResumeDetails = async userId => {
       languages,
       awards,
       interests,
-      applyedJob
+      applyedJob,
     };
     return { user, resume };
   } catch (err) {
@@ -74,7 +74,7 @@ const applyToJobOffer = async (ResumeId, JobOfferId) => {
   try {
     //check befor applying
     let applyed = await Applicant.findOne({
-      where: { ResumeId, JobOfferId }
+      where: { ResumeId, JobOfferId },
     });
     if (!applyed) {
       //add to table
@@ -90,5 +90,5 @@ const applyToJobOffer = async (ResumeId, JobOfferId) => {
 module.exports = {
   getAllResume,
   getUserResumeDetails,
-  applyToJobOffer
+  applyToJobOffer,
 };

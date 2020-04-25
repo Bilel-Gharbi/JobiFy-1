@@ -6,9 +6,9 @@ import ApplyButton from "./ApplyButton";
 import DetailsButton from "./DetailsButton";
 import SaveButton from "./SaveButton";
 
-import { checkBeforeSave } from "../../helper";
+import { checkBeforeSave, checkBeforApply } from "../../helper";
 
-const JobCartHeader = ({ data, isLoged, job, ...props }) => {
+const JobCartHeader = ({ data, isLoged, applyedJob, job, ...props }) => {
   const {
     companyName,
     jobPosition,
@@ -20,7 +20,7 @@ const JobCartHeader = ({ data, isLoged, job, ...props }) => {
   } = data;
 
   //save component
-  const [disabled, setDisabled] = useState(
+  const [saveDisabled, setSaveDisabled] = useState(
     checkBeforeSave(job.id, JSON.parse(localStorage.getItem("savedJobs")))
   );
   const [saveButtonProps, setSaveButtonProps] = useState({
@@ -28,21 +28,36 @@ const JobCartHeader = ({ data, isLoged, job, ...props }) => {
     icon: null,
   });
 
+  //apply button
+  const [applyDisabled, setApplyDisabled] = useState(
+    checkBeforApply(job.id, applyedJob)
+  );
+  const [applyButtonProps, setApplyButtonProps] = useState({
+    text: "Apply",
+    icon: null,
+  });
+
   useEffect(() => {
-    if (disabled)
+    if (saveDisabled)
       setSaveButtonProps({ text: "Saved", icon: "flaticon2-check-mark" });
+
+    if (applyDisabled)
+      setApplyButtonProps({ text: "Applyed", icon: "flaticon2-check-mark" });
   }, []);
 
   const apply = () => {
-    //console.log("hello", props, isLoged);
     if (!isLoged) {
       props.history.push("/auth");
+      return;
     }
+    //dispatch action
+    props.applyToJob(job.id);
+    setApplyButtonProps({ text: "Applyed", icon: "flaticon2-check-mark" });
+    setApplyDisabled(true);
   };
 
   const showDetails = () => {
     props.fetechJobDetails(job);
-    console.log("details");
   };
 
   const save = () => {
@@ -52,7 +67,7 @@ const JobCartHeader = ({ data, isLoged, job, ...props }) => {
       newSavedJobsTab.push(job);
       localStorage.setItem("savedJobs", JSON.stringify(newSavedJobsTab));
       setSaveButtonProps({ text: "Saved", icon: "flaticon2-check-mark" });
-      setDisabled(true);
+      setSaveDisabled(true);
     }
   };
 
@@ -68,13 +83,19 @@ const JobCartHeader = ({ data, isLoged, job, ...props }) => {
         </div>
 
         <div className="kt-widget__action" style={{ display: "flex" }}>
-          <DetailsButton showDetails={showDetails} />
+          <DetailsButton showDetails={showDetails} job={job} save={save} />
           &nbsp;
-          <ApplyButton apply={apply} />
+          <ApplyButton
+            apply={apply}
+            disabled={applyDisabled}
+            applyButtonProps={applyButtonProps}
+            userInfo={{ info: props.userInfo, email: props.email }}
+            isLoged={isLoged}
+          />
           &nbsp;
           <SaveButton
             save={save}
-            disabled={disabled}
+            disabled={saveDisabled}
             saveButtonProps={saveButtonProps}
           />
         </div>
@@ -103,6 +124,13 @@ const JobCartHeader = ({ data, isLoged, job, ...props }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userProfile.user,
+    email: state.auth.email,
+  };
+};
+
 export default withRouter(
-  connect(null, { applyToJob, fetechJobDetails })(JobCartHeader)
+  connect(mapStateToProps, { applyToJob, fetechJobDetails })(JobCartHeader)
 );

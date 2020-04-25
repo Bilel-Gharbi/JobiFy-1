@@ -1,7 +1,8 @@
 import React from "react";
 import Modal from "../../components/common/modal-component/Modal";
+import { checkBeforeSave } from "../../helper";
 
-const DetailsButton = ({ showDetails }) => {
+const DetailsButton = ({ showDetails, job, save }) => {
   const customButton = () => {
     return (
       <button
@@ -14,19 +15,46 @@ const DetailsButton = ({ showDetails }) => {
       </button>
     );
   };
-  const modalAction = () => {
-    console.log("modal action from details button component");
+  const checkSavedJobs = () => {
+    let jobs = JSON.parse(localStorage.getItem("savedJobs"));
+    return checkBeforeSave(job.id, jobs);
+  };
+  const JobDetails = () => {
+    return (
+      <div className="kt-portlet__body">
+        <h3>{job.Company.companyName}</h3>
+        <b>{job.jobDescription}</b>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled. Lorem Ipsum is simply dummy text of the printing and
+        typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type
+        and scrambled. Lorem Ipsum is simply dummy text of the printing and
+        typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type
+        and scrambled. Lorem Ipsum is simply dummy text of the printing and
+        typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type
+        and scrambled. Lorem Ipsum is simply dummy text of the printing and
+        typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type
+        and scrambled. Lorem Ipsum is simply dummy text of the printing and
+        typesetting industry.
+      </div>
+    );
   };
   return (
     <>
       {
         <Modal
-          modalName="Job offer details "
+          modalName={`${job.jobPosition}`}
           customButton={customButton()}
-          modalAction={modalAction}
+          modalAction={() => save()}
           btnOneText="Close"
           btnTwoText="Save"
-          body={<div>job details component</div>}
+          btnTwoDisabled={checkSavedJobs()}
+          body={<JobDetails />}
         />
       }
     </>

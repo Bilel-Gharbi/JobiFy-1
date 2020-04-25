@@ -54,8 +54,7 @@ export const login = (obj) => async (dispatch) => {
         isLoged: true,
         token: response.data.result.token,
         userType: response.data.result.type,
-        /*  profile: response.data.result.profile,
-        userData: response.data.result.profileDetails */
+        email: response.data.result.email,
       },
     });
   } catch (err) {
@@ -170,8 +169,7 @@ export const fetechUserData = (token) => async (dispatch) => {
         isLoged: true,
         token: response.data.result.token,
         userType: response.data.result.type,
-        /* profile: response.data.result.profile,
-        userData: response.data.result.profileDetails */
+        email: response.data.result.email,
       },
     });
   } catch (err) {

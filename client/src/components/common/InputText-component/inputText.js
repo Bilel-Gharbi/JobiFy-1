@@ -3,7 +3,7 @@ import React from "react";
 import "./inputText.css";
 
 const InputText = (props) => {
-  const { label, placeholder, onChange, value, name, type } = props;
+  const { label, placeholder, onChange, value, name, type, disabled } = props;
 
   let dateString = "";
   if (type === "date") dateString = value.slice(0, 10);
@@ -19,6 +19,7 @@ const InputText = (props) => {
           onChange={onChange}
           placeholder={placeholder}
           name={name}
+          disabled={disabled}
         />
       </div>
     </div>

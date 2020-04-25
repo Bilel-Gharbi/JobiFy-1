@@ -2,7 +2,7 @@ const {
   authServices,
   companyServices,
   userServices,
-  resumeServices
+  resumeServices,
 } = require("../services");
 
 const bcrypt = require("bcryptjs");
@@ -13,7 +13,7 @@ const bcrypt = require("bcryptjs");
 //import helper function
 const { verifyToken, decodeToken, signNewToken } = require("../helper");
 
-const signUp = async data => {
+const signUp = async (data) => {
   const { password, type } = data;
   try {
     let userExist = await authServices.checkUniqueUser(data.email);
@@ -24,10 +24,6 @@ const signUp = async data => {
       //auth service
       newAuth = await authServices.signUp(data);
 
-      //asign a token
-      /* const token = await jwt.sign({ authId: newAuth.id }, jwtSecretKey, {
-        expiresIn: TokenExpDate
-      }); */
       const token = await signNewToken({ authId: newAuth.id });
 
       //create user or compnay table
@@ -47,35 +43,33 @@ const signUp = async data => {
   }
 };
 
-const login = async data => {
+const login = async (data) => {
   const { password, email } = data;
   try {
     let userExist = await authServices.checkUniqueUser(email);
+
     if (userExist) {
       const correctPassword = await bcrypt.compare(
         password,
         userExist.password
       );
-      //asign token
-      /* const token = await jwt.sign(
-        { authId: userExist.id, autType: userExist.type },
-        jwtSecretKey,
-        {
-          expiresIn: TokenExpDate
-        }
-      ); */
+
       const token = await signNewToken({
         authId: userExist.id,
-        autType: userExist.type
+        autType: userExist.type,
       });
       if (correctPassword) {
         const { type } = userExist;
         let profile = await authServices.login(userExist.id);
+
+        //normal user profile Id to fetch profile resume data
+        let profileId = profile.profile.id;
+
         let profileDetails =
           (await companyServices.getCompanyDetails(userExist.id)) ||
-          (await resumeServices.getUserResumeDetails(profile.id));
+          (await resumeServices.getUserResumeDetails(profileId));
 
-        return { type, token, profile, profileDetails };
+        return { type, token, profile, profileDetails, email };
       }
     }
   } catch (err) {
@@ -83,23 +77,26 @@ const login = async data => {
   }
 };
 
-const fetchAuthData = async token => {
+const fetchAuthData = async (token) => {
   try {
     let valid = await verifyToken(token);
     // if the token is valid without err message or err name
     if (!valid.name) {
       token = await signNewToken({
         authId: valid.authId,
-        autType: valid.autType
+        autType: valid.autType,
       });
       //get type from token
       const type = valid.autType;
-      let profile = await authServices.login(valid.authId);
+      let auth = await authServices.login(valid.authId);
       let profileDetails =
         (await companyServices.getCompanyDetails(valid.authId)) ||
-        (await resumeServices.getUserResumeDetails(profile.id));
+        (await resumeServices.getUserResumeDetails(auth.profile.id));
 
-      return { type, token, profile, profileDetails };
+      let profile = auth.profile;
+      let email = auth.email;
+      console.log(email);
+      return { type, token, profile, profileDetails, email };
     }
   } catch (err) {
     console.log("fetchAuthData operation error ", err);
@@ -109,5 +106,5 @@ const fetchAuthData = async token => {
 module.exports = {
   signUp,
   login,
-  fetchAuthData
+  fetchAuthData,
 };
