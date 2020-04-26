@@ -6,10 +6,29 @@ const getAllJobOffers = async () => {
     let jobs = await JobOffer.findAll({
       include: [
         {
-          model: Company
-        }
-      ]
+          model: Company,
+        },
+      ],
     });
+    return jobs;
+  } catch (err) {
+    console.log("JobOfferService /getAllJobOffer Eroor ", err);
+  }
+};
+
+//service used in middleware
+const paginateAllJobOffers = async (limit, offset) => {
+  try {
+    let jobs = await JobOffer.findAndCountAll({
+      include: [
+        {
+          model: Company,
+        },
+      ],
+      offset,
+      limit,
+    });
+
     return jobs;
   } catch (err) {
     console.log("JobOfferService /getAllJobOffer Eroor ", err);
@@ -27,7 +46,7 @@ const addCompanyJobOffer = async (data, id) => {
   }
 };
 
-const getCompanyJobOffers = async id => {
+const getCompanyJobOffers = async (id) => {
   try {
     let company = await Company.findByPk(id);
     let allJobOffers = await company.getJobOffers();
@@ -82,7 +101,7 @@ const addSkillToJobOffer = async (idJobOffer, data) => {
 };
 //Add many skills to job offer
 //done
-const addManySkillsToJobOffer = async data => {
+const addManySkillsToJobOffer = async (data) => {
   try {
     await Skill.sync({ force: false });
     let newJobSkills = await Skill.bulkCreate(data);
@@ -92,7 +111,7 @@ const addManySkillsToJobOffer = async data => {
   }
 };
 
-const getJobOfferSkills = async id => {
+const getJobOfferSkills = async (id) => {
   try {
     let jobOffer = await JobOffer.findByPk(id);
     let allJobOfferSkills = await jobOffer.getSkills();
@@ -103,11 +122,12 @@ const getJobOfferSkills = async id => {
 };
 module.exports = {
   getAllJobOffers,
+  paginateAllJobOffers,
   addCompanyJobOffer,
   getCompanyJobOffers,
   deleteCompanyJobOffer,
   updateCompanyJobOffer,
   addSkillToJobOffer,
   addManySkillsToJobOffer,
-  getJobOfferSkills
+  getJobOfferSkills,
 };

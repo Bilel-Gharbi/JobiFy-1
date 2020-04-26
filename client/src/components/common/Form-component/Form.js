@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Button from "../Button-component/Button";
+import ReCaptcha from "../../common/ReCaptcha";
 import InputText from "../InputText-component/inputText";
 
 import "./Form.css";
@@ -8,6 +9,7 @@ class Form extends Component {
   state = {
     formState: {},
     formId: null,
+    verifiedCaptcha: false,
   };
 
   componentWillMount() {
@@ -59,13 +61,12 @@ class Form extends Component {
   initInputForm() {
     //iterate over the state keys
     const { formState } = this.state;
-    const x = null;
     return (
       <div className="kt-form">
         <div className="kt-portlet__body">
           {formState &&
             Object.keys(formState).map((el, i) => {
-              const { types } = this.props;
+              const { types, disabledFiled } = this.props;
 
               return (
                 <div key={el} className="form-group">
@@ -79,6 +80,7 @@ class Form extends Component {
                     onChange={this.handelInputChange}
                     value={formState[el]}
                     type={types[i]}
+                    disabled={disabledFiled ? disabledFiled[i] : null}
                   />
                 </div>
               );
@@ -90,21 +92,33 @@ class Form extends Component {
 
   onHandelSubmit = (e) => {
     e.preventDefault();
-
     //action passed to the form
     console.log(this.state);
   };
 
+  //captcha verfication function
+  verifyCallback = (response) => {
+    if (response)
+      this.setState({ verifiedCaptcha: true }, () => console.log(this.state));
+  };
+
   render() {
-    //button
-    const { withSubmitButton } = this.props;
+    const { withSubmitButton, withReCaptcha } = this.props;
 
     return (
-      <form onSubmit={this.onHandelSubmit}>
-        {<>{this.initInputForm()}</>}
-        <> {this.props.children} </>
-        {withSubmitButton ? <Button type="submit">Form Button</Button> : null}
-      </form>
+      <>
+        <form onSubmit={this.onHandelSubmit}>
+          {<>{this.initInputForm()}</>}
+          <> {this.props.children} </>
+          {withSubmitButton ? <Button type="submit">Form Button</Button> : null}
+
+          {withReCaptcha ? (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <ReCaptcha verifyCallback={(res) => this.verifyCallback(res)} />
+            </div>
+          ) : null}
+        </form>
+      </>
     );
   }
 }

@@ -21,8 +21,34 @@ const getAllJoboffers = async () => {
     console.log("getAllJoboffers / JobOfferOperations error ", err);
   }
 };
+
+//pagination
+const paginateAllJoboffers = async (limit, offset) => {
+  try {
+    const result = await jobOfferServices.paginateAllJobOffers(limit, offset);
+    //loop throughth job table use getJobOfferSkills service to get skills for each job
+    skillsTab = [];
+    for (let i = 0; i < result.rows.length; i++) {
+      let jobSkills = await jobOfferServices.getJobOfferSkills(
+        result.rows[i].dataValues.id
+      );
+      skillsTab.push(jobSkills);
+    }
+    //Modify the result table that contain all job offer bu adding new key jobSkills include the skills related to this jobOffer
+    result.rows.map((el, i) => {
+      el.dataValues["jobSkills"] = skillsTab[i];
+    });
+    //return jobOffer array with skills for each job offer
+    return result;
+  } catch (err) {
+    console.log(
+      "paginateAllJoboffers / paginateAllJoboffersOperation error ",
+      err
+    );
+  }
+};
 //done
-const getJobOffers = async id => {
+const getJobOffers = async (id) => {
   try {
     result = await jobOfferServices.getCompanyJobOffers(id);
     return result;
@@ -73,7 +99,7 @@ const addJobOfferSkill = async (idJobOffer, data) => {
 
 //add one skills to one joboffer
 const addJobOfferSkills = async (idJobOffer, data) => {
-  data.map(el => (el.JobOfferId = idJobOffer));
+  data.map((el) => (el.JobOfferId = idJobOffer));
   try {
     result = await jobOfferServices.addManySkillsToJobOffer(data);
     return result;
@@ -82,7 +108,7 @@ const addJobOfferSkills = async (idJobOffer, data) => {
   }
 };
 
-const getJobOfferSkills = async id => {
+const getJobOfferSkills = async (id) => {
   try {
     result = await jobOfferServices.getJobOfferSkills(id);
     return result;
@@ -93,11 +119,11 @@ const getJobOfferSkills = async id => {
 
 module.exports = {
   getAllJoboffers,
-  getJobOffers,
+  paginateAllJoboffers,
   addJobOffer,
   deleteJobOffer,
   updateJobOffer,
   addJobOfferSkills,
   addJobOfferSkill,
-  getJobOfferSkills
+  getJobOfferSkills,
 };

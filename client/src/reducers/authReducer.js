@@ -2,8 +2,7 @@ const initialState = {
   isLoged: false,
   token: localStorage.getItem("token"),
   userType: null,
-  profile: {},
-  userData: {}
+  email: "",
 };
 
 const authReducer = (state = initialState, action) => {
@@ -22,7 +21,6 @@ const authReducer = (state = initialState, action) => {
         ...state,
         token: null,
         isLoged: false,
-        userData: []
       };
 
     case "LOGIN_SUCESS":
@@ -31,7 +29,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         token: localStorage.getItem("token"),
-        isLoged: true
+        isLoged: true,
       };
     default:
       return state;

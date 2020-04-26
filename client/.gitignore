@@ -31,5 +31,5 @@ yarn-error.log*
 /public/pages
 /public/dashboards
 /public/layout
-/public/index2
-/public/comp
+/public/index2.html
+/public/comp.html

@@ -1,19 +1,21 @@
 //import User model from models/index.js file
 const { Auth, User, Company } = require("../models");
 
-const login = async AuthId => {
+const login = async (AuthId) => {
   try {
     let profile =
       (await User.findOne({ where: { AuthId: AuthId } })) ||
       (await Company.findOne({ where: { AuthId: AuthId } }));
 
-    return profile;
+    let auth = await Auth.findByPk(AuthId);
+
+    return { profile, email: auth.email };
   } catch (err) {
     console.log("AuthService / login  Error ", err);
   }
 };
 
-const signUp = async data => {
+const signUp = async (data) => {
   try {
     await Auth.sync({ force: false });
     let newAuth = await Auth.create({ ...data });
@@ -23,7 +25,7 @@ const signUp = async data => {
   }
 };
 
-const checkUniqueUser = async email => {
+const checkUniqueUser = async (email) => {
   try {
     await Auth.sync({ force: false });
     let user = await Auth.findOne({ where: { email } });
@@ -41,5 +43,5 @@ const checkUniqueUser = async email => {
 module.exports = {
   signUp,
   login,
-  checkUniqueUser
+  checkUniqueUser,
 };

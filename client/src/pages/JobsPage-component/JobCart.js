@@ -5,8 +5,7 @@ import JobCartMatching from "./JobCartMatching";
 import JobCartHeader from "./JobCartHeader";
 
 import { jobMatch } from "../../helper";
-const JobCart = ({ job, userSkills }) => {
-  //const { job, userSkills } = props;
+const JobCart = ({ job, userSkills, isLoged, applyedJob }) => {
   const {
     Company,
     jobSkills,
@@ -17,8 +16,11 @@ const JobCart = ({ job, userSkills }) => {
   } = job;
   const { location, companyName, type } = Company;
   //function return matching rate
+
+  //FIXME: userSkills tab
   const matchRate = jobMatch(userSkills, jobSkills);
-  const JobCartHeaderDate = {
+
+  const JobCartHeaderData = {
     location,
     type,
     companyName,
@@ -36,7 +38,12 @@ const JobCart = ({ job, userSkills }) => {
               <img src={Company.logo} alt="image" />
             </div>
             <div className="kt-widget__content">
-              <JobCartHeader data={JobCartHeaderDate} />
+              <JobCartHeader
+                data={JobCartHeaderData}
+                isLoged={isLoged}
+                applyedJob={applyedJob}
+                job={job}
+              />
 
               {/* job description */}
               <div className="kt-widget__info" style={{ display: "flex" }}>
@@ -74,8 +81,12 @@ const JobCart = ({ job, userSkills }) => {
   );
 };
 const mapStateToProps = (state) => {
-  return {
-    userSkills: state.userProfile.resume.skills,
-  };
+  if (state.auth.isLoged) {
+    return {
+      userSkills: state.userProfile.resume.skills,
+      applyedJob: state.userProfile.resume.applyedJob,
+    };
+  }
+  return state;
 };
 export default connect(mapStateToProps, null)(JobCart);

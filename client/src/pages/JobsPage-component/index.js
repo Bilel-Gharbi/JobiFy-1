@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { fetechJobs } from "../../actions/jobsAction";
 
 import JobCartList from "./JobCartList";
+import SearchBar from "./SearchBar";
+import PaginationBar from "./PaginationBar";
 
 const JobsPage = ({ ...props }) => {
-  //useEffect(async () => await props.fetchJobsData(), []);
-
   useEffect(() => {
-    props.fetechJobs();
+    props.fetechJobs(1, props.limitPagination);
   }, []);
 
   return (
@@ -16,10 +16,10 @@ const JobsPage = ({ ...props }) => {
       className="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
       id="kt_content"
     >
-      {/* <JobCart /> */}
       <div className="kt-container  kt-grid__item kt-grid__item--fluid">
-        <div>this is jobs page</div>
-        <div>search bar component </div>
+        <SearchBar />
+        <PaginationBar />
+
         <JobCartList data={props} />
       </div>
     </div>
@@ -27,11 +27,13 @@ const JobsPage = ({ ...props }) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     jobs: state.jobs.jobs,
     isLoged: state.auth.isLoged,
     userProfile: state.userProfile,
     jobDetails: state.jobs.jobDetails,
+    limitPagination: state.UI.limit,
   };
 };
 
