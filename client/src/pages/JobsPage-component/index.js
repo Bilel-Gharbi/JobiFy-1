@@ -8,7 +8,7 @@ import PaginationBar from "./PaginationBar";
 
 const JobsPage = ({ ...props }) => {
   useEffect(() => {
-    props.fetechJobs();
+    props.fetechJobs(1, props.limitPagination);
   }, []);
 
   return (
@@ -27,11 +27,13 @@ const JobsPage = ({ ...props }) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     jobs: state.jobs.jobs,
     isLoged: state.auth.isLoged,
     userProfile: state.userProfile,
     jobDetails: state.jobs.jobDetails,
+    limitPagination: state.UI.limit,
   };
 };
 

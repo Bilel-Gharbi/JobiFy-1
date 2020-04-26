@@ -8,10 +8,17 @@ import {
   RETURN_ERRORS,
   FETCH_JOB_DETAILS,
   SET_DEFAULT_JOB_DETAILS,
+  SET_DATA_LENGTH,
 } from "./type";
 
-export const fetechJobs = () => async (dispatch) => {
-  const response = await JobsAPI.get("/all");
+export const fetechJobs = (page, limit) => async (dispatch) => {
+  let response;
+  if (page && limit) {
+    response = await JobsAPI.get(`/all?page=${page}&limit=${limit}`);
+  } else {
+    response = await JobsAPI.get("/all");
+  }
+
   //let payload = response.data.data;
 
   //dispatch set default jobdetails
@@ -20,6 +27,11 @@ export const fetechJobs = () => async (dispatch) => {
     payload: {
       jobDetails: response.data.data[0],
     },
+  });
+
+  dispatch({
+    type: SET_DATA_LENGTH,
+    payload: response.data.length,
   });
 
   return dispatch({
@@ -65,4 +77,24 @@ export const applyToJob = (jobId) => async (dispatch, getState) => {
       },
     });
   }
+};
+
+export const paginateFetechJobs = (page, limit) => async (dispatch) => {
+  const response = await JobsAPI.get(`/all?page=${page}&limit=${limit}`);
+  //let payload = response.data.data;
+
+  //dispatch set default jobdetails
+  dispatch({
+    type: SET_DEFAULT_JOB_DETAILS,
+    payload: {
+      jobDetails: response.data.data[0],
+    },
+  });
+
+  return dispatch({
+    type: FETCH_JOBS,
+    payload: {
+      jobs: response.data.data,
+    },
+  });
 };

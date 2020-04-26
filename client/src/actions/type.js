@@ -65,3 +65,7 @@ export const UPDATE_AWARD = "UPDATE_AWARD";
 
 //UI_Actions
 export const SET_PROFILE_SECTION = "SET_PROFILE_SECTION";
+export const SET_PAGE = "SET_PAGE";
+export const SET_LIMIT = "SET_LIMIT";
+export const SET_QUERY_TERM = "SET_QUERY_TERM";
+export const SET_DATA_LENGTH = "SET_DATA_LENGTH";

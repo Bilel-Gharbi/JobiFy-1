@@ -50,7 +50,7 @@ const SearchBar = () => {
 
   return (
     <>
-      <Form onSubmit={handelSubmit}>
+      <Form onSubmit={handelSubmit} style={{ margin: "2% 4% 0% 4%" }}>
         <InputGroup>
           <Input
             name="search"

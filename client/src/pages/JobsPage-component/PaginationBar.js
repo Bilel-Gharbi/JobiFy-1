@@ -1,33 +1,15 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetechJobs } from "../../actions/jobsAction";
+import { setPaginationLimit } from "../../actions/ui";
 import * as _ from "underscore";
 
-class PaginationElement extends Component {
-  state = {
-    className: "",
-    active: false,
-  };
-
-  render() {
-    const { className, active } = this.state;
-    const { element } = this.props;
-    return (
-      <>
-        <li onClick={this.handelClick} className={active ? className : null}>
-          <a onClick={this.props.onClick} href={`?page=${element}`}>
-            {element}
-          </a>
-        </li>
-      </>
-    );
-  }
-}
+import SetLimitPerPageButton from "./SetLimitPerPageButton";
+import PaginationTagElement from "./PaginationTagElement";
 
 class PaginationBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      nbPage: [1, 2, 3, 4, 5],
-    };
     this.tagRefs = {};
   }
 
@@ -38,25 +20,21 @@ class PaginationBar extends Component {
     return this.tagRefs[id];
   };
 
-  renderPaginationTag = () => {
-    return this.state.nbPage.map((el, i) => {
-      return (
-        <PaginationElement
-          key={i}
-          element={el}
-          ref={this.getOrCreateRef(i)}
-          onClick={(e) => this.handelClick(e, i)}
-        />
-      );
+  //inti tags styling
+  initTagRefs(tagsRefs) {
+    _.map(tagsRefs, (el, key) => {
+      if (el.current !== null) {
+        el.current.setState({ active: false, className: "" });
+      }
     });
-  };
+  }
+
   handelClick = (e, id) => {
     e.preventDefault();
-    /* console.log(this.tagRefs[id].current);
-    console.log(this.tagRefs); */
+    const { limitPagination, fetechJobs } = this.props;
 
     _.map(this.tagRefs, (el, key) => {
-      if (key != id) {
+      if (key != id && el.current !== null) {
         el.current.setState({ active: false, className: "" });
       }
     });
@@ -65,27 +43,72 @@ class PaginationBar extends Component {
       className: "kt-pagination__link--active",
       active: true,
     });
+    //limit
+    fetechJobs(id + 1, limitPagination);
+  };
+
+  renderPaginationTag = () => {
+    const { dataLength, limitPagination } = this.props;
+    let nbPage = [];
+    //set Arr nb page to render pagination bar
+    let pages = Math.ceil(dataLength / limitPagination);
+    for (var i = 1; i <= pages; i++) {
+      nbPage.push(i);
+    }
+
+    return nbPage.map((el, i) => {
+      return (
+        <PaginationTagElement
+          key={i}
+          element={el}
+          ref={this.getOrCreateRef(i)}
+          onClick={(e) => this.handelClick(e, i)}
+        />
+      );
+    });
   };
 
   render() {
     return (
-      <div className="kt-pagination  kt-pagination--brand">
-        <ul className="kt-pagination__links">
-          <li className="kt-pagination__link--next">
-            <a href="#">
-              <i className="fa fa-angle-left kt-font-brand" />
-            </a>
-          </li>
-          {this.renderPaginationTag()}
-          <li className="kt-pagination__link--prev">
-            <a href="#">
-              <i className="fa fa-angle-right kt-font-brand" />
-            </a>
-          </li>
-        </ul>
-      </div>
+      <>
+        <div
+          className="kt-pagination  kt-pagination--brand"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "10px 0px",
+          }}
+        >
+          <ul className="kt-pagination__links">
+            <li className="kt-pagination__link--next">
+              <a href="#">
+                <i className="fa fa-angle-left kt-font-brand" />
+              </a>
+            </li>
+            {this.renderPaginationTag()}
+            <li className="kt-pagination__link--prev">
+              <a href="#">
+                <i className="fa fa-angle-right kt-font-brand" />
+              </a>
+            </li>
+          </ul>
+          <SetLimitPerPageButton
+            initTagRefs={() => this.initTagRefs(this.tagRefs)}
+            action={this.props.setPaginationLimit}
+            fetch={this.props.fetechJobs}
+          />
+        </div>
+      </>
     );
   }
 }
-
-export default PaginationBar;
+const mapStateToProps = (state) => {
+  return {
+    limitPagination: state.UI.limit,
+    dataLength: state.UI.dataLength,
+  };
+};
+export default connect(mapStateToProps, { fetechJobs, setPaginationLimit })(
+  PaginationBar
+);
