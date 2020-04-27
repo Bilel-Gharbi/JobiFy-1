@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import {
   InputGroup,
@@ -14,39 +14,21 @@ const SearchBar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropDownMenuTitle = ["Location", "Position", "Skill", "All"];
 
-  const [selectedDropdown, setSelectedDropdown] = useState("");
+  const [selectedDropdown, setSelectedDropdown] = useState("All");
   const [defaultDropdownText, setDefaultDropdownText] = useState("Filter ...");
-
   const [searchInput, setSearchInput] = useState("");
 
   const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
 
   const selectItem = (e) => {
-    // e.preventDefault();
     setDefaultDropdownText(e.target.name);
     setSelectedDropdown(e.target.name);
+  };
 
-    /* console.log(selectedDropdown);
-    console.log(defaultDropdownText); */
-  };
-  const handelChnage = (e) => {
-    setSearchInput(e.target.value);
-    console.log(searchInput);
-  };
   const handelSubmit = (e) => {
-    const params = new URLSearchParams({
-      var1: "value",
-      var2: "value2",
-      arr: "foo",
-    });
-    // e.preventDefault();
-    //console.log(e.target.value);
+    e.preventDefault();
+    console.log("search ", searchInput, "filter", selectedDropdown);
   };
-
-  useEffect(() => {
-    //console.log(selectedDropdown);
-    //console.log(defaultDropdownText);
-  }, []);
 
   return (
     <>
@@ -55,7 +37,7 @@ const SearchBar = () => {
           <Input
             name="search"
             value={searchInput}
-            onChange={(e) => handelChnage(e)}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
           <InputGroupButtonDropdown
             addonType="append"
@@ -72,7 +54,6 @@ const SearchBar = () => {
                   <div key={i}>
                     <DropdownItem
                       name={menuSection}
-                      href={`?filter=${menuSection}`}
                       onClick={(e) => selectItem(e)}
                     >
                       {menuSection}

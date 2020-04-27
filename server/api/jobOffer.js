@@ -5,7 +5,8 @@ const paginatedResults = require("../middleware/pagination");
 const searchResults = require("../middleware/search");
 //operation
 const {
-  paginateAllJoboffers: jobOperation,
+  paginateAllJoboffers: jobPaginateOp,
+  getAllJoboffersByFilterAndSearch: jobSearchOp,
 } = require("../operations/jobOffer");
 
 const {
@@ -15,7 +16,11 @@ const {
 
 jobOfferRouter
   .route("/all")
-  .get(paginatedResults(jobOperation), jobController.getAllCompaniesJobOffers);
+  .get(
+    searchResults(),
+    paginatedResults(jobPaginateOp),
+    jobController.getAllCompaniesJobOffers
+  );
 
 jobOfferRouter
   .route("/apply/:jobId/:resumeId")

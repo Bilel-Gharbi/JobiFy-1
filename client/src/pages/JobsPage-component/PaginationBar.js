@@ -22,7 +22,7 @@ class PaginationBar extends Component {
 
   //inti tags styling
   initTagRefs(tagsRefs) {
-    _.map(tagsRefs, (el, key) => {
+    _.map(tagsRefs, (el) => {
       if (el.current !== null) {
         el.current.setState({ active: false, className: "" });
       }
@@ -43,8 +43,11 @@ class PaginationBar extends Component {
       className: "kt-pagination__link--active",
       active: true,
     });
-    //limit
+
+    //limit basic pagination
     fetechJobs(id + 1, limitPagination);
+
+    // pagination for search
   };
 
   renderPaginationTag = () => {

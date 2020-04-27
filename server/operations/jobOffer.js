@@ -1,21 +1,10 @@
 const { jobOfferServices } = require("../services");
+const { adjResultForSearchBySkill, adjResultFormating } = require("../helper/");
 
 const getAllJoboffers = async () => {
   try {
-    const result = await jobOfferServices.getAllJobOffers();
-    //loop throughth job table use getJobOfferSkills service to get skills for each job
-    skillsTab = [];
-    for (let i = 0; i < result.length; i++) {
-      let jobSkills = await jobOfferServices.getJobOfferSkills(
-        result[i].dataValues.id
-      );
-      skillsTab.push(jobSkills);
-    }
-    //Modify the result table that contain all job offer bu adding new key jobSkills include the skills related to this jobOffer
-    result.map((el, i) => {
-      el.dataValues["jobSkills"] = skillsTab[i];
-    });
-    //return jobOffer array with skills for each job offer
+    const data = await jobOfferServices.getAllJobOffers();
+    const result = adjResultFormating(data, jobOfferServices);
     return result;
   } catch (err) {
     console.log("getAllJoboffers / JobOfferOperations error ", err);
@@ -25,26 +14,60 @@ const getAllJoboffers = async () => {
 //pagination
 const paginateAllJoboffers = async (limit, offset) => {
   try {
-    const result = await jobOfferServices.paginateAllJobOffers(limit, offset);
-    //loop throughth job table use getJobOfferSkills service to get skills for each job
-    skillsTab = [];
-    for (let i = 0; i < result.rows.length; i++) {
-      let jobSkills = await jobOfferServices.getJobOfferSkills(
-        result.rows[i].dataValues.id
-      );
-      skillsTab.push(jobSkills);
-    }
-    //Modify the result table that contain all job offer bu adding new key jobSkills include the skills related to this jobOffer
-    result.rows.map((el, i) => {
-      el.dataValues["jobSkills"] = skillsTab[i];
-    });
-    //return jobOffer array with skills for each job offer
+    const data = await jobOfferServices.paginateAllJobOffers(limit, offset);
+    const result = adjResultFormating(data, jobOfferServices);
     return result;
   } catch (err) {
     console.log(
       "paginateAllJoboffers / paginateAllJoboffersOperation error ",
       err
     );
+  }
+};
+
+//
+const getAllJoboffersByFilterAndSearch = async (filter, term, limit, page) => {
+  try {
+    let result;
+    let data;
+    switch (filter) {
+      case "Location":
+        data = await jobOfferServices.searchJobOffersByLocation(
+          term,
+          limit,
+          page
+        );
+        result = adjResultFormating(data, jobOfferServices);
+        return result;
+
+      case "jobPosition":
+        data = await jobOfferServices.searchJobOffersByJobPosition(
+          term,
+          limit,
+          page
+        );
+        result = adjResultFormating(data, jobOfferServices);
+        return result;
+
+      case "All":
+        data = await jobOfferServices.searchJobOffersByJobPosition(
+          term,
+          limit,
+          page
+        );
+        result = adjResultFormating(data, jobOfferServices);
+        return result;
+
+      case "skill":
+        data = await jobOfferServices.searchJobOffersBySkill(term, limit, page);
+        result = adjResultForSearchBySkill(data, jobOfferServices);
+        return result;
+
+      default:
+        break;
+    }
+  } catch (err) {
+    console.log("getAllJoboffersByPostion / JobOfferOperations error ", err);
   }
 };
 //done
@@ -126,4 +149,5 @@ module.exports = {
   addJobOfferSkills,
   addJobOfferSkill,
   getJobOfferSkills,
+  getAllJoboffersByFilterAndSearch,
 };

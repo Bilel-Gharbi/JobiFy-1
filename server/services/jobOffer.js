@@ -35,6 +35,74 @@ const paginateAllJobOffers = async (limit, offset) => {
   }
 };
 
+//search by job position
+const searchJobOffersByJobPosition = async (term, limit, offset) => {
+  try {
+    let jobs = await JobOffer.findAndCountAll({
+      where: {
+        jobPosition: term,
+      },
+      include: [
+        {
+          model: Company,
+        },
+      ],
+      offset,
+      limit,
+    });
+
+    return jobs;
+  } catch (err) {
+    console.log("JobOfferService /searchJobOffers Eroor ", err);
+  }
+};
+
+//search by location
+const searchJobOffersByLocation = async (term, limit, offset) => {
+  try {
+    let jobs = await JobOffer.findAndCountAll({
+      include: [
+        {
+          model: Company,
+          where: {
+            location: term,
+          },
+        },
+      ],
+      offset,
+      limit,
+    });
+
+    return jobs;
+  } catch (err) {
+    console.log("JobOfferService /searchJobOffersByLocation Eroor ", err);
+  }
+};
+
+//search by skill
+const searchJobOffersBySkill = async (term, limit, offset) => {
+  try {
+    let skills = await Skill.findAndCountAll({
+      where: {
+        name: term,
+        ResumeId: null,
+      },
+      include: [
+        {
+          model: JobOffer,
+          include: [{ model: Company }],
+        },
+      ],
+      offset,
+      limit,
+    });
+    return skills;
+  } catch (err) {
+    console.log("JobOfferService /searchJobOffersBySkill Eroor ", err);
+  }
+};
+
+/////////////
 const addCompanyJobOffer = async (data, id) => {
   try {
     let company = await Company.findByPk(id);
@@ -130,4 +198,7 @@ module.exports = {
   addSkillToJobOffer,
   addManySkillsToJobOffer,
   getJobOfferSkills,
+  searchJobOffersByJobPosition,
+  searchJobOffersByLocation,
+  searchJobOffersBySkill,
 };
