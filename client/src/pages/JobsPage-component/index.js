@@ -19,7 +19,6 @@ const JobsPage = ({ ...props }) => {
       <div className="kt-container  kt-grid__item kt-grid__item--fluid">
         <SearchBar />
         <PaginationBar />
-
         <JobCartList data={props} />
       </div>
     </div>
