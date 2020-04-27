@@ -1,5 +1,7 @@
 //import Resume model from models/index.js file
 const { Company, JobOffer, Skill } = require("../models");
+const Sequelize = require("Sequelize");
+const Op = Sequelize.Op;
 
 const getAllJobOffers = async () => {
   try {
@@ -81,10 +83,11 @@ const searchJobOffersByLocation = async (term, limit, offset) => {
 
 //search by skill
 const searchJobOffersBySkill = async (term, limit, offset) => {
+  console.log(term);
   try {
     let skills = await Skill.findAndCountAll({
       where: {
-        name: term,
+        name: { [Op.like]: "%" + term + "%" },
         ResumeId: null,
       },
       include: [
@@ -96,6 +99,7 @@ const searchJobOffersBySkill = async (term, limit, offset) => {
       offset,
       limit,
     });
+    //console.log(skills.length);
     return skills;
   } catch (err) {
     console.log("JobOfferService /searchJobOffersBySkill Eroor ", err);

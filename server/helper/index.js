@@ -38,9 +38,8 @@ const adjResultFormating = async (result, service) => {
 
 //to re adj the the result of search and formating
 const adjResultForSearchBySkill = async (result, service) => {
-  //loop throughth job table use getJobOfferSkills service to get skills for each job
   skillsTab = [];
-  // adj reslult
+
   let data = result.rows.map((el) => {
     return el.JobOffer;
   });
@@ -49,11 +48,9 @@ const adjResultForSearchBySkill = async (result, service) => {
     let jobSkills = await service.getJobOfferSkills(data[i].dataValues.id);
     skillsTab.push(jobSkills);
   }
-  //Modify the result table that contain all job offer bu adding new key jobSkills include the skills related to this jobOffer
   data.map((el, i) => {
     el.dataValues["jobSkills"] = skillsTab[i];
   });
-  //return jobOffer
 
   result.rows = data;
   return result;
