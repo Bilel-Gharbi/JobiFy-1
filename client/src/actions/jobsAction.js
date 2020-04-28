@@ -11,12 +11,15 @@ import {
   SET_DATA_LENGTH,
 } from "./type";
 
-export const fetechJobs = (page, limit) => async (dispatch) => {
+export const fetechJobs = (page, limit, term, filter) => async (dispatch) => {
   let response;
-  if (page && limit) {
-    response = await JobsAPI.get(`/all?page=${page}&limit=${limit}`);
+  if (term && filter) {
+    response = await JobsAPI.get(
+      `/all?page=${page}&limit=${limit}&term=${term}&filter=${filter}`
+    );
   } else {
-    response = await JobsAPI.get("/all");
+    //response = await JobsAPI.get("/all");
+    response = await JobsAPI.get(`/all?page=${page}&limit=${limit}`);
   }
 
   //let payload = response.data.data;

@@ -5,6 +5,7 @@ import { fetechJobs } from "../../actions/jobsAction";
 import JobCartList from "./JobCartList";
 import SearchBar from "./SearchBar";
 import PaginationBar from "./PaginationBar";
+import FilterBar from "./FilterBar";
 
 const JobsPage = ({ ...props }) => {
   useEffect(() => {
@@ -18,8 +19,9 @@ const JobsPage = ({ ...props }) => {
     >
       <div className="kt-container  kt-grid__item kt-grid__item--fluid">
         <SearchBar />
-        <PaginationBar />
+        <FilterBar />
         <JobCartList data={props} />
+        <PaginationBar />
       </div>
     </div>
   );

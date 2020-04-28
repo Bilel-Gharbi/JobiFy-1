@@ -7,7 +7,7 @@ const getAllCompaniesJobOffers = async (req, res) => {
       status: "sucess",
       msg: `all jobOffer for all compnaies `,
       length: allJobOffers.length,
-      data: allJobOffers
+      data: allJobOffers,
     });
   } catch (err) {
     res.status(401).json(err);
@@ -21,7 +21,7 @@ const getCompanyJobOffer = async (req, res) => {
       status: "sucess",
       msg: `all jobs for company with id ${req.params.id}`,
       length: jobOffers.length,
-      data: jobOffers
+      data: jobOffers,
     });
   } catch (err) {
     res.status(401).json(err);
@@ -34,7 +34,7 @@ const addCompanyJobOffer = async (req, res) => {
     res.status(201).json({
       status: "sucess",
       msg: `new job offer added to company with id ${req.params.id}`,
-      newJobOffer
+      newJobOffer,
     });
   } catch (err) {
     res.status(401).json(err);
@@ -51,7 +51,7 @@ const deleteCompanyJobOffer = async (req, res) => {
     res.status(202).json({
       status: "sucess",
       msg: `jobOffer with  ${req.params.id_jobOffer} deleted for the Resume with id ${req.params.id}`,
-      deletedJobOffer
+      deletedJobOffer,
     });
   } catch (err) {
     res.status(401).json(err);
@@ -69,7 +69,7 @@ const updateCompanyJobOffer = async (req, res) => {
     res.status(200).json({
       status: "sucess",
       msg: `JobOffer  ${req.params.id_jobOffer} updated for the company with id ${req.params.id}`,
-      newJobOffer
+      newJobOffer,
     });
   } catch (err) {
     res.status(401).json(err);
@@ -87,7 +87,7 @@ const addJobOfferSkill = async (req, res) => {
     res.status(200).json({
       status: "sucess",
       msg: `new Skill added to job offer ${req.params.id_jobOffer} for the company with id ${req.params.id}`,
-      newJobOfferSkill
+      newJobOfferSkill,
     });
   } catch (err) {
     res.status(401).json(err);
@@ -105,7 +105,7 @@ const addJobOfferSkills = async (req, res) => {
     res.status(200).json({
       status: "sucess",
       msg: `many Skill added to job offer ${req.params.id_jobOffer} for the company with id ${req.params.id}`,
-      skillsList
+      skillsList,
     });
   } catch (err) {
     res.status(401).json(err);
@@ -121,7 +121,7 @@ const getJobOfferSkills = async (req, res) => {
       status: "sucess",
       msg: `all skill for jobOffer with id ${req.id_jobOffer}`,
       length: jobOfferSkills.length,
-      data: jobOfferSkills
+      data: jobOfferSkills,
     });
   } catch (err) {
     res.status(401).json(err);
@@ -136,5 +136,5 @@ module.exports = {
   getCompanyJobOffer,
   addJobOfferSkill,
   addJobOfferSkills,
-  getJobOfferSkills
+  getJobOfferSkills,
 };

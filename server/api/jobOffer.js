@@ -1,9 +1,9 @@
 const jobOfferRouter = require("express").Router();
 //middleware
 const paginatedResults = require("../middleware/pagination");
-
 const searchResults = require("../middleware/search");
-//operation
+
+//operation ued as param in the middleware
 const {
   paginateAllJoboffers: jobPaginateOp,
   getAllJoboffersByFilterAndSearch: jobSearchOp,
@@ -17,7 +17,7 @@ const {
 jobOfferRouter
   .route("/all")
   .get(
-    searchResults(),
+    searchResults(jobSearchOp),
     paginatedResults(jobPaginateOp),
     jobController.getAllCompaniesJobOffers
   );
