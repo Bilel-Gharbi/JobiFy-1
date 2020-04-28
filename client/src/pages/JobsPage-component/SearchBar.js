@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { fetechJobs } from "../../actions/jobsAction";
 
 import {
   InputGroup,
@@ -10,9 +12,9 @@ import {
   DropdownItem,
   Form,
 } from "reactstrap";
-const SearchBar = () => {
+const SearchBar = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropDownMenuTitle = ["Location", "Position", "Skill", "All"];
+  const dropDownMenuTitle = ["Location", "Job Position", "Skill", "All"];
 
   const [selectedDropdown, setSelectedDropdown] = useState("All");
   const [defaultDropdownText, setDefaultDropdownText] = useState("Filter ...");
@@ -28,6 +30,7 @@ const SearchBar = () => {
   const handelSubmit = (e) => {
     e.preventDefault();
     console.log("search ", searchInput, "filter", selectedDropdown);
+    props.fetechJobs(1, props.limitPagination, searchInput, selectedDropdown);
   };
 
   return (
@@ -71,4 +74,11 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+const mapStateToProps = (state) => {
+  return {
+    limitPagination: state.UI.limit,
+    dataLength: state.UI.dataLength,
+  };
+};
+
+export default connect(mapStateToProps, { fetechJobs })(SearchBar);

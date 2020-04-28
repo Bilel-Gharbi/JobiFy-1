@@ -5,6 +5,7 @@ const getAllJoboffers = async () => {
   try {
     const data = await jobOfferServices.getAllJobOffers();
     const result = adjResultFormating(data, jobOfferServices);
+    console.log(result);
     return result;
   } catch (err) {
     console.log("getAllJoboffers / JobOfferOperations error ", err);
@@ -25,41 +26,51 @@ const paginateAllJoboffers = async (limit, offset) => {
   }
 };
 
-//
+// search with pagination
 const getAllJoboffersByFilterAndSearch = async (filter, term, limit, page) => {
   try {
     let result;
     let data;
     switch (filter) {
+      case "All":
+        data = await jobOfferServices.paginateAllJobOffers(limit, page);
+        //formating result
+        result = adjResultFormating(data, jobOfferServices);
+        return result;
+
       case "Location":
         data = await jobOfferServices.searchJobOffersByLocation(
           term,
           limit,
           page
         );
+        //formating result
         result = adjResultFormating(data, jobOfferServices);
         return result;
 
-      case "jobPosition":
+      case "Job Position":
         data = await jobOfferServices.searchJobOffersByJobPosition(
           term,
           limit,
           page
         );
+        //formating result
         result = adjResultFormating(data, jobOfferServices);
         return result;
 
-      case "All":
-        data = await jobOfferServices.searchJobOffersByJobPosition(
+      case "Contract":
+        data = await jobOfferServices.searchJobOffersByContract(
           term,
           limit,
           page
         );
+        //formating result
         result = adjResultFormating(data, jobOfferServices);
         return result;
 
-      case "skill":
+      case "Skill":
         data = await jobOfferServices.searchJobOffersBySkill(term, limit, page);
+        //formating result
         result = adjResultForSearchBySkill(data, jobOfferServices);
         return result;
 

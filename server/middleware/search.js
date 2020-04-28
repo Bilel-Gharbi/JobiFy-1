@@ -1,6 +1,6 @@
-const { jobOfferOperations } = require("../operations");
+//const { jobOfferOperations } = require("../operations");
 
-const searchResults = () => {
+const searchResults = (operation) => {
   return async (req, res, next) => {
     const term = req.query.term;
     const filter = req.query.filter;
@@ -9,12 +9,7 @@ const searchResults = () => {
       const limit = parseInt(req.query.limit);
       if (page && limit) {
         try {
-          let result = await jobOfferOperations.getAllJoboffersByFilterAndSearch(
-            filter,
-            term,
-            limit,
-            page - 1
-          );
+          let result = await operation(filter, term, limit, page - 1);
           res.json({
             status: "sucess",
             message: "search jobOffer result ",
@@ -26,10 +21,7 @@ const searchResults = () => {
         }
       } else {
         try {
-          let result = await jobOfferOperations.getAllJoboffersByFilterAndSearch(
-            filter,
-            term
-          );
+          let result = await operation(filter, term);
           res.json({
             status: "sucess",
             message: "search jobOffer result ",

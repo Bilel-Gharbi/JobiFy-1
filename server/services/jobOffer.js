@@ -42,7 +42,7 @@ const searchJobOffersByJobPosition = async (term, limit, offset) => {
   try {
     let jobs = await JobOffer.findAndCountAll({
       where: {
-        jobPosition: term,
+        jobPosition: { [Op.like]: "%" + term + "%" },
       },
       include: [
         {
@@ -67,7 +67,7 @@ const searchJobOffersByLocation = async (term, limit, offset) => {
         {
           model: Company,
           where: {
-            location: term,
+            location: { [Op.like]: "%" + term + "%" },
           },
         },
       ],
@@ -78,6 +78,28 @@ const searchJobOffersByLocation = async (term, limit, offset) => {
     return jobs;
   } catch (err) {
     console.log("JobOfferService /searchJobOffersByLocation Eroor ", err);
+  }
+};
+
+//search by location
+const searchJobOffersByContract = async (term, limit, offset) => {
+  try {
+    let jobs = await JobOffer.findAndCountAll({
+      where: {
+        JobContractType: term,
+      },
+      include: [
+        {
+          model: Company,
+        },
+      ],
+      offset,
+      limit,
+    });
+
+    return jobs;
+  } catch (err) {
+    console.log("JobOfferService /searchJobOffersByContract Eroor ", err);
   }
 };
 
@@ -205,4 +227,5 @@ module.exports = {
   searchJobOffersByJobPosition,
   searchJobOffersByLocation,
   searchJobOffersBySkill,
+  searchJobOffersByContract,
 };
