@@ -4,6 +4,7 @@ import {
   SET_PAGE,
   SET_QUERY_TERM,
   SET_LIMIT,
+  SET_WIZARD_FORM,
 } from "./type";
 
 //action to dispatch err and update the err reducer
@@ -35,9 +36,9 @@ export const setQuerySearch = (element) => (dispatch) => {
   });
 };
 
-/* //to clear error
-export const clearErrors = () => dispatch => {
+export const setWizardForm = (element) => (dispatch) => {
   return dispatch({
-    type: CLEAR_ERRORS
+    type: SET_WIZARD_FORM,
+    payload: element,
   });
-}; */
+};

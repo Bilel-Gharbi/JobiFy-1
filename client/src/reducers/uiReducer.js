@@ -5,6 +5,7 @@ const initialState = {
   page: 1,
   limit: 3,
   dataLength: 0,
+  wizardForm: 0,
 };
 
 const uiReducer = (state = initialState, action) => {
@@ -23,6 +24,9 @@ const uiReducer = (state = initialState, action) => {
 
     case "SET_LIMIT":
       return { ...state, limit: action.payload };
+
+    case "SET_WIZARD_FORM":
+      return { ...state, wizardForm: action.payload };
     default:
       return state;
   }
