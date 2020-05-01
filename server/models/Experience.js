@@ -5,32 +5,32 @@ const Experience = db.define("Experience", {
   // Model attributes are defined here
   startDate: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: false,
   },
   endDate: {
     type: DataTypes.DATE,
-    allowNull: true
+    allowNull: true,
   },
   //it can be current position
   current: {
     type: DataTypes.BOOLEAN,
-    allowNull: true
+    allowNull: true,
   },
-  comapanyName: {
+  companyName: {
     type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: "comapny name default"
+    defaultValue: "comapny name default",
   },
   position: {
     type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: "position name default"
+    defaultValue: "position name default",
   },
   task: {
     type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: "task name default"
-  }
+    defaultValue: "task name default",
+  },
 });
 
 module.exports = Experience;

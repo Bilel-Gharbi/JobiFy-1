@@ -7,7 +7,7 @@ const formProps = {
       startDate: "",
       endDate: "",
       current: "",
-      comapanyName: "",
+      companyName: "",
       position: "",
       task: "",
     },

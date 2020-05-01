@@ -25,7 +25,7 @@ const ProfileResumeMenu = ({ menu }) => {
         startDate: "",
         endDate: "",
         current: "",
-        comapanyName: "",
+        companyName: "",
         position: "",
         task: "",
       },

@@ -26,7 +26,7 @@ const ExperienceCart = ({ experience, deleteAction, selectedMenuSection }) => {
         <div className="kt-widget kt-widget--user-profile-2">
           <div className="kt-widget__head">
             <div className="kt-widget__info">
-              <a className="kt-widget__username">{experience.comapanyName}</a>
+              <a className="kt-widget__username">{experience.companyName}</a>
               <span className="kt-widget__desc">{experience.position}</span>
             </div>
           </div>
