@@ -20,28 +20,28 @@ const Auth = require("./Auth");
 /* ----- Auth / User association ------- */
 Auth.hasOne(User, {
   onDelete: "CASCADE",
-  onUpdate: "CASCADE"
+  onUpdate: "CASCADE",
 });
 User.belongsTo(Auth);
 
 /* ------- Auth / Company association ------- */
 Auth.hasOne(Company, {
   onDelete: "CASCADE",
-  onUpdate: "CASCADE"
+  onUpdate: "CASCADE",
 });
 Company.belongsTo(Auth);
 
 /* ----- User / Resume association ------- */
 User.hasOne(Resume, {
   onDelete: "CASCADE",
-  onUpdate: "CASCADE"
+  onUpdate: "CASCADE",
 });
 Resume.belongsTo(User);
 
 /* ----- Company / JobOffer association ------- */
 Company.hasMany(JobOffer, {
   onDelete: "CASCADE",
-  onUpdate: "CASCADE"
+  onUpdate: "CASCADE",
 });
 JobOffer.belongsTo(Company);
 
@@ -101,7 +101,9 @@ Education.sync({ force: false });
 Award.sync({ force: false });
 Project.sync({ force: false });
 Interest.sync({ force: false });
-Certificate.sync({ force: false }); */
+Certificate.sync({ force: false }); 
+Applicant.sync({ force: false });
+*/
 
 //console.log(Company.prototype);
 
@@ -119,5 +121,5 @@ module.exports = {
   Interest,
   Company,
   JobOffer,
-  Applicant
+  Applicant,
 };

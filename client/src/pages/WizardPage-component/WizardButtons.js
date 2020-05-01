@@ -29,6 +29,7 @@ const WizardButtons = ({ wizardForm, setWizardForm }) => {
       case 2:
       case 3:
       case 4:
+      case 5:
         return (
           <>
             <Button
@@ -43,7 +44,7 @@ const WizardButtons = ({ wizardForm, setWizardForm }) => {
             </Button>
           </>
         );
-      case 5:
+      case 6:
         return (
           <>
             <Button
@@ -52,13 +53,13 @@ const WizardButtons = ({ wizardForm, setWizardForm }) => {
             >
               Pervious
             </Button>
-            &nbsp; &nbsp;
+            {/*  &nbsp; &nbsp;
             <Button
               className="btn btn-outline-brand btn-square"
               onClick={handelSubmit}
             >
               Submit
-            </Button>
+            </Button> */}
           </>
         );
 

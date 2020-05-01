@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { setWizardForm } from "../../actions/ui";
 
 const WizardMenu = ({ wizardForm, setWizardForm }) => {
-  const [menuList, setMenuList] = useState([
+  const [menuList] = useState([
     "Personal Information",
     "Resume Info",
     "Experiences",

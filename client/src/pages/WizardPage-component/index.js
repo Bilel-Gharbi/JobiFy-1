@@ -14,7 +14,7 @@ const WizardPage = () => {
       <WizardBody />
       <br />
       <br />
-      <WizardButtons />
+      {/* <WizardButtons /> */}
     </div>
   );
 };

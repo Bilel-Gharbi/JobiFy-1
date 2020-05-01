@@ -5,7 +5,20 @@ import {
   SET_QUERY_TERM,
   SET_LIMIT,
   SET_WIZARD_FORM,
+  SET_WIZARD_FORM_FIRST_EXPERIENCE,
 } from "./type";
+
+import resumeAPI from "../API/resumeAPI";
+
+export const addFirstExperience = (data) => async (dispatch, getState) => {
+  const resumeId = getState().userProfile.resume.userResume.id;
+  const experience = await resumeAPI.post(`${resumeId}/experience`, data);
+
+  return dispatch({
+    type: SET_WIZARD_FORM_FIRST_EXPERIENCE,
+    payload: experience.data.data,
+  });
+};
 
 //action to dispatch err and update the err reducer
 export const setProfileSectionToRender = (element) => (dispatch) => {
