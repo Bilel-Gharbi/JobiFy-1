@@ -13,6 +13,7 @@ class Form extends Component {
   };
 
   componentWillMount() {
+    console.log(this.props);
     //init from state depend from the formState props
     this.setState({ formState: { ...this.props.formState } }, () =>
       console.log(this.state)

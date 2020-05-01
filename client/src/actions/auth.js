@@ -26,6 +26,7 @@ import {
 export const login = (obj) => async (dispatch) => {
   try {
     const response = await authAPI.post("/login", obj);
+    console.log(response);
 
     //delete error
     dispatch({
@@ -55,6 +56,8 @@ export const login = (obj) => async (dispatch) => {
         token: response.data.result.token,
         userType: response.data.result.type,
         email: response.data.result.email,
+        /*  profile: response.data.result.profile,
+        userData: response.data.result.profileDetails */
       },
     });
   } catch (err) {
@@ -170,6 +173,8 @@ export const fetechUserData = (token) => async (dispatch) => {
         token: response.data.result.token,
         userType: response.data.result.type,
         email: response.data.result.email,
+        /*  profile: response.data.result.profile,
+        userData: response.data.result.profileDetails, */
       },
     });
   } catch (err) {

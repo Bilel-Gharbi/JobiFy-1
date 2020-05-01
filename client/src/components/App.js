@@ -37,6 +37,7 @@ const UserProfilePage = React.lazy(() =>
 const DashBoardPage = React.lazy(() =>
   import("../pages/DashBoardPage-component/DashBoardPage")
 );
+const WizardPage = React.lazy(() => import("../pages/WizardPage-component/"));
 
 const Header = React.lazy(() => import("./header-component/Header"));
 
@@ -79,7 +80,7 @@ class App extends React.Component {
           <Switch>
             <>
               <div className="mainContainer">
-                <Route exact path="/" component={InfoPage} />
+                <Route exact path="/" component={HomePage} />
                 <Route
                   path="/auth"
                   render={() =>
@@ -87,7 +88,9 @@ class App extends React.Component {
                   }
                 />
                 <Route exact path="/auth" component={AuthPage} />
-                <Route exact path="/info" component={InfoPage} />
+
+                <Route exact path="/info" component={WizardPage} />
+
                 <Route exact path="/profile" component={UserProfilePage} />
                 <Route exact path="/dashboard" component={DashBoardPage} />
                 <Route exact path="/jobs" component={JobPage} />

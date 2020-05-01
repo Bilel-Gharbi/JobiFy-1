@@ -5,6 +5,13 @@ const initialState = {
   page: 1,
   limit: 3,
   dataLength: 0,
+  wizardForm: 0,
+  wizardFormData: {
+    personaInfo: {},
+    experience: {},
+    education: {},
+    skill: {},
+  },
 };
 
 const uiReducer = (state = initialState, action) => {
@@ -23,6 +30,33 @@ const uiReducer = (state = initialState, action) => {
 
     case "SET_LIMIT":
       return { ...state, limit: action.payload };
+
+    case "SET_WIZARD_FORM":
+      return { ...state, wizardForm: action.payload };
+
+    case "SET_WIZARD_FORM_DATA_INFO":
+      return {
+        ...state,
+        wizardFormData: {
+          ...state.wizardFormData,
+          personaInfo: {
+            ...state.wizardFormData.personaInfo,
+            ...action.payload,
+          },
+        },
+      };
+
+    case "SET_WIZARD_FORM_FIRST_EXPERIENCE":
+      return {
+        ...state,
+        wizardFormData: {
+          ...state.wizardFormData,
+          experience: {
+            ...state.wizardFormData.experience,
+            ...action.payload,
+          },
+        },
+      };
     default:
       return state;
   }

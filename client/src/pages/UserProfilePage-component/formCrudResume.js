@@ -84,6 +84,28 @@ const formProps = {
     types: ["text"],
     action: { add: actions.addInterest },
   },
+
+  // personal info
+  PersonalInfo: {
+    formState: {
+      firstName: "",
+      lastName: "",
+      birthDate: "",
+      phoneNumber: "",
+      location: "",
+    },
+    types: ["text", "text", "date", "phone", "text"],
+    action: { add: actions.addInterest },
+  },
+  // user resume info
+  UserResumeInfo: {
+    formState: {
+      summary: "",
+      expertiseLevel: "",
+    },
+    types: ["text", "text"],
+    action: { add: actions.addInterest },
+  },
 };
 
 export default formProps;

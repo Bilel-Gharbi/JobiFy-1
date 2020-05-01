@@ -6,6 +6,7 @@ const SetLimitPerPageButton = ({ action, fetch, initTagRefs }) => {
 
   const onChangeSelect = (e) => {
     action(e.target.value);
+    //todo check before if there is a search query or note be fore refeching data
     fetch(1, e.target.value);
     initTagRefs();
   };
