@@ -11,7 +11,7 @@ const signUp = async (req, res) => {
     res.status(201).json({
       status: "sucess",
       msg: "new signup created .... ",
-      result
+      result,
     });
   } catch (err) {
     res.status(400).json({ status: "fail", err: err.message });
@@ -27,7 +27,7 @@ const login = async (req, res) => {
     res.status(201).json({
       status: "sucess",
       msg: "you logged in succesufly .... ",
-      result
+      result,
     });
   } catch (err) {
     res.status(401).json({ status: "fail", err: err.message });
@@ -38,13 +38,27 @@ const fetchAuthData = async (req, res) => {
   try {
     const requestToken = req.headers["x-auth-token"];
     const result = await authOperations.fetchAuthData(requestToken);
+
     if (!result) {
       throw new Error("invalid token");
     }
     res.status(201).json({
       status: "sucess",
       msg: "you still login with new token ",
-      result
+      result,
+    });
+  } catch (err) {
+    res.status(401).json({ status: "fail", err: err.message });
+  }
+};
+
+const activeUserAccount = async (req, res) => {
+  try {
+    let result = authOperations.activeUserAccount(req.query.id);
+    res.status(201).json({
+      status: "sucess",
+      msg: `accout with authId ${req.query.id} activated`,
+      result,
     });
   } catch (err) {
     res.status(401).json({ status: "fail", err: err.message });
@@ -54,5 +68,6 @@ const fetchAuthData = async (req, res) => {
 module.exports = {
   signUp,
   login,
-  fetchAuthData
+  fetchAuthData,
+  activeUserAccount,
 };

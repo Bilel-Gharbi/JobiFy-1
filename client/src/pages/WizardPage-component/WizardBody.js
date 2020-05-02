@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { setWizardForm, addFirstExperience } from "../../actions/ui";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../actions/ui";
+import { fetechUserData } from "../../actions/auth";
 import Button from "../../components/common/Button-component/Button";
 
 import {
@@ -11,18 +13,31 @@ import {
   FormUserSkill,
 } from "./WizardFormInfo";
 
-const WizardBody = ({ wizardForm, setWizardForm, ...props }) => {
-  const handelSubmit = () => {};
-
-  const next = () => {
-    setWizardForm(wizardForm++);
+const WizardBody = ({
+  wizardForm,
+  setWizardForm,
+  wizardFormData,
+  ...props
+}) => {
+  const submitAllData = (e) => {
+    e.preventDefault();
+    props.AddUserWizardInfo();
+    props.fetechUserData(localStorage.getItem("token")).then(() => {
+      props.history.push("/profile");
+    });
   };
-  const pervious = () => {
-    setWizardForm(wizardForm--);
+
+  const next = (e) => {
+    // e.preventDefault();
+    setWizardForm(wizardForm + 1);
+  };
+  const pervious = (e) => {
+    // e.preventDefault();
+    setWizardForm(wizardForm - 1);
   };
 
   useEffect(() => {
-    //console.log(props.experience);
+    console.log(props);
   }, []);
   const renderFormBody = () => {
     switch (wizardForm) {
@@ -31,7 +46,11 @@ const WizardBody = ({ wizardForm, setWizardForm, ...props }) => {
           <>
             <h5>Please complete your personal Info</h5>
             <br />
-            <FormUserInfo next={next} data={props.userInfo} />
+            <FormUserInfo
+              next={next}
+              data={wizardFormData.personalInfo}
+              action={props.setWizardFormInfo}
+            />
           </>
         );
 
@@ -43,7 +62,8 @@ const WizardBody = ({ wizardForm, setWizardForm, ...props }) => {
             <FormUserResumeInfo
               next={next}
               pervious={pervious}
-              data={props.resumeInfo}
+              data={wizardFormData.resumeInfo}
+              action={props.setWizardFormResumeInfo}
             />
           </>
         );
@@ -55,8 +75,8 @@ const WizardBody = ({ wizardForm, setWizardForm, ...props }) => {
             <FormUserExperience
               next={next}
               pervious={pervious}
-              data={props.experience}
-              action={props.addFirstExperience}
+              data={wizardFormData.experience}
+              action={props.setWizardFormExperience}
             />
           </>
         );
@@ -68,7 +88,8 @@ const WizardBody = ({ wizardForm, setWizardForm, ...props }) => {
             <FormUserEducation
               next={next}
               pervious={pervious}
-              data={props.education}
+              data={wizardFormData.education}
+              action={props.setWizardFormEducation}
             />
           </>
         );
@@ -76,7 +97,12 @@ const WizardBody = ({ wizardForm, setWizardForm, ...props }) => {
         return (
           <>
             <h5>Please add a least one Skills</h5>
-            <FormUserSkill next={next} pervious={pervious} data={props.skill} />
+            <FormUserSkill
+              next={next}
+              pervious={pervious}
+              data={wizardFormData.skill}
+              action={props.setWizardFormSkill}
+            />
           </>
         );
 
@@ -103,6 +129,7 @@ const WizardBody = ({ wizardForm, setWizardForm, ...props }) => {
                 <Button
                   className="btn btn-outline-brand btn-square"
                   type="submit"
+                  onClick={submitAllData}
                 >
                   Submit
                 </Button>
@@ -149,21 +176,10 @@ const WizardBody = ({ wizardForm, setWizardForm, ...props }) => {
 const mapStateToProps = (state) => {
   return {
     wizardForm: state.UI.wizardForm,
-    userInfo: state.userProfile.user,
-    resumeInfo: state.userProfile.resume.userResume,
-    experience:
-      state.userProfile.resume.experiences[
-        state.userProfile.resume.experiences.length - 1
-      ],
-    education:
-      state.userProfile.resume.educations[
-        state.userProfile.resume.educations.length - 1
-      ],
-
-    skill: state.userProfile.resume.skills[state.userProfile.resume.skills - 1],
+    wizardFormData: state.UI.wizardFormData,
   };
 };
 
-export default connect(mapStateToProps, { setWizardForm, addFirstExperience })(
-  WizardBody
+export default withRouter(
+  connect(mapStateToProps, { ...actions, fetechUserData })(WizardBody)
 );

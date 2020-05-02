@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 import "./signup.css";
 class SignUp extends Component {
@@ -7,15 +8,14 @@ class SignUp extends Component {
     password: "",
     confirmPassword: "",
     type: "",
-    disabled: ""
+    disabled: "",
   };
-  handelSubmit = e => {
+  handelSubmit = (e) => {
     e.preventDefault();
-    // console.log(this.state);
     //action sign up
     this.props.signUp({ ...this.state });
   };
-  handelChange = e => {
+  handelChange = (e) => {
     const name = e.target.name;
     this.setState({ [name]: e.target.value });
     this.state.password !== this.state.confirmPassword &&
@@ -109,4 +109,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

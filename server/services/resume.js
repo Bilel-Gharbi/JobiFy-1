@@ -69,6 +69,17 @@ const getUserResumeDetails = async (userId) => {
   }
 };
 
+//add resume info
+const addBasicResumeInfo = async (resumeId, data) => {
+  try {
+    let resume = await Resume.findByPk(resumeId);
+    let updatedResume = await resume.update({ ...data });
+    return updatedResume;
+  } catch (err) {
+    console.log("ResumeService /addBasicResumeInfo Eroor ", err);
+  }
+};
+
 //apply to job
 const applyToJobOffer = async (ResumeId, JobOfferId) => {
   try {
@@ -91,4 +102,5 @@ module.exports = {
   getAllResume,
   getUserResumeDetails,
   applyToJobOffer,
+  addBasicResumeInfo,
 };

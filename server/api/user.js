@@ -9,5 +9,7 @@ userRouter
   .get(checkToken, controller.getAllUser);
 
 userRouter.route("/:authId/info").post(controller.createUserInfo);
+//to active user Profile
+userRouter.route("/active").patch(controller.activateUserProfile);
 
 module.exports = userRouter;

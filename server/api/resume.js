@@ -16,6 +16,9 @@ resumeRouter.route("/").get(controller.getAllResume);
 //TODO: get Resume with details
 resumeRouter.route("/:id").get(controller.getUserResumeDetails);
 
+//ResumeInfo route
+resumeRouter.route("/:id/info").post(controller.addResumeInfo);
+
 //done
 resumeRouter
   .route("/:id/experiences")

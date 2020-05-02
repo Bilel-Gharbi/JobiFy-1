@@ -38,10 +38,21 @@ const checkUniqueUser = async (email) => {
   }
 };
 
+const activateAccount = async (id) => {
+  try {
+    let account = await Auth.findByPk(id);
+    let activatedAccount = await account.update({ active: true });
+    return activatedAccount;
+  } catch (err) {
+    console.log("AuthService / activateAccount Error ", err);
+  }
+};
+
 //TODO: Forget Password
 //TODO: email verification
 module.exports = {
   signUp,
   login,
   checkUniqueUser,
+  activateAccount,
 };

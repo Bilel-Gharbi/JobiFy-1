@@ -83,6 +83,18 @@ export const signup = (data) => async (dispatch) => {
     dispatch({
       type: CLEAR_ERRORS,
     });
+    //added
+    response.data.result.type === "USER"
+      ? dispatch({
+          type: SET_USER_PROFILE,
+          payload: response.data.result.profileDetails,
+        })
+      : dispatch({
+          type: SET_COMPANY_PROFILE,
+          payload: response.data.result.profileDetails,
+        });
+
+    //added
     // if there is no error  disptach signup sucess
     dispatch({
       type: SIGNUP_SUCESS,
@@ -96,8 +108,9 @@ export const signup = (data) => async (dispatch) => {
         isLoged: true,
         token: response.data.result.token,
         userType: response.data.result.type,
-        profile: response.data.result.profile,
-        userData: response.data.result.profileDetails,
+        email: response.data.result.email,
+        /* profile: response.data.result.profile,
+        userData: response.data.result.profileDetails, */
       },
     });
   } catch (err) {
@@ -115,19 +128,18 @@ export const signup = (data) => async (dispatch) => {
 
 export const logout = () => async (dispatch, getState) => {
   try {
-    //diapatch clear User or company
-    getState().auth.userType === "USER"
-      ? dispatch({
-          type: CLEAR_USER_PROFILE,
-        })
-      : dispatch({
-          type: CLEAR_COMPANY_PROFILE,
-        });
-
-    //dipatch LOGOUT
-    return dispatch({
+    dispatch({
       type: LOGOUT,
     });
+    if (getState().auth.userType === "USER") {
+      return dispatch({
+        type: CLEAR_USER_PROFILE,
+      });
+    } else {
+      return dispatch({
+        type: CLEAR_COMPANY_PROFILE,
+      });
+    }
   } catch (err) {
     //case signup fail
     return dispatch({
@@ -144,6 +156,8 @@ export const fetechUserData = (token) => async (dispatch) => {
   try {
     authAPI.defaults.headers.common["x-auth-token"] = token;
     let response = await authAPI.get("login");
+
+    console.log(response.data.result);
 
     dispatch({
       type: CLEAR_ERRORS,

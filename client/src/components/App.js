@@ -21,16 +21,14 @@ import SpinnerLoader from "../components/common/Spinner-component";
 const HomePage = React.lazy(() =>
   import("../pages/HomePage-component/HomePage")
 );
-const ProfilePage = React.lazy(() =>
-  import("../pages/ProfilePage-component/ProfilePage")
-);
-const JobPage = React.lazy(() => import("../pages/JobPage-component/JobPage"));
+
+//const JobPage = React.lazy(() => import("../pages/JobPage-component/JobPage"));
 const AuthPage = React.lazy(() =>
   import("../pages/authPage-component/AuthPage")
 );
-const InfoPage = React.lazy(() =>
+/* const InfoPage = React.lazy(() =>
   import("../pages/InfoPage-component/InfoPage")
-);
+); */
 const UserProfilePage = React.lazy(() =>
   import("../pages/UserProfilePage-component")
 );
@@ -55,7 +53,6 @@ class App extends React.Component {
     if (token) {
       store.dispatch(fetechUserData(token));
     }
-
     //set savedJobs Array ;
     let savedJobs = localStorage.getItem("savedJobs");
     if (!savedJobs) {
@@ -63,13 +60,14 @@ class App extends React.Component {
     }
   }
 
-  renderRouteOrRedirect = (condition, routeDirection, otherRoute) => {
+  /* renderRouteOrRedirect = (condition, routeDirection, otherRoute) => {
+ 
     return condition ? (
       <Redirect to={`${routeDirection}`} />
     ) : (
       <Redirect to={`${otherRoute}`} />
     );
-  };
+  }; */
   render() {
     const { isLoged } = this.props;
     return (
@@ -81,20 +79,12 @@ class App extends React.Component {
             <>
               <div className="mainContainer">
                 <Route exact path="/" component={HomePage} />
-                <Route
-                  path="/auth"
-                  render={() =>
-                    this.renderRouteOrRedirect(isLoged, "profile", "auth")
-                  }
-                />
                 <Route exact path="/auth" component={AuthPage} />
-
                 <Route exact path="/info" component={WizardPage} />
-
                 <Route exact path="/profile" component={UserProfilePage} />
                 <Route exact path="/dashboard" component={DashBoardPage} />
-                <Route exact path="/jobs" component={JobPage} />
                 <Route exact path="/jobsPage" component={JobsPage} />
+                {/* <Route exact path="/jobs" component={JobPage} /> */}
               </div>
             </>
           </Switch>

@@ -14,12 +14,23 @@ const getAllResume = async (req, res) => {
   }
 };
 
-//TODO:
 const getUserResumeDetails = async (req, res) => {
-  console.log(req.params.id);
   try {
     userResume = await resumeOperations.getUserResumeDetails(req.params.id);
     res.json({ status: "sucess", data: userResume });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
+const addResumeInfo = async (req, res) => {
+  try {
+    result = await resumeOperations.addResumeInfo(req.params.id, req.body);
+    res.json({
+      status: "sucess",
+      msg: `user info added to resume with id ${req.params.id}`,
+      data: result,
+    });
   } catch (err) {
     res.status(400).json(err);
   }
@@ -32,7 +43,7 @@ const getResumeExperiences = async (req, res) => {
       status: "sucess",
       msg: `all experiences for Resume with id ${req.params.id}`,
       length: experiences.length,
-      data: experiences
+      data: experiences,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -48,7 +59,7 @@ const addResumeExperience = async (req, res) => {
     res.status(201).json({
       status: "sucess",
       msg: `new experience added to Resume with id ${req.params.id}`,
-      data: newExperience
+      data: newExperience,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -64,7 +75,7 @@ const deleteResumeExperience = async (req, res) => {
     res.status(202).json({
       status: "sucess",
       msg: `experience ${req.params.id_experience} deleted for the Resume with id ${req.params.id}`,
-      deletedExperience
+      deletedExperience,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -81,7 +92,7 @@ const updateResumeExperience = async (req, res) => {
     res.status(200).json({
       status: "sucess",
       msg: `experience ${req.params.id_experience} updated for the Resume with id ${req.params.id}`,
-      newExperience
+      newExperience,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -98,7 +109,7 @@ const applyToJobByResume = async (req, res) => {
     res.status(200).json({
       status: "sucess",
       msg: `Resume with id  ${resumeId} apply offer  with id ${jobId}`,
-      applyToJob
+      applyToJob,
     });
   } catch (err) {
     res.status(400).json({ err: err.message });
@@ -108,9 +119,10 @@ const applyToJobByResume = async (req, res) => {
 module.exports = {
   getAllResume,
   getUserResumeDetails,
+  addResumeInfo,
   addResumeExperience,
   deleteResumeExperience,
   updateResumeExperience,
   getResumeExperiences,
-  applyToJobByResume
+  applyToJobByResume,
 };

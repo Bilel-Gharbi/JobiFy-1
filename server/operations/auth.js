@@ -14,7 +14,7 @@ const bcrypt = require("bcryptjs");
 const { verifyToken, decodeToken, signNewToken } = require("../helper");
 
 const signUp = async (data) => {
-  const { password, type } = data;
+  const { email, password, type } = data;
   try {
     let userExist = await authServices.checkUniqueUser(data.email);
     if (!userExist) {
@@ -24,7 +24,7 @@ const signUp = async (data) => {
       //auth service
       newAuth = await authServices.signUp(data);
 
-      const token = await signNewToken({ authId: newAuth.id });
+      const token = await signNewToken({ authId: newAuth.id, authType: type });
 
       //create user or compnay table
       type === "USER"
@@ -36,7 +36,7 @@ const signUp = async (data) => {
         (await companyServices.getCompanyDetails(newAuth.id)) ||
         (await resumeServices.getUserResumeDetails(user.id));
 
-      return { type, token, user, profileDetails };
+      return { type, token, user, profileDetails, email };
     }
   } catch (err) {
     console.log("signup operation error ", err);
@@ -56,7 +56,7 @@ const login = async (data) => {
 
       const token = await signNewToken({
         authId: userExist.id,
-        autType: userExist.type,
+        authType: userExist.type,
       });
       if (correctPassword) {
         const { type } = userExist;
@@ -81,13 +81,14 @@ const fetchAuthData = async (token) => {
   try {
     let valid = await verifyToken(token);
     // if the token is valid without err message or err name
+
     if (!valid.name) {
       token = await signNewToken({
         authId: valid.authId,
-        autType: valid.autType,
+        authType: valid.authType,
       });
       //get type from token
-      const type = valid.autType;
+      const type = valid.authType;
       let auth = await authServices.login(valid.authId);
       let profileDetails =
         (await companyServices.getCompanyDetails(valid.authId)) ||
@@ -95,7 +96,7 @@ const fetchAuthData = async (token) => {
 
       let profile = auth.profile;
       let email = auth.email;
-      console.log(email);
+
       return { type, token, profile, profileDetails, email };
     }
   } catch (err) {
@@ -103,8 +104,18 @@ const fetchAuthData = async (token) => {
   }
 };
 
+const activeUserAccount = async (authId) => {
+  try {
+    let account = await authServices.activateAccount(authId);
+    return account;
+  } catch (err) {
+    console.log("activeUserAccount operation error ", err);
+  }
+};
+
 module.exports = {
   signUp,
   login,
   fetchAuthData,
+  activeUserAccount,
 };

@@ -4,7 +4,7 @@ const { User, Resume } = require("../models");
 // User service file includes functon thant interact with directly with the database
 // After create a service export using the es6 synt
 
-const createUser = async data => {
+const createUser = async (data) => {
   //console.log("user service paramter ", data);
   try {
     await User.sync({ force: false });
@@ -29,17 +29,29 @@ const getAllUser = async () => {
 
 const createUserInfo = async (authId, data) => {
   try {
-    let result = await (
-      await User.findOne({ where: { AuthId: authId } })
-    ).update({ ...data });
-    return result;
+    let user = await User.findOne({ where: { AuthId: authId } });
+    let updateUser = await user.update({ ...data });
+
+    return updateUser;
   } catch (err) {
     console.log("UserService/generateDammyUser data Error ", err);
+  }
+};
+
+//activateUserProfile
+const activateUserProfile = async (id) => {
+  try {
+    let user = await User.findByPk(id);
+    let activatedProfile = await user.update({ active: true });
+    return activatedProfile;
+  } catch (err) {
+    console.log("UserService / activateUserProfile Error ", err);
   }
 };
 
 module.exports = {
   createUser,
   getAllUser,
-  createUserInfo
+  createUserInfo,
+  activateUserProfile,
 };

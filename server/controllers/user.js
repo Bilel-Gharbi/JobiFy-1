@@ -10,7 +10,7 @@ const getAllUser = async (req, res) => {
       status: "sucess",
       msg: "get all users",
       length: users.length,
-      data: users
+      data: users,
     });
   } catch (err) {
     res.status(400).json(err);
@@ -25,7 +25,7 @@ const createNewUser = async (req, res) => {
       status: "sucess",
       msg: "new user created .... ",
       length: newUser.length,
-      data: newUser
+      data: newUser,
     });
   } catch (err) {
     res.status(400).json({ status: "fail", msg: err });
@@ -33,22 +33,34 @@ const createNewUser = async (req, res) => {
 };
 
 const createUserInfo = async (req, res) => {
-  const authId = req.params.authId;
-
   try {
-    userInfo = await userOperations.createUserInfo(authId, req.body);
+    userInfo = await userOperations.createUserInfo(req.params.authId, req.body);
     res.status(201).json({
       status: "sucess",
-      msg: "init user info with authId .... ",
-      data: userInfo
+      msg: `init user info with authId .... ${req.params.authId}`,
+      data: userInfo,
     });
   } catch (err) {
     res.status(400).json(err);
   }
 };
 
+const activateUserProfile = async (req, res) => {
+  try {
+    let result = userOperations.activateUserProfile(req.query.id);
+    res.status(201).json({
+      status: "sucess",
+      msg: `User Profile with id ${req.query.id} activated`,
+      result,
+    });
+  } catch (err) {
+    res.status(401).json({ status: "fail", err: err.message });
+  }
+};
+
 module.exports = {
   getAllUser,
   createNewUser,
-  createUserInfo
+  createUserInfo,
+  activateUserProfile,
 };

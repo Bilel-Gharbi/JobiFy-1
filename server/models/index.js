@@ -101,8 +101,8 @@ Education.sync({ force: false });
 Award.sync({ force: false });
 Project.sync({ force: false });
 Interest.sync({ force: false });
-Certificate.sync({ force: false }); 
-Applicant.sync({ force: false });
+Certificate.sync({ force: false });
+Skill.sync({ force: false });
 */
 
 //console.log(Company.prototype);

@@ -7,7 +7,8 @@ const initialState = {
   dataLength: 0,
   wizardForm: 0,
   wizardFormData: {
-    personaInfo: {},
+    personalInfo: {},
+    resumeInfo: {},
     experience: {},
     education: {},
     skill: {},
@@ -34,13 +35,37 @@ const uiReducer = (state = initialState, action) => {
     case "SET_WIZARD_FORM":
       return { ...state, wizardForm: action.payload };
 
-    case "SET_WIZARD_FORM_DATA_INFO":
+    case "SET_WIZARD_FORM_FIRST_INFO":
       return {
         ...state,
         wizardFormData: {
           ...state.wizardFormData,
-          personaInfo: {
-            ...state.wizardFormData.personaInfo,
+          personalInfo: {
+            ...state.wizardFormData.personalInfo,
+            ...action.payload,
+          },
+        },
+      };
+
+    case "SET_WIZARD_FORM_FIRST_RESUME_INFO":
+      return {
+        ...state,
+        wizardFormData: {
+          ...state.wizardFormData,
+          resumeInfo: {
+            ...state.wizardFormData.resumeInfo,
+            ...action.payload,
+          },
+        },
+      };
+
+    case "SET_WIZARD_FORM_FIRST_EDUCATION":
+      return {
+        ...state,
+        wizardFormData: {
+          ...state.wizardFormData,
+          education: {
+            ...state.wizardFormData.education,
             ...action.payload,
           },
         },
@@ -57,6 +82,19 @@ const uiReducer = (state = initialState, action) => {
           },
         },
       };
+
+    case "SET_WIZARD_FORM_FIRST_SKILL":
+      return {
+        ...state,
+        wizardFormData: {
+          ...state.wizardFormData,
+          skill: {
+            ...state.wizardFormData.skill,
+            ...action.payload,
+          },
+        },
+      };
+
     default:
       return state;
   }

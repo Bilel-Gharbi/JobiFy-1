@@ -4,7 +4,7 @@
 
 const { userServices } = require("../services");
 
-const createNewUser = async data => {
+const createNewUser = async (data) => {
   try {
     result = await userServices.createUser(data);
     return result;
@@ -30,9 +30,18 @@ const createUserInfo = async (authId, data) => {
     console.log("createUserInfo operation error ", err);
   }
 };
+const activateUserProfile = async (id) => {
+  try {
+    result = await userServices.activateUserProfile(id);
+    return result;
+  } catch (err) {
+    console.log("activateUserProfile / User operation error ", err);
+  }
+};
 
 module.exports = {
   createNewUser,
   getAllUser,
-  createUserInfo
+  createUserInfo,
+  activateUserProfile,
 };

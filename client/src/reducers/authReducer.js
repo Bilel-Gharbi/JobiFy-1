@@ -9,8 +9,10 @@ const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOGIN":
     case "FETCH_USER_DATA":
+      console.log("FETCH USER/LOGIN reducer", action.payload);
       return { ...state, ...action.payload };
     case "SIGNUP":
+      console.log("SIGNUP reducer", action.payload);
       return { ...state, ...action.payload };
 
     case "LOGIN_FAIL":
@@ -21,6 +23,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         token: null,
         isLoged: false,
+        userType: null,
       };
 
     case "LOGIN_SUCESS":

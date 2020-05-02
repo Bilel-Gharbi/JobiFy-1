@@ -71,7 +71,6 @@ export const updateEducation = (id, data) => async (dispatch, getState) => {
 export const addSkill = (data) => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
   const newSkill = await resumeAPI.post(`${resumeId}/skill`, data);
-  console.log(newSkill.data.newSkill);
   return dispatch({
     type: TYPE.ADD_SKILL,
     payload: newSkill.data.newSkill,

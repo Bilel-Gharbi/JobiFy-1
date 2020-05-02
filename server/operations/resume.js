@@ -9,14 +9,24 @@ const getAllResume = async () => {
     console.log("getAllResume /Resume operation error ", err);
   }
 };
-//TODO:
-const getUserResumeDetails = async userId => {
+
+const getUserResumeDetails = async (userId) => {
   try {
     result = await resumeServices.getUserResumeDetails(userId);
 
     return result;
   } catch (err) {
     console.log("getUserResumeDetails/ Resume operation error ", err);
+  }
+};
+
+const addResumeInfo = async (resumId, data) => {
+  try {
+    result = await resumeServices.addBasicResumeInfo(resumId, data);
+
+    return result;
+  } catch (err) {
+    console.log("addResumeInfo/ Resume operation error ", err);
   }
 };
 
@@ -32,7 +42,7 @@ const addExperience = async (data, id) => {
   }
 };
 //done
-const getExperiences = async id => {
+const getExperiences = async (id) => {
   try {
     result = await resumeServices.getResumeExperience(id);
     return result;
@@ -41,7 +51,7 @@ const getExperiences = async id => {
   }
 };
 //done
-const deleteExperience = async idExperience => {
+const deleteExperience = async (idExperience) => {
   try {
     result = await resumeServices.deleteResumeExperience(idExperience);
     return result;
@@ -71,9 +81,10 @@ const applyJob = async (idResume, idJobOffer) => {
 module.exports = {
   getAllResume,
   getUserResumeDetails,
+  addResumeInfo,
   addExperience,
   getExperiences,
   deleteExperience,
   updateExperience,
-  applyJob
+  applyJob,
 };

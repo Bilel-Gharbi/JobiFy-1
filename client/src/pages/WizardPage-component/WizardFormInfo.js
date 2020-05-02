@@ -1,13 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/common/Button-component/Button";
+import { bindActionCreators } from "redux";
 
-export const FormUserInfo = ({ next, data }) => {
+export const FormUserInfo = ({ next, data, action }) => {
   const { handleSubmit, register, errors } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
     next();
+    action(data);
   };
 
   return (
@@ -84,11 +86,12 @@ export const FormUserInfo = ({ next, data }) => {
   );
 };
 
-export const FormUserResumeInfo = ({ data, next, pervious }) => {
+export const FormUserResumeInfo = ({ data, next, pervious, action }) => {
   const { handleSubmit, errors, register } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     next();
+    action(data);
   };
   return (
     <>
@@ -147,10 +150,11 @@ export const FormUserResumeInfo = ({ data, next, pervious }) => {
 
 export const FormUserExperience = ({ data, next, pervious, action }) => {
   const { handleSubmit, errors, register } = useForm();
+
   const onSubmit = (data) => {
     console.log(data);
-    action(data);
     next();
+    action(data);
   };
   return (
     <>
@@ -251,11 +255,12 @@ export const FormUserExperience = ({ data, next, pervious, action }) => {
   );
 };
 
-export const FormUserEducation = ({ data, next, pervious }) => {
+export const FormUserEducation = ({ data, next, pervious, action }) => {
   const { handleSubmit, errors, register } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     next();
+    action(data);
   };
   return (
     <>
@@ -372,11 +377,12 @@ export const FormUserEducation = ({ data, next, pervious }) => {
   );
 };
 
-export const FormUserSkill = ({ data, next, pervious }) => {
+export const FormUserSkill = ({ data, next, pervious, action }) => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     next();
+    action(data);
   };
   return (
     <>
