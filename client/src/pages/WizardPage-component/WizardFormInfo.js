@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/common/Button-component/Button";
-import { bindActionCreators } from "redux";
 
 export const FormUserInfo = ({ next, data, action }) => {
   const { handleSubmit, register, errors } = useForm();

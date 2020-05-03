@@ -26,9 +26,9 @@ const HomePage = React.lazy(() =>
 const AuthPage = React.lazy(() =>
   import("../pages/authPage-component/AuthPage")
 );
-/* const InfoPage = React.lazy(() =>
+const InfoPage = React.lazy(() =>
   import("../pages/InfoPage-component/InfoPage")
-); */
+);
 const UserProfilePage = React.lazy(() =>
   import("../pages/UserProfilePage-component")
 );
@@ -85,6 +85,7 @@ class App extends React.Component {
                 <Route exact path="/dashboard" component={DashBoardPage} />
                 <Route exact path="/jobsPage" component={JobsPage} />
                 {/* <Route exact path="/jobs" component={JobPage} /> */}
+                <Route exact path="/test" component={InfoPage} />
               </div>
             </>
           </Switch>
