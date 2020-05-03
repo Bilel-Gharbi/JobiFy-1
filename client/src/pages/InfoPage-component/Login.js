@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 
 const Login = (props) => {
   const { handleSubmit, register, errors } = useForm();
-  const onSubmit = (data, e) => {
-    e.preventDefault();
-    console.log(data);
+  const onSubmit = (data) => {
+    //dispatch login action
+    props.login({ ...data });
   };
   return (
     <>
@@ -45,6 +45,14 @@ const Login = (props) => {
             <a className="kt-login__link">Forget Password ?</a>
           </div>
         </div>
+        {props.err.id === "login" && props.err.message ? (
+          <div className="alert alert-outline-warning fade show">
+            <div className="alert-icon">
+              <i className="flaticon-warning" />
+            </div>
+            <div className="alert-text">{props.err.message}</div>
+          </div>
+        ) : null}
         <div
           className="kt-login__actions"
           style={{ display: "flex", justifyContent: "center" }}

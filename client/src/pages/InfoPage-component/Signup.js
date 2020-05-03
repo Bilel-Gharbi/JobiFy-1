@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 
-const Signup = () => {
+const Signup = (props) => {
   const { handleSubmit, register, errors, watch, setError } = useForm();
   //Select option
   const options = [
@@ -20,8 +20,7 @@ const Signup = () => {
 
   const onSubmit = (data) => {
     if (!data.type) return setError("type");
-
-    console.log(data);
+    props.signup({ ...data });
   };
 
   return (
@@ -98,6 +97,14 @@ const Signup = () => {
             <p>{errors.type && "Please select account type"}</p>
           </div>
         </div>
+        {props.err.id === "signup" && props.err.message ? (
+          <div className="alert alert-outline-warning fade show">
+            <div className="alert-icon">
+              <i className="flaticon-warning" />
+            </div>
+            <div className="alert-text">{props.err.message}</div>
+          </div>
+        ) : null}
 
         <div
           className="kt-login__actions"

@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { login, signup } from "../../actions/auth";
 import Login from "./Login";
 import Signup from "./Signup";
-import { signup } from "../../actions/auth";
 
-const InfoPage = () => {
+const InfoPage = ({ history, isLoged, error, login, signup, userType }) => {
+  useEffect(() => {
+    if (isLoged && userType === "USER") history.push("/profile");
+    if (isLoged && userType === "COMPANY") history.push("/dashbord");
+  }, [isLoged, userType]);
+
   const [formToDisplay, setFormToDisplay] = useState({
     displayLogin: true,
     displaySignup: false,
   });
+
   const handelClick = () => {
     setFormToDisplay((values) => ({
       displayLogin: !values.displayLogin,
@@ -23,7 +31,7 @@ const InfoPage = () => {
       <>
         <div
           className="kt-login__logo"
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{ display: "flex", justifyContent: "center", padding: "10px" }}
         >
           <a href="#">
             <img src="assets/media/logos/logo-5.png" />
@@ -38,12 +46,14 @@ const InfoPage = () => {
               {displayLogin ? "Login To JobiFy" : "Signup To JobiFy"}
             </h3>
           </div>
+          {/* component  */}
 
-          {displayLogin && <Login />}
-          {displaySignup && <Signup />}
+          {displayLogin && <Login login={login} err={error} />}
+          {displaySignup && <Signup signup={signup} err={error} />}
+
+          {/* component  */}
         </div>
       </>
-      {/* base  */}
       <>
         <div
           className="kt-login__account"
@@ -64,4 +74,14 @@ const InfoPage = () => {
   );
 };
 
-export default InfoPage;
+const mapStateToProps = (state) => {
+  return {
+    isLoged: state.auth.isLoged,
+    userType: state.auth.userType,
+    error: state.error,
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, { login, signup })(InfoPage)
+);
