@@ -23,9 +23,7 @@ const HomePage = React.lazy(() =>
 );
 
 //const JobPage = React.lazy(() => import("../pages/JobPage-component/JobPage"));
-const AuthPage = React.lazy(() =>
-  import("../pages/authPage-component/AuthPage")
-);
+const AuthPage = React.lazy(() => import("../pages/AuthPage-component"));
 const InfoPage = React.lazy(() =>
   import("../pages/InfoPage-component/InfoPage")
 );
