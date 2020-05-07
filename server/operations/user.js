@@ -3,6 +3,7 @@
  */
 
 const { userServices } = require("../services");
+//cloudinary to store photo and generate cloud link
 const cloudinary = require("cloudinary").v2;
 
 const createNewUser = async (data) => {
