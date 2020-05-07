@@ -45,6 +45,22 @@ const createUserInfo = async (req, res) => {
   }
 };
 
+const updateUserInfo = async (req, res) => {
+  try {
+    const filePath = req.file.path;
+    const { authId } = req.params;
+
+    userInfo = await userOperations.updateUserInfo(authId, req.body, filePath);
+    res.status(201).json({
+      status: "sucess",
+      msg: `update user info with authId .... ${authId}`,
+      data: userInfo,
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
 const activateUserProfile = async (req, res) => {
   try {
     let result = userOperations.activateUserProfile(req.query.id);
@@ -63,4 +79,5 @@ module.exports = {
   createNewUser,
   createUserInfo,
   activateUserProfile,
+  updateUserInfo,
 };

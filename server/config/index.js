@@ -1,4 +1,5 @@
 const dotenv = require("dotenv");
+const cloudinary = require("cloudinary");
 dotenv.config();
 module.exports = {
   //Server config
@@ -13,5 +14,12 @@ module.exports = {
 
   //JWT config
   jwtSecretKey: process.env.JWTSECRETKEY,
-  TokenExpDate: process.env.TokenExpDate
+  TokenExpDate: process.env.TokenExpDate,
 };
+
+//cloudPhoto config
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_CLOUD_KEY,
+  api_secret: process.env.API_CLOUD_SECRET_KEY,
+});

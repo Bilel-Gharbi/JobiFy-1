@@ -3,6 +3,7 @@
  */
 
 const { userServices } = require("../services");
+const cloudinary = require("cloudinary").v2;
 
 const createNewUser = async (data) => {
   try {
@@ -30,6 +31,20 @@ const createUserInfo = async (authId, data) => {
     console.log("createUserInfo operation error ", err);
   }
 };
+
+const updateUserInfo = async (authId, data, filePath) => {
+  try {
+    const photoCloudURL = await cloudinary.uploader.upload(filePath);
+    data.photo = photoCloudURL.url;
+
+    result = await userServices.createUserInfo(authId, data);
+
+    return result;
+  } catch (err) {
+    console.log("createNewUser operation error ", err);
+  }
+};
+
 const activateUserProfile = async (id) => {
   try {
     result = await userServices.activateUserProfile(id);
@@ -44,4 +59,5 @@ module.exports = {
   getAllUser,
   createUserInfo,
   activateUserProfile,
+  updateUserInfo,
 };
