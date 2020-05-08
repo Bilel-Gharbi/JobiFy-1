@@ -1,13 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { updateUserInfo } from "../../actions/user";
+import { useForm } from "react-hook-form";
 
-const PersonalInformationCart = ({ data }) => {
+const PersonalInformationCart = ({ data, updateUserInfo }) => {
+  const { handleSubmit, register, errors } = useForm();
+
+  const [bgPhoto, setBgPhoto] = useState(data.photo);
+
+  const handlePhotoChange = () => {
+    let photo = document.getElementsByName("userPhoto")[0].files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setBgPhoto(reader.result);
+    };
+    if (photo) {
+      reader.readAsDataURL(photo);
+      setBgPhoto(reader.result);
+    }
+  };
+
+  const onSubmit = (data) => {
+    const { firstName, lastName, phoneNumber, location, userPhoto } = data;
+    const formData = new FormData();
+
+    formData.append("userPhoto", userPhoto[0]);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("location", location);
+
+    updateUserInfo(formData);
+  };
   return (
-    <form className="kt-form kt-form--label-right">
+    <form
+      className="kt-form kt-form--label-right"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className="kt-portlet__body">
         <div className="kt-section kt-section--first">
           <div className="kt-section__body">
             <div className="form-group row">
-              <label className="col-xl-3 col-lg-3 col-form-label">Avatar</label>
+              <label className="col-xl-3 col-lg-3 col-form-label">
+                {/* removed label */}
+              </label>
               <div className="col-lg-9 col-xl-6">
                 <div
                   className="kt-avatar kt-avatar--outline"
@@ -16,7 +53,8 @@ const PersonalInformationCart = ({ data }) => {
                   <div
                     className="kt-avatar__holder"
                     style={{
-                      backgroundImage: 'url("assets/media/users/100_13.jpg")',
+                      backgroundImage: `url(${bgPhoto || null})`,
+                      //backgroundImage: 'url("assets/media/users/100_13.jpg")',
                     }}
                   />
                   <label
@@ -27,8 +65,10 @@ const PersonalInformationCart = ({ data }) => {
                     <i className="fa fa-pen" />
                     <input
                       type="file"
-                      name="profile_avatar"
+                      name="userPhoto"
                       accept=".png, .jpg, .jpeg"
+                      onChange={handlePhotoChange}
+                      ref={register()}
                     />
                   </label>
                   <span
@@ -48,9 +88,12 @@ const PersonalInformationCart = ({ data }) => {
               <div className="col-lg-9 col-xl-6">
                 <input
                   className="form-control"
+                  name="firstName"
                   type="text"
                   defaultValue={data.firstName}
+                  ref={register({ required: "please fill your first name" })}
                 />
+                {errors.firstName && errors.firstName.message}
               </div>
             </div>
             <div className="form-group row">
@@ -60,9 +103,12 @@ const PersonalInformationCart = ({ data }) => {
               <div className="col-lg-9 col-xl-6">
                 <input
                   className="form-control"
+                  name="lastName"
                   type="text"
                   defaultValue={data.lastName}
+                  ref={register({ required: "please fill your last name" })}
                 />
+                {errors.lastName && errors.lastName.message}
               </div>
             </div>
             <div className="form-group row">
@@ -72,9 +118,12 @@ const PersonalInformationCart = ({ data }) => {
               <div className="col-lg-9 col-xl-6">
                 <input
                   className="form-control"
+                  name="location"
                   type="text"
                   defaultValue={data.location}
+                  ref={register({ required: "please fill your location" })}
                 />
+                {errors.location && errors.location.message}
               </div>
             </div>
             <div className="form-group row">
@@ -90,10 +139,15 @@ const PersonalInformationCart = ({ data }) => {
                   </div>
                   <input
                     type="text"
+                    name="phoneNumber"
                     className="form-control"
                     placeholder="Phone"
                     defaultValue={data.phoneNumber}
+                    ref={register({
+                      required: "please fill your phone number",
+                    })}
                   />
+                  {errors.phoneNumber && errors.phoneNumber.message}
                 </div>
               </div>
             </div>
@@ -120,4 +174,4 @@ const PersonalInformationCart = ({ data }) => {
   );
 };
 
-export default PersonalInformationCart;
+export default connect(null, { updateUserInfo })(PersonalInformationCart);

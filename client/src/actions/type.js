@@ -22,6 +22,7 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 //user actions
 export const SET_USER_PROFILE = "SET_USER_PROFILE";
 export const CLEAR_USER_PROFILE = "CLEAR_USER_PROFILE";
+export const UPDATE_USER_INFO = "UPDATE_USER_INFO";
 
 // company action
 export const SET_COMPANY_PROFILE = "SET_COMPANY_PROFILE";

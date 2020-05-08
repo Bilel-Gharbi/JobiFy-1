@@ -16,4 +16,15 @@ const storage = multer.diskStorage({
   },
 });
 
+/* 
+module.exports.send = (req, res, next) => {
+  return upload.single('file')(req, res, () => {
+    // Remember, the middleware will call it's next function
+    // so we can inject our controller manually as the next()
+
+    if (!req.file) return res.json({ error: ErrorMessages.invalidFiletype })
+    next()
+  })
+}
+ */
 module.exports = multer({ storage: storage });

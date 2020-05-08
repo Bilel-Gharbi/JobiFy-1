@@ -1,11 +1,13 @@
 import React from "react";
 
-const UserProfileDescription = ({ data }) => {
+const UserProfileDescription = ({ data, email, resume }) => {
+  const { experiences } = resume;
+  let position = experiences[0].position;
   return (
     <>
       <div className="kt-widget__head">
         <div className="kt-widget__media">
-          <img src="assets/media/users/100_13.jpg" alt="image" />
+          <img src={data.photo} alt="image" />
         </div>
         <div className="kt-widget__content">
           <div className="kt-widget__section">
@@ -13,7 +15,7 @@ const UserProfileDescription = ({ data }) => {
               {data.firstName}
               <i className="flaticon2-correct kt-font-success" />
             </a>
-            <span className="kt-widget__subtitle">Head of Development </span>
+            <span className="kt-widget__subtitle">{position} </span>
           </div>
           <div className="kt-widget__action">
             <button type="button" className="btn btn-info btn-sm">
@@ -30,7 +32,7 @@ const UserProfileDescription = ({ data }) => {
         <div className="kt-widget__content">
           <div className="kt-widget__info">
             <span className="kt-widget__label">Email:</span>
-            <a className="kt-widget__data">matt@fifestudios.com</a>
+            <a className="kt-widget__data">{email}</a>
           </div>
           <div className="kt-widget__info">
             <span className="kt-widget__label">Phone:</span>

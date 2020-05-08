@@ -47,8 +47,9 @@ const createUserInfo = async (req, res) => {
 
 const updateUserInfo = async (req, res) => {
   try {
-    const filePath = req.file.path;
     const { authId } = req.params;
+    let filePath;
+    req.file ? (filePath = req.file.path) : null;
 
     userInfo = await userOperations.updateUserInfo(authId, req.body, filePath);
     res.status(201).json({

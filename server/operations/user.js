@@ -35,9 +35,10 @@ const createUserInfo = async (authId, data) => {
 
 const updateUserInfo = async (authId, data, filePath) => {
   try {
-    const photoCloudURL = await cloudinary.uploader.upload(filePath);
-    data.photo = photoCloudURL.url;
-
+    if (filePath) {
+      const photoCloudURL = await cloudinary.uploader.upload(filePath);
+      data.photo = photoCloudURL.url;
+    }
     result = await userServices.createUserInfo(authId, data);
 
     return result;

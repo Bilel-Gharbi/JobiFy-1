@@ -29,7 +29,7 @@ class ProfileLeftMenu extends Component {
         },
         {
           section: "Certifications",
-          // nb: this.props.resume.certificates.length,
+          //nb: this.props.resume.certificates.length,
           nb: 4,
           icon: "flaticon2-rocket",
         },
@@ -47,7 +47,7 @@ class ProfileLeftMenu extends Component {
         },
         {
           section: "Skills",
-          //nb: this.props.resume.skills.length,
+          // nb: this.props.resume.skills.length,
           nb: 5,
           icon: "flaticon2-layers",
         },
@@ -86,7 +86,11 @@ class ProfileLeftMenu extends Component {
           {/*begin::Widget */}
           <div className="kt-portlet__body kt-portlet__body--fit-y">
             <div className="kt-widget kt-widget--user-profile-1">
-              <UserProfileDescription data={this.props.userInfo} />
+              <UserProfileDescription
+                data={this.props.userInfo}
+                email={this.props.email}
+                resume={this.props.resume}
+              />
               <MenuProfileList list={this.state.list} />
             </div>
           </div>
@@ -100,6 +104,7 @@ const mapStateToProps = (state) => {
   return {
     userInfo: state.userProfile.user,
     resume: state.userProfile.resume,
+    email: state.auth.email,
   };
 };
 

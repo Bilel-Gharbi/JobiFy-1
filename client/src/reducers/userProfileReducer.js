@@ -260,6 +260,19 @@ const userProfileReducer = (state = initialState, action) => {
           applyedJob: [...state.resume.applyedJob, action.payload],
         },
       };
+
+    case "UPDATE_USER_INFO":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          photo: action.payload.photo,
+          location: action.payload.location,
+          phoneNumber: action.payload.phoneNumber,
+        },
+      };
     default:
       return state;
   }
