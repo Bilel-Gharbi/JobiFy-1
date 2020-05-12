@@ -195,11 +195,12 @@ const addSkillToJobOffer = async (idJobOffer, data) => {
 };
 //Add many skills to job offer
 //done
-const addManySkillsToJobOffer = async (data) => {
+const addManySkillsToJobOffer = async (data, idJobOffer) => {
   try {
     await Skill.sync({ force: false });
     let newJobSkills = await Skill.bulkCreate(data);
-    return newJobSkills;
+    let jobs = await getAllJobOffers(idJobOffer);
+    return jobs;
   } catch (err) {
     console.log("JobOfferService /addManySkillsToJobOffer Eroor ", err);
   }

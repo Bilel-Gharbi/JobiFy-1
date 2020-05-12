@@ -83,6 +83,7 @@ const JobOfferAddSkills = ({ setStep }) => {
         >
           Add another Skill
         </Button>
+
         {/* rendering skill tags  */}
         <div style={{ display: "flex" }}>{renderSkillsTag()}</div>
         {/* end skill tags  */}

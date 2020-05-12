@@ -13,6 +13,9 @@ const companyProfileReducer = (state = initialState, action) => {
 
     case "CREATE_COMPANY_PROFILE_INFO":
       return { ...state, ...action.payload };
+
+    case "ADD_COMPANY_JOB_OFFER_WITH_SKILLS":
+      return { ...state, jobOffers: [...action.payload] };
     default:
       return state;
   }

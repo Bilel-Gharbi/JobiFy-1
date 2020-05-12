@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import Select from "react-select";
 import Button from "../../components/common/Button-component/Button";
 
-const FormAddJobOffer = ({ setStep, step }) => {
+const FormAddJobOffer = ({ setStep, setJobOffer }) => {
   const { handleSubmit, register, watch, errors, setError } = useForm();
 
   const options = [
@@ -21,9 +21,8 @@ const FormAddJobOffer = ({ setStep, step }) => {
 
   const onSubmit = (data) => {
     if (!data.jobContractType) return setError("jobContractType");
-    //props.signup({ ...data });
     setStep(2);
-    console.log(step);
+    setJobOffer(data);
   };
   return (
     <>

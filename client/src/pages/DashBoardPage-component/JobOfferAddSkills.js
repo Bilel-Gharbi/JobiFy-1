@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { addCompanyJobOffer } from "../../actions/comapny";
 import { useForm } from "react-hook-form";
 import Button from "../../components/common/Button-component/Button";
 import Tag from "../../components/common/Tag-component";
@@ -6,7 +8,7 @@ import Tag from "../../components/common/Tag-component";
 import ReCaptcha from "../../components/common/ReCaptcha";
 import AddSkillJobForm from "./AddSkillJobForm";
 
-const JobOfferAddSkills = ({ setStep }) => {
+const JobOfferAddSkills = ({ setStep, jobOffer, addCompanyJobOffer }) => {
   const { handleSubmit, errors, setError } = useForm();
 
   const [verifiedCaptcha, SetVerifiedCaptcha] = useState(false);
@@ -53,9 +55,13 @@ const JobOfferAddSkills = ({ setStep }) => {
   const onSubmit = () => {
     if (verifiedCaptcha) {
       //dipatch action
+      console.log(allSkills);
+      console.log(jobOffer);
+      addCompanyJobOffer(jobOffer, allSkills);
       setStep(1);
+    } else {
+      setError("captch");
     }
-    setError("captch");
   };
 
   const renderFormComponent = () => {
@@ -67,7 +73,7 @@ const JobOfferAddSkills = ({ setStep }) => {
   const renderSkillsTag = () => {
     return allSkills.map((skill, i) => {
       return (
-        <div style={{ marginRight: "10px" }} key={skill.name + i}>
+        <div style={{ padding: "10px" }} key={skill.name + i}>
           <Tag>{skill.name}</Tag>
         </div>
       );
@@ -76,19 +82,29 @@ const JobOfferAddSkills = ({ setStep }) => {
 
   return (
     <>
-      <div className="kt-portlet" style={{ padding: "5%" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: "5px",
+        }}
+      >
         <Button
-          className="btn btn-outline-brand btn-square"
+          className="btn btn-label-brand btn-sm btn-icon btn-icon-md"
           onClick={() => addForm()}
-        >
-          Add another Skill
-        </Button>
-        {/* rendering skill tags  */}
-        <div style={{ display: "flex" }}>{renderSkillsTag()}</div>
-        {/* end skill tags  */}
+          icon="flaticon2-add"
+        />
       </div>
 
       <div className="kt-portlet" style={{ padding: "5%" }}>
+        {/* rendering skill tags  */}
+        {allSkills.length ? (
+          <div className="kt-portlet" /* style={{ padding: "5%" }} */>
+            <div style={{ display: "flex" }}>{renderSkillsTag()}</div>
+          </div>
+        ) : null}
+        {/* end skill tags  */}
+
         {renderFormComponent()}
 
         {allSkills.length ? (
@@ -101,6 +117,7 @@ const JobOfferAddSkills = ({ setStep }) => {
               }}
             >
               <ReCaptcha verifyCallback={(res) => verifyCallback(res)} />
+              &nbsp; &nbsp;
               {errors.captch && "please check i'm not robot "}
               &nbsp; &nbsp;
               <div style={{ display: "flex", justifyContent: "center" }}>
@@ -114,6 +131,7 @@ const JobOfferAddSkills = ({ setStep }) => {
                 <Button
                   className="btn btn-outline-brand btn-square"
                   type="submit"
+                  disabled={!verifiedCaptcha}
                 >
                   Create Job
                 </Button>
@@ -126,4 +144,4 @@ const JobOfferAddSkills = ({ setStep }) => {
   );
 };
 
-export default JobOfferAddSkills;
+export default connect(null, { addCompanyJobOffer })(JobOfferAddSkills);

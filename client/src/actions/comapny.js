@@ -4,6 +4,7 @@ import {
   CLEAR_COMPANY_PROFILE,
   ADD_COMPANY_JOB_OFFER,
   ADD_COMPANY_JOB_OFFER_SKILLS,
+  ADD_COMPANY_JOB_OFFER_WITH_SKILLS,
   CREATE_COMPANY_PROFILE_INFO,
 } from "./type";
 
@@ -34,22 +35,36 @@ export const createCompanyProfileInfo = (data) => async (
   const activeProfile = await companyAPI.patch(`active?id=${companyId}`);
   const result = await companyAPI.patch(`${authId}/info`, data);
 
-  console.log(result.data);
-
   return dispatch({
     type: CREATE_COMPANY_PROFILE_INFO,
     payload: result.data.data,
   });
 };
 //http://localhost:5000/api/company/1/jobOffer
-export const addCompanyJobOffer = () => (dispatch) => {
+export const addCompanyJobOffer = (job, skills) => async (
+  dispatch,
+  getState
+) => {
+  const companyId = getState().companyProfile.company.id;
+  //create job offer
+  const newJobOffer = await companyAPI.post(`${companyId}/jobOffer`, job);
+
+  // add skills to job offer
+  const jobId = newJobOffer.data.newJobOffer.id;
+
+  const result = await companyAPI.post(
+    `${companyId}/jobOffer/${jobId}/skills`,
+    skills
+  );
+
   return dispatch({
-    type: ADD_COMPANY_JOB_OFFER,
+    type: ADD_COMPANY_JOB_OFFER_WITH_SKILLS,
+    payload: result.data.jobsList,
   });
 };
 //http://localhost:5000/api/company/1/jobOffer/1/skills
-export const addCompanyJobOfferSkills = () => (dispatch) => {
+/* export const addCompanyJobOfferSkills = () => (dispatch) => {
   return dispatch({
     type: ADD_COMPANY_JOB_OFFER_SKILLS,
   });
-};
+}; */

@@ -3,26 +3,27 @@ import FormAddJobOffer from "./FormAddJobOffer";
 import JobOfferAddSkills from "./JobOfferAddSkills";
 
 const DashbordCreateJobOffer = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
+  const [jobOffer, setJobOffer] = useState();
 
   const renderForm = () => {
     switch (step) {
       case 1:
         return (
           <>
-            <FormAddJobOffer setStep={setStep} />
+            <FormAddJobOffer setStep={setStep} setJobOffer={setJobOffer} />
           </>
         );
       case 2:
         return (
           <>
-            <JobOfferAddSkills setStep={setStep} />
+            <JobOfferAddSkills setStep={setStep} jobOffer={jobOffer} />
           </>
         );
       default:
         return (
           <>
-            <JobOfferAddSkills setStep={setStep} />
+            <FormAddJobOffer setStep={setStep} setJobOffer={setJobOffer} />
           </>
         );
     }

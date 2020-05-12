@@ -5,7 +5,6 @@ const getAllJoboffers = async () => {
   try {
     const data = await jobOfferServices.getAllJobOffers();
     const result = adjResultFormating(data, jobOfferServices);
-    console.log(result);
     return result;
   } catch (err) {
     console.log("getAllJoboffers / JobOfferOperations error ", err);
@@ -135,7 +134,7 @@ const addJobOfferSkill = async (idJobOffer, data) => {
 const addJobOfferSkills = async (idJobOffer, data) => {
   data.map((el) => (el.JobOfferId = idJobOffer));
   try {
-    result = await jobOfferServices.addManySkillsToJobOffer(data);
+    result = await jobOfferServices.addManySkillsToJobOffer(data, idJobOffer);
     return result;
   } catch (err) {
     console.log("addJobOfferSkill / JobOfferOperations error ", err);
