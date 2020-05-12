@@ -20,8 +20,6 @@ export const updateUserInfo = (data) => async (dispatch, getState) => {
   const authId = getState().userProfile.user.AuthId;
   let updatedUserInfo = await userAPI.patch(`${authId}/info`, data);
 
-  console.log(updatedUserInfo.data.data);
-
   return dispatch({
     type: UPDATE_USER_INFO,
     payload: updatedUserInfo.data.data,

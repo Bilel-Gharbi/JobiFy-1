@@ -1,16 +1,55 @@
 //import type
-import { SET_COMPANY_PROFILE, CLEAR_COMPANY_PROFILE } from "./type";
+import {
+  SET_COMPANY_PROFILE,
+  CLEAR_COMPANY_PROFILE,
+  ADD_COMPANY_JOB_OFFER,
+  ADD_COMPANY_JOB_OFFER_SKILLS,
+  CREATE_COMPANY_PROFILE_INFO,
+} from "./type";
+
+import companyAPI from "../API/comapnyAPI";
 
 //action to fetech resume
-export const setCompanyProfile = data => dispatch => {
+export const setCompanyProfile = (data) => (dispatch) => {
   return dispatch({
     type: SET_COMPANY_PROFILE,
-    payload: data
+    payload: data,
   });
 };
 
-export const clearCompanyProfile = () => dispatch => {
+export const clearCompanyProfile = () => (dispatch) => {
   return dispatch({
-    type: CLEAR_COMPANY_PROFILE
+    type: CLEAR_COMPANY_PROFILE,
+  });
+};
+
+//http://localhost:5000/api/company/3/info
+export const createCompanyProfileInfo = (data) => async (
+  dispatch,
+  getState
+) => {
+  const authId = getState().companyProfile.company.AuthId;
+  const companyId = getState().companyProfile.company.id;
+
+  const activeProfile = await companyAPI.patch(`active?id=${companyId}`);
+  const result = await companyAPI.patch(`${authId}/info`, data);
+
+  console.log(result.data);
+
+  return dispatch({
+    type: CREATE_COMPANY_PROFILE_INFO,
+    payload: result.data.data,
+  });
+};
+//http://localhost:5000/api/company/1/jobOffer
+export const addCompanyJobOffer = () => (dispatch) => {
+  return dispatch({
+    type: ADD_COMPANY_JOB_OFFER,
+  });
+};
+//http://localhost:5000/api/company/1/jobOffer/1/skills
+export const addCompanyJobOfferSkills = () => (dispatch) => {
+  return dispatch({
+    type: ADD_COMPANY_JOB_OFFER_SKILLS,
   });
 };

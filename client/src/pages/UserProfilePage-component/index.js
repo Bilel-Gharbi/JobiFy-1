@@ -7,9 +7,9 @@ import ProfileLeftMenu from "./ProfileLeftMenu";
 
 const UserProfilePage = ({ isActive, userType, ...props }) => {
   useEffect(() => {
-    if (userType === "COMPANY") props.history.push("/dashbord");
     if (!isActive) props.history.push("/info");
-  }, []);
+    if (userType === "COMPANY") props.history.push("/dashboard");
+  }, [isActive, userType]);
   return (
     <div className="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
       <ProfileLeftMenu />

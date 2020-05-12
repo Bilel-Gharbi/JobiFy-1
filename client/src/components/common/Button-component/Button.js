@@ -3,7 +3,7 @@ import React from "react";
 /* import "./Button.css"; */
 
 const Button = (props) => {
-  const { className, icon, customButton, children, ...otherProps } = props;
+  const { className, icon, customButton, children, id, ...otherProps } = props;
 
   const renderButton = () => {
     //if we i have custom design button
@@ -13,9 +13,9 @@ const Button = (props) => {
       //basic cusstem btn
       return (
         <button className={`${className} default-btn`} {...otherProps}>
-          <div>
+          <div id={id}>
             {icon ? <i className={icon} /> : null}
-            <a>{children}</a>
+            <a id={id}>{children}</a>
           </div>
         </button>
       );

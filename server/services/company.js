@@ -48,9 +48,20 @@ const getCompanyDetails = async (AuthId) => {
   }
 };
 
+const activateCompanyProfile = async (id) => {
+  try {
+    let company = await Company.findByPk(id);
+    let activatedProfile = await company.update({ active: true });
+    return activatedProfile;
+  } catch (err) {
+    console.log("CompanyServices / activateCompanyProfile Error ", err);
+  }
+};
+
 module.exports = {
   createCompany,
   getAllCompany,
   createCompanyInfo,
   getCompanyDetails,
+  activateCompanyProfile,
 };

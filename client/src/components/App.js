@@ -31,7 +31,7 @@ const UserProfilePage = React.lazy(() =>
   import("../pages/UserProfilePage-component")
 );
 const DashBoardPage = React.lazy(() =>
-  import("../pages/DashBoardPage-component/DashBoardPage")
+  import("../pages/DashBoardPage-component")
 );
 const WizardPage = React.lazy(() => import("../pages/WizardPage-component/"));
 

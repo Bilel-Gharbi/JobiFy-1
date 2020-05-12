@@ -4,6 +4,8 @@ const { companyControllers: compController } = require("../controllers");
 const { jobOfferControllers: jobcontroller } = require("../controllers");
 const { skillControllers: skillController } = require("../controllers");
 
+const upload = require("../middleware/multer");
+
 comapnyRouter
   .route("/")
   .post(compController.createNewCompany)
@@ -11,6 +13,14 @@ comapnyRouter
 
 //to complete compnay profile
 comapnyRouter.route("/:authId/info").post(compController.createCompanyInfo);
+
+//update company profile
+comapnyRouter
+  .route("/:authId/info")
+  .patch(upload.single("companyPhoto"), compController.createCompanyInfo);
+
+//activate company
+comapnyRouter.route("/active").patch(compController.activateCompanyProfile);
 
 comapnyRouter.route("/:id/jobOffers").get(jobcontroller.getCompanyJobOffer);
 comapnyRouter.route("/:id/jobOffer").post(jobcontroller.addCompanyJobOffer);

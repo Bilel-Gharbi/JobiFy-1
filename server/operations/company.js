@@ -1,6 +1,7 @@
 const { companyServices } = require("../services");
+const cloudinary = require("cloudinary").v2;
 
-const createNewCompany = async data => {
+const createNewCompany = async (data) => {
   try {
     result = await companyServices.createCompany(data);
     return result;
@@ -18,8 +19,12 @@ const getAllCompany = async () => {
   }
 };
 
-const createCompnayInfo = async (authId, data) => {
+const createCompnayInfo = async (authId, data, filePath) => {
   try {
+    if (filePath) {
+      const photoCloudURL = await cloudinary.uploader.upload(filePath);
+      data.logo = photoCloudURL.url;
+    }
     result = await companyServices.createCompanyInfo(authId, data);
     return result;
   } catch (err) {
@@ -27,8 +32,18 @@ const createCompnayInfo = async (authId, data) => {
   }
 };
 
+const activateCompanyProfile = async (id) => {
+  try {
+    result = await companyServices.activateCompanyProfile(id);
+    return result;
+  } catch (err) {
+    console.log("activateCompanyProfile / company operation error ", err);
+  }
+};
+
 module.exports = {
   createNewCompany,
   getAllCompany,
-  createCompnayInfo
+  createCompnayInfo,
+  activateCompanyProfile,
 };

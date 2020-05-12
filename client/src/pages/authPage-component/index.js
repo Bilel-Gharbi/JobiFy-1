@@ -8,7 +8,7 @@ import Signup from "../../components/Signup-component";
 const AuthPage = ({ history, isLoged, error, login, signup, userType }) => {
   useEffect(() => {
     if (isLoged && userType === "USER") history.push("/profile");
-    if (isLoged && userType === "COMPANY") history.push("/dashbord");
+    if (isLoged && userType === "COMPANY") history.push("/dashboard");
   }, [isLoged, userType]);
 
   const [formToDisplay, setFormToDisplay] = useState({

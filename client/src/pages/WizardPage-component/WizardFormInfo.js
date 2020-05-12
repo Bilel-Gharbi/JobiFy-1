@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/common/Button-component/Button";
 
@@ -427,6 +427,204 @@ export const FormUserSkill = ({ data, next, pervious, action }) => {
           <Button className="btn btn-outline-brand btn-square" type="submit">
             Submit
           </Button>
+        </div>
+      </form>
+    </>
+  );
+};
+
+export const FormCompanyInfo = ({ action }) => {
+  const { register, handleSubmit, errors } = useForm();
+  const [bgPhoto, setBgPhoto] = useState();
+
+  const handlePhotoChange = () => {
+    let photo = document.getElementsByName("companyPhoto")[0].files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setBgPhoto(reader.result);
+    };
+    if (photo) {
+      reader.readAsDataURL(photo);
+      setBgPhoto(reader.result);
+    }
+  };
+
+  const onSubmit = (data) => {
+    const {
+      companyName,
+      companyDescription,
+      type,
+      phoneNumber,
+      location,
+      companyPhoto,
+    } = data;
+    const formData = new FormData();
+
+    formData.append("companyPhoto", companyPhoto[0]);
+    formData.append("companyName", companyName);
+    formData.append("companyDescription", companyDescription);
+    formData.append("type", type);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("location", location);
+    //dispatch action
+    action(formData);
+  };
+  return (
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="kt-portlet__body">
+          <div className="kt-section kt-section--first">
+            <div className="kt-section__body">
+              <div className="form-group row">
+                <label className="col-xl-3 col-lg-3 col-form-label">
+                  {/* removed label */}
+                </label>
+                <div
+                  className="col-lg-9 col-xl-6"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
+                    className="kt-avatar kt-avatar--outline"
+                    id="kt_user_avatar"
+                  >
+                    <div
+                      className="kt-avatar__holder"
+                      style={{
+                        backgroundImage: `url(${bgPhoto || null})`,
+                      }}
+                    />
+                    <label
+                      className="kt-avatar__upload"
+                      data-toggle="kt-tooltip"
+                      data-original-title="Change avatar"
+                    >
+                      <i className="fa fa-pen" />
+                      <input
+                        type="file"
+                        name="companyPhoto"
+                        accept=".png, .jpg, .jpeg"
+                        onChange={handlePhotoChange}
+                        ref={register({ required: "upload companay logo" })}
+                      />
+                    </label>
+                    <span
+                      className="kt-avatar__cancel"
+                      data-toggle="kt-tooltip"
+                      data-original-title="Cancel avatar"
+                    >
+                      <i className="fa fa-times" />
+                    </span>
+                  </div>
+                </div>
+                {errors.companyPhoto && errors.companyPhoto.message}
+              </div>
+              <div className="form-group row">
+                <label className="col-xl-3 col-lg-3 col-form-label">
+                  Company Name
+                </label>
+                <div className="col-lg-9 col-xl-6">
+                  <input
+                    className="form-control"
+                    name="companyName"
+                    type="text"
+                    placeholder="Company Name"
+                    ref={register({ required: "please fill Company Name" })}
+                  />
+                  {errors.companyName && errors.companyName.message}
+                </div>
+              </div>
+              <div className="form-group row">
+                <label className="col-xl-3 col-lg-3 col-form-label">
+                  Company description
+                </label>
+                <div className="col-lg-9 col-xl-6">
+                  <textarea
+                    className="form-control"
+                    name="companyDescription"
+                    type="text"
+                    placeholder="company description"
+                    ref={register({
+                      required: "please fill Company Description",
+                    })}
+                  />
+                  {errors.companyDescription &&
+                    errors.companyDescription.message}
+                </div>
+              </div>
+              <div className="form-group row">
+                <label className="col-xl-3 col-lg-3 col-form-label">
+                  Location
+                </label>
+                <div className="col-lg-9 col-xl-6">
+                  <input
+                    className="form-control"
+                    name="location"
+                    type="text"
+                    placeholder="Company Location"
+                    ref={register({ required: "please fill your location" })}
+                  />
+                  {errors.location && errors.location.message}
+                </div>
+              </div>
+
+              <div className="form-group row">
+                <label className="col-xl-3 col-lg-3 col-form-label">
+                  Company Type
+                </label>
+                <div className="col-lg-9 col-xl-6">
+                  <input
+                    className="form-control"
+                    name="type"
+                    type="text"
+                    placeholder="Company type , SS2I , IT , ..."
+                    ref={register({ required: "please fill company type" })}
+                  />
+                  {errors.type && errors.type.message}
+                </div>
+              </div>
+              <div className="form-group row">
+                <label className="col-xl-3 col-lg-3 col-form-label">
+                  Contact Phone
+                </label>
+                <div className="col-lg-9 col-xl-6">
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="la la-phone" />
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      name="phoneNumber"
+                      className="form-control"
+                      placeholder="Phone"
+                      placeholder="Phone Number"
+                      ref={register({
+                        required: "please fill company phone number",
+                      })}
+                    />
+                  </div>
+                  {errors.phoneNumber && errors.phoneNumber.message}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Button className="btn btn-outline-brand btn-square" type="submit">
+              Create Company Profile
+            </Button>
+          </div>
         </div>
       </form>
     </>
