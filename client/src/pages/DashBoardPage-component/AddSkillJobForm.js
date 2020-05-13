@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import Button from "../../components/common/Button-component/Button";
@@ -15,7 +15,6 @@ const AddSkillJobForm = (props) => {
   const handleSelectChange = (selectedOption) => {
     if (!selectedOption) setError("level");
     setSelectValue({ selectedOption });
-    console.log(selectValue);
   };
 
   const onSubmit = (data) => {

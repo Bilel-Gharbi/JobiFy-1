@@ -1,22 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import DashbordJobOffersList from "./DashbordJobOffersList";
 import DashbordCandidateList from "./DashbordCandidateList";
 import DashbordCreateJobOffer from "./DashbordCreateJobOffer";
 
-const RightDashBordConatainer = ({ elementToRender }) => {
+const RightDashBordConatainer = ({ elementToRender, ...props }) => {
   const renderContent = () => {
     switch (elementToRender) {
       case "Create job offer":
         return <DashbordCreateJobOffer />;
       case "jobOfferList":
-        return <DashbordJobOffersList />;
+        return <DashbordJobOffersList jobs={props.companyJobs} />;
       case "Candidate":
         return <DashbordCandidateList />;
       case "Somthing Else":
         return "<h3> Somthing Else </h3>";
       default:
-        return <DashbordCreateJobOffer />;
+        //return <DashbordCreateJobOffer />;
+        return <DashbordJobOffersList jobs={props.companyJobs} />;
     }
   };
   return (
@@ -29,4 +31,10 @@ const RightDashBordConatainer = ({ elementToRender }) => {
   );
 };
 
-export default RightDashBordConatainer;
+const mapStateToProps = (state) => {
+  return {
+    companyJobs: state.companyProfile.jobOffers,
+  };
+};
+
+export default connect(mapStateToProps, null)(RightDashBordConatainer);

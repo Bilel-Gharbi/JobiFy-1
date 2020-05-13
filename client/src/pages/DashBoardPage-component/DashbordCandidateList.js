@@ -91,10 +91,10 @@ const DashbordCandidateList = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody style={{}} className="kt-datatable__body">
+              <tbody className="kt-datatable__body">
                 <tr className="kt-datatable__row" style={{ left: 0 }}>
                   <td className="kt-datatable__cell kt-datatable__toggle-detail">
-                    <a className="kt-datatable__toggle-detail" href>
+                    <a className="kt-datatable__toggle-detail">
                       <i className="fa fa-caret-right" />
                     </a>
                   </td>
@@ -119,7 +119,7 @@ const DashbordCandidateList = () => {
                   </td>
                 </tr>
                 {/* display job details */}
-                <table>
+                {/*   <table>
                   <tbody>
                     <tr className="kt-datatable__row">
                       <td className="kt-datatable__cell">
@@ -130,7 +130,7 @@ const DashbordCandidateList = () => {
                       </td>
                     </tr>
                   </tbody>
-                </table>
+                </table> */}
                 {/* end display job details */}
               </tbody>
             </table>

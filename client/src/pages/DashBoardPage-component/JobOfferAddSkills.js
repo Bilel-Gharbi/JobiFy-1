@@ -55,8 +55,6 @@ const JobOfferAddSkills = ({ setStep, jobOffer, addCompanyJobOffer }) => {
   const onSubmit = () => {
     if (verifiedCaptcha) {
       //dipatch action
-      console.log(allSkills);
-      console.log(jobOffer);
       addCompanyJobOffer(jobOffer, allSkills);
       setStep(1);
     } else {

@@ -1,5 +1,7 @@
 //import User model from models/index.js file
 const { Company } = require("../models");
+const { adjResultFormatingCompnayProfile } = require("../helper/");
+const jobOfferServices = require("./jobOffer");
 
 // User service file includes functon thant interact with directly with the database
 // After create a service export using the es6 synt
@@ -40,7 +42,11 @@ const getCompanyDetails = async (AuthId) => {
     let company = await Company.findOne({ where: { AuthId } });
     //retreive company job offers
     if (company) {
-      let jobOffers = await company.getJobOffers();
+      let jobs = await company.getJobOffers();
+      let jobOffers = await adjResultFormatingCompnayProfile(
+        jobs,
+        jobOfferServices
+      );
       return { company, jobOffers };
     }
   } catch (err) {

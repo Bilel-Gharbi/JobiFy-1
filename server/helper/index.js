@@ -55,7 +55,26 @@ const adjResultForSearchBySkill = async (result, service) => {
   result.rows = data;
   return result;
 };
+
+const adjResultFormatingCompnayProfile = async (result, service) => {
+  skillsTab = [];
+
+  let data = result.map((el) => {
+    return el;
+  });
+
+  for (let i = 0; i < data.length; i++) {
+    let jobSkills = await service.getJobOfferSkills(data[i].dataValues.id);
+    skillsTab.push(jobSkills);
+  }
+  data.map((el, i) => {
+    el.dataValues["jobSkills"] = skillsTab[i];
+  });
+
+  return data;
+};
 module.exports.signNewToken = signNewToken;
 module.exports.verifyToken = verifyToken;
 module.exports.adjResultFormating = adjResultFormating;
 module.exports.adjResultForSearchBySkill = adjResultForSearchBySkill;
+module.exports.adjResultFormatingCompnayProfile = adjResultFormatingCompnayProfile;

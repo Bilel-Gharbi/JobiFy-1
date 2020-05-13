@@ -1,15 +1,18 @@
 import React from "react";
 import Select from "react-select";
 
-const DashbordJobOffersList = () => {
+import JobOfferListTable from "./JobOfferListTable";
+
+const DashbordJobOffersList = (props) => {
   const options = [
     { value: "CDI", label: "CDI" },
     { value: "CDD", label: "CDD" },
     { value: "Remote", label: "Remote" },
   ];
+
   return (
     <div>
-      <div className="kt-portlet" /* style={{ padding: "5%" }} */>
+      <div className="kt-portlet">
         <div className="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded">
           <>
             <div className="kt-portlet__body">
@@ -54,86 +57,7 @@ const DashbordJobOffersList = () => {
             {/*end: Search Form */}
           </>
           <>
-            <table className="kt-datatable__table">
-              <thead className="kt-datatable__head">
-                <tr className="kt-datatable__row">
-                  <th className="kt-datatable__cell kt-datatable__toggle-detail">
-                    <span />
-                  </th>
-                  <th className="kt-datatable__cell kt-datatable__cell--sort">
-                    <span style={{ width: 110 }}>Job offer</span>
-                  </th>
-                  <th className="kt-datatable__cell kt-datatable__cell--sort">
-                    <span style={{ width: 110 }}>First Name</span>
-                  </th>
-                  <th className="kt-datatable__cell kt-datatable__cell--sort">
-                    <span style={{ width: 110 }}>Last Name</span>
-                  </th>
-                  <th className="kt-datatable__cell kt-datatable__cell--sort">
-                    <span style={{ width: 110 }}>Expertise </span>
-                  </th>
-
-                  <th
-                    className="kt-datatable__cell kt-datatable__cell--sort"
-                    style={{ display: "none" }}
-                  >
-                    <span style={{ width: 110 }}>Deposit Paid</span>
-                  </th>
-                  <th
-                    data-field="Order Date"
-                    className="kt-datatable__cell kt-datatable__cell--sort"
-                    style={{ display: "none" }}
-                  >
-                    <span style={{ width: 110 }}>Order Date</span>
-                  </th>
-                  <th className="kt-datatable__cell kt-datatable__cell--sort">
-                    <span style={{ width: 110 }}>Status</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody style={{}} className="kt-datatable__body">
-                <tr className="kt-datatable__row" style={{ left: 0 }}>
-                  <td className="kt-datatable__cell kt-datatable__toggle-detail">
-                    <a className="kt-datatable__toggle-detail" href>
-                      <i className="fa fa-caret-right" />
-                    </a>
-                  </td>
-                  <td data-field="Order ID" className="kt-datatable__cell">
-                    <span style={{ width: 110 }}>111</span>
-                  </td>
-                  <td data-field="Order ID" className="kt-datatable__cell">
-                    <span style={{ width: 110 }}>0006-3629</span>
-                  </td>
-                  <td data-field="Car Make" className="kt-datatable__cell">
-                    <span style={{ width: 110 }}>Land Rover</span>
-                  </td>
-                  <td data-field="Car Model" className="kt-datatable__cell">
-                    <span style={{ width: 110 }}>Range Rover</span>
-                  </td>
-                  <td className="kt-datatable__cell">
-                    <span style={{ width: 110 }}>
-                      <span className="kt-badge  kt-badge--primary kt-badge--inline kt-badge--pill">
-                        Canceled
-                      </span>
-                    </span>
-                  </td>
-                </tr>
-                {/* display job details */}
-                <table>
-                  <tbody>
-                    <tr className="kt-datatable__row">
-                      <td className="kt-datatable__cell">
-                        <span>Deposit Paid</span>
-                      </td>
-                      <td className="kt-datatable__cell">
-                        <span style={{ width: 110 }}>$22672.60</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                {/* end display job details */}
-              </tbody>
-            </table>
+            <JobOfferListTable jobs={props.jobs} />
           </>
         </div>
       </div>

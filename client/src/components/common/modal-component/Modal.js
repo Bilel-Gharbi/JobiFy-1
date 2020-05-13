@@ -26,23 +26,6 @@ const ModalComponent = (props) => {
   };
 
   const executeActionAndToggle = () => {
-    //const { action } = props.body.props;
-    //const data = props.body.ref.current.state;
-    //get the form state from props or children using ref
-
-    /*   let stateFormValue;
-    props.body
-      ? (stateFormValue = props.body.ref.current.state)
-      : (stateFormValue = props.children.ref.current.state);
-
-  */
-    //dispatch action
-    //TODO: validation before dispatch actions
-    //console.log(data);
-    //console.log(props.body.props.action);
-    //console.log(props.body.ref.current.state);
-
-    // console.log(body.ref.current);
     if (modalAction) {
       modalAction();
       toggle();
@@ -74,10 +57,6 @@ const ModalComponent = (props) => {
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}> {modalName}</ModalHeader>
         <ModalBody>{body || props.children}</ModalBody>
-
-        {/* <div className="alert alert-solid-danger alert-bold">
-          <div className="alert-text">A simple danger alert—check it out!</div>
-        </div> */}
 
         <ModalFooter>
           <Button className="btn btn-secondary" onClick={toggle} type="reset">
