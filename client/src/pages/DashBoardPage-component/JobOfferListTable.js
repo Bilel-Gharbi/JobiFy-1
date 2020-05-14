@@ -5,7 +5,11 @@ import * as actions from "../../actions/comapny";
 import Btn from "../../components/common/ModalDashboard-component/ModalDashboard";
 import JobSkillsTabRow from "./JobSkillsTabRow";
 
-import { AddSkillModalForm, UpdateJobOfferForm } from "./ModalForms";
+import {
+  AddSkillModalForm,
+  UpdateJobOfferForm,
+  ConfirmationModalForm,
+} from "./ModalForms";
 import {
   DeleteButton,
   AddButton,
@@ -50,14 +54,21 @@ const JobOfferListTable = ({ jobs, ...props }) => {
           {jobs &&
             jobs.map((job) => {
               return (
-                <tr key={job.id}>
-                  <tr className="kt-datatable__row" style={{ left: 0 }}>
+                <React.Fragment key={job.id}>
+                  <tr
+                    className="kt-datatable__row"
+                    style={{ left: 0 }}
+                    key={job.id}
+                  >
                     <td className="kt-datatable__cell kt-datatable__toggle-detail">
                       <a
                         className="kt-datatable__toggle-detail"
                         onClick={() => toggle(job.id)}
                       >
-                        <i className="fa fa-caret-right" />
+                        <i
+                          className="fa fa-caret-right"
+                          style={{ cursor: "pointer" }}
+                        />
                       </a>
                     </td>
                     <td className="kt-datatable__cell">
@@ -94,7 +105,15 @@ const JobOfferListTable = ({ jobs, ...props }) => {
                     </td>
                     <td className="kt-datatable__cell">
                       <span style={{ width: 110, display: "flex" }}>
-                        <DeleteButton />
+                        <Btn
+                          title="Delete job"
+                          btn={<DeleteButton />}
+                          body={
+                            <ConfirmationModalForm
+                              action={() => props.deleteCompanyJobOffer(job.id)}
+                            />
+                          }
+                        />
                         &nbsp; &nbsp;
                         <Btn
                           title="Update Job Offer"
@@ -109,14 +128,13 @@ const JobOfferListTable = ({ jobs, ...props }) => {
                       </span>
                     </td>
                   </tr>
-                  <>
-                    <JobSkillsTabRow
-                      job={job}
-                      jobSkillIdToRender={jobSkillIdToRender}
-                      detailsSkills={detailsSkills}
-                    />
-                  </>
-                </tr>
+                  <JobSkillsTabRow
+                    job={job}
+                    jobSkillIdToRender={jobSkillIdToRender}
+                    detailsSkills={detailsSkills}
+                    deleteSkillAction={props.deleteJobOfferSkill}
+                  />
+                </React.Fragment>
               );
             })}
         </tbody>

@@ -10,6 +10,11 @@ const DashbordJobOffersList = (props) => {
     { value: "Remote", label: "Remote" },
   ];
 
+  const handleSelectChange = (selectOption) => {
+    console.log("hello");
+    console.log(selectOption);
+  };
+
   return (
     <div>
       <div className="kt-portlet">
@@ -44,7 +49,7 @@ const DashbordJobOffersList = (props) => {
                               placeholder="search by status "
                               //value={selectValue.value}
                               options={options}
-                              //onChange={handleSelectChange}
+                              onChange={handleSelectChange}
                             />
                           </div>
                         </div>

@@ -4,10 +4,12 @@ import {
   CLEAR_COMPANY_PROFILE,
   ADD_COMPANY_JOB_OFFER,
   ADD_COMPANY_JOB_OFFER_SKILLS,
+  ADD_COMPANY_JOB_OFFER_SKILL,
   ADD_COMPANY_JOB_OFFER_WITH_SKILLS,
   CREATE_COMPANY_PROFILE_INFO,
   UPDATE_COMPANY_JOB_OFFER,
   DELETE_COMPANY_JOB_OFFER,
+  DELETE_COMPANY_JOB_OFFER_SKILL,
 } from "./type";
 
 import companyAPI from "../API/comapnyAPI";
@@ -49,8 +51,6 @@ export const addCompanyJobOffer = (job, skills) => async (
 ) => {
   const companyId = getState().companyProfile.company.id;
   //create job offer
-  //FIXME:
-
   const newJobOffer = await companyAPI.post(`${companyId}/jobOffer`, job);
 
   // add skills to job offer
@@ -66,34 +66,58 @@ export const addCompanyJobOffer = (job, skills) => async (
     payload: result.data.jobsList,
   });
 };
-//http://localhost:5000/api/company/1/jobOffer/1/skills
-export const addCompanyJobOfferSkill = (jobId, skill) => (dispatch) => {
-  /*   const result = await companyAPI.post(
-    `${companyId}/jobOffer/${jobId}/skills`,
-    [skill]
-  ); */
+//http://localhost:5000/api/company/1/jobOffer/1/skill
+export const addCompanyJobOfferSkill = (jobId, skill) => async (
+  dispatch,
+  getState
+) => {
+  const companyId = getState().companyProfile.company.id;
+
+  const newSkill = await companyAPI.post(
+    `${companyId}/jobOffer/${jobId}/skill`,
+    skill
+  );
   return dispatch({
-    type: ADD_COMPANY_JOB_OFFER_SKILLS,
+    type: ADD_COMPANY_JOB_OFFER_SKILL,
+    payload: newSkill.data.newJobOfferSkill,
   });
 };
+//http://localhost:5000/api/company/4/jobOffer/4
+export const UpdateCompanyJobOffer = (jobId, newJobOffer) => async (
+  dispatch,
+  getState
+) => {
+  const companyId = getState().companyProfile.company.id;
+  const result = await companyAPI.patch(
+    `${companyId}/jobOffer/${jobId}`,
+    newJobOffer
+  );
 
-export const UpdateCompanyJobOffer = (jobId, skill) => (dispatch) => {
-  /*   const result = await companyAPI.post(
-    `${companyId}/jobOffer/${jobId}/skills`,
-    [skill]
-  ); */
   return dispatch({
     type: UPDATE_COMPANY_JOB_OFFER,
+    payload: result.data.newJobOffer,
+  });
+};
+//http://localhost:5000/api/company/3/jobOffer/1
+export const deleteCompanyJobOffer = (jobId) => async (dispatch, getState) => {
+  const companyId = getState().companyProfile.company.id;
+  const result = await companyAPI.delete(`${companyId}/jobOffer/${jobId}`);
+  return dispatch({
+    type: DELETE_COMPANY_JOB_OFFER,
+    payload: result.data.deletedJobOffer,
   });
 };
 
-export const deleteCompanyJobOffer = (jobId, skill) => (dispatch, getState) => {
+export const deleteJobOfferSkill = (skillId, jobId) => async (
+  dispatch,
+  getState
+) => {
   const companyId = getState().companyProfile.company.id;
-  /*   const result = await companyAPI.post(
-    `${companyId}/jobOffer/${jobId}/skills`,
-    [skill]
-  ); */
+  const result = await companyAPI.delete(
+    `${companyId}/jobOffer/${jobId}/skill/${skillId}`
+  );
   return dispatch({
-    type: DELETE_COMPANY_JOB_OFFER,
+    type: DELETE_COMPANY_JOB_OFFER_SKILL,
+    payload: result.data.deletedSkill,
   });
 };

@@ -14,13 +14,13 @@ const FormAddJobOffer = ({ setStep, setJobOffer }) => {
   const [selectValue, setSelectValue] = useState({ selectedOption: [] });
 
   const handleSelectChange = (selectedOption) => {
-    if (!selectedOption) setError("jobContractType");
+    if (!selectedOption) setError("JobContractType");
     setSelectValue({ selectedOption });
-    console.log(selectValue);
   };
 
   const onSubmit = (data) => {
-    if (!data.jobContractType) return setError("jobContractType");
+    if (!data.JobContractType) return setError("JobContractType");
+
     setStep(2);
     setJobOffer(data);
   };
@@ -59,14 +59,14 @@ const FormAddJobOffer = ({ setStep, setJobOffer }) => {
             <label className="col-3 col-form-label">contract type</label>
             <div className="col-9">
               <Select
-                name="jobContractType"
+                name="JobContractType"
                 placeholder="Choose contract type "
                 value={selectValue.value}
                 options={options}
                 onChange={handleSelectChange}
                 ref={() => {
                   register({
-                    name: "jobContractType",
+                    name: "JobContractType",
                     value: selectValue.selectedOption.value,
                     required: true,
                     validate: (value) => {
@@ -75,7 +75,7 @@ const FormAddJobOffer = ({ setStep, setJobOffer }) => {
                   });
                 }}
               />
-              {errors.jobContractType && errors.jobContractType.message}
+              {errors.JobContractType && "please select contract type"}
             </div>
           </div>
           <div className="form-group row">

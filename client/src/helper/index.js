@@ -51,3 +51,19 @@ export const updateElementFromState = (arr, element) => {
     };
   });
 };
+
+export const addSkillToJobOffer = (state, skill) => {
+  let jobOffer = state.filter((el) => el.id === skill.JobOfferId);
+  jobOffer[0].jobSkills.push(skill);
+
+  return [...jobOffer, ...state.filter((el) => el.id !== skill.JobOfferId)];
+};
+
+export const delSkillFromJobOffer = (state, skillId, jobId) => {
+  let jobOffer = state.filter((el) => el.id === jobId);
+  let newSkills = jobOffer[0].jobSkills.filter((skill) => skill.id !== skillId);
+
+  jobOffer[0].jobSkills = newSkills;
+
+  return [...jobOffer, ...state.filter((el) => el.id !== jobId)];
+};
