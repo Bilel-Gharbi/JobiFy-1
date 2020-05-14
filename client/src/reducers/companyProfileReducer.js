@@ -27,6 +27,18 @@ const companyProfileReducer = (state = initialState, action) => {
         jobOffers: [...newJobOffers],
       };
 
+    case "SEARCH_COMPANY_JOB_OFFER":
+      return {
+        ...state,
+        jobOffers: [...action.payload],
+      };
+
+    case "FILTER_COMPANY_JOB_OFFER":
+      return {
+        ...state,
+        jobOffers: [...action.payload],
+      };
+
     case "ADD_COMPANY_JOB_OFFER_WITH_SKILLS":
       return { ...state, jobOffers: [...action.payload] };
 
@@ -42,29 +54,6 @@ const companyProfileReducer = (state = initialState, action) => {
         jobOffers: [...updateElementFromState(state.jobOffers, action.payload)],
       };
     case "DELETE_COMPANY_JOB_OFFER_SKILL":
-      /* return {
-        ...state,
-        jobOffers: [
-          ...filterElementFromState(
-            filterElementFromState(state.jobOffers, {
-              id: action.payload.JobOfferId,
-            }),
-
-            action.payload
-          ),
-        ],
-      }; */
-
-      /* return {
-        ...state,
-        jobOffers: [
-          ...delSkillFromJobOffer(
-            state.jobOffers,
-            action.payload.id,
-            action.payload.JobOfferId
-          ),
-        ],
-      }; */
       return {
         ...state,
         jobOffers: [

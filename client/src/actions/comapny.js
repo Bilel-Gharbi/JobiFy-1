@@ -10,6 +10,8 @@ import {
   UPDATE_COMPANY_JOB_OFFER,
   DELETE_COMPANY_JOB_OFFER,
   DELETE_COMPANY_JOB_OFFER_SKILL,
+  SEARCH_COMPANY_JOB_OFFER,
+  FILTER_COMPANY_JOB_OFFER,
 } from "./type";
 
 import companyAPI from "../API/comapnyAPI";
@@ -119,5 +121,42 @@ export const deleteJobOfferSkill = (skillId, jobId) => async (
   return dispatch({
     type: DELETE_COMPANY_JOB_OFFER_SKILL,
     payload: result.data.deletedSkill,
+  });
+};
+//Search jobOffer
+export const searchJobByPosition = (term) => async (dispatch, getState) => {
+  const companyId = getState().companyProfile.company.id;
+  const jobOffers = getState().companyProfile.jobOffers;
+
+  let result;
+  if (term.length === 0) {
+    let jobs = await companyAPI.get(`${companyId}/jobOffers`);
+    result = jobs.data.data;
+  } else {
+    result = jobOffers.filter((job) =>
+      job.jobPosition.toUpperCase().includes(term.toUpperCase())
+    );
+  }
+
+  return dispatch({
+    type: SEARCH_COMPANY_JOB_OFFER,
+    payload: result,
+  });
+};
+export const filterJobByContract = (term) => async (dispatch, getState) => {
+  const companyId = getState().companyProfile.company.id;
+  const jobOffers = await companyAPI.get(`${companyId}/jobOffers`);
+
+  let result;
+  if (term == "All") {
+    let jobs = await companyAPI.get(`${companyId}/jobOffers`);
+    result = jobs.data.data;
+  } else {
+    result = jobOffers.data.data.filter((job) => job.JobContractType === term);
+  }
+
+  return dispatch({
+    type: FILTER_COMPANY_JOB_OFFER,
+    payload: result,
   });
 };

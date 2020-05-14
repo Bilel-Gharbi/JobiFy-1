@@ -1,4 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import {
+  searchJobByPosition,
+  filterJobByContract,
+} from "../../actions/comapny";
 import Select from "react-select";
 
 import JobOfferListTable from "./JobOfferListTable";
@@ -8,11 +13,15 @@ const DashbordJobOffersList = (props) => {
     { value: "CDI", label: "CDI" },
     { value: "CDD", label: "CDD" },
     { value: "Remote", label: "Remote" },
+    { value: "All", label: "All" },
   ];
 
   const handleSelectChange = (selectOption) => {
-    console.log("hello");
-    console.log(selectOption);
+    props.filterJobByContract(selectOption.value);
+  };
+
+  const handleSearchChange = (e) => {
+    props.searchJobByPosition(e.target.value);
   };
 
   return (
@@ -31,7 +40,8 @@ const DashbordJobOffersList = (props) => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search..."
+                            placeholder="Search job position ..."
+                            onChange={handleSearchChange}
                           />
                           <span className="kt-input-icon__icon kt-input-icon__icon--left">
                             <span>
@@ -46,8 +56,7 @@ const DashbordJobOffersList = (props) => {
                           <div className="kt-form__control">
                             <Select
                               name="jobContractType"
-                              placeholder="search by status "
-                              //value={selectValue.value}
+                              placeholder="Filter by contract "
                               options={options}
                               onChange={handleSelectChange}
                             />
@@ -70,4 +79,6 @@ const DashbordJobOffersList = (props) => {
   );
 };
 
-export default DashbordJobOffersList;
+export default connect(null, { searchJobByPosition, filterJobByContract })(
+  DashbordJobOffersList
+);

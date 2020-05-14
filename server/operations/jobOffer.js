@@ -153,6 +153,7 @@ const getJobOfferSkills = async (id) => {
 module.exports = {
   getAllJoboffers,
   paginateAllJoboffers,
+  getJobOffers,
   addJobOffer,
   deleteJobOffer,
   updateJobOffer,

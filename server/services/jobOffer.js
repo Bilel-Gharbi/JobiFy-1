@@ -1,5 +1,7 @@
 //import Resume model from models/index.js file
 const { Company, JobOffer, Skill } = require("../models");
+const { adjResultFormatingCompnayJobOffers } = require("../helper/");
+
 const Sequelize = require("Sequelize");
 const Op = Sequelize.Op;
 
@@ -121,7 +123,6 @@ const searchJobOffersBySkill = async (term, limit, offset) => {
       offset,
       limit,
     });
-    //console.log(skills.length);
     return skills;
   } catch (err) {
     console.log("JobOfferService /searchJobOffersBySkill Eroor ", err);
@@ -144,7 +145,11 @@ const getCompanyJobOffers = async (id) => {
   try {
     let company = await Company.findByPk(id);
     let allJobOffers = await company.getJobOffers();
-    return allJobOffers;
+    let jobOffers = await adjResultFormatingCompnayJobOffers(
+      allJobOffers,
+      getJobOfferSkills
+    );
+    return jobOffers;
   } catch (err) {
     console.log("JobOfferService /getCompanyJobOffer Eroor ", err);
   }
