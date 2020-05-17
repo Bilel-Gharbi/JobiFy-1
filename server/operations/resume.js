@@ -20,6 +20,16 @@ const getUserResumeDetails = async (userId) => {
   }
 };
 
+const getResumeDetailsForApplication = async (resumeId) => {
+  try {
+    result = await resumeServices.getResumeDetailsForApplication(resumeId);
+
+    return result;
+  } catch (err) {
+    console.log("getResumeDetailsForApplication/ Resume operation error ", err);
+  }
+};
+
 const addResumeInfo = async (resumId, data) => {
   try {
     result = await resumeServices.addBasicResumeInfo(resumId, data);
@@ -87,4 +97,5 @@ module.exports = {
   deleteExperience,
   updateExperience,
   applyJob,
+  getResumeDetailsForApplication,
 };

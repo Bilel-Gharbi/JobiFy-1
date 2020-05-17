@@ -68,7 +68,47 @@ const getUserResumeDetails = async (userId) => {
     console.log("ResumeService /getUserResumeDetails Eroor ", err);
   }
 };
+const getResumeDetailsForApplication = async (id) => {
+  try {
+    let userResume = await Resume.findByPk(id);
+    //if (!userResume) return `no resume with this id ${userId}`;
 
+    //in case 0 we need to create all the table
+    /* 
+    await Project.sync({ force: false });
+    await Award.sync({ force: false });
+    await Certificate.sync({ force: false });
+    await Interest.sync({ force: false });
+    await Skill.sync({ force: false });
+    await Experience.sync({ force: false });
+    await Education.sync({ force: false });
+    await Language.sync({ force: false }); */
+
+    let experiences = await userResume.getExperiences();
+    let educations = await userResume.getEducation();
+    let projects = await userResume.getProjects();
+    let awards = await userResume.getAwards();
+    let certificates = await userResume.getCertificates();
+    let skills = await userResume.getSkills();
+    let interests = await userResume.getInterests();
+    let languages = await userResume.getLanguages();
+
+    let resumeCandidate = {
+      userResume,
+      experiences,
+      educations,
+      skills,
+      certificates,
+      projects,
+      languages,
+      awards,
+      interests,
+    };
+    return resumeCandidate;
+  } catch (err) {
+    console.log("ResumeService /getUserResumeDetails Eroor ", err);
+  }
+};
 //add resume info
 const addBasicResumeInfo = async (resumeId, data) => {
   try {
@@ -103,4 +143,5 @@ module.exports = {
   getUserResumeDetails,
   applyToJobOffer,
   addBasicResumeInfo,
+  getResumeDetailsForApplication,
 };

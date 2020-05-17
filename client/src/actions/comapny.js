@@ -12,9 +12,14 @@ import {
   DELETE_COMPANY_JOB_OFFER_SKILL,
   SEARCH_COMPANY_JOB_OFFER,
   FILTER_COMPANY_JOB_OFFER,
+  FETCH_COMPANY_JOB_APPLICATIONS,
+  FETCH_CANDIDATE_DETAILS,
 } from "./type";
 
 import companyAPI from "../API/comapnyAPI";
+import { jobMatch } from "../helper";
+import * as _ from "underscore";
+import axios from "axios";
 
 //action to fetech resume
 export const setCompanyProfile = (data) => (dispatch) => {
@@ -109,6 +114,32 @@ export const deleteCompanyJobOffer = (jobId) => async (dispatch, getState) => {
     payload: result.data.deletedJobOffer,
   });
 };
+//http://localhost:5000/api/company/3/applications
+export const fetchCompanyJobOfferApplications = (companyId) => async (
+  dispatch
+) => {
+  const result = await companyAPI.get(`${companyId}/applications`);
+  return dispatch({
+    type: FETCH_COMPANY_JOB_APPLICATIONS,
+    payload: result.data.applications,
+  });
+};
+
+export const fetchCompanyJobOfferApplicationsResume = (
+  companyId,
+  resumeId
+) => async (dispatch) => {
+  const result = await companyAPI.get(
+    `${companyId}/applications/resume/${resumeId}`
+  );
+  return result.data;
+  /* return dispatch({
+    type: "FETCH_COMPANY_JOB_CANDIDATE_RESUME",
+    //payload: result.data.applications,
+  }); */
+};
+
+//localhost:5000/api/company/applications/resume/16
 
 export const deleteJobOfferSkill = (skillId, jobId) => async (
   dispatch,

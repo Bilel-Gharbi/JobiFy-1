@@ -7,6 +7,7 @@ import {
 const initialState = {
   company: null,
   jobOffers: null,
+  applications: [],
 };
 
 const companyProfileReducer = (state = initialState, action) => {
@@ -25,6 +26,12 @@ const companyProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         jobOffers: [...newJobOffers],
+      };
+
+    case "FETCH_COMPANY_JOB_APPLICATIONS":
+      return {
+        ...state,
+        applications: [...action.payload],
       };
 
     case "SEARCH_COMPANY_JOB_OFFER":

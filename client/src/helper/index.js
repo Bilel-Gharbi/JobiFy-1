@@ -13,6 +13,10 @@ export const checkBeforeSave = (jobId, savedJobsTab) => {
 export const jobMatch = (resumeSkillsTab, jobOfferSkillsTab) => {
   //check how many Resume skills included in JobOffer skills
 
+  console.log(resumeSkillsTab);
+  console.log(jobOfferSkillsTab);
+  console.log("hello");
+
   let jobSkills = _.pluck(jobOfferSkillsTab, "name")
     .join(",")
     .toUpperCase()

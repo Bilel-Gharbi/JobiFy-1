@@ -1,15 +1,71 @@
-import React from "react";
-import Select from "react-select";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../actions/comapny";
+import companyAPI from "../../API/comapnyAPI";
+import axios from "axios";
 
-const DashbordCandidateList = () => {
+import * as _ from "underscore";
+
+import Select from "react-select";
+import CandidateListTable from "./CandidateListTable";
+
+import { jobMatch } from "../../helper";
+
+const DashbordCandidateList = (props) => {
+  const [resumesTabSkills, setResumesTabSkills] = useState([]);
+  const [jobsTabSkills, setJobsTabSkills] = useState([]);
+  const [matchingArray, setMatchingArray] = useState([]);
+
+  useEffect(() => {
+    if (props.company) {
+      props.fetchCompanyJobOfferApplications(props.company.id);
+    }
+  }, []);
+
   const options = [
-    { value: "CDI", label: "CDI" },
-    { value: "CDD", label: "CDD" },
-    { value: "Remote", label: "Remote" },
+    { value: "pendding", label: "pendding" },
+    { value: "accepted", label: "accepted" },
+    { value: "rejected", label: "rejected" },
   ];
+
+  /* const setMatchingRate = () => {
+    let jobsId = props.applications.map((app) => app.JobOfferId);
+    let resumesId = props.applications.map((app) => app.ResumeId);
+
+    let obj1 = {};
+    let obj2 = {};
+
+    resumesId.map(async (id, index) => {
+      let resumeTab = await companyAPI.get(`applications/resume/${id}`);
+      let skills = resumeTab.data.resumeCandidate.skills;
+      obj1[index] = skills;
+    });
+
+    jobsId.map(async (id, index) => {
+      let jobTab = await axios.get(
+        `http://localhost:5000/api/company/${props.company.id}/jobOffer/${id}/skills`
+      );
+      let skills = jobTab.data.data;
+      obj2[index] = skills;
+    });
+    setResumesTabSkills(obj1);
+    setJobsTabSkills(obj2);
+
+    let result = _.map(resumesTabSkills, (el, i) =>
+      jobMatch(resumesTabSkills[i], jobsTabSkills[i])
+    );
+    console.log(result);
+    //return result;
+    return setMatchingArray([...result]);
+  }; */
   return (
     <div>
-      <div className="kt-portlet" /* style={{ padding: "5%" }} */>
+      <div
+        className="kt-portlet"
+        /* style={{ padding: "5%" }} */
+        //onClick={setMatchingRate}
+        //onChange={() => setMatchingRate()}
+      >
         <div className="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded">
           <>
             <div className="kt-portlet__body">
@@ -23,7 +79,7 @@ const DashbordCandidateList = () => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search..."
+                            placeholder="Search by candidate or job "
                           />
                           <span className="kt-input-icon__icon kt-input-icon__icon--left">
                             <span>
@@ -38,7 +94,7 @@ const DashbordCandidateList = () => {
                           <div className="kt-form__control">
                             <Select
                               name="jobContractType"
-                              placeholder="search by status "
+                              placeholder="Filter status "
                               //value={selectValue.value}
                               options={options}
                               //onChange={handleSelectChange}
@@ -54,91 +110,22 @@ const DashbordCandidateList = () => {
             {/*end: Search Form */}
           </>
           <>
-            <table className="kt-datatable__table">
-              <thead className="kt-datatable__head">
-                <tr className="kt-datatable__row">
-                  <th className="kt-datatable__cell kt-datatable__toggle-detail">
-                    <span />
-                  </th>
-                  <th className="kt-datatable__cell kt-datatable__cell--sort">
-                    <span style={{ width: 110 }}>Job offer</span>
-                  </th>
-                  <th className="kt-datatable__cell kt-datatable__cell--sort">
-                    <span style={{ width: 110 }}>First Name</span>
-                  </th>
-                  <th className="kt-datatable__cell kt-datatable__cell--sort">
-                    <span style={{ width: 110 }}>Last Name</span>
-                  </th>
-                  <th className="kt-datatable__cell kt-datatable__cell--sort">
-                    <span style={{ width: 110 }}>Expertise </span>
-                  </th>
-
-                  <th
-                    className="kt-datatable__cell kt-datatable__cell--sort"
-                    style={{ display: "none" }}
-                  >
-                    <span style={{ width: 110 }}>Deposit Paid</span>
-                  </th>
-                  <th
-                    data-field="Order Date"
-                    className="kt-datatable__cell kt-datatable__cell--sort"
-                    style={{ display: "none" }}
-                  >
-                    <span style={{ width: 110 }}>Order Date</span>
-                  </th>
-                  <th className="kt-datatable__cell kt-datatable__cell--sort">
-                    <span style={{ width: 110 }}>Status</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="kt-datatable__body">
-                <tr className="kt-datatable__row" style={{ left: 0 }}>
-                  <td className="kt-datatable__cell kt-datatable__toggle-detail">
-                    <a className="kt-datatable__toggle-detail">
-                      <i className="fa fa-caret-right" />
-                    </a>
-                  </td>
-                  <td data-field="Order ID" className="kt-datatable__cell">
-                    <span style={{ width: 110 }}>111</span>
-                  </td>
-                  <td data-field="Order ID" className="kt-datatable__cell">
-                    <span style={{ width: 110 }}>0006-3629</span>
-                  </td>
-                  <td data-field="Car Make" className="kt-datatable__cell">
-                    <span style={{ width: 110 }}>Land Rover</span>
-                  </td>
-                  <td data-field="Car Model" className="kt-datatable__cell">
-                    <span style={{ width: 110 }}>Range Rover</span>
-                  </td>
-                  <td className="kt-datatable__cell">
-                    <span style={{ width: 110 }}>
-                      <span className="kt-badge  kt-badge--primary kt-badge--inline kt-badge--pill">
-                        Canceled
-                      </span>
-                    </span>
-                  </td>
-                </tr>
-                {/* display job details */}
-                {/*   <table>
-                  <tbody>
-                    <tr className="kt-datatable__row">
-                      <td className="kt-datatable__cell">
-                        <span>Deposit Paid</span>
-                      </td>
-                      <td className="kt-datatable__cell">
-                        <span style={{ width: 110 }}>$22672.60</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table> */}
-                {/* end display job details */}
-              </tbody>
-            </table>
+            <CandidateListTable
+              applications={props.applications}
+              matchingArr={matchingArray}
+              setMatchingRate={props.setMatchingRate}
+            />
           </>
         </div>
       </div>
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    applications: state.companyProfile.applications,
+    company: state.companyProfile.company,
+  };
+};
 
-export default DashbordCandidateList;
+export default connect(mapStateToProps, { ...actions })(DashbordCandidateList);

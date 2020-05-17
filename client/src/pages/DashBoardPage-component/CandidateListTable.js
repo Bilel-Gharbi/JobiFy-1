@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../actions/comapny";
 
@@ -10,19 +10,24 @@ import {
   UpdateJobOfferForm,
   ConfirmationModalForm,
 } from "./ModalForms";
+import DetailsCandidateResume from "./DetailsCandidateResume";
 import {
   DeleteButton,
   AddButton,
   UpdateButton,
+  DoneButton,
+  XButton,
+  DetailsButton,
+  CheckButton,
 } from "../../components/common/SVG-Buttons";
 
-const JobOfferListTable = ({ jobs, ...props }) => {
+const CandidateListTable = ({ applications, ...props }) => {
   const [detailsSkills, setDetailsSkills] = useState(false);
   const [jobSkillIdToRender, SetJobSkillId] = useState();
 
   const toggle = (id) => {
-    setDetailsSkills(!detailsSkills);
-    SetJobSkillId(id);
+    //setDetailsSkills(!detailsSkills);
+    //SetJobSkillId(id);
   };
 
   return (
@@ -34,36 +39,36 @@ const JobOfferListTable = ({ jobs, ...props }) => {
               <span />
             </th>
             <th className="kt-datatable__cell kt-datatable__cell--sort">
-              <span style={{ width: 110 }}>Job Position</span>
+              <span style={{ width: 150 }}>Job Position</span>
             </th>
             <th className="kt-datatable__cell kt-datatable__cell--sort">
-              <span style={{ width: 110 }}>Contract</span>
+              <span style={{ width: 150 }}>Candidate</span>
             </th>
             <th className="kt-datatable__cell kt-datatable__cell--sort">
-              <span style={{ width: 110 }}>Sponsored</span>
+              <span style={{ width: 110 }}>Status</span>
             </th>
             <th className="kt-datatable__cell kt-datatable__cell--sort">
-              <span style={{ width: 110 }}>Job skills</span>
+              <span style={{ width: 100, textAlign: "center" }}>Resume</span>
             </th>
             <th className="kt-datatable__cell kt-datatable__cell--sort">
-              <span style={{ width: 110 }}>Actions</span>
+              <span style={{ width: 110, textAlign: "center" }}>Actions</span>
             </th>
           </tr>
         </thead>
         <tbody className="kt-datatable__body">
-          {jobs &&
-            jobs.map((job) => {
+          {applications &&
+            applications.map((app, i) => {
               return (
-                <React.Fragment key={job.id}>
+                <React.Fragment key={app.id}>
                   <tr
                     className="kt-datatable__row"
                     style={{ left: 0 }}
-                    key={job.id}
+                    //key={job.id}
                   >
                     <td className="kt-datatable__cell kt-datatable__toggle-detail">
                       <a
                         className="kt-datatable__toggle-detail"
-                        onClick={() => toggle(job.id)}
+                        //onClick={() => toggle(job.id)}
                       >
                         <i
                           className="fa fa-caret-right"
@@ -72,68 +77,74 @@ const JobOfferListTable = ({ jobs, ...props }) => {
                       </a>
                     </td>
                     <td className="kt-datatable__cell">
-                      <span style={{ width: 110 }}>{job.jobPosition}</span>
-                    </td>
-                    <td className="kt-datatable__cell">
-                      <span style={{ width: 110 }}>{job.JobContractType}</span>
-                    </td>
-                    <td className="kt-datatable__cell">
-                      <span style={{ width: 110 }}>
-                        {job.sponsored.toString()}
+                      <span style={{ width: 150 }}>
+                        {app.JobOffer.jobPosition}
                       </span>
                     </td>
                     <td className="kt-datatable__cell">
+                      <span style={{ width: 150 }}>
+                        {app.Resume.User.firstName +
+                          " " +
+                          app.Resume.User.lastName}
+                      </span>
+                    </td>
+
+                    <td className="kt-datatable__cell">
                       <span style={{ width: 110, display: "flex" }}>
-                        <span
-                          className="kt-badge kt-badge--primary"
-                          style={{ marginTop: "2px" }}
-                        >
-                          {job.jobSkills.length}
-                        </span>
-                        &nbsp; &nbsp;
+                        {app.status}
+                      </span>
+                    </td>
+
+                    <td className="kt-datatable__cell">
+                      <span
+                        style={{
+                          width: 110,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <Btn
-                          title="Add job skill"
-                          btn={<AddButton />}
-                          body={
-                            <AddSkillModalForm
-                              action={props.addCompanyJobOfferSkill}
-                              jobId={job.id}
-                            />
-                          }
+                          title="Candidate Resume"
+                          btn={<DetailsButton />}
+                          size="lg"
+                          body={<DetailsCandidateResume data={app} />}
                         />
                       </span>
                     </td>
                     <td className="kt-datatable__cell">
-                      <span style={{ width: 110, display: "flex" }}>
+                      <span
+                        style={{
+                          width: 110,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <Btn
-                          title="Delete job"
-                          btn={<DeleteButton />}
+                          title="Update Job Offer"
+                          btn={<XButton />}
                           body={
-                            <ConfirmationModalForm
-                              action={() => props.deleteCompanyJobOffer(job.id)}
+                            <UpdateJobOfferForm
+                            //action={props.UpdateCompanyJobOffer}
+                            //job={job}
                             />
                           }
                         />
                         &nbsp; &nbsp;
                         <Btn
                           title="Update Job Offer"
-                          btn={<UpdateButton />}
+                          btn={<CheckButton />}
                           body={
                             <UpdateJobOfferForm
-                              action={props.UpdateCompanyJobOffer}
-                              job={job}
+                            //action={props.UpdateCompanyJobOffer}
+                            //job={job}
                             />
                           }
                         />
                       </span>
                     </td>
                   </tr>
-                  <JobSkillsTabRow
-                    job={job}
-                    jobSkillIdToRender={jobSkillIdToRender}
-                    detailsSkills={detailsSkills}
-                    deleteSkillAction={props.deleteJobOfferSkill}
-                  />
                 </React.Fragment>
               );
             })}
@@ -143,4 +154,4 @@ const JobOfferListTable = ({ jobs, ...props }) => {
   );
 };
 
-export default connect(null, { ...actions })(JobOfferListTable);
+export default connect(null, { ...actions })(CandidateListTable);

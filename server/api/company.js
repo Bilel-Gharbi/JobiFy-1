@@ -51,4 +51,14 @@ comapnyRouter
   .route("/:id/jobOffer/:id_jobOffer/skill/:id_skill")
   .patch(skillController.updateSkill)
   .delete(skillController.deleteSkill);
+
+comapnyRouter
+  .route("/:id/applications")
+  .get(compController.getCompanyApplication);
+
+//get resume details for job application
+comapnyRouter
+  .route("/applications/resume/:resumeId")
+  .get(compController.getResumeDetailsForApplication);
+
 module.exports = comapnyRouter;

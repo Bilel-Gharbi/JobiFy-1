@@ -1,6 +1,6 @@
 /* User controllers */
 
-const { companyOperations } = require("../operations");
+const { companyOperations, resumeOperations } = require("../operations");
 
 const getAllCompany = async (req, res) => {
   try {
@@ -63,9 +63,41 @@ const activateCompanyProfile = async (req, res) => {
     res.status(401).json({ status: "fail", err: err.message });
   }
 };
+
+const getCompanyApplication = async (req, res) => {
+  try {
+    applications = await companyOperations.getCompanyApplication(req.params.id);
+    res.status(200).json({
+      status: "sucess",
+      msg: "get Company Application",
+      length: applications.length,
+      applications,
+    });
+  } catch (err) {
+    res.status(401).json({ status: "fail", msg: err });
+  }
+};
+
+const getResumeDetailsForApplication = async (req, res) => {
+  try {
+    resumeCandidate = await resumeOperations.getResumeDetailsForApplication(
+      req.params.resumeId
+    );
+
+    res.status(200).json({
+      status: "sucess",
+      msg: "get candidate Resume Details",
+      resumeCandidate,
+    });
+  } catch (err) {
+    res.status(401).json({ status: "fail", msg: err });
+  }
+};
 module.exports = {
   getAllCompany,
   createNewCompany,
   createCompanyInfo,
   activateCompanyProfile,
+  getCompanyApplication,
+  getResumeDetailsForApplication,
 };

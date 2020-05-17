@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
+//import * as actions from "../../actions/comapny";
 
 import DashbordJobOffersList from "./DashbordJobOffersList";
 import DashbordCandidateList from "./DashbordCandidateList";
@@ -18,7 +19,8 @@ const RightDashBordConatainer = ({ elementToRender, ...props }) => {
         return "<h3> Somthing Else </h3>";
       default:
         //return <DashbordCreateJobOffer />;
-        return <DashbordJobOffersList jobs={props.companyJobs} />;
+        //return <DashbordJobOffersList jobs={props.companyJobs} />;
+        return <DashbordCandidateList />;
     }
   };
   return (

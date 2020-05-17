@@ -18,6 +18,14 @@ const getAllCompany = async () => {
     console.log("getAllCompany / CompanyOperation error ", err);
   }
 };
+const getCompanyApplication = async (id) => {
+  try {
+    result = await companyServices.getCompanyApplications(id);
+    return result;
+  } catch (err) {
+    console.log("getCompanyApplication / Company Operation error ", err);
+  }
+};
 
 const createCompnayInfo = async (authId, data, filePath) => {
   try {
@@ -46,4 +54,5 @@ module.exports = {
   getAllCompany,
   createCompnayInfo,
   activateCompanyProfile,
+  getCompanyApplication,
 };

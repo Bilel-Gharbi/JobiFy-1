@@ -1,7 +1,9 @@
 //import User model from models/index.js file
-const { Company } = require("../models");
+const { Company, Applicant, Resume, User, JobOffer } = require("../models");
 const { adjResultFormatingCompnayProfile } = require("../helper/");
 const jobOfferServices = require("./jobOffer");
+
+const sequelize = require("sequelize");
 
 // User service file includes functon thant interact with directly with the database
 // After create a service export using the es6 synt
@@ -54,6 +56,33 @@ const getCompanyDetails = async (AuthId) => {
   }
 };
 
+const getCompanyApplications = async (id) => {
+  try {
+    let company = await Company.findByPk(id);
+    //retreive company job offers
+    if (company) {
+      let jobOffersIds = await company
+        .getJobOffers({
+          attributes: ["id"],
+          raw: true,
+        })
+        .map((el) => el.id);
+
+      let applications = await Applicant.findAll({
+        where: { jobOfferId: jobOffersIds },
+        include: [
+          { model: JobOffer },
+          { model: Resume, include: [{ model: User }] },
+        ],
+      });
+
+      return applications;
+    }
+  } catch (err) {
+    console.log("CompanyServices/getCompanyApplications Error ", err);
+  }
+};
+
 const activateCompanyProfile = async (id) => {
   try {
     let company = await Company.findByPk(id);
@@ -70,4 +99,5 @@ module.exports = {
   createCompanyInfo,
   getCompanyDetails,
   activateCompanyProfile,
+  getCompanyApplications,
 };
