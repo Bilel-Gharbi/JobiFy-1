@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
 dotenv.config();
+
 module.exports = {
   //Server config
   PORT: process.env.PORT || 5000,
@@ -15,6 +16,10 @@ module.exports = {
   //JWT config
   jwtSecretKey: process.env.JWTSECRETKEY,
   TokenExpDate: process.env.TokenExpDate,
+
+  //nodeMail
+  jobiFyMail: process.env.JOBIFYMAIL,
+  jobiFyMailPwd: process.env.JOBIFYMAILPWD,
 };
 
 //cloudPhoto config

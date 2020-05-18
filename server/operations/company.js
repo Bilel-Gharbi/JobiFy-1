@@ -49,10 +49,20 @@ const activateCompanyProfile = async (id) => {
   }
 };
 
+const acceptOrRejectCandidate = async (accept, id) => {
+  try {
+    result = await companyServices.acceptOrRejectCandidate(accept, id);
+    return result;
+  } catch (err) {
+    console.log("acceptOrRejectCandidate / company operation error ", err);
+  }
+};
+
 module.exports = {
   createNewCompany,
   getAllCompany,
   createCompnayInfo,
   activateCompanyProfile,
   getCompanyApplication,
+  acceptOrRejectCandidate,
 };

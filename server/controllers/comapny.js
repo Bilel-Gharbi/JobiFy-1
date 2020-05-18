@@ -93,6 +93,26 @@ const getResumeDetailsForApplication = async (req, res) => {
     res.status(401).json({ status: "fail", msg: err });
   }
 };
+
+const acceptOrRejectCandidate = async (req, res) => {
+  try {
+    const { accept } = req.query;
+    const { id } = req.params;
+
+    application = await companyOperations.acceptOrRejectCandidate(
+      JSON.parse(accept),
+      id
+    );
+
+    res.status(200).json({
+      status: "sucess",
+      msg: "application updated",
+      application,
+    });
+  } catch (err) {
+    res.status(401).json({ status: "fail", msg: err });
+  }
+};
 module.exports = {
   getAllCompany,
   createNewCompany,
@@ -100,4 +120,5 @@ module.exports = {
   activateCompanyProfile,
   getCompanyApplication,
   getResumeDetailsForApplication,
+  acceptOrRejectCandidate,
 };

@@ -7,7 +7,6 @@ const verifyToken = async (req, res, next) => {
     try {
       await promisify(jwt.verify)(req.headers["x-auth-token"], jwtSecretKey);
       let decodedToken = await jwt.decode(req.headers["x-auth-token"]);
-      console.log(decodedToken);
     } catch (err) {
       res.status(401).json({ err: err.message });
     }

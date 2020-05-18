@@ -5,6 +5,7 @@ const { jobOfferControllers: jobcontroller } = require("../controllers");
 const { skillControllers: skillController } = require("../controllers");
 
 const upload = require("../middleware/multer");
+const sendCandidateMail = require("../middleware/mailer");
 
 comapnyRouter
   .route("/")
@@ -61,4 +62,8 @@ comapnyRouter
   .route("/applications/resume/:resumeId")
   .get(compController.getResumeDetailsForApplication);
 
+//accept or reject candidate
+comapnyRouter
+  .route("/applications/:id")
+  .patch(sendCandidateMail, compController.acceptOrRejectCandidate);
 module.exports = comapnyRouter;

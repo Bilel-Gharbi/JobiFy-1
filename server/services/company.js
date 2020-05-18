@@ -93,6 +93,21 @@ const activateCompanyProfile = async (id) => {
   }
 };
 
+const acceptOrRejectCandidate = async (accept, id) => {
+  try {
+    let application = await Applicant.findByPk(id);
+    let updatedApplication;
+    if (accept)
+      updatedApplication = await application.update({ status: "Accepted" });
+    if (!accept)
+      updatedApplication = await application.update({ status: "Rejected" });
+
+    return updatedApplication;
+  } catch (err) {
+    console.log("CompanyServices / acceptOrRejectCandidate Error ", err);
+  }
+};
+
 module.exports = {
   createCompany,
   getAllCompany,
@@ -100,4 +115,5 @@ module.exports = {
   getCompanyDetails,
   activateCompanyProfile,
   getCompanyApplications,
+  acceptOrRejectCandidate,
 };
