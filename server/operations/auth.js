@@ -112,10 +112,27 @@ const activeUserAccount = async (authId) => {
     console.log("activeUserAccount operation error ", err);
   }
 };
+const changePassword = async (data) => {
+  const { pwd, newPwd, email } = data;
+  try {
+    const userAccount = await authServices.checkUniqueUser(email);
+    const correctPassword = await bcrypt.compare(pwd, userAccount.password);
+
+    if (correctPassword) {
+      const hashedNewPassword = await bcrypt.hash(newPwd, 12);
+      data.hashedNewPassword = hashedNewPassword;
+      let result = await authServices.changePassword(data);
+      return result;
+    }
+  } catch (err) {
+    console.log("changePassword operation error ", err);
+  }
+};
 
 module.exports = {
   signUp,
   login,
   fetchAuthData,
   activeUserAccount,
+  changePassword,
 };

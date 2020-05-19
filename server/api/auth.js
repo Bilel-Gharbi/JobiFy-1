@@ -8,5 +8,6 @@ authRouter.route("/login").post(controller.login);
 authRouter.route("/active").patch(controller.activeUserAccount);
 //i used to keep user connected
 authRouter.route("/login").get(controller.fetchAuthData);
+authRouter.route("/changePassword").patch(controller.changePassword);
 
 module.exports = authRouter;

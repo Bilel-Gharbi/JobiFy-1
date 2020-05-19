@@ -47,12 +47,27 @@ const activateAccount = async (id) => {
     console.log("AuthService / activateAccount Error ", err);
   }
 };
+const changePassword = async (data) => {
+  try {
+    const { email, hashedNewPassword } = data;
+    let account = await Auth.findOne({ where: { email: email } });
+    // let activatedAccount = await account.update({ active: true });
+    const updatedAccount = await account.update({
+      password: hashedNewPassword,
+    });
+
+    return updatedAccount;
+  } catch (err) {
+    console.log("AuthService / changePassword Error ", err);
+  }
+};
 
 //TODO: Forget Password
-//TODO: email verification
+
 module.exports = {
   signUp,
   login,
   checkUniqueUser,
   activateAccount,
+  changePassword,
 };

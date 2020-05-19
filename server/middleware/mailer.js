@@ -2,6 +2,9 @@ const nodemailer = require("nodemailer");
 const { jobiFyMail, jobiFyMailPwd } = require("../config");
 
 const { Auth, Company } = require("../models");
+const interviewMailTemplate = require("../helper/interviewMailTemplate");
+
+console.log(interviewMailTemplate);
 
 const sendCandidateMail = async (req, res, next) => {
   console.log(req.body);
@@ -23,18 +26,13 @@ const sendCandidateMail = async (req, res, next) => {
       const jobPosition = application.JobOffer.jobPosition;
       const companyMail = companyAuth.email;
       const userMail = UserAuth.email;
+      const userName = application.Resume.User.firstName;
 
       const mailOptions = {
         from: jobiFyMail,
         to: "hb.bilel@gmail.com",
         subject: `Application for ${jobPosition}`,
-        html: `<p>your candidate for position ${jobPosition} has been accepted by the recruter of the company.
-         </br>
-         message:  ${data.mail}
-         </br>
-         <b>interview date : ${data.interviewDate} </b>
-         
-         </p>`,
+        html: interviewMailTemplate(userName, data, jobPosition),
       };
 
       transporter.sendMail(mailOptions, (err, info) => {
@@ -42,10 +40,10 @@ const sendCandidateMail = async (req, res, next) => {
         else console.log(info);
       });
 
-      console.log(companyMail);
+      /*    console.log(companyMail);
       console.log(userMail);
       console.log(jobPosition);
-      console.log(data);
+      console.log(data); */
     }
   } catch (err) {
     console.log(err);

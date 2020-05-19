@@ -64,10 +64,26 @@ const activeUserAccount = async (req, res) => {
     res.status(401).json({ status: "fail", err: err.message });
   }
 };
+const changePassword = async (req, res) => {
+  try {
+    let result = await authOperations.changePassword(req.body);
+    if (!result) {
+      throw new Error("invalid password");
+    }
+    res.status(201).json({
+      status: "sucess",
+      msg: `password for user ${req.body.email} updated `,
+      result,
+    });
+  } catch (err) {
+    res.status(401).json({ status: "fail", err: err.message });
+  }
+};
 
 module.exports = {
   signUp,
   login,
   fetchAuthData,
   activeUserAccount,
+  changePassword,
 };
