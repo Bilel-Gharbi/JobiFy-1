@@ -133,6 +133,7 @@ const addJobOfferSkill = async (idJobOffer, data) => {
 //add one skills to one joboffer
 const addJobOfferSkills = async (idJobOffer, data) => {
   data.map((el) => (el.JobOfferId = idJobOffer));
+
   try {
     result = await jobOfferServices.addManySkillsToJobOffer(data, idJobOffer);
     return result;

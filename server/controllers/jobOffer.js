@@ -98,10 +98,11 @@ const addJobOfferSkill = async (req, res) => {
 const addJobOfferSkills = async (req, res) => {
   const { id_jobOffer } = req.params;
   try {
-    jobsList = await jobOfferOperations.addJobOfferSkills(
+    const jobsList = await jobOfferOperations.addJobOfferSkills(
       id_jobOffer,
       req.body
     );
+
     res.status(200).json({
       status: "sucess",
       msg: `many Skill added to job offer ${req.params.id_jobOffer} for the company with id ${req.params.id}`,
