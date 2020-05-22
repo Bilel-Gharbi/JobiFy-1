@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { setProfileSectionToRender } from "../../actions/ui";
 
 const MenuSectionElement = React.lazy(() => import("./MenuSectionElement"));
-//import MenuSectionElement from "./MenuSectionElement";
 
 class MenuProfileList extends Component {
   constructor(props) {
@@ -20,7 +19,6 @@ class MenuProfileList extends Component {
   }
   handelClick = (e, id) => {
     e.preventDefault();
-    //console.log("hello", this.sectionReferences[id].current.props);
     this.props.setProfileSectionToRender(
       this.sectionReferences[id].current.props.section
     );
@@ -46,7 +44,7 @@ class MenuProfileList extends Component {
     return (
       <div className="kt-widget__body">
         <div className="kt-widget__items">
-          <a className="kt-widget__item kt-widget__item--active">
+          <a className="kt-widget__item kt-widget__item">
             <span className="kt-widget__section">
               <span className="kt-widget__icon">
                 <i

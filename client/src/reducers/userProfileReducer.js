@@ -8,7 +8,6 @@ const initialState = {
 const userProfileReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_USER_PROFILE":
-      console.log("set user profile reducer", action.payload);
       return { ...state, ...action.payload };
 
     case "CLEAR_USER_PROFILE":

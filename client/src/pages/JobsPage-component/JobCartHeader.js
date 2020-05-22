@@ -85,13 +85,15 @@ const JobCartHeader = ({ data, isLoged, applyedJob, job, ...props }) => {
         <div className="kt-widget__action" style={{ display: "flex" }}>
           <DetailsButton showDetails={showDetails} job={job} save={save} />
           &nbsp;
-          <ApplyButton
-            apply={apply}
-            disabled={applyDisabled}
-            applyButtonProps={applyButtonProps}
-            userInfo={{ info: props.userInfo, email: props.email }}
-            isLoged={isLoged}
-          />
+          {props.userType === "USER" ? (
+            <ApplyButton
+              apply={apply}
+              disabled={applyDisabled}
+              applyButtonProps={applyButtonProps}
+              userInfo={{ info: props.userInfo, email: props.email }}
+              isLoged={isLoged}
+            />
+          ) : null}
           &nbsp;
           <SaveButton
             save={save}
@@ -125,10 +127,14 @@ const JobCartHeader = ({ data, isLoged, applyedJob, job, ...props }) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    userInfo: state.userProfile.user,
-    email: state.auth.email,
-  };
+  if (state.auth.userType === "USER") {
+    return {
+      userInfo: state.userProfile.user,
+      email: state.auth.email,
+      userType: state.auth.userType,
+    };
+  }
+  return { userType: state.auth.userType };
 };
 
 export default withRouter(

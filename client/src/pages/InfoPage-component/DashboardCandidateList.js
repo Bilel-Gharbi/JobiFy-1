@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
-const DashbordCandidateList = () => {
+const DashboardCandidateList = () => {
   const options = [
     { value: "CDI", label: "CDI" },
     { value: "CDD", label: "CDD" },
@@ -141,4 +141,4 @@ const DashbordCandidateList = () => {
   );
 };
 
-export default DashbordCandidateList;
+export default DashboardCandidateList;

@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
-const DashbordJobOffersList = () => {
+const DashboardJobOffersList = () => {
   const options = [
     { value: "CDI", label: "CDI" },
     { value: "CDD", label: "CDD" },
@@ -141,4 +141,4 @@ const DashbordJobOffersList = () => {
   );
 };
 
-export default DashbordJobOffersList;
+export default DashboardJobOffersList;

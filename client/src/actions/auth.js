@@ -10,6 +10,7 @@ import {
   SIGNUP_FAIL,
   LOGOUT,
   FETCH_USER_DATA,
+  CHANGE_PASSWORD,
 } from "./type";
 
 //error actions
@@ -26,7 +27,6 @@ import {
 export const login = (obj) => async (dispatch) => {
   try {
     const response = await authAPI.post("/login", obj);
-    console.log(response);
 
     //delete error
     dispatch({
@@ -126,20 +126,20 @@ export const signup = (data) => async (dispatch) => {
   }
 };
 
-export const logout = () => async (dispatch, getState) => {
+export const logout = () => async (dispatch) => {
   try {
     dispatch({
       type: LOGOUT,
     });
-    if (getState().auth.userType === "USER") {
-      return dispatch({
-        type: CLEAR_USER_PROFILE,
-      });
-    } else {
-      return dispatch({
-        type: CLEAR_COMPANY_PROFILE,
-      });
-    }
+    dispatch({
+      type: CLEAR_ERRORS,
+    });
+    dispatch({
+      type: CLEAR_USER_PROFILE,
+    });
+    dispatch({
+      type: CLEAR_COMPANY_PROFILE,
+    });
   } catch (err) {
     //case signup fail
     return dispatch({
@@ -152,12 +152,34 @@ export const logout = () => async (dispatch, getState) => {
   }
 };
 
+export const changePassword = (data) => async (dispatch) => {
+  try {
+    const response = await authAPI.patch(`changePassword`, data);
+    dispatch({
+      type: CLEAR_ERRORS,
+    });
+    dispatch({
+      type: CHANGE_PASSWORD,
+    });
+    dispatch({
+      type: LOGOUT,
+    });
+  } catch (err) {
+    return dispatch({
+      type: RETURN_ERRORS,
+      payload: {
+        id: "changePwd",
+        status: err.response.data.status,
+        message: err.response.data.err,
+      },
+    });
+  }
+};
+
 export const fetechUserData = (token) => async (dispatch) => {
   try {
     authAPI.defaults.headers.common["x-auth-token"] = token;
     let response = await authAPI.get("login");
-
-    console.log(response.data.result);
 
     dispatch({
       type: CLEAR_ERRORS,
@@ -187,8 +209,6 @@ export const fetechUserData = (token) => async (dispatch) => {
         token: response.data.result.token,
         userType: response.data.result.type,
         email: response.data.result.email,
-        /*  profile: response.data.result.profile,
-        userData: response.data.result.profileDetails, */
       },
     });
   } catch (err) {

@@ -36,9 +36,6 @@ const WizardBody = ({
     setWizardForm(wizardForm - 1);
   };
 
-  useEffect(() => {
-    console.log(props);
-  }, []);
   const renderFormBody = () => {
     switch (wizardForm) {
       case 1:

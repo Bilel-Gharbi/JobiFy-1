@@ -13,11 +13,8 @@ class Form extends Component {
   };
 
   componentWillMount() {
-    console.log(this.props);
     //init from state depend from the formState props
-    this.setState({ formState: { ...this.props.formState } }, () =>
-      console.log(this.state)
-    );
+    this.setState({ formState: { ...this.props.formState } });
 
     //set form default value for update
     if (this.props.formValue) {
@@ -28,9 +25,7 @@ class Form extends Component {
         ResumeId,
         ...defaultValue
       } = this.props.formValue;
-      this.setState({ formState: { ...defaultValue }, formId: id }, () =>
-        console.log(this.state)
-      );
+      this.setState({ formState: { ...defaultValue }, formId: id });
     }
   }
 
@@ -50,13 +45,11 @@ class Form extends Component {
           () => {
             //change the value of input checkbox or radio from true to false
             this.props.formState[name] = !this.props.formState[name];
-            //console.log(this.state);
           }
         )
-      : this.setState(
-          { formState: { ...this.state.formState, [name]: e.target.value } },
-          () => console.log(this.state)
-        );
+      : this.setState({
+          formState: { ...this.state.formState, [name]: e.target.value },
+        });
   };
 
   initInputForm() {
@@ -94,13 +87,12 @@ class Form extends Component {
   onHandelSubmit = (e) => {
     e.preventDefault();
     //action passed to the form
-    console.log(this.state);
+    //console.log(this.state);
   };
 
   //captcha verfication function
   verifyCallback = (response) => {
-    if (response)
-      this.setState({ verifiedCaptcha: true }, () => console.log(this.state));
+    if (response) this.setState({ verifiedCaptcha: true });
   };
 
   render() {

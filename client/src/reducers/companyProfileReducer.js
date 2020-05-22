@@ -15,11 +15,11 @@ const companyProfileReducer = (state = initialState, action) => {
     case "SET_COMPANY_PROFILE":
       return { ...state, ...action.payload };
 
-    case "CLEAR_COMAPNY_PROFILE":
+    case "CLEAR_COMPANY_PROFILE":
       return { ...initialState };
 
     case "CREATE_COMPANY_PROFILE_INFO":
-      return { ...state, ...action.payload };
+      return { ...state, company: { ...action.payload } };
 
     case "ADD_COMPANY_JOB_OFFER_SKILL":
       let newJobOffers = addSkillToJobOffer(state.jobOffers, action.payload);
@@ -59,6 +59,14 @@ const companyProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         jobOffers: [...updateElementFromState(state.jobOffers, action.payload)],
+      };
+
+    case "ACCEPT_REJECT_CANDIATE":
+      return {
+        ...state,
+        applications: [
+          ...updateElementFromState(state.applications, action.payload),
+        ],
       };
     case "DELETE_COMPANY_JOB_OFFER_SKILL":
       return {

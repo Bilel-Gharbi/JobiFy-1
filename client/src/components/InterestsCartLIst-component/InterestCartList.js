@@ -37,7 +37,8 @@ const InterestCartList = ({ data, selectedMenuSection, deleteInterest }) => {
                       display: "grid",
                       alignItems: "center",
                       justifyContent: "center",
-                      gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))",
+                      gridTemplateColumns:
+                        "repeat(auto-fit,minmax(160px,200px))",
                       gridGap: "10px",
                     }}
                   >

@@ -26,18 +26,18 @@ const AuthPage = ({ history, isLoged, error, login, signup, userType }) => {
   return (
     <div
       className="kt-login__container"
-      style={{ width: "50%", margin: "15% auto auto" }}
+      style={{ width: "50%", margin: "10% auto 15% auto" }}
     >
       <>
         <div
           className="kt-login__logo"
           style={{ display: "flex", justifyContent: "center", padding: "10px" }}
         >
-          <a href="#">
-            <img src="assets/media/logos/logo-5.png" />
+          <a href="#" style={{ height: 130 }}>
+            <img src="logo.png" />
           </a>
         </div>
-        <div className="kt-login__signin">
+        <div className="kt-login__signin" style={{ padding: "0 100px" }}>
           <div
             className="kt-login__head"
             style={{ display: "flex", justifyContent: "center" }}

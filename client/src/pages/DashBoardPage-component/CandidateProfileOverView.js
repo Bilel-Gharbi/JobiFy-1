@@ -13,14 +13,11 @@ const CandidateProfileOverView = ({ data, job }) => {
     );
 
     setMatching(jobMatch(data.skills, jobTabSkills.data.data));
-    console.log(jobMatch(data.skills, jobTabSkills.data.data));
   };
 
   useEffect(() => {
     if (data && data.skills) setMatchingRate();
   }, [data]);
-
-  console.log(data);
 
   return (
     <>
@@ -74,12 +71,14 @@ const CandidateProfileOverView = ({ data, job }) => {
               style={{
                 flex: 28,
                 display: "grid",
-                gridTemplateColumns: "repeat( auto-fit, minmax(100px, 150xp) )",
+                gridTemplateColumns: "repeat( auto-fit, minmax(100px, 150px) )",
                 gridGap: "10px",
               }}
             >
-              {data.languages.map((language) => (
-                <Tag>{language.name}</Tag>
+              {data.languages.map((language, i) => (
+                <Tag key={i} style={{ margin: "0 10px" }}>
+                  {language.name}
+                </Tag>
               ))}
             </div>
           </div>
@@ -93,7 +92,7 @@ const CandidateProfileOverView = ({ data, job }) => {
             style={{
               flex: 28,
               display: "grid",
-              gridTemplateColumns: "repeat( auto-fit, minmax(100px, 1fr) )",
+              gridTemplateColumns: "repeat( auto-fit, minmax(100px, 150px) )",
               gridGap: "10px",
             }}
           >

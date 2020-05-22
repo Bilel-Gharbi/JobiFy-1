@@ -79,12 +79,12 @@ const JobOfferAddSkills = ({ setStep, jobOffer, addCompanyJobOffer }) => {
   };
 
   return (
-    <>
+    <div className="kt-portlet">
       <div
         style={{
           display: "flex",
           justifyContent: "flex-end",
-          marginBottom: "5px",
+          margin: "5px 10px 5px 5px",
         }}
       >
         <Button
@@ -94,10 +94,10 @@ const JobOfferAddSkills = ({ setStep, jobOffer, addCompanyJobOffer }) => {
         />
       </div>
 
-      <div className="kt-portlet" style={{ padding: "5%" }}>
+      <div style={{ padding: "5%" }}>
         {/* rendering skill tags  */}
         {allSkills.length ? (
-          <div className="kt-portlet" /* style={{ padding: "5%" }} */>
+          <div className="kt-portlet">
             <div style={{ display: "flex" }}>{renderSkillsTag()}</div>
           </div>
         ) : null}
@@ -138,7 +138,7 @@ const JobOfferAddSkills = ({ setStep, jobOffer, addCompanyJobOffer }) => {
           </form>
         ) : null}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -3,36 +3,22 @@ import { connect } from "react-redux";
 import * as actions from "../../actions/comapny";
 
 import Btn from "../../components/common/ModalDashboard-component/ModalDashboard";
-import JobSkillsTabRow from "../../components/JobSkillsTabRow-component";
 
 import {
-  AddSkillModalForm,
-  UpdateJobOfferForm,
-  ConfirmationModalForm,
+  AcceptCandidateModalForm,
+  ConfirmationRejectCandidateModalForm,
 } from "./ModalForms";
 import DetailsCandidateResume from "./DetailsCandidateResume";
 import {
-  DeleteButton,
-  AddButton,
-  UpdateButton,
-  DoneButton,
   XButton,
   DetailsButton,
   CheckButton,
 } from "../../components/common/SVG-Buttons";
 
 const CandidateListTable = ({ applications, ...props }) => {
-  const [detailsSkills, setDetailsSkills] = useState(false);
-  const [jobSkillIdToRender, SetJobSkillId] = useState();
-
-  const toggle = (id) => {
-    //setDetailsSkills(!detailsSkills);
-    //SetJobSkillId(id);
-  };
-
   return (
     <>
-      <table className="kt-datatable__table">
+      <table className="kt-datatable__table" style={{ padding: "0 35px" }}>
         <thead className="kt-datatable__head">
           <tr className="kt-datatable__row">
             <th className="kt-datatable__cell kt-datatable__toggle-detail">
@@ -60,16 +46,9 @@ const CandidateListTable = ({ applications, ...props }) => {
             applications.map((app, i) => {
               return (
                 <React.Fragment key={app.id}>
-                  <tr
-                    className="kt-datatable__row"
-                    style={{ left: 0 }}
-                    //key={job.id}
-                  >
+                  <tr className="kt-datatable__row" style={{ left: 0 }}>
                     <td className="kt-datatable__cell kt-datatable__toggle-detail">
-                      <a
-                        className="kt-datatable__toggle-detail"
-                        //onClick={() => toggle(job.id)}
-                      >
+                      <a className="kt-datatable__toggle-detail">
                         <i
                           className="fa fa-caret-right"
                           style={{ cursor: "pointer" }}
@@ -122,23 +101,23 @@ const CandidateListTable = ({ applications, ...props }) => {
                         }}
                       >
                         <Btn
-                          title="Update Job Offer"
+                          title="Confirm candidate"
                           btn={<XButton />}
                           body={
-                            <UpdateJobOfferForm
-                            //action={props.UpdateCompanyJobOffer}
-                            //job={job}
+                            <ConfirmationRejectCandidateModalForm
+                              action={props.acceptOrRejectCandidate}
+                              application={app}
                             />
                           }
                         />
                         &nbsp; &nbsp;
                         <Btn
-                          title="Update Job Offer"
+                          title="Accept Candidate"
                           btn={<CheckButton />}
                           body={
-                            <UpdateJobOfferForm
-                            //action={props.UpdateCompanyJobOffer}
-                            //job={job}
+                            <AcceptCandidateModalForm
+                              action={props.acceptOrRejectCandidate}
+                              application={app}
                             />
                           }
                         />

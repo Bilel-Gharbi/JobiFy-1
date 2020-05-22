@@ -9,18 +9,20 @@ import { FormCompanyInfo } from "./WizardFormInfo";
 
 const WizardPage = ({ isLoged, isActive, userType, history, ...props }) => {
   useEffect(() => {
-    if (isLoged && isActive && userType === "COMPANY")
+    if (isLoged && isActive && userType === "COMPANY") {
+      console.log("rr");
       history.push("/dashboard");
+    }
     if (isLoged && isActive && userType === "USER") history.push("/profile");
-    if (!isLoged) history.push("/");
-  }, [isLoged, isActive]);
+    if (!isLoged) history.push("/auth");
+  }, [isLoged, isActive, userType]);
 
   const renderWizard = () => {
     if (userType === "COMPANY") {
       return (
-        <>
+        <div className="kt-portlet" style={{ margin: "0% 20%" }}>
           <FormCompanyInfo action={props.createCompanyProfileInfo} />
-        </>
+        </div>
       );
     }
     return (
@@ -47,8 +49,7 @@ const mapStateToProps = (state) => {
       isActive: state.userProfile.user.active,
       userType: state.auth.userType,
     };
-  }
-  if (state.auth.isLoged && state.auth.userType === "COMPANY") {
+  } else if (state.auth.isLoged && state.auth.userType === "COMPANY") {
     return {
       isLoged: state.auth.isLoged,
       isActive: state.companyProfile.company.active,

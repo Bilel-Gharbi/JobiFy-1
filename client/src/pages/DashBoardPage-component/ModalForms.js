@@ -248,7 +248,7 @@ export const UpdateJobOfferForm = ({ action, job }) => {
   );
 };
 
-export const ConfirmationModalForm = (props) => {
+export const ConfirmationModalForm = ({ message, ...props }) => {
   const [submited, setSubmited] = useState(false);
 
   const { handleSubmit } = useForm();
@@ -264,7 +264,186 @@ export const ConfirmationModalForm = (props) => {
             <div className="form-group row" style={{ display: "grid" }}>
               <WarningButton />
               <h3 style={{ textAlign: "center" }}>
-                Are you sur you want to delete this job offer
+                {message
+                  ? message
+                  : "Are you sur you want to delete this job offer"}
+              </h3>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Button
+                  className="btn btn-outline-brand btn-square"
+                  type="submit"
+                >
+                  Yes I confirm
+                </Button>
+              </div>
+            </div>
+          </form>
+        ) : (
+          <>
+            <DoneButton />
+            <h3 style={{ textAlign: "center" }}> Job Offer deleted </h3>
+          </>
+        )}
+      </div>
+    </>
+  );
+};
+
+export const UpdateInfoModalForm = (props) => {
+  const [submited, setSubmited] = useState(false);
+
+  const { handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    props.action();
+    setSubmited(true);
+  };
+  return (
+    <>
+      <div className="kt-portlet" style={{ padding: "5%" }}>
+        {!submited ? (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-group row" style={{ display: "grid" }}>
+              <WarningButton />
+              <h3 style={{ textAlign: "center" }}>
+                Are you sur you want to update company Info
+              </h3>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Button
+                  className="btn btn-outline-brand btn-square"
+                  type="submit"
+                >
+                  Yes I confirm
+                </Button>
+              </div>
+            </div>
+          </form>
+        ) : (
+          <>
+            <DoneButton />
+            <h3 style={{ textAlign: "center" }}> Done </h3>
+          </>
+        )}
+      </div>
+    </>
+  );
+};
+
+export const AcceptCandidateModalForm = ({ action, application }) => {
+  const [submited, setSubmited] = useState(false);
+  const { errors, handleSubmit, register } = useForm();
+
+  const onSubmit = (data) => {
+    setSubmited(true);
+    action(application.id, true, { data, application });
+  };
+  return (
+    <>
+      <div className="kt-portlet" style={{ padding: "5%" }}>
+        {!submited ? (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-group row">
+              <label className="col-3 col-form-label">Interview Date</label>
+              <div className="col-9">
+                <input
+                  name="interviewDate"
+                  className="form-control"
+                  type="date"
+                  placeholder="choose interview date "
+                  ref={register({
+                    required: "Please fill the interview date",
+                  })}
+                />
+                {errors.interviewDate && errors.interviewDate.message}
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-3 col-form-label">At </label>
+              <div className="col-9">
+                <input
+                  name="hour"
+                  className="form-control"
+                  type="time"
+                  placeholder="choose interview date "
+                  ref={register({
+                    required: "Please fill the interview hour",
+                  })}
+                />
+                {errors.hour && errors.hour.message}
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-3 col-form-label">Message</label>
+              <div className="col-9">
+                <textarea
+                  name="mail"
+                  className="form-control"
+                  placeholder="message to candidate "
+                  ref={register({
+                    required: "Please fill message filed",
+                  })}
+                />
+                {errors.mail && errors.mail.message}
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Button
+                className="btn btn-outline-brand btn-square"
+                type="submit"
+              >
+                Accept
+              </Button>
+            </div>
+          </form>
+        ) : (
+          <>
+            <DoneButton />
+            <h3 style={{ textAlign: "center" }}> Candidate Accepted </h3>
+          </>
+        )}
+      </div>
+    </>
+  );
+};
+
+export const ConfirmationRejectCandidateModalForm = ({
+  application,
+  action,
+}) => {
+  const [submited, setSubmited] = useState(false);
+
+  const { handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    setSubmited(true);
+    action(application.id, false);
+  };
+  return (
+    <>
+      <div className="kt-portlet" style={{ padding: "5%" }}>
+        {!submited ? (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-group row" style={{ display: "grid" }}>
+              <WarningButton />
+              <h3 style={{ textAlign: "center" }}>
+                Are you sur you want to Reject this Candidate
               </h3>
               <div
                 style={{

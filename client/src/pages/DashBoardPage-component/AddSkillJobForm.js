@@ -59,7 +59,7 @@ const AddSkillJobForm = (props) => {
             {errors.level && "please select level"}
           </div>
         </div>
-        <p> from id {props.id} </p>
+
         <div
           style={{
             display: "grid",

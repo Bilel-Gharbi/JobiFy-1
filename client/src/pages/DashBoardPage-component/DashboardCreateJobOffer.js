@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import FormAddJobOffer from "./FormAddJobOffer";
 import JobOfferAddSkills from "./JobOfferAddSkills";
 
-const DashbordCreateJobOffer = () => {
+const DashboardCreateJobOffer = () => {
   const [step, setStep] = useState(1);
   const [jobOffer, setJobOffer] = useState();
 
@@ -32,4 +32,4 @@ const DashbordCreateJobOffer = () => {
   return <>{renderForm()}</>;
 };
 
-export default DashbordCreateJobOffer;
+export default DashboardCreateJobOffer;

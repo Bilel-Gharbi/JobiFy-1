@@ -6,7 +6,6 @@ export const FormUserInfo = ({ next, data, action }) => {
   const { handleSubmit, register, errors } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     next();
     action(data);
   };
@@ -28,7 +27,7 @@ export const FormUserInfo = ({ next, data, action }) => {
           </div>
         </div>
         <div className="form-group row">
-          <label className="col-3 col-form-label">First Name</label>
+          <label className="col-3 col-form-label">Last Name</label>
           <div className="col-9">
             <input
               name="lastName"

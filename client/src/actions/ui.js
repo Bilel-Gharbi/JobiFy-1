@@ -88,7 +88,7 @@ export const setWizardFormSkill = (element) => (dispatch) => {
   });
 };
 
-export const AddUserWizardInfo = () => (dispatch, getState) => {
+export const AddUserWizardInfo = () => async (dispatch, getState) => {
   const resumeId = getState().userProfile.resume.userResume.id;
   const authId = getState().userProfile.user.AuthId;
   const userId = getState().userProfile.user.id;
@@ -118,7 +118,7 @@ export const AddUserWizardInfo = () => (dispatch, getState) => {
 
   const activeProfile = userAPI.patch(`active?id=${userId}`);
 
-  Promise.all([
+  await Promise.all([
     AddUserInfo,
     AddResumeInfo,
     AddExperience,

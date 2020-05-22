@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import LeftMenu from "./LeftMenu";
-import RightDashBordConatainer from "./RightDashBordConatainer";
+import RightDashboardConatainer from "./RightDashboardConatainer";
 
 const DashBoardPage = ({ history, isActive, userType, isLoged }) => {
   const [elementToRender, setElementToRender] = useState();
@@ -10,13 +10,16 @@ const DashBoardPage = ({ history, isActive, userType, isLoged }) => {
   useEffect(() => {
     if (!isActive && userType === "COMPANY") history.push("/info");
     if (!isLoged) history.push("/auth");
-  }, []);
+  }, [isLoged, isActive]);
 
   return (
     <>
-      <div style={{ display: "flex", height: "100%" }}>
+      <div style={{ display: "flex", height: "100%", marginTop: "10%" }}>
         <LeftMenu setElementToRender={setElementToRender} />
-        <RightDashBordConatainer elementToRender={elementToRender} />
+        <RightDashboardConatainer
+          elementToRender={elementToRender}
+          setElementToRender={setElementToRender}
+        />
       </div>
     </>
   );
@@ -30,6 +33,7 @@ const mapsStateToProps = (state) => {
       userType: state.auth.userType,
     };
   }
+  return state;
 };
 
 export default withRouter(connect(mapsStateToProps, null)(DashBoardPage));

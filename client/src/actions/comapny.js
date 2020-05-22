@@ -14,12 +14,12 @@ import {
   FILTER_COMPANY_JOB_OFFER,
   FETCH_COMPANY_JOB_APPLICATIONS,
   FETCH_CANDIDATE_DETAILS,
+  ACCEPT_REJECT_CANDIATE,
 } from "./type";
 
 import companyAPI from "../API/comapnyAPI";
-import { jobMatch } from "../helper";
+
 import * as _ from "underscore";
-import axios from "axios";
 
 //action to fetech resume
 export const setCompanyProfile = (data) => (dispatch) => {
@@ -63,16 +63,15 @@ export const addCompanyJobOffer = (job, skills) => async (
   // add skills to job offer
   const jobId = newJobOffer.data.newJobOffer.id;
 
-  const result = await companyAPI.post(
-    `${companyId}/jobOffer/${jobId}/skills`,
-    skills
-  );
-
+  await companyAPI.post(`${companyId}/jobOffer/${jobId}/skills`, skills);
+  //http://localhost:5000/api/company/8/jobOffers
+  const result = await companyAPI.get(`${companyId}/jobOffers`, skills);
   return dispatch({
     type: ADD_COMPANY_JOB_OFFER_WITH_SKILLS,
-    payload: result.data.jobsList,
+    payload: result.data.data,
   });
 };
+
 //http://localhost:5000/api/company/1/jobOffer/1/skill
 export const addCompanyJobOfferSkill = (jobId, skill) => async (
   dispatch,
@@ -125,20 +124,6 @@ export const fetchCompanyJobOfferApplications = (companyId) => async (
   });
 };
 
-export const fetchCompanyJobOfferApplicationsResume = (
-  companyId,
-  resumeId
-) => async (dispatch) => {
-  const result = await companyAPI.get(
-    `${companyId}/applications/resume/${resumeId}`
-  );
-  return result.data;
-  /* return dispatch({
-    type: "FETCH_COMPANY_JOB_CANDIDATE_RESUME",
-    //payload: result.data.applications,
-  }); */
-};
-
 //localhost:5000/api/company/applications/resume/16
 
 export const deleteJobOfferSkill = (skillId, jobId) => async (
@@ -189,5 +174,19 @@ export const filterJobByContract = (term) => async (dispatch, getState) => {
   return dispatch({
     type: FILTER_COMPANY_JOB_OFFER,
     payload: result,
+  });
+};
+
+export const acceptOrRejectCandidate = (id, accept, data) => async (
+  dispatch
+) => {
+  const result = await companyAPI.patch(
+    `applications/${id}?accept=${accept}`,
+    data
+  );
+
+  return dispatch({
+    type: ACCEPT_REJECT_CANDIATE,
+    payload: result.data.application,
   });
 };

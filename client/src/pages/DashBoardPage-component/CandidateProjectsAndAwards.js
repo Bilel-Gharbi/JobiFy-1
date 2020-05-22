@@ -9,7 +9,7 @@ const CandidateProjectsAndAwards = ({ projects, awards }) => {
         {projects && projects.length ? <h3>Projects</h3> : null}
       </div>
       {projects &&
-        projects.length &&
+        projects.length > 0 &&
         projects.map((project, i) => {
           const technologiesTab = technlogiesTabGenerator(project.technologies);
           return (
@@ -73,7 +73,7 @@ const CandidateProjectsAndAwards = ({ projects, awards }) => {
         {awards && awards.length ? <h3>Certifications</h3> : null}
       </div>
       {awards &&
-        awards.length &&
+        awards.length > 0 &&
         awards.map((award, i) => {
           return (
             <div

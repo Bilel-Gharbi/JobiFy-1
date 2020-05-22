@@ -98,7 +98,7 @@ export const CheckButton = ({ onClick }) => {
   );
 };
 
-export const XButton = ({ onClick }) => {
+export const XButton = ({ onClick, disabled }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

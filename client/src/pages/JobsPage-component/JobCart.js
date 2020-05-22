@@ -5,7 +5,7 @@ import JobCartMatching from "./JobCartMatching";
 import JobCartHeader from "./JobCartHeader";
 
 import { jobMatch } from "../../helper";
-const JobCart = ({ job, userSkills, isLoged, applyedJob }) => {
+const JobCart = ({ job, userSkills, isLoged, applyedJob, ...props }) => {
   const {
     Company,
     jobSkills,
@@ -17,7 +17,6 @@ const JobCart = ({ job, userSkills, isLoged, applyedJob }) => {
   const { location, companyName, type } = Company;
   //function return matching rate
 
-  //FIXME: userSkills tab
   const matchRate = jobMatch(userSkills, jobSkills);
 
   const JobCartHeaderData = {
@@ -48,18 +47,13 @@ const JobCart = ({ job, userSkills, isLoged, applyedJob }) => {
               {/* job description */}
               <div className="kt-widget__info" style={{ display: "flex" }}>
                 <div className="kt-widget__desc" style={{ flex: "3" }}>
-                  {/*   I distinguish three main text objektive.First, your could
-                  <br />
-                  be merely to inform people a second could be persuade people.
-                  <br />
-                  You want people to bay your products */}
                   {job.jobDescription}
                   {job.jobDescription}
                   {job.jobDescription}
                 </div>
-                {/* end job description */}
-
-                <JobCartMatching rate={matchRate} />
+                {props.userType && props.userType === "USER" ? (
+                  <JobCartMatching rate={matchRate} />
+                ) : null}
               </div>
             </div>
           </div>
@@ -81,10 +75,11 @@ const JobCart = ({ job, userSkills, isLoged, applyedJob }) => {
   );
 };
 const mapStateToProps = (state) => {
-  if (state.auth.isLoged) {
+  if (state.auth.isLoged && state.auth.userType === "USER") {
     return {
       userSkills: state.userProfile.resume.skills,
       applyedJob: state.userProfile.resume.applyedJob,
+      userType: state.auth.userType,
     };
   }
   return state;

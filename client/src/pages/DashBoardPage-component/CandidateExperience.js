@@ -1,13 +1,16 @@
 import React from "react";
 
 const CandidateExperience = ({ data }) => {
-  console.log(data);
   return (
     <>
       <div className="kt-widget4" style={{ margin: "10px 0px" }}>
-        {data.map((experience) => {
+        {data.map((experience, i) => {
           return (
-            <div className="kt-widget4__item" style={{ display: "flex" }}>
+            <div
+              className="kt-widget4__item"
+              key={i}
+              style={{ display: "flex" }}
+            >
               <span className="kt-widget4__icon" style={{ flex: 1 }}>
                 <i className="flaticon2-soft-icons-1 kt-font-primary" />
               </span>

@@ -129,7 +129,7 @@ const CandidateEducationsAndCertification = ({
         <div className="kt-widget4__item" style={{ display: "flex" }}>
           {certifications.length ? <h3>Certifications</h3> : null}
         </div>
-        {certifications.length &&
+        {certifications.length > 0 &&
           certifications.map((certification, i) => {
             return (
               <div

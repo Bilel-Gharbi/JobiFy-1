@@ -8,7 +8,7 @@ import Select from "react-select";
 
 import JobOfferListTable from "./JobOfferListTable";
 
-const DashbordJobOffersList = (props) => {
+const DashboardJobOffersList = (props) => {
   const options = [
     { value: "CDI", label: "CDI" },
     { value: "CDD", label: "CDD" },
@@ -25,7 +25,7 @@ const DashbordJobOffersList = (props) => {
   };
 
   return (
-    <div>
+    <>
       <div className="kt-portlet">
         <div className="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded">
           <>
@@ -75,10 +75,10 @@ const DashbordJobOffersList = (props) => {
           </>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 export default connect(null, { searchJobByPosition, filterJobByContract })(
-  DashbordJobOffersList
+  DashboardJobOffersList
 );

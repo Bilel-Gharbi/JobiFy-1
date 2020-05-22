@@ -12,9 +12,6 @@ import {
   Redirect,
 } from "react-router-dom";
 
-/* import Header from "./header-component/Header";
-import NewHeader from "./test-component/NewHeader"; */
-
 import SpinnerLoader from "../components/common/Spinner-component";
 
 //pages
@@ -35,11 +32,7 @@ const DashBoardPage = React.lazy(() =>
 );
 const WizardPage = React.lazy(() => import("../pages/WizardPage-component/"));
 
-const Header = React.lazy(() => import("./header-component/Header"));
-
-const NewHeader = React.lazy(() =>
-  import("../components/test-component/NewHeader")
-);
+const Header = React.lazy(() => import("./Header-component"));
 
 const JobsPage = React.lazy(() => import("../pages/JobsPage-component"));
 
@@ -72,7 +65,7 @@ class App extends React.Component {
       <Router>
         <Suspense fallback={<SpinnerLoader />}>
           <Header />
-          {/* <NewHeader /> */}
+          {/*      <NewHeader /> */}
           <Switch>
             <>
               <div className="mainContainer">
@@ -82,7 +75,6 @@ class App extends React.Component {
                 <Route exact path="/profile" component={UserProfilePage} />
                 <Route exact path="/dashboard" component={DashBoardPage} />
                 <Route exact path="/jobsPage" component={JobsPage} />
-                {/* <Route exact path="/jobs" component={JobPage} /> */}
                 <Route exact path="/test" component={InfoPage} />
               </div>
             </>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LeftMenu from "./LeftMenu";
-import RightDashBordConatainer from "./RightDashBordConatainer";
+import RightDashboardConatainer from "./RightDashboardConatainer";
 
 const InfoPage = () => {
   const [elementToRender, setElementToRender] = useState();
@@ -9,7 +9,7 @@ const InfoPage = () => {
     <>
       <div style={{ display: "flex", height: "100%" }}>
         <LeftMenu setElementToRender={setElementToRender} />
-        <RightDashBordConatainer elementToRender={elementToRender} />
+        <RightDashboardConatainer elementToRender={elementToRender} />
       </div>
     </>
   );

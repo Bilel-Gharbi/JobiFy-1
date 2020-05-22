@@ -41,11 +41,13 @@ const SearchBar = (props) => {
             name="search"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
+            style={{ zIndex: 0 }}
           />
           <InputGroupButtonDropdown
             addonType="append"
             isOpen={dropdownOpen}
             toggle={toggleDropDown}
+            style={{ zIndex: 0 }}
           >
             <DropdownToggle name="by" caret>
               {defaultDropdownText}

@@ -5,11 +5,12 @@ import { withRouter } from "react-router-dom";
 import ProfileRightDetails from "./ProfileRightDetails";
 import ProfileLeftMenu from "./ProfileLeftMenu";
 
-const UserProfilePage = ({ isActive, userType, ...props }) => {
+const UserProfilePage = ({ isActive, userType, isLoged, ...props }) => {
   useEffect(() => {
+    if (!isLoged) props.history.push("/auth");
     if (!isActive) props.history.push("/info");
     if (userType === "COMPANY") props.history.push("/dashboard");
-  }, [isActive, userType]);
+  }, [isActive, userType, isLoged]);
   return (
     <div className="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
       <ProfileLeftMenu />

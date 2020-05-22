@@ -4,7 +4,6 @@ import ButtonModalProfilAdd from "../common/ButtonModalProfilAdd-component";
 
 const LanguagesCartList = ({ data, selectedMenuSection, deleteLanguage }) => {
   const formRef = useRef();
-  console.log(selectedMenuSection);
 
   return (
     <div className="row">
@@ -39,7 +38,8 @@ const LanguagesCartList = ({ data, selectedMenuSection, deleteLanguage }) => {
                       display: "grid",
                       alignItems: "center",
                       justifyContent: "center",
-                      gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))",
+                      gridTemplateColumns:
+                        "repeat(auto-fit,minmax(160px,200px))",
                       gridGap: "10px",
                     }}
                   >

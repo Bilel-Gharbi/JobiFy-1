@@ -26,8 +26,8 @@ const FormAddJobOffer = ({ setStep, setJobOffer }) => {
   };
   return (
     <>
-      <div className="kt-portlet" style={{ padding: "5%" }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="kt-portlet" style={{ padding: "5%", height: "100%" }}>
+        <form onSubmit={handleSubmit(onSubmit)} style={{ padding: "0 120px" }}>
           <div className="form-group row">
             <label className="col-3 col-form-label">Job Position</label>
             <div className="col-9">
@@ -96,7 +96,7 @@ const FormAddJobOffer = ({ setStep, setJobOffer }) => {
               {errors.jobMinSalary && errors.jobMinSalary.message}
             </div>
 
-            <div className="col-4">
+            <div className="col-5">
               <input
                 name="jobMaxSalary"
                 className="form-control"

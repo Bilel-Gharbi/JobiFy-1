@@ -8,6 +8,7 @@ export const LOGIN = "LOGIN";
 export const SIGNUP = "SIGNUP";
 export const LOGOUT = "LOGOUT";
 export const FETCH_USER_DATA = "FETCH_USER_DATA";
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD";
 
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const LOGIN_FAIL = "LOGIN_FAIL";
@@ -47,6 +48,7 @@ export const FILTER_COMPANY_JOB_OFFER = "FILTER_COMPANY_JOB_OFFER";
 // Application Job
 export const FETCH_COMPANY_JOB_APPLICATIONS = "FETCH_COMPANY_JOB_APPLICATIONS";
 export const FETCH_CANDIDATE_DETAILS = "FETCH_CANDIDATE_DETAILS";
+export const ACCEPT_REJECT_CANDIATE = "ACCEPT_REJECT_CANDIATE";
 
 // job_details
 export const FETCH_JOB_DETAILS = "FETCH_JOB_DETAILS";
