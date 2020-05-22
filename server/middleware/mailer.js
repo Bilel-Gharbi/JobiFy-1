@@ -4,11 +4,7 @@ const { jobiFyMail, jobiFyMailPwd } = require("../config");
 const { Auth, Company } = require("../models");
 const interviewMailTemplate = require("../helper/interviewMailTemplate");
 
-console.log(interviewMailTemplate);
-
 const sendCandidateMail = async (req, res, next) => {
-  console.log(req.body);
-
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -39,11 +35,6 @@ const sendCandidateMail = async (req, res, next) => {
         if (err) console.log(err);
         else console.log(info);
       });
-
-      /*    console.log(companyMail);
-      console.log(userMail);
-      console.log(jobPosition);
-      console.log(data); */
     }
   } catch (err) {
     console.log(err);
